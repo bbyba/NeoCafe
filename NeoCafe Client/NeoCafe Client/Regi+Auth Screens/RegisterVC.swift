@@ -8,27 +8,39 @@
 import UIKit
 
 class RegisterVC: UIViewController {
+    lazy var baseAuthRegView = BaseAuthRegView()
+    lazy var registrationView = RegistrationView()
+    lazy var signinView = SignInView()
 
-    lazy var registerView = RegisterView()
-    
     override func loadView() {
-        view = registerView
+        view = baseAuthRegView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        updateViewForSegmentIndex(index: baseAuthRegView.segmentedControl.selectedSegmentIndex)
+        baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func segmentedControlValueChanged() {
+        let selectedIndex = baseAuthRegView.segmentedControl.selectedSegmentIndex
+        updateViewForSegmentIndex(index: selectedIndex)
     }
-    */
 
+    private func updateViewForSegmentIndex(index: Int) {
+        baseAuthRegView.textFieldStack.subviews.forEach { $0.removeFromSuperview() }
+
+        if index == 0 {
+            baseAuthRegView.textFieldStack.addSubview(signinView)
+            signinView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        } else {
+            baseAuthRegView.textFieldStack.addSubview(registrationView)
+            registrationView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+        }
+    }
 }
