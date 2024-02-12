@@ -11,6 +11,7 @@
 		DDC1D8442B75B77C0068598D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DDC1D8432B75B77C0068598D /* .swiftlint.yml */; };
 		DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D8482B7601A30068598D /* RegistrationView.swift */; };
 		DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84B2B7602A20068598D /* SignInView.swift */; };
+		DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */; };
 		DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */; };
 		DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */; };
 		DDF8B5922B70ED3C005FE06A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5912B70ED3C005FE06A /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		DDC1D8432B75B77C0068598D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DDC1D8482B7601A30068598D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		DDC1D84B2B7602A20068598D /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationView.swift; sourceTree = "<group>"; };
 		DDF8B58A2B70ED3C005FE06A /* NeoCafe Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NeoCafe Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				DDF8B5C22B70F1C7005FE06A /* BaseAuthRegView.swift */,
 				DDC1D8482B7601A30068598D /* RegistrationView.swift */,
 				DDC1D84B2B7602A20068598D /* SignInView.swift */,
+				DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
 				DDF8B5C82B70F211005FE06A /* RegisterVC.swift in Sources */,
+				DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */,
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,

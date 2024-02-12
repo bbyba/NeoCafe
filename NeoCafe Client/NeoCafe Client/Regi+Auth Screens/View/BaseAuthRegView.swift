@@ -36,7 +36,7 @@ class BaseAuthRegView: UIView {
         return segmentedControl
     }()
 
-    lazy var textFieldStack: UIView = {
+    lazy var textFieldStackView: UIView = {
         let stack = UIView()
         return stack
     }()
@@ -58,7 +58,7 @@ class BaseAuthRegView: UIView {
         addSubview(headerImage)
         headerSection.addSubview(headerLabel)
         addSubview(segmentedControl)
-        addSubview(textFieldStack)
+        addSubview(textFieldStackView)
         addSubview(button)
     }
 
@@ -90,14 +90,14 @@ class BaseAuthRegView: UIView {
             make.width.equalTo(346)
         }
 
-        textFieldStack.snp.makeConstraints { make in
+        textFieldStackView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.width.equalTo(346)
         }
 
         button.snp.makeConstraints { make in
-            make.top.equalTo(textFieldStack.snp.bottom).offset(56)
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.centerX.equalToSuperview()
             make.width.equalTo(346)
             make.height.equalTo(48)

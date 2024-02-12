@@ -18,7 +18,7 @@ class SignInView: UIStackView {
         spacing = 14
         addSubviews()
     }
-    
+
     func addSubviews() {
         addArrangedSubview(emailTextFieldReg)
     }

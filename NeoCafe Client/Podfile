@@ -8,5 +8,6 @@ target 'NeoCafe Client' do
   # Pods for NeoCafe Client
 pod 'SnapKit'
 pod 'SwiftLint'
+pod 'SVPinView', '~> 1.0'
 
 end
