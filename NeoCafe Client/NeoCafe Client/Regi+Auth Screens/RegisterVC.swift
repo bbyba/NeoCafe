@@ -11,39 +11,67 @@ class RegisterVC: UIViewController {
     lazy var baseAuthRegView = BaseAuthRegView()
     lazy var registrationView = RegistrationView()
     lazy var signinView = SignInView()
-    
+    lazy var codeConfirmationView = CodeConfirmationView()
+
     override func loadView() {
         view = baseAuthRegView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         updateViewForSegmentIndex(index: baseAuthRegView.segmentedControl.selectedSegmentIndex)
         addTargets()
     }
-    
+
     private func addTargets() {
         baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        baseAuthRegView.getCodebutton.addTarget(self, action: #selector(getCodeButtonTapped), for: .touchUpInside)
     }
-    
+
+    private func configureInitialView() {
+        let selectedIndex = baseAuthRegView.segmentedControl.selectedSegmentIndex
+        updateViewForSegmentIndex(index: selectedIndex)
+    }
+
+    private func updateViewForSegmentIndex(index: Int) {
+        baseAuthRegView.textFieldStackView.subviews.forEach { $0.removeFromSuperview() }
+        let viewToAdd: UIView = index == 0 ? signinView : registrationView
+        baseAuthRegView.textFieldStackView.addSubview(viewToAdd)
+        viewToAdd.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        updateButtonText(forIndex: index)
+    }
+
+    private func updateButtonText(forIndex index: Int) {
+        let buttonTitle = index == 0 ? "Получить код" : "Зарегистрироваться"
+        baseAuthRegView.getCodebutton.setTitle(buttonTitle, for: .normal)
+    }
+
+    private func goToCodeConfirmation() {
+        baseAuthRegView.textFieldStackView.subviews.forEach { $0.removeFromSuperview() }
+        baseAuthRegView.textFieldStackView.addSubview(codeConfirmationView)
+        codeConfirmationView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        baseAuthRegView.getCodebutton.setTitle("Подтвердить", for: .normal)
+    }
+
     @objc func segmentedControlValueChanged() {
         let selectedIndex = baseAuthRegView.segmentedControl.selectedSegmentIndex
         updateViewForSegmentIndex(index: selectedIndex)
     }
-    
-    private func updateViewForSegmentIndex(index: Int) {
-        baseAuthRegView.textFieldStackView.subviews.forEach { $0.removeFromSuperview() }
 
-        if index == 0 {
-            baseAuthRegView.textFieldStackView.addSubview(signinView)
-            signinView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-        } else {
-            baseAuthRegView.textFieldStackView.addSubview(signinView)
-            signinView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
+    @objc func getCodeButtonTapped() {
+        if signinView.validateEmail() {
+            let selectedIndex = baseAuthRegView.segmentedControl.selectedSegmentIndex
+            if selectedIndex == 0 {
+                goToCodeConfirmation()
+                //                getVerificationCode()
+            } else {
+                goToCodeConfirmation()
+                //                registerAccount()
             }
         }
     }

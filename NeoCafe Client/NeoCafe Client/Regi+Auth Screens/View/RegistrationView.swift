@@ -14,14 +14,18 @@ class RegistrationView: UIStackView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubviews()
         axis = .vertical
         spacing = 14
+        addSubviews()
     }
 
-        func addSubviews() {
+    func addSubviews() {
         addArrangedSubview(emailTextField)
     }
+
+//    func resetView() {
+//        emailTextField.text = ""
+//    }
 
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

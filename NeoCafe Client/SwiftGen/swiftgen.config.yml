@@ -1,0 +1,12 @@
+input_dir: ${PROJECT_DIR}/NeoCafe\ Client
+output_dir: ${PROJECT_DIR}/NeoCafe\ Client/SwiftGen
+xcassets:
+    inputs:
+        - Assets.xcassets
+    outputs:
+        - templatePath:
+            $
+            ${PROJECT_DIR}/NeoCafe\ Client/SwiftGen/template.stencil
+          params:
+            publicAccess: true
+          output: Assets.generated.swift

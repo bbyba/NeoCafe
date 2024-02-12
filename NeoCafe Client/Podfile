@@ -9,5 +9,6 @@ target 'NeoCafe Client' do
 pod 'SnapKit'
 pod 'SwiftLint'
 pod 'SVPinView', '~> 1.0'
-
+pod 'Moya/RxSwift', '~> 15.0'
+pod 'SwiftGen'
 end

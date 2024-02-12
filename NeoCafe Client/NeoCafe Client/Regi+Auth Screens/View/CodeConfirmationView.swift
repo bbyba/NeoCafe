@@ -10,6 +10,16 @@ import SVPinView
 import Foundation
 
 class CodeConfirmationView: UIStackView {
+    lazy var enterCodeMessageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "enter"
+        label.textColor = Assets.ConstantColors.black
+        label.numberOfLines = 0
+//        label.font = ConstantFont.sfRegular().getUIFont(size: 16)
+        label.textAlignment = .center
+        return label
+    }()
+
     lazy var otpField: SVPinView = {
         let pinView = SVPinView()
         pinView.pinLength = 4
@@ -19,8 +29,8 @@ class CodeConfirmationView: UIStackView {
         pinView.borderLineThickness = 1
         pinView.shouldSecureText = true
         pinView.allowsWhitespaces = false
-        pinView.fieldBackgroundColor = K.ConstantColors.grey
-        pinView.activeFieldBackgroundColor = K.ConstantColors.grey
+        pinView.fieldBackgroundColor = Assets.ConstantColors.grey
+        pinView.activeFieldBackgroundColor = Assets.ConstantColors.grey
         pinView.fieldCornerRadius = 18
         pinView.activeFieldCornerRadius = 18
         pinView.placeholder = ""
@@ -33,10 +43,13 @@ class CodeConfirmationView: UIStackView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        axis = .vertical
+        spacing = 14
         addSubviews()
     }
 
     private func addSubviews() {
+        addArrangedSubview(enterCodeMessageLabel)
         addArrangedSubview(otpField)
     }
 

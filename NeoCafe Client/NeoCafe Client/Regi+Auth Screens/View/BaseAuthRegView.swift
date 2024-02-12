@@ -12,7 +12,7 @@ class BaseAuthRegView: UIView {
     lazy var headerSection: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = K.ConstantColors.second
+        view.backgroundColor = Assets.ConstantColors.second
         return view
     }()
 
@@ -25,7 +25,7 @@ class BaseAuthRegView: UIView {
         let label = UILabel()
         label.text = "Вход"
         label.font = .systemFont(ofSize: 32)
-        label.textColor = K.ConstantColors.fourth
+        label.textColor = Assets.ConstantColors.fourth
         return label
     }()
 
@@ -41,9 +41,9 @@ class BaseAuthRegView: UIView {
         return stack
     }()
 
-    lazy var button: CustomButton = {
+    lazy var getCodebutton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: "Получить код", backgroundColor: K.ConstantColors.black)
+        button.setProperties(title: "Получить код", backgroundColor: Assets.ConstantColors.black)
         return button
     }()
 
@@ -59,7 +59,7 @@ class BaseAuthRegView: UIView {
         headerSection.addSubview(headerLabel)
         addSubview(segmentedControl)
         addSubview(textFieldStackView)
-        addSubview(button)
+        addSubview(getCodebutton)
     }
 
     func setupConstraints() {
@@ -96,7 +96,7 @@ class BaseAuthRegView: UIView {
             make.width.equalTo(346)
         }
 
-        button.snp.makeConstraints { make in
+        getCodebutton.snp.makeConstraints { make in
             make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.centerX.equalToSuperview()
             make.width.equalTo(346)

@@ -24,13 +24,13 @@ class CustomSegmentedControl: UISegmentedControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = K.ConstantColors.grey
+        self.backgroundColor = Assets.ConstantColors.grey
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
 
         let selectedImageViewIndex = numberOfSegments
         if let selectedImageView = subviews[selectedImageViewIndex] as? UIImageView {
-            selectedImageView.backgroundColor = K.ConstantColors.primary
+            selectedImageView.backgroundColor = Assets.ConstantColors.primary
             selectedImageView.image = nil
             selectedImageView.bounds = selectedImageView.bounds.insetBy(dx: segmentInset, dy: segmentInset)
             selectedImageView.layer.masksToBounds = true

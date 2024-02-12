@@ -45,8 +45,8 @@ class CustomTextField: UITextField {
         self.autocapitalizationType = .none
         self.autocorrectionType = .no
         self.clearButtonMode = .whileEditing
-        self.backgroundColor = K.ConstantColors.grey
-        self.textColor = K.ConstantColors.black
+        self.backgroundColor = Assets.ConstantColors.grey
+        self.textColor = Assets.ConstantColors.black
         let font = UIFont.systemFont(ofSize: 16) // change later
         self.font = font
         self.attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
