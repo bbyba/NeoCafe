@@ -19,7 +19,6 @@ class RegisterVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view.backgroundColor = .white
         updateViewForSegmentIndex(index: baseAuthRegView.segmentedControl.selectedSegmentIndex)
         addTargets()
     }
@@ -45,7 +44,7 @@ class RegisterVC: UIViewController {
     }
 
     private func updateButtonText(forIndex index: Int) {
-        let buttonTitle = index == 0 ? "Получить код" : "Зарегистрироваться"
+        let buttonTitle = index == 0 ? S.getCode : S.register
         baseAuthRegView.getCodebutton.setTitle(buttonTitle, for: .normal)
     }
 
@@ -55,7 +54,7 @@ class RegisterVC: UIViewController {
         codeConfirmationView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        baseAuthRegView.getCodebutton.setTitle("Подтвердить", for: .normal)
+        baseAuthRegView.getCodebutton.setTitle(S.confirm, for: .normal)
     }
 
     @objc func segmentedControlValueChanged() {

@@ -12,16 +12,16 @@ import SnapKit
 class SignInView: UIStackView {
     lazy var wrongEmailErrorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Неправильный адрес электронной почты, попробуйте ещё раз"
+        label.text = S.wrongEmail
         label.textAlignment = .center
         label.numberOfLines = 0
-//        label.font = UIFont(name: FontFamily.Poppins.medium.name, size: 16)
-        label.textColor = Assets.ConstantColors.red
+        label.font = FontFamily.Poppins.medium.font(size: 16)
+        label.textColor = Asset.Colors.coral.color
         label.isHidden = true
         return label
     }()
-    
-    lazy var emailTextFieldReg = CustomTextField(iconName: "at", customPlaceholder: "example@email.com")
+
+    lazy var emailTextFieldReg = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.exampleEmail)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,7 +48,7 @@ class SignInView: UIStackView {
 //        wrongEmailErrorLabel.isHidden = isValidEmail
 //        wrongEmailErrorLabel.textColor = isValidEmail ? .clear : .red
 //    }
-    
+
     func validateEmail() -> Bool {
         guard let email = emailTextFieldReg.text, !email.isEmpty else { return false }
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		B18546FCF9870DF3864F7D37 /* Pods_NeoCafe_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */; };
+		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
 		DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9556142B79F67300FB65AF /* NetworkService.swift */; };
-		DD9556192B7A404300FB65AF /* swiftgen.config.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD9556182B7A404300FB65AF /* swiftgen.config.yml */; };
-		DD95561B2B7A413300FB65AF /* template.stencil  in Sources */ = {isa = PBXBuildFile; fileRef = DD95561A2B7A413300FB65AF /* template.stencil  */; };
+		DD9D08322B7B435D00BAB6CD /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D08312B7B435D00BAB6CD /* XCAssets+Generated.swift */; };
+		DD9D08372B7BF18100BAB6CD /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */; };
+		DD9D08392B7BF19000BAB6CD /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9D08382B7BF19000BAB6CD /* Poppins-Medium.ttf */; };
+		DD9D083B2B7BF19B00BAB6CD /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9D083A2B7BF19B00BAB6CD /* Poppins-Regular.ttf */; };
+		DD9D083D2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DD9D083C2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf */; };
+		DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D083E2B7BF2F800BAB6CD /* Fonts.swift */; };
+		DD9D08412B7BF53300BAB6CD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD9D08402B7BF53300BAB6CD /* Localizable.strings */; };
+		DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D08422B7BF71000BAB6CD /* Strings+Generated.swift */; };
 		DDC1D8442B75B77C0068598D /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = DDC1D8432B75B77C0068598D /* .swiftlint.yml */; };
 		DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D8482B7601A30068598D /* RegistrationView.swift */; };
 		DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84B2B7602A20068598D /* SignInView.swift */; };
@@ -24,7 +31,6 @@
 		DDF8B5C62B70F1FF005FE06A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C52B70F1FF005FE06A /* Model.swift */; };
 		DDF8B5C82B70F211005FE06A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C72B70F211005FE06A /* RegisterVC.swift */; };
 		DDF8B5CA2B70F21D005FE06A /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C92B70F21D005FE06A /* RegisterViewModel.swift */; };
-		DDF8B5CC2B70F231005FE06A /* ConstantColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5CB2B70F231005FE06A /* ConstantColors.swift */; };
 		DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */; };
 		DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5D22B70F299005FE06A /* CustomTextField.swift */; };
 		DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5D72B70F2BA005FE06A /* CustomButton.swift */; };
@@ -34,9 +40,16 @@
 		774A1FD35DC0575343951A93 /* Pods-NeoCafe Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Client.release.xcconfig"; path = "Target Support Files/Pods-NeoCafe Client/Pods-NeoCafe Client.release.xcconfig"; sourceTree = "<group>"; };
 		7FC66A2F83A1FDDD0ECAFD78 /* Pods-NeoCafe Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Client.debug.xcconfig"; path = "Target Support Files/Pods-NeoCafe Client/Pods-NeoCafe Client.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DD9556142B79F67300FB65AF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		DD9556182B7A404300FB65AF /* swiftgen.config.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.config.yml; sourceTree = "<group>"; };
-		DD95561A2B7A413300FB65AF /* template.stencil  */ = {isa = PBXFileReference; lastKnownFileType = text; path = "template.stencil "; sourceTree = "<group>"; };
+		DD9D08312B7B435D00BAB6CD /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
+		DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		DD9D08382B7BF19000BAB6CD /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		DD9D083A2B7BF19B00BAB6CD /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		DD9D083C2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		DD9D083E2B7BF2F800BAB6CD /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		DD9D08402B7BF53300BAB6CD /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		DD9D08422B7BF71000BAB6CD /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		DDC1D8432B75B77C0068598D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		DDC1D8482B7601A30068598D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		DDC1D84B2B7602A20068598D /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -52,7 +65,6 @@
 		DDF8B5C52B70F1FF005FE06A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DDF8B5C72B70F211005FE06A /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterVC.swift; path = "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/NeoCafe Client/Regi+Auth Screens/RegisterVC.swift"; sourceTree = "<absolute>"; };
 		DDF8B5C92B70F21D005FE06A /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		DDF8B5CB2B70F231005FE06A /* ConstantColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantColors.swift; sourceTree = "<group>"; };
 		DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		DDF8B5D22B70F299005FE06A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DDF8B5D72B70F2BA005FE06A /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -87,6 +99,26 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		DD84CBA82B7B372B00580D4A /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				DD9D08312B7B435D00BAB6CD /* XCAssets+Generated.swift */,
+				DD9D083E2B7BF2F800BAB6CD /* Fonts.swift */,
+				DD9D08422B7BF71000BAB6CD /* Strings+Generated.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		DD84CBAC2B7B3B3100580D4A /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				DDF8B5982B70ED3E005FE06A /* LaunchScreen.storyboard */,
+				DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */,
+				DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		DD9556162B7A00E400FB65AF /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,13 +127,15 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
-		DD9556172B7A401400FB65AF /* SwiftGen */ = {
+		DD9D08352B7BF12800BAB6CD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				DD9556182B7A404300FB65AF /* swiftgen.config.yml */,
-				DD95561A2B7A413300FB65AF /* template.stencil  */,
+				DD9D083C2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf */,
+				DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */,
+				DD9D08382B7BF19000BAB6CD /* Poppins-Medium.ttf */,
+				DD9D083A2B7BF19B00BAB6CD /* Poppins-Regular.ttf */,
 			);
-			path = SwiftGen;
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		DDC1D84A2B7601A70068598D /* View */ = {
@@ -118,7 +152,7 @@
 		DDF8B5812B70ED3C005FE06A = {
 			isa = PBXGroup;
 			children = (
-				DD9556172B7A401400FB65AF /* SwiftGen */,
+				DD84CBAF2B7B414E00580D4A /* swiftgen.yml */,
 				DDC1D8432B75B77C0068598D /* .swiftlint.yml */,
 				DDF8B58C2B70ED3C005FE06A /* NeoCafe Client */,
 				DDF8B58B2B70ED3C005FE06A /* Products */,
@@ -138,11 +172,12 @@
 		DDF8B58C2B70ED3C005FE06A /* NeoCafe Client */ = {
 			isa = PBXGroup;
 			children = (
+				DDF8B59B2B70ED3E005FE06A /* Info.plist */,
+				DD84CBA82B7B372B00580D4A /* Generated */,
 				DDF8B5CF2B70F277005FE06A /* Custom */,
 				DDF8B5C12B70F19A005FE06A /* Regi+Auth Screens */,
 				DDF8B5912B70ED3C005FE06A /* ViewController.swift */,
 				DDF8B5CD2B70F24D005FE06A /* Supporting */,
-				DDF8B59B2B70ED3E005FE06A /* Info.plist */,
 				DD9556162B7A00E400FB65AF /* NetworkService */,
 			);
 			path = "NeoCafe Client";
@@ -162,11 +197,10 @@
 		DDF8B5CD2B70F24D005FE06A /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				DDF8B5CB2B70F231005FE06A /* ConstantColors.swift */,
-				DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */,
-				DDF8B5982B70ED3E005FE06A /* LaunchScreen.storyboard */,
+				DD9D08352B7BF12800BAB6CD /* Fonts */,
+				DD84CBAC2B7B3B3100580D4A /* Delegates */,
 				DDF8B5962B70ED3E005FE06A /* Assets.xcassets */,
-				DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */,
+				DD9D08402B7BF53300BAB6CD /* Localizable.strings */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -189,6 +223,7 @@
 			buildConfigurationList = DDF8B59E2B70ED3E005FE06A /* Build configuration list for PBXNativeTarget "NeoCafe Client" */;
 			buildPhases = (
 				FDFF9AFB6452C8E5E9332C74 /* [CP] Check Pods Manifest.lock */,
+				DD84CBAB2B7B37D300580D4A /* SwiftGen */,
 				DDF8B5862B70ED3C005FE06A /* Sources */,
 				DDF8B5872B70ED3C005FE06A /* Frameworks */,
 				DDF8B5882B70ED3C005FE06A /* Resources */,
@@ -244,8 +279,13 @@
 			files = (
 				DDC1D8442B75B77C0068598D /* .swiftlint.yml in Resources */,
 				DDF8B59A2B70ED3E005FE06A /* LaunchScreen.storyboard in Resources */,
-				DD9556192B7A404300FB65AF /* swiftgen.config.yml in Resources */,
+				DD9D083D2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf in Resources */,
+				DD9D083B2B7BF19B00BAB6CD /* Poppins-Regular.ttf in Resources */,
+				DD9D08412B7BF53300BAB6CD /* Localizable.strings in Resources */,
+				DD9D08372B7BF18100BAB6CD /* Poppins-Bold.ttf in Resources */,
+				DD9D08392B7BF19000BAB6CD /* Poppins-Medium.ttf in Resources */,
 				DDF8B5972B70ED3E005FE06A /* Assets.xcassets in Resources */,
+				DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +308,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NeoCafe Client/Pods-NeoCafe Client-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DD84CBAB2B7B37D300580D4A /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then \n\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\n\nelse \n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\" \nfi \n\n";
 		};
 		DDC1D8452B75B7EC0068598D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -320,17 +378,18 @@
 				DDF8B5922B70ED3C005FE06A /* ViewController.swift in Sources */,
 				DDF8B5CA2B70F21D005FE06A /* RegisterViewModel.swift in Sources */,
 				DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */,
-				DDF8B5CC2B70F231005FE06A /* ConstantColors.swift in Sources */,
 				DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */,
 				DDF8B5C32B70F1C7005FE06A /* BaseAuthRegView.swift in Sources */,
+				DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */,
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
 				DDF8B5C82B70F211005FE06A /* RegisterVC.swift in Sources */,
 				DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */,
+				DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */,
+				DD9D08322B7B435D00BAB6CD /* XCAssets+Generated.swift in Sources */,
 				DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */,
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
-				DD95561B2B7A413300FB65AF /* template.stencil  in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

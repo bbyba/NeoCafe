@@ -6,40 +6,38 @@
 //
 
 import UIKit
+import SnapKit
 import SVPinView
 import Foundation
 
 class CodeConfirmationView: UIStackView {
     lazy var enterCodeMessageLabel: UILabel = {
         let label = UILabel()
-        label.text = "enter"
-        label.textColor = Assets.ConstantColors.black
-        label.numberOfLines = 0
-//        label.font = ConstantFont.sfRegular().getUIFont(size: 16)
+        label.text = S.otpCodeLabel
+        label.textColor = Asset.Colors.darkBlue.color
+        label.font = FontFamily.Poppins.regular.font(size: 16)
         label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
 
     lazy var otpField: SVPinView = {
         let pinView = SVPinView()
         pinView.pinLength = 4
-        pinView.secureCharacter = "\u{25CF}"
-        pinView.interSpace = 10
-        pinView.textColor = UIColor.black
-        pinView.borderLineThickness = 1
-        pinView.shouldSecureText = true
-        pinView.allowsWhitespaces = false
-        pinView.fieldBackgroundColor = Assets.ConstantColors.grey
-        pinView.activeFieldBackgroundColor = Assets.ConstantColors.grey
-        pinView.fieldCornerRadius = 18
-        pinView.activeFieldCornerRadius = 18
-        pinView.placeholder = ""
+        pinView.interSpace = 8
+        pinView.textColor = Asset.Colors.darkBlue.color
+        pinView.font = FontFamily.Poppins.regular.font(size: 20)
+        pinView.shouldSecureText = false
+        pinView.fieldBackgroundColor = Asset.Colors.grey.color
+        pinView.fieldCornerRadius = 15
         pinView.deleteButtonAction = .deleteCurrentAndMoveToPrevious
-        pinView.keyboardAppearance = .default
+        pinView.keyboardType = .numberPad
         pinView.becomeFirstResponderAtIndex = 0
         pinView.shouldDismissKeyboardOnEmptyFirstField = false
+//        pinView.heightAnchor = pinView.widthAnchor.constraint(equalTo: <#T##NSLayoutDimension#>, multiplier: <#T##CGFloat#>)
         return pinView
     }()
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +49,14 @@ class CodeConfirmationView: UIStackView {
     private func addSubviews() {
         addArrangedSubview(enterCodeMessageLabel)
         addArrangedSubview(otpField)
+
+        func setupConstraints() {
+            otpField.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+//                make.width.equalToSuperview()
+                make.height.equalTo(52)
+            }
+        }
     }
 
     required init(coder: NSCoder) {

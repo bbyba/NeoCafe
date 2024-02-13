@@ -12,25 +12,26 @@ class BaseAuthRegView: UIView {
     lazy var headerSection: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = Assets.ConstantColors.second
+        view.backgroundColor = Asset.Colors.blue.color
         return view
     }()
 
     lazy var headerImage: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "twoBeans"))
-        return image
+        let imageView = UIImageView(image: Asset.Splash.twoBeans.image)
+        return imageView
     }()
+
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Вход"
-        label.font = .systemFont(ofSize: 32)
-        label.textColor = Assets.ConstantColors.fourth
+        label.text = S.entry
+        label.font = FontFamily.Poppins.bold.font(size: 32)
+        label.textColor = Asset.Colors.ivory.color
         return label
     }()
 
     lazy var segmentedControl: CustomSegmentedControl = {
-        let segmentedControl = CustomSegmentedControl(items: ["Войти", "Регистрация"])
+        let segmentedControl = CustomSegmentedControl(items: [S.enter, S.registration])
         segmentedControl.contentMode = .scaleToFill
         segmentedControl.selectedSegmentIndex = 0
         return segmentedControl
@@ -43,12 +44,13 @@ class BaseAuthRegView: UIView {
 
     lazy var getCodebutton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: "Получить код", backgroundColor: Assets.ConstantColors.black)
+        button.setProperties(title: S.getCode, backgroundColor: Asset.Colors.darkBlue.color)
         return button
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
         addSubviews()
         setupConstraints()
     }
@@ -79,28 +81,27 @@ class BaseAuthRegView: UIView {
         headerLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.height.equalTo(80)
-            make.width.equalTo(80)
+            make.height.equalTo(38)
         }
 
         segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(headerSection.snp.bottom).inset(segmentedControl.frame.height / 2)
             make.centerX.equalToSuperview()
             make.height.equalTo(48)
-            make.width.equalTo(346)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
 
         textFieldStackView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
-            make.width.equalTo(346)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
 
         getCodebutton.snp.makeConstraints { make in
             make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.centerX.equalToSuperview()
-            make.width.equalTo(346)
             make.height.equalTo(48)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
     }
 

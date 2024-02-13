@@ -10,7 +10,8 @@ import Foundation
 import SnapKit
 
 class RegistrationView: UIStackView {
-    lazy var emailTextField = CustomTextField(iconName: "at", customPlaceholder: "Введите почту")
+    lazy var emailTextField = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.enterEmail)
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)

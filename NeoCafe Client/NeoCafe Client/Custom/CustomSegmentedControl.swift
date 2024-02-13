@@ -24,13 +24,20 @@ class CustomSegmentedControl: UISegmentedControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = Assets.ConstantColors.grey
+        self.backgroundColor = Asset.Colors.grey.color
         self.layer.cornerRadius = 25
         self.layer.masksToBounds = true
+        let fontAttributes: [NSAttributedString.Key: Any] = [
+            .font: FontFamily.Poppins.bold.font(size: 15),
+            .foregroundColor: Asset.Colors.darkBlue.color
+        ]
+        setTitleTextAttributes(fontAttributes, for: .normal)
+        setTitleTextAttributes([.foregroundColor: Asset.Colors.white.color], for: .selected)
+
 
         let selectedImageViewIndex = numberOfSegments
         if let selectedImageView = subviews[selectedImageViewIndex] as? UIImageView {
-            selectedImageView.backgroundColor = Assets.ConstantColors.primary
+            selectedImageView.backgroundColor = Asset.Colors.orange.color
             selectedImageView.image = nil
             selectedImageView.bounds = selectedImageView.bounds.insetBy(dx: segmentInset, dy: segmentInset)
             selectedImageView.layer.masksToBounds = true

@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomTextField: UITextField {
-    var iconName: String
+    var iconName: UIImage
     var customPlaceholder: String
 
     let iconImageView: UIImageView = {
@@ -18,7 +18,7 @@ class CustomTextField: UITextField {
         return imageView
     }()
 
-    init(iconName: String, customPlaceholder: String) {
+    init(iconName: UIImage, customPlaceholder: String) {
         self.iconName = iconName
         self.customPlaceholder = customPlaceholder
         super.init(frame: .zero)
@@ -45,13 +45,13 @@ class CustomTextField: UITextField {
         self.autocapitalizationType = .none
         self.autocorrectionType = .no
         self.clearButtonMode = .whileEditing
-        self.backgroundColor = Assets.ConstantColors.grey
-        self.textColor = Assets.ConstantColors.black
-        let font = UIFont.systemFont(ofSize: 16) // change later
-        self.font = font
+        self.backgroundColor = Asset.Colors.grey.color
+        self.textColor = Asset.Colors.darkBlue.color
+//        let font = FontFamily.SFProDisplay.regular.font(size: 16)
+        self.font = FontFamily.SFProDisplay.regular.font(size: 16)
         self.attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
         self.layer.cornerRadius = 18
-        iconImageView.image = UIImage(named: iconName)
+        iconImageView.image = iconName
         let leftViewContainer = UIView()
         leftViewContainer.addSubview(iconImageView)
         self.leftView = leftViewContainer
