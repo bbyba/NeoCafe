@@ -2,10 +2,7 @@
 //  CodeConfirmationView.swift
 //  NeoCafe Client
 //
-//  Created by Burte Bayaraa on 2024.02.07.
-//
 
-import UIKit
 import SnapKit
 import SVPinView
 import Foundation
@@ -53,7 +50,6 @@ class CodeConfirmationView: UIStackView {
         func setupConstraints() {
             otpField.snp.makeConstraints { make in
                 make.top.equalToSuperview()
-//                make.width.equalToSuperview()
                 make.height.equalTo(52)
             }
         }

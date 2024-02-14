@@ -37,10 +37,7 @@ class BaseAuthRegView: UIView {
         return segmentedControl
     }()
 
-    lazy var textFieldStackView: UIView = {
-        let stack = UIView()
-        return stack
-    }()
+    lazy var textFieldStackView = UIView()
 
     lazy var getCodebutton: CustomButton = {
         let button = CustomButton()
@@ -66,8 +63,7 @@ class BaseAuthRegView: UIView {
 
     func setupConstraints() {
         headerSection.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.width.equalToSuperview()
+            make.top.width.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.2)
         }
 
