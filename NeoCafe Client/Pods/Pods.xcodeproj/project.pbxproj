@@ -391,7 +391,7 @@
 		03493C18E596648ED327F5D2C6BFA277 /* Moya-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Moya-umbrella.h"; sourceTree = "<group>"; };
 		0489D89C6F890223B525B0B909FC9596 /* SVPinView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SVPinView.modulemap; sourceTree = "<group>"; };
 		04D01E60574F8BB3FA68CEE14B747980 /* Moya-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Moya-prefix.pch"; sourceTree = "<group>"; };
-		05063D223EBC25232CC63013B1670142 /* Pods-NeoCafe Client */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-NeoCafe Client"; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05063D223EBC25232CC63013B1670142 /* Pods_NeoCafe_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05164B2E50F7DAE01E6BB661AABDAA8F /* Concat.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Concat.swift; path = RxSwift/Observables/Concat.swift; sourceTree = "<group>"; };
 		059C98CD5EC466FF57DAB800346513B5 /* Task.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Task.swift; path = Sources/Moya/Task.swift; sourceTree = "<group>"; };
 		06EFD9676317D214DB76982A09A77BAE /* AuthenticationInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthenticationInterceptor.swift; path = Source/AuthenticationInterceptor.swift; sourceTree = "<group>"; };
@@ -1270,7 +1270,7 @@
 			children = (
 				5D797E9A5C5782CE845840781FA1CC81 /* Alamofire.framework */,
 				3756A9BBE41ABEE8DCBF5BCA6972C4DA /* Moya.framework */,
-				05063D223EBC25232CC63013B1670142 /* Pods-NeoCafe Client */,
+				05063D223EBC25232CC63013B1670142 /* Pods_NeoCafe_Client.framework */,
 				809C5FAB588354C9BA37DC3EAB8CB45C /* RxSwift.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
 				11EA81E2ABBB1FAAB1B2323ED6104A68 /* SVPinView.framework */,
@@ -1418,7 +1418,7 @@
 			);
 			name = "Pods-NeoCafe Client";
 			productName = Pods_NeoCafe_Client;
-			productReference = 05063D223EBC25232CC63013B1670142 /* Pods-NeoCafe Client */;
+			productReference = 05063D223EBC25232CC63013B1670142 /* Pods_NeoCafe_Client.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA9EA43B3B503823EE36C60D9C8A865F /* RxSwift */ = {
