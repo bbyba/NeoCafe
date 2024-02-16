@@ -31,7 +31,6 @@ class CodeConfirmationView: UIStackView {
         pinView.keyboardType = .numberPad
         pinView.becomeFirstResponderAtIndex = 0
         pinView.shouldDismissKeyboardOnEmptyFirstField = false
-//        pinView.heightAnchor = pinView.widthAnchor.constraint(equalTo: <#T##NSLayoutDimension#>, multiplier: <#T##CGFloat#>)
         return pinView
     }()
 

@@ -24,9 +24,9 @@ class CustomSegmentedControl: UISegmentedControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.backgroundColor = Asset.Colors.grey.color
-        self.layer.cornerRadius = 25
-        self.layer.masksToBounds = true
+        backgroundColor = Asset.Colors.grey.color
+        layer.cornerRadius = 25
+        layer.masksToBounds = true
         let fontAttributes: [NSAttributedString.Key: Any] = [
             .font: FontFamily.Poppins.bold.font(size: 15),
             .foregroundColor: Asset.Colors.darkBlue.color

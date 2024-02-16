@@ -42,19 +42,18 @@ class CustomTextField: UITextField {
     }
 
     private func setupTextField() {
-        self.autocapitalizationType = .none
-        self.autocorrectionType = .no
-        self.clearButtonMode = .whileEditing
-        self.backgroundColor = Asset.Colors.grey.color
-        self.textColor = Asset.Colors.darkBlue.color
-//        let font = FontFamily.SFProDisplay.regular.font(size: 16)
-        self.font = FontFamily.SFProDisplay.regular.font(size: 16)
-        self.attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
-        self.layer.cornerRadius = 18
+        autocapitalizationType = .none
+        autocorrectionType = .no
+        clearButtonMode = .whileEditing
+        backgroundColor = Asset.Colors.grey.color
+        textColor = Asset.Colors.darkBlue.color
+        font = FontFamily.SFProDisplay.regular.font(size: 16)
+        attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
+        layer.cornerRadius = 18
         iconImageView.image = iconName
         let leftViewContainer = UIView()
         leftViewContainer.addSubview(iconImageView)
-        self.leftView = leftViewContainer
-        self.leftViewMode = .always
+        leftView = leftViewContainer
+        leftViewMode = .always
     }
 }
