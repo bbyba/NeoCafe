@@ -2,15 +2,12 @@
 //  RegistrationView.swift
 //  NeoCafe Client
 //
-//  Created by Burte Bayaraa on 2024.02.07.
-//
 
 import UIKit
-import Foundation
 import SnapKit
 
 class RegistrationView: UIStackView {
-    lazy var emailTextField = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.enterEmail)
+    lazy var emailTextFieldReg = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.exampleEmail)
 
 
     override init(frame: CGRect) {
@@ -21,7 +18,7 @@ class RegistrationView: UIStackView {
     }
 
     func addSubviews() {
-        addArrangedSubview(emailTextField)
+        addArrangedSubview(emailTextFieldReg)
     }
 
 //    func resetView() {

@@ -10,7 +10,7 @@
 "enterEmail" = "Введите почту";
 "wrongEmail" = "Неправильный адрес электронной почты, попробуйте ещё раз";
 "exampleEmail" = "example@email.com";
-"OTPCodeLabel" = "Введите 4-х значный код,\ отправленный на почту example@gmail.com";
+"OTPCodeLabel" = "Введите 4-х значный код,\ отправленный на почту ";
 "verificationCode" = "Код подтверждения";
 "register" = "Зарегистрироваться";
 "confirm" = "Подтвердить";

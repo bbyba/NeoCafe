@@ -23,8 +23,8 @@ internal enum S {
   internal static let exampleEmail = S.tr("Localizable", "exampleEmail", fallback: "example@email.com")
   /// Получить код
   internal static let getCode = S.tr("Localizable", "getCode", fallback: "Получить код")
-  /// Введите 4-х значный код, отправленный на почту example@gmail.com
-  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код, отправленный на почту example@gmail.com")
+  /// Введите 4-х значный код, отправленный на почту 
+  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код, отправленный на почту ")
   /// Зарегистрироваться
   internal static let register = S.tr("Localizable", "register", fallback: "Зарегистрироваться")
   /// Регистрация

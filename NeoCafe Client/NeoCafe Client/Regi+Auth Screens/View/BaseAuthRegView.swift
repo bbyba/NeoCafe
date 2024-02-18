@@ -1,14 +1,17 @@
 //
-//  RegisterView.swift
+//  BaseAuthRegView.swift
 //  NeoCafe Client
 //
-//  Created by Burte Bayaraa on 2024.02.02.
-//
+
 import Foundation
 import UIKit
 import SnapKit
 
 class BaseAuthRegView: UIView {
+    lazy var registrationView = RegistrationView()
+    lazy var signInView = SignInView()
+    lazy var codeConfirmationView = CodeConfirmationView()
+    
     lazy var headerSection: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
@@ -20,7 +23,6 @@ class BaseAuthRegView: UIView {
         let imageView = UIImageView(image: Asset.Splash.twoBeans.image)
         return imageView
     }()
-
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -37,12 +39,29 @@ class BaseAuthRegView: UIView {
         return segmentedControl
     }()
 
-    lazy var textFieldStackView = UIView()
+//    lazy var textFieldStackView = UIStackView()
+    lazy var textFieldStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 14
+        return stackView
+    }()
 
     lazy var getCodebutton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.getCode, backgroundColor: Asset.Colors.darkBlue.color)
         return button
+    }()
+
+    lazy var wrongEmailErrorLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.wrongEmail
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = FontFamily.Poppins.medium.font(size: 16)
+        label.textColor = Asset.Colors.coral.color
+        label.isHidden = true
+        return label
     }()
 
     override init(frame: CGRect) {
@@ -58,6 +77,8 @@ class BaseAuthRegView: UIView {
         headerSection.addSubview(headerLabel)
         addSubview(segmentedControl)
         addSubview(textFieldStackView)
+        textFieldStackView.addArrangedSubview(wrongEmailErrorLabel)
+        textFieldStackView.addArrangedSubview(signInView)
         addSubview(getCodebutton)
     }
 
@@ -100,6 +121,41 @@ class BaseAuthRegView: UIView {
             make.leading.trailing.equalToSuperview().inset(16)
         }
     }
+
+    // MARK: - Switch between registration and authorization
+
+    func updateViewForSegmentIndex(index: Int) {
+        let currentViews = textFieldStackView.arrangedSubviews
+        currentViews.forEach { view in
+            if view !== wrongEmailErrorLabel {
+                textFieldStackView.removeArrangedSubview(view)
+                view.removeFromSuperview()
+            }
+        }
+
+        switch index {
+        case 1:
+            textFieldStackView.addArrangedSubview(registrationView)
+            headerLabel.text = S.registration
+        default:
+            textFieldStackView.addArrangedSubview(signInView)
+            headerLabel.text = S.entry
+        }
+
+        textFieldStackView.insertArrangedSubview(wrongEmailErrorLabel, at: 0)
+    }
+
+    func showCodeConfirmationView() {
+        textFieldStackView.arrangedSubviews.forEach {
+            textFieldStackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+
+        textFieldStackView.addArrangedSubview(codeConfirmationView)
+        headerLabel.text = S.verificationCode
+        getCodebutton.titleLabel?.text = S.confirm
+    }
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
