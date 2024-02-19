@@ -2,8 +2,6 @@
 //  CustomSearchBar.swift
 //  NeoCafe Client
 //
-//  Created by Burte Bayaraa on 2024.02.19.
-//
 
 import UIKit
 import SnapKit

@@ -2,10 +2,9 @@
 //  RegisterViewModel.swift
 //  NeoCafe Client
 //
-//  Created by Burte Bayaraa on 2024.02.05.
-//
 
 import UIKit
+import Moya
 
 enum ViewState {
     case signIn
@@ -14,7 +13,17 @@ enum ViewState {
 }
 
 class AuthViewModel {
-    var currentState: ViewState = .signIn       // Maybe use didSet??
+    let provider = MoyaProvider<UserService>()
+//    var currentState: ViewState = .signIn       // Maybe use didSet??
+    var currentState: ViewState = .signIn {
+        didSet {
+            if currentState == .codeConfirmation {
+                previousState = oldValue
+            }
+            self.updateViewState?(currentState)
+        }
+    }
+    var previousState: ViewState?
     var emailValidationFailed: Bool = false
     var updateViewState: ((ViewState) -> Void)?
     var updateEmailValidationState: ((Bool) -> Void)?
@@ -25,8 +34,96 @@ class AuthViewModel {
         emailValidationFailed = !emailTest.evaluate(with: email)
     }
 
-    // Method to change the current view state
     func changeViewState(to newState: ViewState) {
         self.currentState = newState
+    }
+
+    func requestConfirmationCode(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        switch currentState {
+        case .signIn:
+            print("sign send code request")
+            provider.request(.checkEmailLogin(email: email)) { result in
+                self.handleResult(result, completion: completion)
+            }
+        case .registration:
+            print("registration send code request")
+            provider.request(.checkEmailRegister(email: email)) { result in
+                self.handleResult(result, completion: completion)
+            }
+        case .codeConfirmation:
+            break
+        }
+    }
+
+    func registerLoginUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        switch currentState {
+        case .signIn:
+            print("sign confirm request")
+            provider.request(.loginUser(email: email, confirmationCode: confirmationCode)) { result in
+                self.handleResult(result, completion: completion)
+            }
+        case .registration:
+            print("registration confirm request")
+            provider.request(.registerUser(email: email, confirmationCode: confirmationCode)) { result in
+                self.handleResult(result, completion: completion)
+            }
+        case .codeConfirmation:
+            provider.request(.registerUser(email: email, confirmationCode: confirmationCode)) { result in
+                self.handleResult(result, completion: completion)
+            }
+        }
+    }
+
+//    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
+//        switch result {
+//        case .success(let response):
+//            print("Request succeeded with status code: \(response.statusCode)")
+//            if let responseString = String(data: response.data, encoding: .utf8) {
+//                print("Response data: \(responseString)")
+//            }
+//            completion(.success(()))
+//        case .failure(let error):
+//            print("Request failed with error: \(error.localizedDescription)")
+//            if let response = error.response {
+//                // Additionally, print the error status code and error response body if available
+//                print("Error status code: \(response.statusCode)")
+//                if let errorResponseString = String(data: response.data, encoding: .utf8) {
+//                    print("Error response data: \(errorResponseString)")
+//                }
+//            }
+//            completion(.failure(error))
+//        }
+//    }
+
+    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
+        switch result {
+        case .success(let response):
+            // Check if the status code indicates a successful response
+            if (200...299).contains(response.statusCode) {
+                print("Request succeeded with status code: \(response.statusCode)")
+                if let responseString = String(data: response.data, encoding: .utf8) {
+                    print("Response data: \(responseString)")
+                }
+                completion(.success(()))
+            } else {
+                // Handle unsuccessful status codes
+                print("Request completed with error status code: \(response.statusCode)")
+                if let responseString = String(data: response.data, encoding: .utf8) {
+                    print("Error response data: \(responseString)")
+                }
+                let errorResponse = NSError(domain: "com.neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
+                completion(.failure(errorResponse))
+            }
+
+        case .failure(let error):
+            print("Networking request failed with error: \(error.localizedDescription)")
+            if let response = error.response {
+                print("Error status code: \(response.statusCode)")
+                if let errorResponseString = String(data: response.data, encoding: .utf8) {
+                    print("Error response data: \(errorResponseString)")
+                }
+            }
+            completion(.failure(error))
+        }
     }
 }

@@ -45,6 +45,7 @@ internal enum Asset {
     internal static let calendar = ImageAsset(name: "calendar")
     internal static let profile = ImageAsset(name: "profile")
   }
+  internal static let magnifyingGlass = ImageAsset(name: "magnifyingGlass")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

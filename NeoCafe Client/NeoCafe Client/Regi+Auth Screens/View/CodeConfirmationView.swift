@@ -34,7 +34,6 @@ class CodeConfirmationView: UIStackView {
         return pinView
     }()
 
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         axis = .vertical
@@ -46,12 +45,12 @@ class CodeConfirmationView: UIStackView {
         addArrangedSubview(enterCodeMessageLabel)
         addArrangedSubview(otpField)
 
-        func setupConstraints() {
-            otpField.snp.makeConstraints { make in
-                make.top.equalToSuperview()
-                make.height.equalTo(52)
-            }
-        }
+//        func setupConstraints() {
+//            otpField.snp.makeConstraints { make in
+//                make.top.equalToSuperview()
+//                make.height.equalTo(52)
+//            }
+//        }
     }
 
     required init(coder: NSCoder) {
