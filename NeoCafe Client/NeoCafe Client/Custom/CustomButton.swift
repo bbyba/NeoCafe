@@ -20,7 +20,7 @@ class CustomButton: UIButton {
 
     private func configure() {
         layer.cornerRadius = 18
-        titleLabel?.font = FontFamily.Poppins.bold.font(size: 16)
+        titleLabel?.font = .poppins(ofSize: 16, weight: .bold)
     }
 
     func setProperties(title: String, backgroundColor: UIColor) {

@@ -11,8 +11,8 @@ class CodeConfirmationView: UIStackView {
     lazy var enterCodeMessageLabel: UILabel = {
         let label = UILabel()
         label.text = S.otpCodeLabel
-        label.textColor = Asset.Colors.darkBlue.color
-        label.font = FontFamily.Poppins.regular.font(size: 16)
+        label.textColor = .darkBlueCustom
+        label.font = .poppins(ofSize: 16, weight: .regular)
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
@@ -22,11 +22,11 @@ class CodeConfirmationView: UIStackView {
         let pinView = SVPinView()
         pinView.pinLength = 4
         pinView.interSpace = 8
-        pinView.textColor = Asset.Colors.darkBlue.color
-        pinView.font = FontFamily.Poppins.regular.font(size: 20)
+        pinView.textColor = .darkBlueCustom
+        pinView.font = .poppins(ofSize: 20, weight: .regular)
         pinView.shouldSecureText = false
-        pinView.fieldBackgroundColor = Asset.Colors.grey.color
-        pinView.fieldCornerRadius = 15
+        pinView.fieldBackgroundColor = .greyCustom
+//        pinView.fieldCornerRadius = 15
         pinView.deleteButtonAction = .deleteCurrentAndMoveToPrevious
         pinView.keyboardType = .numberPad
         pinView.becomeFirstResponderAtIndex = 0

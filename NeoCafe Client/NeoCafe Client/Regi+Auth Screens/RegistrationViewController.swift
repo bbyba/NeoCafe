@@ -71,7 +71,6 @@ class RegistrationViewController: UIViewController {
     func emailValidation(email: String?) {
         guard let email = email else { return }
         viewModel.validateEmail(email: email)
-//        print("Email validation result: \(viewModel.emailValidationFailed)")
         baseAuthRegView.wrongEmailErrorLabel.isHidden = !viewModel.emailValidationFailed
     }
 
@@ -119,13 +118,13 @@ class RegistrationViewController: UIViewController {
         baseAuthRegView.showCodeConfirmationView()
     }
 }
-//
-//#if DEBUG
-//
-//@available(iOS 13.0, *)
-//struct RegisterVCPreview: PreviewProvider {
-//    static var previews: some View {
-//        RegistrationViewController().showPreview()
-//    }
-//}
-//#endif
+
+#if DEBUG
+
+@available(iOS 13.0, *)
+struct RegisterVCPreview: PreviewProvider {
+    static var previews: some View {
+        RegistrationViewController().showPreview()
+    }
+}
+#endif

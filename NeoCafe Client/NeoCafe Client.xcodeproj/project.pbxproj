@@ -10,6 +10,11 @@
 		B18546FCF9870DF3864F7D37 /* Pods_NeoCafe_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */; };
 		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
 		DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C18C2B7FF77800339287 /* Ext+UIViewController.swift */; };
+		DD93C18F2B81C5CC00339287 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C18E2B81C5CC00339287 /* Network.swift */; };
+		DD93C1922B82C94100339287 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C1912B82C94100339287 /* MainView.swift */; };
+		DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C1932B82CBEE00339287 /* CustomSearchBar.swift */; };
+		DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C1962B83869700339287 /* Extension+UIFont.swift */; };
+		DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C1982B838BC100339287 /* Extension+UIColor.swift */; };
 		DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9556142B79F67300FB65AF /* NetworkService.swift */; };
 		DD9D08322B7B435D00BAB6CD /* XCAssets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9D08312B7B435D00BAB6CD /* XCAssets+Generated.swift */; };
 		DD9D08372B7BF18100BAB6CD /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */; };
@@ -25,7 +30,7 @@
 		DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */; };
 		DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */; };
 		DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */; };
-		DDF8B5922B70ED3C005FE06A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5912B70ED3C005FE06A /* ViewController.swift */; };
+		DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5912B70ED3C005FE06A /* MainViewController.swift */; };
 		DDF8B5972B70ED3E005FE06A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5962B70ED3E005FE06A /* Assets.xcassets */; };
 		DDF8B59A2B70ED3E005FE06A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5982B70ED3E005FE06A /* LaunchScreen.storyboard */; };
 		DDF8B5C32B70F1C7005FE06A /* BaseAuthRegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C22B70F1C7005FE06A /* BaseAuthRegView.swift */; };
@@ -43,6 +48,11 @@
 		9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DD93C18C2B7FF77800339287 /* Ext+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIViewController.swift"; sourceTree = "<group>"; };
+		DD93C18E2B81C5CC00339287 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		DD93C1912B82C94100339287 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DD93C1932B82CBEE00339287 /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		DD93C1962B83869700339287 /* Extension+UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIFont.swift"; sourceTree = "<group>"; };
+		DD93C1982B838BC100339287 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
 		DD9556142B79F67300FB65AF /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		DD9D08312B7B435D00BAB6CD /* XCAssets+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCAssets+Generated.swift"; sourceTree = "<group>"; };
 		DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -59,7 +69,7 @@
 		DDF8B58A2B70ED3C005FE06A /* NeoCafe Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NeoCafe Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DDF8B5912B70ED3C005FE06A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DDF8B5912B70ED3C005FE06A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DDF8B5962B70ED3E005FE06A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDF8B5992B70ED3E005FE06A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDF8B59B2B70ED3E005FE06A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,10 +131,29 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		DD93C1902B82C89900339287 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				DDF8B5912B70ED3C005FE06A /* MainViewController.swift */,
+				DD93C1912B82C94100339287 /* MainView.swift */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		DD93C1952B83868000339287 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD93C1962B83869700339287 /* Extension+UIFont.swift */,
+				DD93C1982B838BC100339287 /* Extension+UIColor.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DD9556162B7A00E400FB65AF /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				DD9556142B79F67300FB65AF /* NetworkService.swift */,
+				DD93C18E2B81C5CC00339287 /* Network.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -178,7 +207,7 @@
 				DD84CBA82B7B372B00580D4A /* Generated */,
 				DDF8B5CF2B70F277005FE06A /* Custom */,
 				DDF8B5C12B70F19A005FE06A /* Regi+Auth Screens */,
-				DDF8B5912B70ED3C005FE06A /* ViewController.swift */,
+				DD93C1902B82C89900339287 /* Main Screen */,
 				DDF8B5CD2B70F24D005FE06A /* Supporting */,
 				DD9556162B7A00E400FB65AF /* NetworkService */,
 			);
@@ -211,9 +240,11 @@
 		DDF8B5CF2B70F277005FE06A /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				DD93C1952B83868000339287 /* Extensions */,
 				DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */,
 				DDF8B5D22B70F299005FE06A /* CustomTextField.swift */,
 				DDF8B5D72B70F2BA005FE06A /* CustomButton.swift */,
+				DD93C1932B82CBEE00339287 /* CustomSearchBar.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -378,7 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDF8B5C62B70F1FF005FE06A /* Model.swift in Sources */,
-				DDF8B5922B70ED3C005FE06A /* ViewController.swift in Sources */,
+				DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */,
 				DDF8B5CA2B70F21D005FE06A /* RegisterViewModel.swift in Sources */,
 				DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */,
 				DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */,
@@ -389,11 +420,16 @@
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
 				DDF8B5C82B70F211005FE06A /* RegistrationViewController.swift in Sources */,
 				DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */,
+				DD93C18F2B81C5CC00339287 /* Network.swift in Sources */,
+				DD93C1922B82C94100339287 /* MainView.swift in Sources */,
+				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,
+				DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */,
 				DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */,
 				DD9D08322B7B435D00BAB6CD /* XCAssets+Generated.swift in Sources */,
 				DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */,
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
+				DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

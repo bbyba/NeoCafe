@@ -28,8 +28,8 @@ class CustomSegmentedControl: UISegmentedControl {
         layer.cornerRadius = 25
         layer.masksToBounds = true
         let fontAttributes: [NSAttributedString.Key: Any] = [
-            .font: FontFamily.Poppins.bold.font(size: 15),
-            .foregroundColor: Asset.Colors.darkBlue.color
+            .font: UIFont.poppins(ofSize: 16, weight: .bold),
+            .foregroundColor: UIColor.darkBlueCustom
         ]
         setTitleTextAttributes(fontAttributes, for: .normal)
         setTitleTextAttributes([.foregroundColor: Asset.Colors.white.color], for: .selected)

@@ -98,7 +98,6 @@ class AuthViewModel {
     private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
         switch result {
         case .success(let response):
-            // Check if the status code indicates a successful response
             if (200...299).contains(response.statusCode) {
                 print("Request succeeded with status code: \(response.statusCode)")
                 if let responseString = String(data: response.data, encoding: .utf8) {
@@ -106,7 +105,6 @@ class AuthViewModel {
                 }
                 completion(.success(()))
             } else {
-                // Handle unsuccessful status codes
                 print("Request completed with error status code: \(response.statusCode)")
                 if let responseString = String(data: response.data, encoding: .utf8) {
                     print("Error response data: \(responseString)")

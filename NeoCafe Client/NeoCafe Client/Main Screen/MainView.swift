@@ -6,11 +6,11 @@
 import UIKit
 import SnapKit
 
-class MainView: UIView  {
+class MainView: UIView {
     lazy var headerSection: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = Asset.Colors.blue.color
+        view.backgroundColor = .blueCustom
         return view
     }()
 
@@ -22,8 +22,8 @@ class MainView: UIView  {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.goodMorning
-        label.font = FontFamily.Poppins.bold.font(size: 32)
-        label.textColor = Asset.Colors.ivory.color
+        label.font = .poppins(ofSize: 32, weight: .bold)
+        label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
     }()

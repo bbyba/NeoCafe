@@ -45,9 +45,9 @@ class CustomTextField: UITextField {
         autocapitalizationType = .none
         autocorrectionType = .no
         clearButtonMode = .whileEditing
-        backgroundColor = Asset.Colors.grey.color
-        textColor = Asset.Colors.darkBlue.color
-        font = FontFamily.SFProDisplay.regular.font(size: 16)
+        backgroundColor = .greyCustom
+        textColor = .darkBlueCustom
+        font = .sFProDisplayFont(ofSize: 16)
         attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
         layer.cornerRadius = 18
         iconImageView.image = iconName

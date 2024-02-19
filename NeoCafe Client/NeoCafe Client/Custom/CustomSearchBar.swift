@@ -30,7 +30,7 @@ class CustomSearchBar: UIView {
     }
 
     private func setupBackground() {
-        backgroundColor = Asset.Colors.grey.color
+        backgroundColor = .greyCustom
         layer.cornerRadius = 25
         layer.masksToBounds = true
     }

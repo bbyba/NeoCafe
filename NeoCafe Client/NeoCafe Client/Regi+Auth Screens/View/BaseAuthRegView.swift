@@ -15,7 +15,7 @@ class BaseAuthRegView: UIView {
     lazy var headerSection: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = Asset.Colors.blue.color
+        view.backgroundColor = .blueCustom
         return view
     }()
 
@@ -27,8 +27,8 @@ class BaseAuthRegView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.entry
-        label.font = FontFamily.Poppins.bold.font(size: 32)
-        label.textColor = Asset.Colors.ivory.color
+        label.font = .poppins(ofSize: 32, weight: .bold)
+        label.textColor = .ivoryCustom
         return label
     }()
 
@@ -58,15 +58,15 @@ class BaseAuthRegView: UIView {
         label.text = S.wrongEmail
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = FontFamily.Poppins.medium.font(size: 16)
-        label.textColor = Asset.Colors.coral.color
+        label.font = .poppins(ofSize: 16, weight: .medium)
+        label.textColor = .coralCustom
         label.isHidden = true
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        backgroundColor = .whiteCustom
         addSubviews()
         setupConstraints()
     }
