@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   NeoCafe Client
 */
@@ -10,9 +10,12 @@
 "enterEmail" = "Введите почту";
 "wrongEmail" = "Неправильный адрес электронной почты, попробуйте ещё раз";
 "exampleEmail" = "example@email.com";
-"OTPCodeLabel" = "Введите 4-х значный код,\ отправленный на почту ";
+"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n jeromo5819@minhlun.com";
 "verificationCode" = "Код подтверждения";
 "register" = "Зарегистрироваться";
 "confirm" = "Подтвердить";
 "search" = "Поиск";
 "goodMorning" = "Доброе утро!";
+"welcome" = "Добро пожаловать в";
+"wrongCode" = "Код введён неверно,\n попробуйте еще раз";
+"resend" = "Отправить ещё раз через";

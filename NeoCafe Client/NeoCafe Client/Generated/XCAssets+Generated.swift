@@ -37,6 +37,7 @@ internal enum Asset {
   }
   internal enum Splash {
     internal static let coffeeCups = ImageAsset(name: "coffeeCups")
+    internal static let neocafe = ImageAsset(name: "neocafe")
     internal static let threeBeans = ImageAsset(name: "threeBeans")
     internal static let twoBeans = ImageAsset(name: "twoBeans")
   }

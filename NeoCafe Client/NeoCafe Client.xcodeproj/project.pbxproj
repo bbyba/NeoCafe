@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B18546FCF9870DF3864F7D37 /* Pods_NeoCafe_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */; };
+		DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7012B8571FB002D8977 /* SplashView.swift */; };
+		DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7032B85721A002D8977 /* SplashViewController.swift */; };
 		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
 		DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C18C2B7FF77800339287 /* Ext+UIViewController.swift */; };
 		DD93C18F2B81C5CC00339287 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD93C18E2B81C5CC00339287 /* Network.swift */; };
@@ -46,6 +48,8 @@
 		774A1FD35DC0575343951A93 /* Pods-NeoCafe Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Client.release.xcconfig"; path = "Target Support Files/Pods-NeoCafe Client/Pods-NeoCafe Client.release.xcconfig"; sourceTree = "<group>"; };
 		7FC66A2F83A1FDDD0ECAFD78 /* Pods-NeoCafe Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Client.debug.xcconfig"; path = "Target Support Files/Pods-NeoCafe Client/Pods-NeoCafe Client.debug.xcconfig"; sourceTree = "<group>"; };
 		9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD03C7012B8571FB002D8977 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		DD03C7032B85721A002D8977 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DD93C18C2B7FF77800339287 /* Ext+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIViewController.swift"; sourceTree = "<group>"; };
 		DD93C18E2B81C5CC00339287 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -109,6 +113,15 @@
 				774A1FD35DC0575343951A93 /* Pods-NeoCafe Client.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DD03C7002B857178002D8977 /* Splash Screen */ = {
+			isa = PBXGroup;
+			children = (
+				DD03C7012B8571FB002D8977 /* SplashView.swift */,
+				DD03C7032B85721A002D8977 /* SplashViewController.swift */,
+			);
+			path = "Splash Screen";
 			sourceTree = "<group>";
 		};
 		DD84CBA82B7B372B00580D4A /* Generated */ = {
@@ -203,6 +216,7 @@
 		DDF8B58C2B70ED3C005FE06A /* NeoCafe Client */ = {
 			isa = PBXGroup;
 			children = (
+				DD03C7002B857178002D8977 /* Splash Screen */,
 				DDF8B59B2B70ED3E005FE06A /* Info.plist */,
 				DD84CBA82B7B372B00580D4A /* Generated */,
 				DDF8B5CF2B70F277005FE06A /* Custom */,
@@ -417,6 +431,7 @@
 				DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */,
 				DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */,
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
+				DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */,
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
 				DDF8B5C82B70F211005FE06A /* RegistrationViewController.swift in Sources */,
 				DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */,
@@ -425,6 +440,7 @@
 				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,
 				DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */,
 				DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */,
+				DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */,
 				DD9D08322B7B435D00BAB6CD /* XCAssets+Generated.swift in Sources */,
 				DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */,
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,

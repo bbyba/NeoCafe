@@ -25,16 +25,25 @@ internal enum S {
   internal static let getCode = S.tr("Localizable", "getCode", fallback: "Получить код")
   /// Доброе утро!
   internal static let goodMorning = S.tr("Localizable", "goodMorning", fallback: "Доброе утро!")
-  /// Введите 4-х значный код, отправленный на почту 
-  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код, отправленный на почту ")
+  /// Введите 4-х значный код,
+  ///  отправленный на почту 
+  ///  jeromo5819@minhlun.com
+  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n jeromo5819@minhlun.com")
   /// Зарегистрироваться
   internal static let register = S.tr("Localizable", "register", fallback: "Зарегистрироваться")
   /// Регистрация
   internal static let registration = S.tr("Localizable", "registration", fallback: "Регистрация")
+  /// Отправить ещё раз через
+  internal static let resend = S.tr("Localizable", "resend", fallback: "Отправить ещё раз через")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
+  /// Добро пожаловать в
+  internal static let welcome = S.tr("Localizable", "welcome", fallback: "Добро пожаловать в")
+  /// Код введён неверно,
+  ///  попробуйте еще раз
+  internal static let wrongCode = S.tr("Localizable", "wrongCode", fallback: "Код введён неверно,\n попробуйте еще раз")
   /// Неправильный адрес электронной почты, попробуйте ещё раз
   internal static let wrongEmail = S.tr("Localizable", "wrongEmail", fallback: "Неправильный адрес электронной почты, попробуйте ещё раз")
 }
