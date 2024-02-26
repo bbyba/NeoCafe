@@ -49,6 +49,12 @@ internal enum Asset {
     internal static let threeBeans = ImageAsset(name: "threeBeans")
     internal static let twoBeans = ImageAsset(name: "twoBeans")
   }
+  internal enum TabBar {
+    internal static let branches = ImageAsset(name: "branches")
+    internal static let cart = ImageAsset(name: "cart")
+    internal static let main = ImageAsset(name: "main")
+    internal static let profile = ImageAsset(name: "profile")
+  }
   internal enum TextField {
     internal static let at = ImageAsset(name: "at")
     internal static let calendar = ImageAsset(name: "calendar")

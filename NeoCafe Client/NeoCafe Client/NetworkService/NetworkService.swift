@@ -48,7 +48,7 @@ extension UserService: TargetType {
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
         case .registerUser(let email, let confirmationCode),
              .loginUser(let email, let confirmationCode):
-            return .requestParameters(parameters: ["email": email, "confirmationCode": confirmationCode], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
         }
     }
 

@@ -67,23 +67,22 @@ class MainView: UIView {
     func setupConstraints() {
         header.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalTo(140)
         }
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(55)
         }
 
         notificationButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(55)
             make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }
 
         searchBar.snp.makeConstraints { make in
-            make.centerY.equalTo(header.snp.bottom).offset(-searchBar.frame.height / 2)
-//            make.top.equalTo(header.snp.bottom).inset(8)
+            make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }

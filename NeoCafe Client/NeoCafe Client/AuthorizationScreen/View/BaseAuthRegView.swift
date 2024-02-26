@@ -74,16 +74,17 @@ class BaseAuthRegView: UIView {
     func setupConstraints() {
         header.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.2)
+            make.height.equalTo(140)
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(51)
+            make.centerX.equalToSuperview()
             make.height.equalTo(38)
         }
 
         segmentedControl.snp.makeConstraints { make in
-            make.centerY.equalTo(header.snp.bottom).offset(-segmentedControl.frame.height / 2)
+            make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }

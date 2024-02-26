@@ -98,7 +98,7 @@ class PopularCell: UICollectionViewCell {
         }
 
         stepper.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.height.equalTo(32)
             make.trailing.bottom.equalToSuperview().inset(2)
         }
         stepper.isHidden = true

@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum S {
+  /// Филиалы
+  internal static let branches = S.tr("Localizable", "branches", fallback: "Филиалы")
+  /// Корзина
+  internal static let cart = S.tr("Localizable", "cart", fallback: "Корзина")
   /// Подтвердить
   internal static let confirm = S.tr("Localizable", "confirm", fallback: "Подтвердить")
   /// Войти
@@ -25,6 +29,8 @@ internal enum S {
   internal static let getCode = S.tr("Localizable", "getCode", fallback: "Получить код")
   /// Доброе утро!
   internal static let goodMorning = S.tr("Localizable", "goodMorning", fallback: "Доброе утро!")
+  /// Главная
+  internal static let main = S.tr("Localizable", "main", fallback: "Главная")
   /// Перейти к меню
   internal static let menuButton = S.tr("Localizable", "menuButton", fallback: "Перейти к меню")
   /// Введите 4-х значный код,
@@ -34,6 +40,8 @@ internal enum S {
   internal static let ourMenu = S.tr("Localizable", "ourMenu", fallback: "Наше меню")
   /// Популярное
   internal static let popular = S.tr("Localizable", "popular", fallback: "Популярное")
+  /// Профиль
+  internal static let profile = S.tr("Localizable", "profile", fallback: "Профиль")
   /// Зарегистрироваться
   internal static let register = S.tr("Localizable", "register", fallback: "Зарегистрироваться")
   /// Регистрация
