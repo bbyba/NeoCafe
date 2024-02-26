@@ -52,11 +52,12 @@ class PopularCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .greyCustom
+        backgroundColor = .whiteCustom
         layer.cornerRadius = 14
         addSubviews()
         setupConstraints()
         addTargets()
+        setupShadow()
     }
 
     private func addSubviews() {
@@ -101,6 +102,14 @@ class PopularCell: UICollectionViewCell {
             make.trailing.bottom.equalToSuperview().inset(2)
         }
         stepper.isHidden = true
+    }
+
+    private func setupShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 5.0
+        layer.masksToBounds = false
     }
 
     private func configureData(name: String, imageName: String) {

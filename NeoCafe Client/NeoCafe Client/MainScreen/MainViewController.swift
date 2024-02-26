@@ -85,6 +85,7 @@ extension MainViewController: UICollectionViewDataSource {
             switch sectionKind {
             case .category:
                 header.configureTitle(title: S.ourMenu)
+                header.configureButton(title: S.menuButton, isVisible: true)
             case .popular:
                 header.configureTitle(title: S.popular)
             }

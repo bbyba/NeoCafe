@@ -1,5 +1,5 @@
 //
-//  RegisterVC.swift
+//  RegistrationViewController.swift
 //  NeoCafe Client
 //
 
@@ -37,7 +37,7 @@ class RegistrationViewController: UIViewController {
             registerLoginUserRequest()
         default:
             print("current viewstate: \(self.viewModel.currentState)")
-            requestCodebuttontarget()
+            requestCodeButton()
         }
     }
 
@@ -89,7 +89,7 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-    private func requestCodebuttontarget() {
+    private func requestCodeButton() {
         print("getCodeButtonTapped")
         guard let email = getEmailString() else { return }
         emailValidation(email: email)
@@ -97,8 +97,9 @@ class RegistrationViewController: UIViewController {
     }
 
     private func registerLoginUserRequest() {
-        print("confirm button tapped")
         guard let email = getEmailString(), let code = getCodeString() else { return }
+        print("confirm button tapped")
+        print("\(email) and  \(code)")
 
         viewModel.registerLoginUser(email: email, confirmationCode: code) { result in
             DispatchQueue.main.async {
@@ -119,12 +120,12 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct RegisterVCPreview: PreviewProvider {
-    static var previews: some View {
-        RegistrationViewController().showPreview()
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct RegisterVCPreview: PreviewProvider {
+//    static var previews: some View {
+//        RegistrationViewController().showPreview()
+//    }
+//}
+//#endif

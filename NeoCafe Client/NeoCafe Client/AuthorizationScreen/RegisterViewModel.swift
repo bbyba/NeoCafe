@@ -56,21 +56,23 @@ class AuthViewModel {
     }
 
     func registerLoginUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        switch currentState {
-        case .signIn:
-            print("sign confirm request")
+        guard currentState == .codeConfirmation else {
+            print("Error: registerLoginUser can only be called in codeConfirmation state")
+            return
+        }
+
+        if previousState == .signIn {
+            print("Confirm request: sign-in")
             provider.request(.loginUser(email: email, confirmationCode: confirmationCode)) { result in
                 self.handleResult(result, completion: completion)
             }
-        case .registration:
-            print("registration confirm request")
+        } else if previousState == .registration {
+            print("Confirm request: registration")
             provider.request(.registerUser(email: email, confirmationCode: confirmationCode)) { result in
                 self.handleResult(result, completion: completion)
             }
-        case .codeConfirmation:
-            provider.request(.registerUser(email: email, confirmationCode: confirmationCode)) { result in
-                self.handleResult(result, completion: completion)
-            }
+        } else {
+            print("Error: Invalid previous state")
         }
     }
 

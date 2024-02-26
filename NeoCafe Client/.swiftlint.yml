@@ -9,14 +9,9 @@ disabled_rules:
   - orphaned_doc_comment
   - todo
   - unused_capture_list
-
-analyzer_rules:
-  - unused_import
-
-opt_in_rules:
   - array_init
   - attributes
-  - closure_end_indentation
+#  - closure_end_indentation
   - closure_spacing
   - collection_alignment
   - colon # promote to error
@@ -101,8 +96,8 @@ private_over_fileprivate:
   validate_extensions: true
 
 trailing_whitespace:
-  ignores_empty_lines: false
+  ignores_empty_lines: true
   ignores_comments: true
 
 vertical_whitespace:
-  max_empty_lines: 2
+  max_empty_lines: 5

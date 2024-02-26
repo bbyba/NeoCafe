@@ -11,18 +11,8 @@ class BaseAuthRegView: UIView {
     lazy var registrationView = RegistrationView()
     lazy var signInView = SignInView()
     lazy var codeConfirmationView = CodeConfirmationView()
-    
-    lazy var headerSection: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .blueCustom
-        return view
-    }()
 
-    lazy var headerImage: UIImageView = {
-        let imageView = UIImageView(image: Asset.Splash.twoBeans.image)
-        return imageView
-    }()
+    lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -72,9 +62,8 @@ class BaseAuthRegView: UIView {
     }
 
     func addSubviews() {
-        addSubview(headerSection)
-        addSubview(headerImage)
-        headerSection.addSubview(headerLabel)
+        addSubview(header)
+        header.addSubview(headerLabel)
         addSubview(segmentedControl)
         addSubview(textFieldStackView)
         textFieldStackView.addArrangedSubview(wrongEmailErrorLabel)
@@ -83,29 +72,20 @@ class BaseAuthRegView: UIView {
     }
 
     func setupConstraints() {
-        headerSection.snp.makeConstraints { make in
-            make.top.width.equalToSuperview()
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.2)
         }
 
-        headerImage.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.height.equalTo(headerSection)
-            make.width.equalToSuperview().multipliedBy(0.25)
-            make.trailing.equalToSuperview()
-        }
-
         headerLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.centerX.centerY.equalToSuperview()
             make.height.equalTo(38)
         }
 
         segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(headerSection.snp.bottom).inset(segmentedControl.frame.height / 2)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(48)
+            make.centerY.equalTo(header.snp.bottom).offset(-segmentedControl.frame.height / 2)
             make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
         }
 
         textFieldStackView.snp.makeConstraints { make in
