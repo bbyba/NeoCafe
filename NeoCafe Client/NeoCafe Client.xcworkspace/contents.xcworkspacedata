@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/NeoCafe Client/Regi+Auth Screens/RegisterVC.swift">
-   </FileRef>
-   <FileRef
       location = "group:NeoCafe Client.xcodeproj">
    </FileRef>
    <FileRef
