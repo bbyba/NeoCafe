@@ -37,4 +37,8 @@ extension UIColor {
     static var whiteCustom: UIColor {
         return Asset.Colors.white.color
     }
+
+    static var yellowCustom: UIColor {
+        return Asset.Colors.yellow.color
+    }
 }

@@ -23,4 +23,3 @@ extension UIFont {
         return FontFamily.SFProDisplay.regular.font(size: size)
     }
 }
-

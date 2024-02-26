@@ -15,11 +15,13 @@ class CustomSearchBar: UIView {
         return textField
     }()
 
-    let searchIcon: UIImageView = {
-        let icon = UIImageView(image: Asset.magnifyingGlass.image)
-        icon.tintColor = .white
-        icon.contentMode = .scaleAspectFit
-        return icon
+    lazy var searchButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .orangeCustom
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        button.layer.cornerRadius = 23
+        button.tintColor = .white
+        return button
     }()
 
     override init(frame: CGRect) {
@@ -31,26 +33,25 @@ class CustomSearchBar: UIView {
 
     private func setupBackground() {
         backgroundColor = .greyCustom
-        layer.cornerRadius = 25
+        layer.cornerRadius = 23
         layer.masksToBounds = true
     }
 
     private func addSubviews() {
         addSubview(textField)
-        addSubview(searchIcon)
+        addSubview(searchButton)
     }
 
     private func setupConstraints() {
-        searchIcon.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(34)
+        searchButton.snp.makeConstraints { make in
+            make.top.bottom.trailing.equalToSuperview()
+            make.height.width.equalTo(48)
         }
 
         textField.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(8)
             make.leading.equalToSuperview().inset(22)
-            make.trailing.equalTo(searchIcon.snp.leading).offset(-8)
+            make.trailing.equalTo(searchButton.snp.leading).offset(-8)
+            make.centerY.equalToSuperview()
         }
     }
 

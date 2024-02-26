@@ -25,10 +25,15 @@ internal enum S {
   internal static let getCode = S.tr("Localizable", "getCode", fallback: "Получить код")
   /// Доброе утро!
   internal static let goodMorning = S.tr("Localizable", "goodMorning", fallback: "Доброе утро!")
+  /// Перейти к меню
+  internal static let menuButton = S.tr("Localizable", "menuButton", fallback: "Перейти к меню")
   /// Введите 4-х значный код,
-  ///  отправленный на почту 
-  ///  jeromo5819@minhlun.com
-  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n jeromo5819@minhlun.com")
+  ///  отправленный на почту
+  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту")
+  /// Наше меню
+  internal static let ourMenu = S.tr("Localizable", "ourMenu", fallback: "Наше меню")
+  /// Популярное
+  internal static let popular = S.tr("Localizable", "popular", fallback: "Популярное")
   /// Зарегистрироваться
   internal static let register = S.tr("Localizable", "register", fallback: "Зарегистрироваться")
   /// Регистрация
