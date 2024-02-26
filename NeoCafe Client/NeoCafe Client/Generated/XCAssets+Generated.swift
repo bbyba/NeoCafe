@@ -36,6 +36,7 @@ internal enum Asset {
     internal static let white = ColorAsset(name: "white")
     internal static let yellow = ColorAsset(name: "yellow")
   }
+  internal static let image = ImageAsset(name: "Image")
   internal enum Menu {
     internal static let bakery = ImageAsset(name: "bakery")
     internal static let coffee = ImageAsset(name: "coffee")

@@ -20,8 +20,7 @@ internal enum S {
   internal static let enter = S.tr("Localizable", "enter", fallback: "Войти")
   /// Введите почту
   internal static let enterEmail = S.tr("Localizable", "enterEmail", fallback: "Введите почту")
-  /// Localizable.strings
-  ///   NeoCafe Client
+  /// Вход
   internal static let entry = S.tr("Localizable", "entry", fallback: "Вход")
   /// example@email.com
   internal static let exampleEmail = S.tr("Localizable", "exampleEmail", fallback: "example@email.com")
@@ -52,7 +51,8 @@ internal enum S {
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
-  /// Добро пожаловать в
+  /// Localizable.strings
+  ///   NeoCafe Client
   internal static let welcome = S.tr("Localizable", "welcome", fallback: "Добро пожаловать в")
   /// Код введён неверно,
   ///  попробуйте еще раз
