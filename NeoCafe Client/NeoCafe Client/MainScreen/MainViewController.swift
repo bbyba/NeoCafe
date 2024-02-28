@@ -38,6 +38,7 @@ class MainViewController: UIViewController {
         //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
 }
+
 extension MainViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Section.allCases.count
@@ -50,7 +51,7 @@ extension MainViewController: UICollectionViewDataSource {
         case .category:
             return categories.count
         case .popular:
-            return popularItems.count
+            return 3
         }
     }
 

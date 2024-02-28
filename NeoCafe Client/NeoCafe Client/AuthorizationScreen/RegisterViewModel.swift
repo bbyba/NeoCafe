@@ -76,27 +76,6 @@ class AuthViewModel {
         }
     }
 
-//    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
-//        switch result {
-//        case .success(let response):
-//            print("Request succeeded with status code: \(response.statusCode)")
-//            if let responseString = String(data: response.data, encoding: .utf8) {
-//                print("Response data: \(responseString)")
-//            }
-//            completion(.success(()))
-//        case .failure(let error):
-//            print("Request failed with error: \(error.localizedDescription)")
-//            if let response = error.response {
-//                // Additionally, print the error status code and error response body if available
-//                print("Error status code: \(response.statusCode)")
-//                if let errorResponseString = String(data: response.data, encoding: .utf8) {
-//                    print("Error response data: \(errorResponseString)")
-//                }
-//            }
-//            completion(.failure(error))
-//        }
-//    }
-
     private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
         switch result {
         case .success(let response):

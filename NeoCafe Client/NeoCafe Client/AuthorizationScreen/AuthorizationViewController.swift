@@ -113,7 +113,6 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
         baseAuthRegView.showCodeConfirmationView()
@@ -123,9 +122,11 @@ class RegistrationViewController: UIViewController {
 //#if DEBUG
 //
 //@available(iOS 13.0, *)
-//struct RegisterVCPreview: PreviewProvider {
+//struct VCPreview: PreviewProvider {
 //    static var previews: some View {
 //        RegistrationViewController().showPreview()
 //    }
 //}
 //#endif
+
+

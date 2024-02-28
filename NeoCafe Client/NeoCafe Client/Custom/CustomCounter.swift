@@ -16,7 +16,7 @@ class CustomStepper: UIControl{
     }()
 
     lazy var incrementButton = stepperButton(color: .orangeCustom, titleColor: .ivoryCustom, text: "+")
-    lazy var decrementButton = stepperButton(color: .blueCustom, titleColor: .darkBlueCustom, text: "-")
+    lazy var decrementButton = stepperButton(color: .greyCustom, titleColor: .darkBlueCustom, text: "-")
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -46,8 +46,8 @@ class CustomStepper: UIControl{
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        incrementButton.layer.cornerRadius = 0.5 * bounds.size.height
-        decrementButton.layer.cornerRadius = 0.5 * bounds.size.height
+        incrementButton.layer.cornerRadius = 18
+        decrementButton.layer.cornerRadius = 20
     }
 
     private func addSubviews() {

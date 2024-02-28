@@ -82,7 +82,7 @@ class MainView: UIView {
         }
 
         searchBar.snp.makeConstraints { make in
-            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.top.equalTo(header.snp.bottom).offset(-24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
@@ -122,11 +122,11 @@ extension MainView {
             widthDimension: .absolute(1),
             heightDimension: .absolute(1)
         )
+
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
-            subitem: item,
-            count: 1
-        )
+            repeatingSubitem: item,
+            count: 1)
 
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16)
 
@@ -202,8 +202,6 @@ extension MainView {
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
-        header.pinToVisibleBounds = true
-        header.zIndex = 2
         header.contentInsets = NSDirectionalEdgeInsets(
                 top: 0,
                 leading: 8,
@@ -240,8 +238,6 @@ extension MainView {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        header.pinToVisibleBounds = true
-        header.zIndex = 2
         header.contentInsets = NSDirectionalEdgeInsets(
                 top: 0,
                 leading: 8,

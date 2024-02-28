@@ -31,3 +31,10 @@
 "cart" = "Корзина";
 "branches" = "Филиалы";
 "profile" = "Профиль";
+
+
+// Menu
+"menu2" = "Меню: ";
+"categories" = "Категории";
+"toTheBasket" = "В корзину";
+

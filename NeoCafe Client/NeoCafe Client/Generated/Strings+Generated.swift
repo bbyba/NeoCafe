@@ -14,6 +14,8 @@ internal enum S {
   internal static let branches = S.tr("Localizable", "branches", fallback: "Филиалы")
   /// Корзина
   internal static let cart = S.tr("Localizable", "cart", fallback: "Корзина")
+  /// Категории
+  internal static let categories = S.tr("Localizable", "categories", fallback: "Категории")
   /// Подтвердить
   internal static let confirm = S.tr("Localizable", "confirm", fallback: "Подтвердить")
   /// Войти
@@ -30,6 +32,8 @@ internal enum S {
   internal static let goodMorning = S.tr("Localizable", "goodMorning", fallback: "Доброе утро!")
   /// Главная
   internal static let main = S.tr("Localizable", "main", fallback: "Главная")
+  /// Меню: 
+  internal static let menu2 = S.tr("Localizable", "menu2", fallback: "Меню: ")
   /// Перейти к меню
   internal static let menuButton = S.tr("Localizable", "menuButton", fallback: "Перейти к меню")
   /// Введите 4-х значный код,
@@ -49,6 +53,8 @@ internal enum S {
   internal static let resend = S.tr("Localizable", "resend", fallback: "Отправить ещё раз через")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
+  /// В корзину
+  internal static let toTheBasket = S.tr("Localizable", "toTheBasket", fallback: "В корзину")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
   /// Localizable.strings

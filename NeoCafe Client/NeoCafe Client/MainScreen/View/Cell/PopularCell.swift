@@ -10,6 +10,7 @@ class PopularCell: UICollectionViewCell {
 
     lazy var image: UIImageView = {
         let image = UIImageView()
+        image.image = UIImage(named: Asset.coffeeCupTop.name)
         image.contentMode = .scaleAspectFit
         return image
     }()

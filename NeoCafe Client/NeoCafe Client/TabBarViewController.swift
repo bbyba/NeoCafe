@@ -20,7 +20,7 @@ enum TabBar: CaseIterable {
         case .Branches:
             return UITabBarItem(title: S.branches, image: Asset.TabBar.branches.image, selectedImage: nil)
         case .Profile:
-            return UITabBarItem(title: S.profile, image: Asset.TabBar.profile.image, selectedImage: nil)
+            return UITabBarItem(title: S.profile, image: Asset.TabBar.profileTab.image, selectedImage: nil)
         }
     }
 

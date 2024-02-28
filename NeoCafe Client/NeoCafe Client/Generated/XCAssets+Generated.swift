@@ -54,14 +54,15 @@ internal enum Asset {
     internal static let branches = ImageAsset(name: "branches")
     internal static let cart = ImageAsset(name: "cart")
     internal static let main = ImageAsset(name: "main")
-    internal static let profile = ImageAsset(name: "profile")
+    internal static let profileTab = ImageAsset(name: "profileTab")
   }
   internal enum TextField {
     internal static let at = ImageAsset(name: "at")
     internal static let calendar = ImageAsset(name: "calendar")
-    internal static let profile = ImageAsset(name: "profile")
+    internal static let profileTextField = ImageAsset(name: "profileTextField")
   }
   internal static let coffeeCupTop = ImageAsset(name: "coffeeCupTop")
+  internal static let dropDown = ImageAsset(name: "dropDown")
   internal static let magnifyingGlass = ImageAsset(name: "magnifyingGlass")
   internal static let notification = ImageAsset(name: "notification")
 }
