@@ -1,17 +1,19 @@
 //
-//  PopularCell.swift
+//  MenuProductCell.swift
 //  NeoCafe Client
 //
 
 import UIKit
 
-class PopularCell: UICollectionViewCell {
-    static let identifier = "PopularCell"
+class MenuProductCell: UICollectionViewCell {
+    static let identifier = "MenuProductCell"
 
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.coffeeCupTop.name)
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 12
+        image.layer.masksToBounds = true
         return image
     }()
 
@@ -49,47 +51,46 @@ class PopularCell: UICollectionViewCell {
         return button
     }()
 
-    lazy var stepper = CustomStepper()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .whiteCustom
         layer.cornerRadius = 14
         addSubviews()
         setupConstraints()
-        addTargets()
+//        addTargets()
         setupShadow()
     }
 
     private func addSubviews() {
         contentView.addSubview(image)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
+//        contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(plusButton)
-        contentView.addSubview(stepper)
     }
 
     func setupConstraints() {
         image.snp.makeConstraints { make in
-            make.top.leading.bottom.equalToSuperview()
-            make.width.equalTo(image.snp.height)
+            make.top.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+            make.height.equalTo(110)
         }
 
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(8)
-            make.leading.equalTo(image.snp.trailing).offset(12)
+            make.top.equalTo(image.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(10)
         }
 
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(6)
-            make.leading.equalTo(image.snp.trailing).offset(12)
-            make.trailing.equalToSuperview().offset(-40)
-        }
+//        descriptionLabel.snp.makeConstraints { make in
+//            make.top.equalTo(titleLabel.snp.bottom).offset(6)
+//            make.leading.equalTo(image.snp.trailing).offset(12)
+//            make.trailing.equalToSuperview().offset(-40)
+//        }
 
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(10)
-            make.leading.equalTo(image.snp.trailing).offset(12)
+            make.bottom.equalToSuperview().offset(-10)
+            make.leading.equalToSuperview().offset(10)
         }
 
         plusButton.snp.makeConstraints { make in
@@ -97,12 +98,6 @@ class PopularCell: UICollectionViewCell {
             make.height.equalTo(40)
             make.width.equalTo(54)
         }
-
-        stepper.snp.makeConstraints { make in
-            make.height.equalTo(32)
-            make.trailing.bottom.equalToSuperview().inset(2)
-        }
-        stepper.isHidden = true
     }
 
     private func setupShadow() {
@@ -113,31 +108,10 @@ class PopularCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    private func configureData(name: String, imageName: String) {
+    func configureData(imageName: String, name: String, price: Int) {
         image.image = UIImage(named: imageName)
         titleLabel.text = name
-    }
-
-    private func addTargets() {
-        plusButton.addTarget(self, action: #selector(showStepper), for: .touchUpInside)
-        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
-    }
-
-    @objc private func showStepper() {
-        toggleCounter(isStepperVisible: true)
-    }
-
-    @objc private func stepperValueChanged(_ sender: CustomStepper) {
-        if sender.currentValue == 1 && sender.isDecrementing {
-            toggleCounter(isStepperVisible: false)
-            sender.isDecrementing = false
-        }
-    }
-
-
-    private func toggleCounter(isStepperVisible: Bool) {
-        plusButton.isHidden = isStepperVisible
-        stepper.isHidden = !isStepperVisible
+        priceLabel.text = String(price)
     }
 
     required init?(coder: NSCoder) {

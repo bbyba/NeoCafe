@@ -41,6 +41,8 @@ internal enum S {
   internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту")
   /// Наше меню
   internal static let ourMenu = S.tr("Localizable", "ourMenu", fallback: "Наше меню")
+  /// Приятное дополнение
+  internal static let pleasantAddition = S.tr("Localizable", "pleasantAddition", fallback: "Приятное дополнение")
   /// Популярное
   internal static let popular = S.tr("Localizable", "popular", fallback: "Популярное")
   /// Профиль

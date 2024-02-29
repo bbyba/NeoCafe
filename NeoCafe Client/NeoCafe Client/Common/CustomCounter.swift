@@ -12,6 +12,7 @@ class CustomStepper: UIControl{
     lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = .poppins(ofSize: 30, weight: .bold)
         return label
     }()
 
@@ -46,9 +47,10 @@ class CustomStepper: UIControl{
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        incrementButton.layer.cornerRadius = 18
-        decrementButton.layer.cornerRadius = 20
+        incrementButton.layer.cornerRadius = 17
+        decrementButton.layer.cornerRadius = 17
     }
+
 
     private func addSubviews() {
         addSubview(stackView)
@@ -106,6 +108,7 @@ class CustomStepper: UIControl{
         button.setTitle(text, for: .normal)
         button.setTitleColor(titleColor, for: .normal)
         button.setTitleColor(titleColor, for: .highlighted)
+        button.titleLabel?.font = .poppins(ofSize: 26, weight: .bold)
         button.backgroundColor = color
         return button
     }

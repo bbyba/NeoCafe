@@ -203,16 +203,16 @@ extension MainView {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top)
         header.contentInsets = NSDirectionalEdgeInsets(
-                top: 0,
-                leading: 8,
-                bottom: 0,
-                trailing: 8)
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8)
 
         let section = NSCollectionLayoutSection(group: nestedGroup)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         section.boundarySupplementaryItems = [header]
         return section
-}
+    }
 
     private func generatePopularItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
@@ -239,10 +239,10 @@ extension MainView {
             alignment: .top
         )
         header.contentInsets = NSDirectionalEdgeInsets(
-                top: 0,
-                leading: 8,
-                bottom: 0,
-                trailing: 8)
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8)
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]

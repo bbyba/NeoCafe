@@ -61,6 +61,8 @@ internal enum Asset {
     internal static let calendar = ImageAsset(name: "calendar")
     internal static let profileTextField = ImageAsset(name: "profileTextField")
   }
+  internal static let backButton = ImageAsset(name: "backButton")
+  internal static let coffeeCupFront = ImageAsset(name: "coffeeCupFront")
   internal static let coffeeCupTop = ImageAsset(name: "coffeeCupTop")
   internal static let dropDown = ImageAsset(name: "dropDown")
   internal static let magnifyingGlass = ImageAsset(name: "magnifyingGlass")

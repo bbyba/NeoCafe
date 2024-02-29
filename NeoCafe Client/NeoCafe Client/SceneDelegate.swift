@@ -14,8 +14,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.windowScene = windowScene
 //        window.rootViewController = TabBarViewController()
-//        window.rootViewController = MainViewController()
-        window.rootViewController = MenuViewController()
+        window.rootViewController = ProductViewController()
+//        window.rootViewController = MenuViewController()
 
 
 //        window.rootViewController = RegistrationViewController()
