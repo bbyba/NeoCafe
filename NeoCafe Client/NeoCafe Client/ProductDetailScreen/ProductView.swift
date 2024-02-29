@@ -27,7 +27,7 @@ class ProductView: UIView {
     lazy var productNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Латте"
-        label.font = .poppins(ofSize: 24, weight: .bold)
+        label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .black
         label.textAlignment = .left
         label.numberOfLines = 0
@@ -57,7 +57,7 @@ class ProductView: UIView {
 
     lazy var priceLabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 20, weight: .bold)
+        label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom
         label.text = "270 T"
         return label

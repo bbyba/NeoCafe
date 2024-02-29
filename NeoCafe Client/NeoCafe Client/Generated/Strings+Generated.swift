@@ -16,6 +16,8 @@ internal enum S {
   internal static let cart = S.tr("Localizable", "cart", fallback: "Корзина")
   /// Категории
   internal static let categories = S.tr("Localizable", "categories", fallback: "Категории")
+  /// Выберите филиал
+  internal static let chooseBranch = S.tr("Localizable", "chooseBranch", fallback: "Выберите филиал")
   /// Подтвердить
   internal static let confirm = S.tr("Localizable", "confirm", fallback: "Подтвердить")
   /// Войти

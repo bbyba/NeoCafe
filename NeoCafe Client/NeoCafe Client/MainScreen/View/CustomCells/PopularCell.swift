@@ -17,7 +17,7 @@ class PopularCell: UICollectionViewCell {
 
     lazy var titleLabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.text = "Cafe Latte"
         return label
@@ -33,7 +33,7 @@ class PopularCell: UICollectionViewCell {
 
     lazy var priceLabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .orangeCustom
         label.text = "270 T"
         return label

@@ -25,7 +25,7 @@ class MenuView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.menu2
-        label.font = .poppins(ofSize: 32, weight: .bold)
+        label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label

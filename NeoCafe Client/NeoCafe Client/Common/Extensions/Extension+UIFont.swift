@@ -14,6 +14,8 @@ extension UIFont {
             return FontFamily.Poppins.medium.font(size: size)
         case .regular:
             return FontFamily.Poppins.regular.font(size: size)
+        case .semibold:
+            return FontFamily.Poppins.semiBold.font(size: size)
         default:
             return UIFont.systemFont(ofSize: size, weight: weight)
         }

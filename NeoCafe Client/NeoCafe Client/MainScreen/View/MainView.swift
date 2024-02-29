@@ -20,7 +20,7 @@ class MainView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.goodMorning
-        label.font = .poppins(ofSize: 32, weight: .bold)
+        label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label

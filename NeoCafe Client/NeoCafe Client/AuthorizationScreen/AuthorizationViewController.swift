@@ -119,14 +119,4 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-//#if DEBUG
-//
-//@available(iOS 13.0, *)
-//struct VCPreview: PreviewProvider {
-//    static var previews: some View {
-//        RegistrationViewController().showPreview()
-//    }
-//}
-//#endif
-
 

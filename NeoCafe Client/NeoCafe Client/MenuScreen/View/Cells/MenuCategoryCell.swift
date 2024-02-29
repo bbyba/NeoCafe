@@ -10,7 +10,7 @@ class MenuCategoryCell: UICollectionViewCell {
 
     lazy var titleLabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .medium)
         label.textColor = .darkBlueCustom
         label.text = "Coffee"
         return label

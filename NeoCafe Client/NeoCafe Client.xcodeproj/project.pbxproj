@@ -37,6 +37,11 @@
 		DD9DD0CC2B8FF1F800C489F6 /* BaseContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0CB2B8FF1F800C489F6 /* BaseContentViewController.swift */; };
 		DD9DD0CE2B8FF21700C489F6 /* BaseContentViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0CD2B8FF21700C489F6 /* BaseContentViewModelController.swift */; };
 		DD9DD0D02B8FF4A700C489F6 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0CF2B8FF4A700C489F6 /* ProductViewModel.swift */; };
+		DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0D12B90B45E00C489F6 /* ModalSheet.swift */; };
+		DD9DD0D52B90DF6600C489F6 /* BranchesModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0D42B90DF6600C489F6 /* BranchesModalView.swift */; };
+		DD9DD0D72B90DFB500C489F6 /* BranchesModalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0D62B90DFB500C489F6 /* BranchesModalCell.swift */; };
+		DD9DD0D92B90E36700C489F6 /* BranchesModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0D82B90E36700C489F6 /* BranchesModalViewController.swift */; };
+		DD9DD0DB2B90EBD600C489F6 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD9DD0DA2B90EBD600C489F6 /* Poppins-SemiBold.ttf */; };
 		DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */; };
 		DDAD65D52B8CB09B00F72345 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* PopularCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
@@ -95,6 +100,11 @@
 		DD9DD0CB2B8FF1F800C489F6 /* BaseContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContentViewController.swift; sourceTree = "<group>"; };
 		DD9DD0CD2B8FF21700C489F6 /* BaseContentViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContentViewModelController.swift; sourceTree = "<group>"; };
 		DD9DD0CF2B8FF4A700C489F6 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		DD9DD0D12B90B45E00C489F6 /* ModalSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalSheet.swift; sourceTree = "<group>"; };
+		DD9DD0D42B90DF6600C489F6 /* BranchesModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesModalView.swift; sourceTree = "<group>"; };
+		DD9DD0D62B90DFB500C489F6 /* BranchesModalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesModalCell.swift; sourceTree = "<group>"; };
+		DD9DD0D82B90E36700C489F6 /* BranchesModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesModalViewController.swift; sourceTree = "<group>"; };
+		DD9DD0DA2B90EBD600C489F6 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCounter.swift; sourceTree = "<group>"; };
 		DDAD65D42B8CB09B00F72345 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -212,6 +222,7 @@
 			children = (
 				DD9D083C2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf */,
 				DD9D08362B7BF18100BAB6CD /* Poppins-Bold.ttf */,
+				DD9DD0DA2B90EBD600C489F6 /* Poppins-SemiBold.ttf */,
 				DD9D08382B7BF19000BAB6CD /* Poppins-Medium.ttf */,
 				DD9D083A2B7BF19B00BAB6CD /* Poppins-Regular.ttf */,
 			);
@@ -233,6 +244,7 @@
 				DD9DD0C42B8FEF4A00C489F6 /* ProductView.swift */,
 				DD9DD0C62B8FEF5500C489F6 /* ProductViewController.swift */,
 				DD9DD0CF2B8FF4A700C489F6 /* ProductViewModel.swift */,
+				DD9DD0D12B90B45E00C489F6 /* ModalSheet.swift */,
 			);
 			path = ProductDetailScreen;
 			sourceTree = "<group>";
@@ -245,6 +257,16 @@
 				DD9DD0CD2B8FF21700C489F6 /* BaseContentViewModelController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		DD9DD0D32B90DC3A00C489F6 /* BranchesModal */ = {
+			isa = PBXGroup;
+			children = (
+				DD9DD0D42B90DF6600C489F6 /* BranchesModalView.swift */,
+				DD9DD0D82B90E36700C489F6 /* BranchesModalViewController.swift */,
+				DD9DD0D62B90DFB500C489F6 /* BranchesModalCell.swift */,
+			);
+			path = BranchesModal;
 			sourceTree = "<group>";
 		};
 		DDAD65E02B8CB9D900F72345 /* MenuScreen */ = {
@@ -333,6 +355,7 @@
 				DDF8B5C12B70F19A005FE06A /* AuthorizationScreen */,
 				DD93C1902B82C89900339287 /* MainScreen */,
 				DDAD65E02B8CB9D900F72345 /* MenuScreen */,
+				DD9DD0D32B90DC3A00C489F6 /* BranchesModal */,
 				DD9DD0C32B8FEED100C489F6 /* ProductDetailScreen */,
 				DDF8B5CF2B70F277005FE06A /* Common */,
 				DDF8B5CD2B70F24D005FE06A /* Supporting */,
@@ -440,6 +463,7 @@
 				DD9D083D2B7BF1C700BAB6CD /* SF-Pro-Display-Regular.otf in Resources */,
 				DD9D083B2B7BF19B00BAB6CD /* Poppins-Regular.ttf in Resources */,
 				DD9D08412B7BF53300BAB6CD /* Localizable.strings in Resources */,
+				DD9DD0DB2B90EBD600C489F6 /* Poppins-SemiBold.ttf in Resources */,
 				DD9D08372B7BF18100BAB6CD /* Poppins-Bold.ttf in Resources */,
 				DD9D08392B7BF19000BAB6CD /* Poppins-Medium.ttf in Resources */,
 				DDF8B5972B70ED3E005FE06A /* Assets.xcassets in Resources */,
@@ -546,6 +570,7 @@
 				DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */,
 				DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */,
 				DDAD65DD2B8CB29700F72345 /* MainView.swift in Sources */,
+				DD9DD0D52B90DF6600C489F6 /* BranchesModalView.swift in Sources */,
 				DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */,
 				DD9DD0D02B8FF4A700C489F6 /* ProductViewModel.swift in Sources */,
 				DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */,
@@ -553,11 +578,13 @@
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
 				DD9DD0C52B8FEF4A00C489F6 /* ProductView.swift in Sources */,
 				DD9DD0CE2B8FF21700C489F6 /* BaseContentViewModelController.swift in Sources */,
+				DD9DD0D92B90E36700C489F6 /* BranchesModalViewController.swift in Sources */,
 				DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */,
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
 				DDAD65D52B8CB09B00F72345 /* PopularCell.swift in Sources */,
 				DDAD65DF2B8CB3B100F72345 /* CustomHeaderView.swift in Sources */,
 				DD9556152B79F67300FB65AF /* NetworkService.swift in Sources */,
+				DD9DD0D72B90DFB500C489F6 /* BranchesModalCell.swift in Sources */,
 				DD93C18F2B81C5CC00339287 /* Network.swift in Sources */,
 				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,
 				DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */,
@@ -573,6 +600,7 @@
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,
 				DD9DD0B82B8FD60700C489F6 /* MenuProductCell.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
+				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,
 				DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,
 			);

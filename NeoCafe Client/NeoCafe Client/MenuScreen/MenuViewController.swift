@@ -40,7 +40,16 @@ class MenuViewController: UIViewController, UICollectionViewDelegate {
 
     private func addTargets() {
         //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        menuView.headerDropDownButton.addTarget(self, action: #selector(menuDropdownButtonTapped), for: .touchUpInside)
     }
+
+    @objc func menuDropdownButtonTapped() {
+        let branchesModalViewController = BranchesModalViewController()
+        branchesModalViewController.modalPresentationStyle = .formSheet
+        branchesModalViewController.modalTransitionStyle = .crossDissolve
+        present(branchesModalViewController, animated: true, completion: nil)
+    }
+
 }
 
 extension MenuViewController: UICollectionViewDataSource {

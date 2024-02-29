@@ -12,6 +12,10 @@ enum ViewState {
     case codeConfirmation
 }
 
+protocol AuthViewModelProtocol {
+    
+}
+
 class AuthViewModel {
     let provider = MoyaProvider<UserService>()
 //    var currentState: ViewState = .signIn       // Maybe use didSet??

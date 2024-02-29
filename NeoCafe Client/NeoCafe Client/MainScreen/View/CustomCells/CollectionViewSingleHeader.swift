@@ -11,7 +11,7 @@ class CollectionViewSingleHeader: UICollectionReusableView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 16, weight: .bold)
+        label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .black
         label.textAlignment = .left
         return label

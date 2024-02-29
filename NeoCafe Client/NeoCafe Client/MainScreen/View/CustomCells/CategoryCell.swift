@@ -16,7 +16,7 @@ class CategoryCell: UICollectionViewCell {
 
     lazy var titleLabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .black
         return label
     }()
