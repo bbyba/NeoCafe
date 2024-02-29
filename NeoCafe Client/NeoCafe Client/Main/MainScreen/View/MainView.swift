@@ -77,12 +77,13 @@ class MainView: UIView {
 
         notificationButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(55)
-            make.trailing.equalToSuperview().inset(40)
+            make.trailing.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.bottom).offset(-24)
+//            make.top.equalTo(header.snp.bottom).offset(-24)
+            make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }

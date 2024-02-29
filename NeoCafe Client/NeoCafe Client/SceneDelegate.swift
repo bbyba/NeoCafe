@@ -13,12 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         window.windowScene = windowScene
-//        window.rootViewController = TabBarViewController()
+        window.rootViewController = TabBarViewController()
 //        window.rootViewController = ProductViewController()
-        window.rootViewController = MenuViewController()
+//        window.rootViewController = MenuViewController()
 
 
-//        window.rootViewController = RegistrationViewController()
+//        window.rootViewController = CartViewController()
 //        window.rootViewController = SplashViewController()
 
 

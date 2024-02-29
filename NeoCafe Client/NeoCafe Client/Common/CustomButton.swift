@@ -21,10 +21,19 @@ class CustomButton: UIButton {
     private func configure() {
         layer.cornerRadius = 18
         titleLabel?.font = .poppins(ofSize: 16, weight: .bold)
+        layer.borderWidth = 2
     }
 
-    func setProperties(title: String, backgroundColor: UIColor) {
+    func setProperties(title: String, backgroundColor: UIColor, titleColor: UIColor = .whiteCustom, showBorder: Bool = false) {
         setTitle(title, for: .normal)
         self.backgroundColor = backgroundColor
+        setTitleColor(titleColor, for: .normal)
+
+        if showBorder {
+            layer.borderWidth = 2
+            layer.borderColor = titleColor.cgColor
+        } else {
+            layer.borderWidth = 0
+        }
     }
 }

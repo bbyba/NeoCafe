@@ -39,3 +39,31 @@
 "toTheBasket" = "В корзину";
 "pleasantAddition" = "Приятное дополнение";
 "chooseBranch" = "Выберите филиал";
+"oopsSomethingsWrong" = "Упс, что-то пошло не так";
+"reload" = "Повторить";
+
+// Cart
+"toGo" = "Возьму с собой";
+"eatHere" = "В заведении";
+"addMore" = "Добавить ещё";
+"order" = "Заказать";
+"orderHistory" = "История заказов";
+"useBonusPoints" = "Списание бонусов";
+"availablePointsWant" = "У вас есть 100 бонусов, хотите использовать их?";
+"yourBonusPoints" = "Ваши бонусы:";
+"enterBonusPoints" = "Введите количество бонусов,\n которое хотите списать";
+"no" = "Нет";
+"yes" = "Да";
+"use" = "Списать";
+"cancel" = "Отмена";
+"perfect" = "Отлично!";
+"orderAcceptedWait" = "Ваш заказ принят, пожалуйста ожидайте";
+"emptyCart" = "Ваша корзина пуста";
+"openOrder" = "Открытый заказ";
+"finished" = "Завершенные";
+"toMenu" = "В меню";
+"orderHash" = "Заказ #";
+"total" = "Итого: ";
+"closeOrder" = "Закрыть счёт";
+"availablePoints" = "Бонусы к списанию:";
+

@@ -35,8 +35,12 @@ class MainViewController: UIViewController {
     }
 
     private func addTargets() {
-        //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+//        mainView.collectionView.button.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
     }
+
+//    @objc func goToMenuButtonTapped() {
+//        let menuViewController = MenuViewController()
+//    }
 }
 
 extension MainViewController: UICollectionViewDataSource {

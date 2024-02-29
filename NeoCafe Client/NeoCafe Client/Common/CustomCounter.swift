@@ -12,12 +12,15 @@ class CustomStepper: UIControl{
     lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .poppins(ofSize: 30, weight: .bold)
+        label.font = .poppins(ofSize: 16, weight: .semibold)
         return label
     }()
 
     lazy var incrementButton = stepperButton(color: .orangeCustom, titleColor: .ivoryCustom, text: "+")
     lazy var decrementButton = stepperButton(color: .greyCustom, titleColor: .darkBlueCustom, text: "-")
+
+//    lazy var incrementButton = stepperButton(color: .orangeCustom, imageName: Asset.stepperPlus.image)
+//    lazy var decrementButton = stepperButton(color: .greyCustom, imageName: Asset.stepperMinus.image)
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -85,15 +88,6 @@ class CustomStepper: UIControl{
             isDecrementing = true
         }
     }
-//    @objc private func handleDecrement() {
-//            if currentValue > minValue {
-//                currentValue -= stepValue
-////                sendActions(for: .valueChanged)
-//                isDecrementing = true
-//            } else {
-//                currentValue = minValue
-//            }
-//        }
 
     @objc private func buttonTapped(_ sender: UIButton) {
         let adjustment = sender.tag * stepValue
@@ -112,7 +106,14 @@ class CustomStepper: UIControl{
         button.backgroundColor = color
         return button
     }
-
+//    
+//    private func stepperButton(color: UIColor, imageName: UIImage) -> UIButton {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//        button.backgroundColor = color
+//        button.setImage(imageName, for: .normal)
+//        return button
+//    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
