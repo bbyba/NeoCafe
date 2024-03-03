@@ -45,6 +45,10 @@
 		DD9DD0DF2B91054A00C489F6 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0DE2B91054A00C489F6 /* CartView.swift */; };
 		DD9DD0E12B91107E00C489F6 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0E02B91107E00C489F6 /* CartViewController.swift */; };
 		DD9DD0E32B91229500C489F6 /* EmptyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0E22B91229500C489F6 /* EmptyCartView.swift */; };
+		DD9DD0E52B9146EC00C489F6 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0E42B9146EC00C489F6 /* OrderHistoryView.swift */; };
+		DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0E72B91491200C489F6 /* OrderHistoryViewController.swift */; };
+		DD9DD0EB2B94581B00C489F6 /* OrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0EA2B94581B00C489F6 /* OrderDetailsView.swift */; };
+		DD9DD0ED2B94586B00C489F6 /* OrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD0EC2B94586B00C489F6 /* OrderDetailsViewController.swift */; };
 		DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */; };
 		DDAD65D52B8CB09B00F72345 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* PopularCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
@@ -111,6 +115,10 @@
 		DD9DD0DE2B91054A00C489F6 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		DD9DD0E02B91107E00C489F6 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		DD9DD0E22B91229500C489F6 /* EmptyCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCartView.swift; sourceTree = "<group>"; };
+		DD9DD0E42B9146EC00C489F6 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
+		DD9DD0E72B91491200C489F6 /* OrderHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewController.swift; sourceTree = "<group>"; };
+		DD9DD0EA2B94581B00C489F6 /* OrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsView.swift; sourceTree = "<group>"; };
+		DD9DD0EC2B94586B00C489F6 /* OrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsViewController.swift; sourceTree = "<group>"; };
 		DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCounter.swift; sourceTree = "<group>"; };
 		DDAD65D42B8CB09B00F72345 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -292,8 +300,28 @@
 				DD9DD0DE2B91054A00C489F6 /* CartView.swift */,
 				DD9DD0E22B91229500C489F6 /* EmptyCartView.swift */,
 				DD9DD0E02B91107E00C489F6 /* CartViewController.swift */,
+				DD9DD0E62B91471400C489F6 /* OrderHistory */,
+				DD9DD0E92B9457C500C489F6 /* OrderDetails */,
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		DD9DD0E62B91471400C489F6 /* OrderHistory */ = {
+			isa = PBXGroup;
+			children = (
+				DD9DD0E42B9146EC00C489F6 /* OrderHistoryView.swift */,
+				DD9DD0E72B91491200C489F6 /* OrderHistoryViewController.swift */,
+			);
+			path = OrderHistory;
+			sourceTree = "<group>";
+		};
+		DD9DD0E92B9457C500C489F6 /* OrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				DD9DD0EA2B94581B00C489F6 /* OrderDetailsView.swift */,
+				DD9DD0EC2B94586B00C489F6 /* OrderDetailsViewController.swift */,
+			);
+			path = OrderDetails;
 			sourceTree = "<group>";
 		};
 		DDAD65E02B8CB9D900F72345 /* MenuScreen */ = {
@@ -591,6 +619,7 @@
 				DDAD65E22B8CBB9100F72345 /* AuthorizationViewController.swift in Sources */,
 				DD9DD0BE2B8FD66800C489F6 /* MenuView.swift in Sources */,
 				DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */,
+				DD9DD0E52B9146EC00C489F6 /* OrderHistoryView.swift in Sources */,
 				DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */,
 				DDF8B5C32B70F1C7005FE06A /* BaseAuthRegView.swift in Sources */,
 				DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */,
@@ -604,6 +633,7 @@
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
 				DD9DD0C52B8FEF4A00C489F6 /* ProductView.swift in Sources */,
 				DD9DD0CE2B8FF21700C489F6 /* BaseContentViewModelController.swift in Sources */,
+				DD9DD0EB2B94581B00C489F6 /* OrderDetailsView.swift in Sources */,
 				DD9DD0D92B90E36700C489F6 /* BranchesModalViewController.swift in Sources */,
 				DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */,
 				DDF8B5D82B70F2BA005FE06A /* CustomButton.swift in Sources */,
@@ -617,6 +647,7 @@
 				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,
 				DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */,
 				DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */,
+				DD9DD0ED2B94586B00C489F6 /* OrderDetailsViewController.swift in Sources */,
 				DD9DD0BA2B8FD63C00C489F6 /* MenuCategoryCell.swift in Sources */,
 				DD9DD0C02B8FD68400C489F6 /* MenuViewController.swift in Sources */,
 				DD9DD0BC2B8FD64E00C489F6 /* MenuModel.swift in Sources */,
@@ -628,6 +659,7 @@
 				DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */,
 				DD9DD0B82B8FD60700C489F6 /* MenuProductCell.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
+				DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */,
 				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,
 				DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,

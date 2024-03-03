@@ -25,8 +25,8 @@ class CartViewController: UIViewController{
     ]
 
     override func loadView() {
-//        view = cartView
-        view = emptyCartView
+        view = cartView
+//        view = emptyCartView
     }
 
     override func viewDidLoad() {
@@ -37,6 +37,17 @@ class CartViewController: UIViewController{
     }
 
     private func addTargets() {
+        cartView.orderHistoryButton.addTarget(self, action: #selector(orderHistoryButtonTapped), for: .touchUpInside)
+    }
+
+//    @objc func orderHistoryButtonTapped() {
+//        print("orderHistoryButtonTapped")
+//        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+//    }
+    @objc func orderHistoryButtonTapped() {
+        print("orderHistoryButtonTapped")
+        print("Navigation controller: \(String(describing: navigationController))")
+        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
     }
 }
 
@@ -55,7 +66,8 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
                 fatalError("Could not dequeue PopularCell")
             }
         let product = orderedProducts[indexPath.row]
-        cell.configureData(name: product.name, imageName: product.image)
+        cell.configureData(name: product.name, imageName: product.image, description: "nil", price: String(product.price))
+        cell.hideStepper()
         return cell
         }
 }

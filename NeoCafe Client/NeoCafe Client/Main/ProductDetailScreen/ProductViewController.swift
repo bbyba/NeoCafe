@@ -43,7 +43,7 @@ extension ProductViewController: UICollectionViewDataSource, UICollectionViewDel
                 fatalError("Could not dequeue PopularCell")
             }
         let category = suggestions[indexPath.row]
-        cell.configureData(name: category.name, imageName: category.image)
+        cell.configureData(name: category.name, imageName: category.image, description: "nil", price: String(category.price))
         return cell
         }
 

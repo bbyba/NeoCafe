@@ -10,17 +10,16 @@ import SwiftUI
 enum MenuSection: String, CaseIterable {
     case category
     case productItem
-
 }
 
 class MenuView: UIView {
-//    lazy var header = CustomHeaderView()
-    lazy var header: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 20
-        view.backgroundColor = .blueCustom
-        return view
-    }()
+    lazy var header = CustomHeaderView()
+//    lazy var header: UIView = {
+//        let view = UIView()
+//        view.layer.cornerRadius = 20
+//        view.backgroundColor = .blueCustom
+//        return view
+//    }()
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()

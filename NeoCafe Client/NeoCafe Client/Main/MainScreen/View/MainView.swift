@@ -77,7 +77,7 @@ class MainView: UIView {
 
         notificationButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(55)
-            make.trailing.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }
 

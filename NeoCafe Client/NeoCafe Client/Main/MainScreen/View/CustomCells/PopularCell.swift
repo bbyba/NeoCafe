@@ -113,9 +113,11 @@ class PopularCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(name: String, imageName: String) {
+    func configureData(name: String, imageName: String, description: String, price: String) {
         image.image = UIImage(named: imageName)
         titleLabel.text = name
+        descriptionLabel.text = description
+        priceLabel.text = price
     }
 
     private func addTargets() {
@@ -138,6 +140,14 @@ class PopularCell: UICollectionViewCell {
     private func toggleCounter(isStepperVisible: Bool) {
         plusButton.isHidden = isStepperVisible
         stepper.isHidden = !isStepperVisible
+    }
+
+    func  hideStepper() {
+        stepper.isHidden = true
+    }
+    
+    func hidePlusButton() {
+        plusButton.isHidden = true
     }
 
     required init?(coder: NSCoder) {

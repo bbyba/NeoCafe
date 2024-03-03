@@ -35,12 +35,14 @@ class MainViewController: UIViewController {
     }
 
     private func addTargets() {
-//        mainView.collectionView.button.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
+        mainView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
+        
     }
 
-//    @objc func goToMenuButtonTapped() {
-//        let menuViewController = MenuViewController()
-//    }
+    @objc func notificationsButtonTapped() {
+        print("notificationsButtonTapped")
+        navigationController?.pushViewController(OrderHistoryViewController(), animated: false)
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -50,8 +52,6 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.allCases[section] {
-            //        case .header:
-            //            return 0
         case .category:
             return categories.count
         case .popular:

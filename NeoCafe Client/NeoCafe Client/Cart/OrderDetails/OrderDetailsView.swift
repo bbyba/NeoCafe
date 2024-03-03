@@ -1,5 +1,5 @@
 //
-//  CartView.swift
+//  OrderDetailsView.swift
 //  NeoCafe Client
 //
 
@@ -7,36 +7,30 @@ import Foundation
 import UIKit
 import SnapKit
 
-class CartView: UIView {
+class OrderDetailsView: UIView {
 
     lazy var header = CustomHeaderView()
 
-    lazy var headerLabel: UILabel = {
-        let label = UILabel()
-        label.text = S.cart
-        label.font = .poppins(ofSize: 32, weight: .bold)
-        label.textColor = .ivoryCustom
-        label.textAlignment = .left
-        return label
-    }()
-
-    lazy var orderHistoryButton: UIButton = {
+    lazy var backButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.orderHistory.image, for: .normal)
-        button.isUserInteractionEnabled = true
+        button.setImage(Asset.backButton.image, for: .normal)
         return button
     }()
 
-    lazy var segmentedControl: CustomSegmentedControl = {
-        let segmentedControl = CustomSegmentedControl(items: [S.toGo, S.eatHere])
-        segmentedControl.contentMode = .scaleToFill
-        segmentedControl.selectedSegmentIndex = 0
-        return segmentedControl
+    lazy var headerLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.orderHash
+        label.font = .poppins(ofSize: 24, weight: .bold)
+        label.textColor = .ivoryCustom
+        label.textAlignment = .center
+        return label
     }()
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(PopularCell.self, forCellWithReuseIdentifier: PopularCell.identifier)
+        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -48,6 +42,31 @@ class CartView: UIView {
         button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
         button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
         return button
+    }()
+
+    lazy var availablePointsLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.availablePoints
+        label.textAlignment = .center
+        label.font = .poppins(ofSize: 14, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var totalAvailablePoints: UILabel = {
+        let label = UILabel()
+        label.text = "50"
+        label.textAlignment = .center
+        label.font = .poppins(ofSize: 20, weight: .semibold)
+        label.textColor = .orangeCustom
+        return label
+    }()
+
+    lazy var availablePointsToUseLabel: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 2
+        return stack
     }()
 
     lazy var totalLabel: UILabel = {
@@ -90,18 +109,18 @@ class CartView: UIView {
 
     func addSubviews() {
         addSubview(header)
+        header.addSubview(backButton)
         header.addSubview(headerLabel)
-        header.addSubview(orderHistoryButton)
-        addSubview(segmentedControl)
         addSubview(collectionView)
-        addSubview(addMoreButton)
-
+        addSubview(availablePointsToUseLabel)
+        availablePointsToUseLabel.addArrangedSubview(availablePointsLabel)
+        availablePointsToUseLabel.addArrangedSubview(totalAvailablePoints)
         addSubview(totalPriceLabel)
         totalPriceLabel.addArrangedSubview(totalLabel)
         totalPriceLabel.addArrangedSubview(priceLabel)
-
         addSubview(orderButton)
     }
+
 
     func setupConstraints() {
         header.snp.makeConstraints { make in
@@ -109,33 +128,30 @@ class CartView: UIView {
             make.height.equalTo(140)
         }
 
-        headerLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(55)
-        }
-
-        orderHistoryButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.leading.equalTo(headerLabel.snp.trailing).offset(30)
+        backButton.snp.makeConstraints { make in
+            //            make.top.equalToSuperview().offset(55)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
-        segmentedControl.snp.makeConstraints { make in
-            make.centerY.equalTo(header.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+        headerLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+
+            //            make.top.equalToSuperview().offset(55)
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(40)
+            make.top.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(addMoreButton.snp.top).offset(-20)
+            make.bottom.equalTo(availablePointsToUseLabel.snp.top).offset(-20)
         }
 
-        addMoreButton.snp.makeConstraints { make in
-            make.bottom.equalTo(totalPriceLabel.snp.top).offset(-41)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
+        availablePointsToUseLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(totalPriceLabel.snp.top).offset(-16)
+            make.leading.equalToSuperview().inset(16)
+            make.height.equalTo(24)
         }
 
         totalPriceLabel.snp.makeConstraints { make in
@@ -145,7 +161,6 @@ class CartView: UIView {
         }
 
         orderButton.snp.makeConstraints { make in
-//            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.centerX.equalToSuperview()
@@ -162,14 +177,31 @@ class CartView: UIView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100))
+            heightDimension: .absolute(110))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
 
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        header.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8)
+
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
+
     }
 
     required init?(coder: NSCoder) {

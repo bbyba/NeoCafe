@@ -104,15 +104,28 @@ class RegistrationViewController: UIViewController {
         viewModel.registerLoginUser(email: email, confirmationCode: code) { result in
             DispatchQueue.main.async {
                 switch result {
+//                case .success:
+//                    print("Success: registerLoginUser")
+//                    self.navigationController?.pushViewController(TabBarViewController(), animated: false)
                 case .success:
                     print("Success: registerLoginUser")
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self = self else { return }
+                        let tabBarController = TabBarViewController()
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let sceneDelegate = windowScene.delegate as? SceneDelegate {
+                            sceneDelegate.window?.rootViewController = tabBarController
+                            sceneDelegate.window?.makeKeyAndVisible()
+                        }
+                    }
+
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
     }
-
+    
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
         baseAuthRegView.showCodeConfirmationView()
