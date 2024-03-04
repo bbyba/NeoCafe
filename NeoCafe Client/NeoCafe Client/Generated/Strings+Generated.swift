@@ -16,6 +16,8 @@ internal enum S {
   internal static let availablePoints = S.tr("Localizable", "availablePoints", fallback: "Бонусы к списанию:")
   /// У вас есть 100 бонусов, хотите использовать их?
   internal static let availablePointsWant = S.tr("Localizable", "availablePointsWant", fallback: "У вас есть 100 бонусов, хотите использовать их?")
+  /// Бонусы
+  internal static let bonuses = S.tr("Localizable", "bonuses", fallback: "Бонусы")
   /// Филиалы
   internal static let branches = S.tr("Localizable", "branches", fallback: "Филиалы")
   /// Отмена
@@ -30,6 +32,8 @@ internal enum S {
   internal static let closeOrder = S.tr("Localizable", "closeOrder", fallback: "Закрыть счёт")
   /// Подтвердить
   internal static let confirm = S.tr("Localizable", "confirm", fallback: "Подтвердить")
+  /// Актуальный заказ
+  internal static let currentOrder = S.tr("Localizable", "currentOrder", fallback: "Актуальный заказ")
   /// В заведении
   internal static let eatHere = S.tr("Localizable", "eatHere", fallback: "В заведении")
   /// Ваша корзина пуста

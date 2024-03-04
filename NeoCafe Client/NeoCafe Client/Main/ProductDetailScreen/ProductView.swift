@@ -20,7 +20,7 @@ class ProductView: UIView {
 
     lazy var backButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.backButton.image, for: .normal)
+        button.setImage(Asset.Buttons.backButton.image, for: .normal)
         return button
     }()
 

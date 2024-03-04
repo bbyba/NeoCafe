@@ -4,10 +4,15 @@
 //
 
 import UIKit
-import SwiftUI
 
 class SplashViewController: UIViewController {
     private lazy var splashScreenView = SplashView()
+    private var splashViewModel: SplashViewModel
+
+    init(viewModel: SplashViewModel) {
+        self.splashViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
 
     override func loadView() {
         view = splashScreenView
@@ -15,17 +20,10 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigateToMainViewController()
+        splashViewModel.toLoginNavigate()
     }
 
-    private func navigateToMainViewController() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let mainViewController = AuthenticationViewController()
-
-            if let window = self.view.window {
-                window.rootViewController = mainViewController
-                UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: nil)
-            }
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

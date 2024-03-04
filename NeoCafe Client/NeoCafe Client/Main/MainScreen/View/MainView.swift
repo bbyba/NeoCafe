@@ -28,7 +28,7 @@ class MainView: UIView {
 
     lazy var notificationButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.notification.image, for: .normal)
+        button.setImage(Asset.Buttons.notification.image, for: .normal)
         return button
     }()
 
@@ -90,7 +90,7 @@ class MainView: UIView {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(8)
-            make.bottom.width.equalToSuperview()
+            make.bottom.leading.trailing.equalToSuperview()
         }
     }
 
@@ -228,7 +228,7 @@ extension MainView {
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

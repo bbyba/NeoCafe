@@ -5,10 +5,12 @@
 
 import UIKit
 import SwiftUI
+import Moya
 
 class AuthenticationViewController: UIViewController {
     private lazy var baseAuthRegView = BaseAuthRegView()
-    private var viewModel = AuthViewModel()
+    //    private var viewModel = AuthViewModel()
+    private var viewModel = AuthViewModelImpl(provider: MoyaProvider<UserAPI>())
 
     override func loadView() {
         view = baseAuthRegView
@@ -24,58 +26,30 @@ class AuthenticationViewController: UIViewController {
         baseAuthRegView.getCodebutton.addTarget(self, action: #selector(getCodeButtonTapped), for: .touchUpInside)
     }
 
-    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        let newState: ViewState = sender.selectedSegmentIndex == 0 ? .signIn : .registration
-        viewModel.changeViewState(to: newState)
-        baseAuthRegView.updateViewForSegmentIndex(index: newState == .signIn ? 0 : 1)
-    }
-
-    @objc private func getCodeButtonTapped() {
-        switch self.viewModel.currentState {
-        case .codeConfirmation:
-            print("current viewstate: \(self.viewModel.currentState)")
-            registerLoginUserRequest()
-        default:
-            print("current viewstate: \(self.viewModel.currentState)")
-            requestCodeButton()
-        }
-    }
-
     private func getEmailString() -> String? {
-        if viewModel.currentState == .codeConfirmation, let previousState = viewModel.previousState {
-            switch previousState {
-            case .signIn:
-                return baseAuthRegView.signInView.emailTextField.text
-            case .registration:
-                return baseAuthRegView.registrationView.emailTextFieldReg.text
-            default:
-                return nil
-            }
-        } else {
-            switch viewModel.currentState {
-            case .signIn:
-                return baseAuthRegView.signInView.emailTextField.text
-            case .registration:
-                return baseAuthRegView.registrationView.emailTextFieldReg.text
-            case .codeConfirmation:
-                return nil
-            }
+        switch viewModel.currentState {
+        case .signIn:
+            return baseAuthRegView.signInView.emailTextField.text
+        case .registration:
+            return baseAuthRegView.registrationView.emailTextFieldReg.text
+        case .codeConfirmation:
+            return nil
         }
     }
 
-
-    private func getCodeString() -> String? {
-        baseAuthRegView.codeConfirmationView.otpField.getPin()
+    private func emailValidation(email: String?) -> Bool {
+        guard let email = email else { return false }
+        return viewModel.validateEmail(email: email)
     }
+    private func handleCodeRequest() {
+        guard let email = getEmailString() else {
+            return
+        }
+        let isValid = viewModel.validateEmail(email: email)
+        baseAuthRegView.wrongEmailErrorLabel.isHidden = isValid
 
-    func emailValidation(email: String?) {
-        guard let email = email else { return }
-        viewModel.validateEmail(email: email)
-        baseAuthRegView.wrongEmailErrorLabel.isHidden = !viewModel.emailValidationFailed
-    }
-
-    private func requestConfirmationCode(email: String) {
-        if !viewModel.emailValidationFailed {
+        if isValid {
+            viewModel.storeEmail(email: email)
             viewModel.requestConfirmationCode(email: email) { result in
                 DispatchQueue.main.async {
                     switch result {
@@ -87,38 +61,64 @@ class AuthenticationViewController: UIViewController {
                 }
             }
         }
+
     }
+
 
     private func requestCodeButton() {
         print("getCodeButtonTapped")
-        guard let email = getEmailString() else { return }
-        emailValidation(email: email)
-        requestConfirmationCode(email: email)
+        handleCodeRequest()
     }
 
-    private func registerLoginUserRequest() {
-        guard let email = getEmailString(), let code = getCodeString() else { return }
-        print("confirm button tapped")
-        print("\(email) and  \(code)")
+    private func getCodeString() -> String? {
+        baseAuthRegView.codeConfirmationView.otpField.getPin()
+    }
 
-        viewModel.registerLoginUser(email: email, confirmationCode: code) { result in
+    private func authenticateUserRequest() {
+        guard let storedEmail = viewModel.storedEmail, let code = getCodeString() else {
+            print("Email is not stored or code is nil")
+            return
+        }
+
+        print("confirm button tapped")
+        print("\(storedEmail) and \(code)")
+
+        viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { result in
             DispatchQueue.main.async {
                 switch result {
-//                case .success:
-//                    print("Success: registerLoginUser")
-//                    self.navigationController?.pushViewController(TabBarViewController(), animated: false)
                 case .success:
-                    print("Success: registerLoginUser")
+                    print("Success: authenticateUser")
+                    self.viewModel.onMainNavigate
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
     }
-    
+
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
         baseAuthRegView.showCodeConfirmationView()
+    }
+
+
+    @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        let newState: ViewState = sender.selectedSegmentIndex == 0 ? .signIn : .registration
+        viewModel.changeViewState(to: newState)
+        baseAuthRegView.updateViewForSegmentIndex(index: newState == .signIn ? 0 : 1)
+    }
+
+    @objc private func getCodeButtonTapped() {
+        switch self.viewModel.currentState {
+        case .codeConfirmation:
+            print("current viewstate: \(self.viewModel.currentState)")
+            print("authenticateUserRequest")
+            authenticateUserRequest()
+        default:
+            print("current viewstate: \(self.viewModel.currentState)")
+            print("requestCodeButton")
+            requestCodeButton()
+        }
     }
 }
 

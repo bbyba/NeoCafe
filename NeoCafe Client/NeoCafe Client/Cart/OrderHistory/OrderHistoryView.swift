@@ -13,7 +13,7 @@ class OrderHistoryView: UIView {
 
     lazy var backButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.backButton.image, for: .normal)
+        button.setImage(Asset.Buttons.backButton.image, for: .normal)
         return button
     }()
 
@@ -126,7 +126,7 @@ class OrderHistoryView: UIView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100))
+            heightDimension: .absolute(110))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

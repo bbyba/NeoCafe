@@ -34,7 +34,7 @@ enum TabBar: CaseIterable {
         case .Branches:
             viewController = UINavigationController(rootViewController: MainViewController())
         case .Profile:
-            viewController = UINavigationController(rootViewController: MainViewController())
+            viewController = UINavigationController(rootViewController: ProfileViewController())
         }
 
         viewController.tabBarItem = tabBarItem

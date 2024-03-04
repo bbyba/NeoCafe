@@ -22,7 +22,7 @@ class EmptyCartView: UIView {
 
     lazy var orderHistoryButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.orderHistory.image, for: .normal)
+        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
         return button
     }()
 

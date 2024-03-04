@@ -5,10 +5,17 @@
 
 import Foundation
 
-protocol SplahViewModel {
+protocol SplashViewModel {
     var onLoginNavigate: EmptyCompletion? { get set }
+    func toLoginNavigate()
 }
 
-final class SplahViewModelImpl: SplahViewModel {
+final class SplashViewModelImpl: SplashViewModel {
     var onLoginNavigate: EmptyCompletion?
+
+    func toLoginNavigate() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .milliseconds(100)) {
+            self.onLoginNavigate?()
+        }
+    }
 }

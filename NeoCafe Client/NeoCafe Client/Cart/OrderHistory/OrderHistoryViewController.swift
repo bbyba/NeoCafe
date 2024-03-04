@@ -77,6 +77,7 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
             let currentOrder = currentOrders[indexPath.row]
             cell.configureData(name: currentOrder.name, imageName: currentOrder.image, description: currentOrder.description, price: currentOrder.status)
             cell.hideStepper()
+            cell.hidePlusButton()
             return cell
         case .completed:
             let completedOrder = completedOrders[indexPath.row]
@@ -97,7 +98,7 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
             case .current:
                 header.configureTitle(title: S.openOrder)
             case .completed:
-                header.configureTitle(title: S.closeOrder)
+                header.configureTitle(title: S.finished)
             }
         }
         return header

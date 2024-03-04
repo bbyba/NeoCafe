@@ -67,3 +67,8 @@
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
 
+
+// Profile
+"bonuses" = "Бонусы";
+"currentOrder" = "Актуальный заказ";
+

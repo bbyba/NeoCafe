@@ -22,7 +22,7 @@ class CartView: UIView {
 
     lazy var orderHistoryButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.orderHistory.image, for: .normal)
+        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
         button.isUserInteractionEnabled = true
         return button
     }()
@@ -128,7 +128,7 @@ class CartView: UIView {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(40)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(addMoreButton.snp.top).offset(-20)
         }
 
@@ -166,7 +166,7 @@ class CartView: UIView {
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
 
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)

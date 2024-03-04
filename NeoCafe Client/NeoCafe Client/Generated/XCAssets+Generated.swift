@@ -60,18 +60,22 @@ internal enum Asset {
     internal static let calendar = ImageAsset(name: "calendar")
     internal static let profileTextField = ImageAsset(name: "profileTextField")
   }
-  internal static let backButton = ImageAsset(name: "backButton")
+  internal static let bonusImage = ImageAsset(name: "bonusImage")
   internal static let branches = ImageAsset(name: "branches")
   internal static let branchesModal = ImageAsset(name: "branchesModal")
+  internal enum Buttons {
+    internal static let backButton = ImageAsset(name: "backButton")
+    internal static let dropDown = ImageAsset(name: "dropDown")
+    internal static let logoutButton = ImageAsset(name: "logoutButton")
+    internal static let notification = ImageAsset(name: "notification")
+    internal static let orderHistory = ImageAsset(name: "orderHistory")
+  }
   internal static let coffeeBeanModal = ImageAsset(name: "coffeeBeanModal")
   internal static let coffeeCupFront = ImageAsset(name: "coffeeCupFront")
   internal static let coffeeCupTop = ImageAsset(name: "coffeeCupTop")
-  internal static let dropDown = ImageAsset(name: "dropDown")
   internal static let emptyCartImage = ImageAsset(name: "emptyCartImage")
   internal static let error404Image = ImageAsset(name: "error404Image")
   internal static let magnifyingGlass = ImageAsset(name: "magnifyingGlass")
-  internal static let notification = ImageAsset(name: "notification")
-  internal static let orderHistory = ImageAsset(name: "orderHistory")
   internal static let stepperMinus = ImageAsset(name: "stepperMinus")
   internal static let stepperPlus = ImageAsset(name: "stepperPlus")
 }
