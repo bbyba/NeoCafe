@@ -5,14 +5,14 @@
 import Foundation
 import Moya
 
-enum UserService {
+enum UserAPI {
     case registerUser(email: String, confirmationCode: String) // Register customer by adding to the database after providing email and confirmation code.
     case loginUser(email: String, confirmationCode: String)    // Authenticate customer after providing email and confirmation code.
     case checkEmailRegister(email: String)  // Check if customer's email is in the database and send a verification code.
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
 }
 
-extension UserService: TargetType {
+extension UserAPI: TargetType {
     var baseURL: URL {
         return URL(string: "https://tokyo-backender.org.kg")!
     }

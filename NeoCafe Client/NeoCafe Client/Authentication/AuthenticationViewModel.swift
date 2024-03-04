@@ -17,7 +17,7 @@ protocol AuthViewModelProtocol {
 }
 
 class AuthViewModel {
-    let provider = MoyaProvider<UserService>()
+    let provider = MoyaProvider<UserAPI>()
 //    var currentState: ViewState = .signIn       // Maybe use didSet??
     var currentState: ViewState = .signIn {
         didSet {

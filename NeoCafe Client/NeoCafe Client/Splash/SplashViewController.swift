@@ -20,7 +20,7 @@ class SplashViewController: UIViewController {
 
     private func navigateToMainViewController() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            let mainViewController = RegistrationViewController()
+            let mainViewController = AuthenticationViewController()
 
             if let window = self.view.window {
                 window.rootViewController = mainViewController
