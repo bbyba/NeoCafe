@@ -67,8 +67,17 @@
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
 
+// Branches
+"schedule" = "График работы: ";
+"todaySchedule" = "Сегодня с 9:00 до 10:00";
+"weekSchedule" = "Пн: 11:00 - 22:00";
 
 // Profile
 "bonuses" = "Бонусы";
 "currentOrder" = "Актуальный заказ";
+"bonusMessageProfile" = "Накапливайте бонусы и совершайте \n выгодные для Вас заказы! \n 1 бонус = 1 сом";
+"editing" = "Редактирование";
+"save" = "Сохранить";
+"notifications" = "Уведомления";
+"clearAll" = "Очистить всё";
 

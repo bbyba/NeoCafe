@@ -61,6 +61,8 @@
 		DD9DD1072B95E10000C489F6 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1062B95E10000C489F6 /* ProfileCoordinator.swift */; };
 		DD9DD1092B95E23000C489F6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1082B95E23000C489F6 /* ProfileView.swift */; };
 		DD9DD10B2B95E74900C489F6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */; };
+		DD9DD10D2B95F73900C489F6 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD10C2B95F73900C489F6 /* EditProfileView.swift */; };
+		DD9DD1112B95FBAA00C489F6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */; };
 		DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */; };
 		DDAD65D52B8CB09B00F72345 /* PopularCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* PopularCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
@@ -143,6 +145,8 @@
 		DD9DD1062B95E10000C489F6 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DD9DD1082B95E23000C489F6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DD9DD10C2B95F73900C489F6 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCounter.swift; sourceTree = "<group>"; };
 		DDAD65D42B8CB09B00F72345 /* PopularCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -361,6 +365,8 @@
 			children = (
 				DD9DD1082B95E23000C489F6 /* ProfileView.swift */,
 				DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */,
+				DD9DD10E2B95F79200C489F6 /* EditProfile */,
+				DD9DD10F2B95F7A500C489F6 /* Notifications */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -387,6 +393,22 @@
 				DD9DD1062B95E10000C489F6 /* ProfileCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		DD9DD10E2B95F79200C489F6 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				DD9DD10C2B95F73900C489F6 /* EditProfileView.swift */,
+				DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		DD9DD10F2B95F7A500C489F6 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		DDAD65E02B8CB9D900F72345 /* MenuScreen */ = {
@@ -702,6 +724,7 @@
 				DD9DD0D52B90DF6600C489F6 /* BranchesModalView.swift in Sources */,
 				DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */,
 				DD9DD0D02B8FF4A700C489F6 /* ProductViewModel.swift in Sources */,
+				DD9DD10D2B95F73900C489F6 /* EditProfileView.swift in Sources */,
 				DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */,
 				DD3FA30D2B8D0BB500B89DDB /* TabBarViewController.swift in Sources */,
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
@@ -720,6 +743,7 @@
 				DD9556152B79F67300FB65AF /* UserAPI.swift in Sources */,
 				DD9DD0D72B90DFB500C489F6 /* BranchesModalCell.swift in Sources */,
 				DD93C18F2B81C5CC00339287 /* Network.swift in Sources */,
+				DD9DD1112B95FBAA00C489F6 /* EditProfileViewController.swift in Sources */,
 				DD9DD0DF2B91054A00C489F6 /* CartView.swift in Sources */,
 				DD9DD0E32B91229500C489F6 /* EmptyCartView.swift in Sources */,
 				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,

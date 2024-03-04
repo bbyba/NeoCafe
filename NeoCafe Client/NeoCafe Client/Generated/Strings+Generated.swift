@@ -18,6 +18,10 @@ internal enum S {
   internal static let availablePointsWant = S.tr("Localizable", "availablePointsWant", fallback: "У вас есть 100 бонусов, хотите использовать их?")
   /// Бонусы
   internal static let bonuses = S.tr("Localizable", "bonuses", fallback: "Бонусы")
+  /// Накапливайте бонусы и совершайте 
+  ///  выгодные для Вас заказы! 
+  ///  1 бонус = 1 сом
+  internal static let bonusMessageProfile = S.tr("Localizable", "bonusMessageProfile", fallback: "Накапливайте бонусы и совершайте \n выгодные для Вас заказы! \n 1 бонус = 1 сом")
   /// Филиалы
   internal static let branches = S.tr("Localizable", "branches", fallback: "Филиалы")
   /// Отмена
@@ -28,6 +32,8 @@ internal enum S {
   internal static let categories = S.tr("Localizable", "categories", fallback: "Категории")
   /// Выберите филиал
   internal static let chooseBranch = S.tr("Localizable", "chooseBranch", fallback: "Выберите филиал")
+  /// Очистить всё
+  internal static let clearAll = S.tr("Localizable", "clearAll", fallback: "Очистить всё")
   /// Закрыть счёт
   internal static let closeOrder = S.tr("Localizable", "closeOrder", fallback: "Закрыть счёт")
   /// Подтвердить
@@ -36,6 +42,8 @@ internal enum S {
   internal static let currentOrder = S.tr("Localizable", "currentOrder", fallback: "Актуальный заказ")
   /// В заведении
   internal static let eatHere = S.tr("Localizable", "eatHere", fallback: "В заведении")
+  /// Редактирование
+  internal static let editing = S.tr("Localizable", "editing", fallback: "Редактирование")
   /// Ваша корзина пуста
   internal static let emptyCart = S.tr("Localizable", "emptyCart", fallback: "Ваша корзина пуста")
   /// Войти
@@ -63,6 +71,8 @@ internal enum S {
   internal static let menuButton = S.tr("Localizable", "menuButton", fallback: "Перейти к меню")
   /// Нет
   internal static let no = S.tr("Localizable", "no", fallback: "Нет")
+  /// Уведомления
+  internal static let notifications = S.tr("Localizable", "notifications", fallback: "Уведомления")
   /// Упс, что-то пошло не так
   internal static let oopsSomethingsWrong = S.tr("Localizable", "oopsSomethingsWrong", fallback: "Упс, что-то пошло не так")
   /// Открытый заказ
@@ -96,8 +106,14 @@ internal enum S {
   internal static let reload = S.tr("Localizable", "reload", fallback: "Повторить")
   /// Отправить ещё раз через
   internal static let resend = S.tr("Localizable", "resend", fallback: "Отправить ещё раз через")
+  /// Сохранить
+  internal static let save = S.tr("Localizable", "save", fallback: "Сохранить")
+  /// График работы: 
+  internal static let schedule = S.tr("Localizable", "schedule", fallback: "График работы: ")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
+  /// Сегодня с 9:00 до 10:00
+  internal static let todaySchedule = S.tr("Localizable", "todaySchedule", fallback: "Сегодня с 9:00 до 10:00")
   /// Возьму с собой
   internal static let toGo = S.tr("Localizable", "toGo", fallback: "Возьму с собой")
   /// В меню
@@ -112,6 +128,8 @@ internal enum S {
   internal static let useBonusPoints = S.tr("Localizable", "useBonusPoints", fallback: "Списание бонусов")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
+  /// Пн: 11:00 - 22:00
+  internal static let weekSchedule = S.tr("Localizable", "weekSchedule", fallback: "Пн: 11:00 - 22:00")
   /// Localizable.strings
   ///   NeoCafe Client
   internal static let welcome = S.tr("Localizable", "welcome", fallback: "Добро пожаловать в")
