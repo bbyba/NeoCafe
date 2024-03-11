@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class NotificationView: UIView {
+class NotificationView: UIView, BaseContentView {
 
     lazy var header = CustomHeaderView()
 
@@ -38,21 +38,32 @@ class NotificationView: UIView {
         return button
     }()
 
+    lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(NotificationsCell.self, forCellWithReuseIdentifier: NotificationsCell.identifier)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
         addSubview(header)
         header.addSubview(backButton)
         header.addSubview(headerLabel)
-
         addSubview(clearAllButton)
-
+        addSubview(collectionView)
     }
 
     func setupConstraints() {
@@ -81,6 +92,31 @@ class NotificationView: UIView {
             make.height.equalTo(19)
             make.trailing.equalToSuperview().offset(-24)
         }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(clearAllButton.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(100))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
     required init?(coder: NSCoder) {

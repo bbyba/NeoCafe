@@ -120,6 +120,8 @@ internal enum S {
   internal static let todaySchedule = S.tr("Localizable", "todaySchedule", fallback: "Сегодня с 9:00 до 10:00")
   /// Возьму с собой
   internal static let toGo = S.tr("Localizable", "toGo", fallback: "Возьму с собой")
+  /// С собой
+  internal static let toGoShort = S.tr("Localizable", "toGoShort", fallback: "С собой")
   /// В меню
   internal static let toMenu = S.tr("Localizable", "toMenu", fallback: "В меню")
   /// Итого: 
