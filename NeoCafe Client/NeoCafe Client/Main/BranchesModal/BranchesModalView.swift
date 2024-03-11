@@ -16,7 +16,6 @@ class BranchesModalView: UIView {
         button.backgroundColor = .coralCustom
         button.layer.cornerRadius = 14
         button.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner]
-
         return button
     }()
 

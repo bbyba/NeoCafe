@@ -12,7 +12,7 @@ struct OrderDetailsModel {
 }
 
 class OrderDetailsViewController: UIViewController{
-    private lazy var orderDetailsView = OrderDetailsView()
+    lazy var orderDetailsView = OrderDetailsView()
 
     var orderDetails: [OrderDetailsModel] = [
         OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),

@@ -40,12 +40,13 @@ class CartViewController: UIViewController{
         cartView.orderHistoryButton.addTarget(self, action: #selector(orderHistoryButtonTapped), for: .touchUpInside)
     }
 
-//    @objc func orderHistoryButtonTapped() {
-//        print("orderHistoryButtonTapped")
-//        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
-//    }
+    @objc func addMoreButtonTapped() {
+        print("Cart: addMoreButtonTapped")
+//        navigationController?.pushViewController(MenuViewController(), animated: true)
+    }
+
     @objc func orderHistoryButtonTapped() {
-        print("orderHistoryButtonTapped")
+        print("Cart: orderHistoryButtonTapped")
         print("Navigation controller: \(String(describing: navigationController))")
         navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
     }

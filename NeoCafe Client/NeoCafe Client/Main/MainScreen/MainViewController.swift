@@ -6,17 +6,8 @@
 import UIKit
 import SwiftUI
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController<MainViewModel, MainView> {
     private lazy var mainView = MainView()
-
-    // TO MOVE!!!!!!!
-    var categories: [Category] = [
-        Category(name: "Кофе", image: Asset.Menu.coffee.name),
-        Category(name: "Десерты", image: Asset.Menu.dessert.name),
-        Category(name: "Выпечка", image: Asset.Menu.bakery.name),
-        Category(name: "Напитки", image: Asset.Menu.drink.name),
-        Category(name: "Чай", image: Asset.Menu.tea.name)
-    ]
 
     var popularItems: [PopularItem] = [
         PopularItem(name: "POP1", image: Asset.Menu.coffee.name),
@@ -32,16 +23,32 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         addTargets()
         mainView.collectionView.dataSource = self
+
+        viewModel.getCategories { [weak self] result in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self?.mainView.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print("Error fetching categories: \(error)")
+            }
+        }
     }
+
 
     private func addTargets() {
         mainView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
-        
+//        mainView.goToMenuButton.addTarget(self, action: #selector(goToMenuTapped), for: .touchUpInside)
     }
 
     @objc func notificationsButtonTapped() {
         print("notificationsButtonTapped")
-        navigationController?.pushViewController(OrderHistoryViewController(), animated: false)
+        viewModel.onNotificationsNavigate?()
+    }
+
+    @objc func goToMenuTapped() {
+        viewModel.onMenuNavigate?()
     }
 }
 
@@ -53,7 +60,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.allCases[section] {
         case .category:
-            return categories.count
+            return viewModel.categories.count
         case .popular:
             return 3
         }
@@ -61,14 +68,12 @@ extension MainViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch Section.allCases[indexPath.section] {
-            //        case .header:
-            //            fatalError("Header section should not request cells")
         case .category:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
                 fatalError("Could not dequeue CategoryCell")
             }
-            let category = categories[indexPath.row]
-            cell.configureData(name: category.name, imageName: category.image)
+            let category = viewModel.categories[indexPath.row]
+            cell.configureData(name: category.name, imageName: category.image!)
             return cell
         case .popular:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {
@@ -91,10 +96,13 @@ extension MainViewController: UICollectionViewDataSource {
             case .category:
                 header.configureTitle(title: S.ourMenu)
                 header.configureButton(title: S.menuButton, isVisible: true)
+                header.button.addTarget(self, action: #selector(goToMenuTapped), for: .touchUpInside)
             case .popular:
                 header.configureTitle(title: S.popular)
+                header.button.isHidden = true
             }
         }
         return header
     }
 }
+

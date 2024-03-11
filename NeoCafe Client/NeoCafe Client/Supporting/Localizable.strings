@@ -14,7 +14,8 @@
 "exampleEmail" = "example@email.com";
 "OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту";
 "wrongCode" = "Код введён неверно,\n попробуйте еще раз";
-"resend" = "Отправить ещё раз через";
+"resend" = "Отправить ещё раз";
+"resendAfter" = "Отправить ещё раз через";
 "verificationCode" = "Код подтверждения";
 "register" = "Зарегистрироваться";
 "confirm" = "Подтвердить";
@@ -66,6 +67,7 @@
 "total" = "Итого: ";
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
+"popularMenu" = "Популярные блюда";
 
 // Branches
 "schedule" = "График работы: ";

@@ -16,6 +16,13 @@ class MenuCategoryCell: UICollectionViewCell {
         return label
     }()
 
+    var isCategorySelected = false {
+        didSet {
+            backgroundColor = isCategorySelected ? .orangeCustom : .greyCustom
+            titleLabel.textColor = isCategorySelected ? .whiteCustom : .darkBlueCustom
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .greyCustom

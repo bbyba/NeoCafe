@@ -34,11 +34,16 @@ class ProfileViewController: UIViewController {
     }
 
     private func addTargets() {
-
+        profileView.editButton.addTarget(self, action: #selector(editProfileViewController), for: .touchUpInside)
     }
 
     @objc func notificationsButtonTapped() {
         print("notificationsButtonTapped")
+    }
+
+    @objc func editProfileViewController() {
+        let editProfileViewController = EditProfileViewController()
+        navigationController?.pushViewController(editProfileViewController, animated: true)
     }
 }
 

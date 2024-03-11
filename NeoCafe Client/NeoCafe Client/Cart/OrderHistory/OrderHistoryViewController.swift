@@ -103,4 +103,19 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
         }
         return header
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
+        switch OrderHistorySection.allCases[indexPath.section] {
+        case .current:
+//            let currentOrder = currentOrders[indexPath.row]
+            let orderDetailsViewController = OrderDetailsViewController()
+            orderDetailsViewController.orderDetailsView.orderButton.isHidden = true
+            navigationController?.pushViewController(orderDetailsViewController, animated: true)
+        case .completed:
+//            let completedOrder = completedOrders[indexPath.row]
+            let orderDetailsViewController = OrderDetailsViewController()
+            navigationController?.pushViewController(orderDetailsViewController, animated: true)
+        }
+    }
 }

@@ -71,6 +71,13 @@ class ProductView: UIView {
         return button
     }()
 
+    lazy var stack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 16
+        return stack
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -85,13 +92,14 @@ class ProductView: UIView {
         addSubview(descriptionLabel)
         addSubview(collectionView)
         addSubview(priceLabel)
-        addSubview(stepper)
-        addSubview(addToCartButton)
+        addSubview(stack)
+        stack.addArrangedSubview(stepper)
+        stack.addArrangedSubview(addToCartButton)
     }
 
     func setConstraints() {
         image.snp.makeConstraints { make in
-            make.top.leading.width.equalToSuperview()
+            make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(220)
         }
 
@@ -117,7 +125,7 @@ class ProductView: UIView {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(priceLabel.snp.top).offset(16)
-//                        make.height.equalTo(320)
+            //                        make.height.equalTo(320)
         }
 
         priceLabel.snp.makeConstraints { make in
@@ -127,18 +135,19 @@ class ProductView: UIView {
             make.height.equalTo(24)
         }
 
-        addToCartButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-16)
+        stack.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().offset(-24)
             make.height.equalTo(55)
-            make.width.equalTo(203)
         }
 
         stepper.snp.makeConstraints { make in
-            make.trailing.equalTo(addToCartButton.snp.leading).offset(-16)
-            make.centerY.equalTo(addToCartButton.snp.centerY)
-            make.height.equalTo(40)
-            make.width.equalTo(123)        }
+            make.width.lessThanOrEqualTo(120)
+        }
+
+        addToCartButton.snp.makeConstraints { make in
+            make.width.equalTo(220)
+        }
     }
 
     required init?(coder: NSCoder) {

@@ -129,23 +129,20 @@ class OrderDetailsView: UIView {
         }
 
         backButton.snp.makeConstraints { make in
-            //            make.top.equalToSuperview().offset(55)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
             make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
         headerLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-
-            //            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.bottom).offset(24)
+            make.top.equalTo(header.snp.bottom).offset(28)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(availablePointsToUseLabel.snp.top).offset(-20)
+            make.bottom.equalTo(availablePointsToUseLabel.snp.top).offset(-10)
         }
 
         availablePointsToUseLabel.snp.makeConstraints { make in

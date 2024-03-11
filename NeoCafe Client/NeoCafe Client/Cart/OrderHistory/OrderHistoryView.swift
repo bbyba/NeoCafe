@@ -97,17 +97,14 @@ class OrderHistoryView: UIView {
         }
 
         backButton.snp.makeConstraints { make in
-//            make.top.equalToSuperview().offset(55)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
             make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
         headerLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-
-//            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
         }
 
         collectionView.snp.makeConstraints { make in

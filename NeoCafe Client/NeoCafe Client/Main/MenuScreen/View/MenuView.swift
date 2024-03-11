@@ -12,14 +12,8 @@ enum MenuSection: String, CaseIterable {
     case productItem
 }
 
-class MenuView: UIView {
+class MenuView: UIView, BaseContentView {
     lazy var header = CustomHeaderView()
-//    lazy var header: UIView = {
-//        let view = UIView()
-//        view.layer.cornerRadius = 20
-//        view.backgroundColor = .blueCustom
-//        return view
-//    }()
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -54,9 +48,13 @@ class MenuView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func setProperties() {
+        backgroundColor = .white
     }
 
     func addSubviews() {
@@ -76,18 +74,19 @@ class MenuView: UIView {
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
         }
 
         headerDropDownButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-16)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(75)
             make.width.equalTo(10)
             make.height.equalTo(5)
         }
 
         searchBar.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.bottom).offset(-24)
+//            make.top.equalTo(header.snp.bottom).offset(-24)
+            make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }

@@ -5,38 +5,46 @@
 
 import UIKit
 
-class MenuViewController: UIViewController, UICollectionViewDelegate {
-    private lazy var menuView = MenuView()
-
-    var categories: [Categories] = [
-        Categories(name: "Кофе"),
-        Categories(name: "Десерты"),
-        Categories(name: "Выпечка"),
-        Categories(name: "Напитки"),
-        Categories(name: "Чай")
-    ]
-
-    var popularItems: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP4", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP5", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP6", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP7", price: 230)]
-
+class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
+    lazy var menuView = MenuView()
+    var selectedCategoryIndex = 1
 
     override func loadView() {
         view = menuView
     }
 
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        menuView.collectionView.dataSource = self
+//        menuView.collectionView.delegate = self
+//        self.navigationItem.hidesBackButton = true
+//        addTargets()
+//        let initialIndexPath = IndexPath(item: selectedCategoryIndex, section: Int(MenuSection.category.rawValue) ?? 0)
+//            menuView.collectionView.selectItem(at: initialIndexPath, animated: false, scrollPosition: [])
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         menuView.collectionView.dataSource = self
         menuView.collectionView.delegate = self
+        self.navigationItem.hidesBackButton = true
         addTargets()
-    }
 
+        if viewModel.categories.isEmpty {
+            viewModel.getCategories { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        self?.menuView.collectionView.reloadData()
+                    case .failure(let error):
+                        print("Error fetching categories: \(error)")
+                    }
+                }
+            }
+        } else {
+            self.menuView.collectionView.reloadData()
+        }
+    }
 
     private func addTargets() {
         //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
@@ -52,19 +60,17 @@ class MenuViewController: UIViewController, UICollectionViewDelegate {
 
 }
 
-extension MenuViewController: UICollectionViewDataSource {
+extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return MenuSection.allCases.count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch MenuSection.allCases[section] {
-            //        case .header:
-            //            return 0
         case .category:
-            return categories.count
+            return viewModel.categories.count
         case .productItem:
-            return popularItems.count
+            return viewModel.menuItems.count
         }
     }
 
@@ -74,15 +80,17 @@ extension MenuViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCategoryCell.identifier, for: indexPath) as? MenuCategoryCell else {
                 fatalError("Could not dequeue MenuCategoryCell")
             }
-            let category = categories[indexPath.row]
+            let category = viewModel.categories[indexPath.row]
             cell.configureData(name: category.name)
+            cell.isCategorySelected = (indexPath.row == selectedCategoryIndex)
             return cell
+
         case .productItem:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuProductCell.identifier, for: indexPath) as? MenuProductCell else {
                 fatalError("Could not dequeue MenuProductCell")
             }
-            let popularItem = popularItems[indexPath.row]
-            cell.configureData(imageName: popularItem.image, name: popularItem.name, price: popularItem.price)
+            let productItem = viewModel.menuItems[indexPath.row]
+            cell.configureData(id: productItem.id, name: productItem.name, description: productItem.description, itemImage: productItem.itemImage, pricePerUnit: productItem.pricePerUnit, branch: productItem.branch, category: productItem.category)
             return cell
         }
     }
@@ -101,5 +109,25 @@ extension MenuViewController: UICollectionViewDataSource {
             }
         }
         return header
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
+        switch MenuSection.allCases[indexPath.section] {
+        case .category:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? MenuCategoryCell else { return }
+            for visibleCell in collectionView.visibleCells {
+                if let categoryCell = visibleCell as? MenuCategoryCell {
+                    categoryCell.isCategorySelected = false
+                }
+            }
+            cell.isCategorySelected = true
+
+        case .productItem:
+            let menuItemSquare = viewModel.menuItems[indexPath.row]
+            let productDetailViewController = ProductViewController()
+            productDetailViewController.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(productDetailViewController, animated: true)
+        }
     }
 }

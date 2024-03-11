@@ -96,6 +96,8 @@ internal enum S {
   internal static let pleasantAddition = S.tr("Localizable", "pleasantAddition", fallback: "Приятное дополнение")
   /// Популярное
   internal static let popular = S.tr("Localizable", "popular", fallback: "Популярное")
+  /// Популярные блюда
+  internal static let popularMenu = S.tr("Localizable", "popularMenu", fallback: "Популярные блюда")
   /// Профиль
   internal static let profile = S.tr("Localizable", "profile", fallback: "Профиль")
   /// Зарегистрироваться
@@ -104,8 +106,10 @@ internal enum S {
   internal static let registration = S.tr("Localizable", "registration", fallback: "Регистрация")
   /// Повторить
   internal static let reload = S.tr("Localizable", "reload", fallback: "Повторить")
+  /// Отправить ещё раз
+  internal static let resend = S.tr("Localizable", "resend", fallback: "Отправить ещё раз")
   /// Отправить ещё раз через
-  internal static let resend = S.tr("Localizable", "resend", fallback: "Отправить ещё раз через")
+  internal static let resendAfter = S.tr("Localizable", "resendAfter", fallback: "Отправить ещё раз через")
   /// Сохранить
   internal static let save = S.tr("Localizable", "save", fallback: "Сохранить")
   /// График работы: 

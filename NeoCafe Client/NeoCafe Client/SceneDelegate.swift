@@ -39,16 +39,39 @@ import UIKit
 //    }
 //}
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowScene)
-        window.windowScene = windowScene
-//        window.rootViewController = TabBarViewController()
-        window.rootViewController = EditProfileViewController()
 
-        window.makeKeyAndVisible()
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+    var window: UIWindow?
+    var applicationCoordinator: TabBarCoordinator?
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else { return }
+        let window = UIWindow(windowScene: windowScene)
         self.window = window
+        let router = RouterImpl(navigationController: UINavigationController())
+        let applicationCoordinator = TabBarCoordinator(router: router)
+        self.applicationCoordinator = applicationCoordinator
+        applicationCoordinator.start()
+        window.rootViewController = applicationCoordinator.toPresent
+        window.makeKeyAndVisible()
     }
+
+
+
+
+
+
+//class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+//    var window: UIWindow?
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        let window = UIWindow(windowScene: windowScene)
+//        window.windowScene = windowScene
+//        window.rootViewController = TabBarViewController()
+////        window.rootViewController = MenuViewController()
+//
+//        window.makeKeyAndVisible()
+//        self.window = window
+//    }
 }

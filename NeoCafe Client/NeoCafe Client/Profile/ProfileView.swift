@@ -13,7 +13,7 @@ class ProfileView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.profile
-        label.font = .poppins(ofSize: 24, weight: .semibold)
+        label.font = .poppins(ofSize: 28, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
@@ -77,7 +77,7 @@ class ProfileView: UIView {
 
     lazy var bonusPointsStack: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 11
+        stackView.spacing = 8
         stackView.axis = .vertical
         return stackView
     }()
@@ -156,7 +156,7 @@ class ProfileView: UIView {
         }
 
         bonusPointsStack.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview().inset(14)
             make.leading.equalToSuperview().inset(23)
         }
 

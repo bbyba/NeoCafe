@@ -14,7 +14,7 @@ enum Section: String, CaseIterable {
 
 }
 
-class MainView: UIView {
+class MainView: UIView, BaseContentView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -29,6 +29,14 @@ class MainView: UIView {
     lazy var notificationButton: UIButton = {
         let button = UIButton()
         button.setImage(Asset.Buttons.notification.image, for: .normal)
+        return button
+    }()
+
+    lazy var goToMenuButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .poppins(ofSize: 16, weight: .regular)
+        button.setTitle(S.toMenu, for: .normal)
+        button.setTitleColor(.orangeCustom, for: .normal)
         return button
     }()
 
@@ -50,9 +58,13 @@ class MainView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func setProperties() {
+        backgroundColor = .white
     }
 
     func addSubviews() {
@@ -61,6 +73,7 @@ class MainView: UIView {
         header.addSubview(notificationButton)
         addSubview(searchBar)
         addSubview(collectionView)
+        addSubview(goToMenuButton)
     }
 
 
