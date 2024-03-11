@@ -17,12 +17,6 @@ class BranchesView: UIView {
         return label
     }()
 
-    lazy var orderHistoryButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
-        return button
-    }()
-
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(BranchesModalCell.self, forCellWithReuseIdentifier: BranchesModalCell.identifier)
@@ -43,7 +37,6 @@ class BranchesView: UIView {
     func addSubviews() {
         addSubview(header)
         header.addSubview(headerLabel)
-        header.addSubview(orderHistoryButton)
         addSubview(collectionView)
     }
 
@@ -56,12 +49,6 @@ class BranchesView: UIView {
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(55)
-        }
-
-        orderHistoryButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
-            make.trailing.equalToSuperview().inset(40)
-            make.height.width.equalTo(40)
         }
 
         collectionView.snp.makeConstraints { make in

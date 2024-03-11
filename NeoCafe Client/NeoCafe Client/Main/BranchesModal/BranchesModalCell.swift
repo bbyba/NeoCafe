@@ -2,6 +2,7 @@
 //  BranchesModalCell.swift
 //  NeoCafe Client
 //
+
 import UIKit
 
 class BranchesModalCell: UICollectionViewCell {
@@ -9,20 +10,66 @@ class BranchesModalCell: UICollectionViewCell {
 
     lazy var image: UIImageView = {
         let image = UIImageView()
-//        image.image = UIImage(named: Asset.branchesModal.name)
+        //        image.image = UIImage(named: Asset.branchesModal.name)
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 12
         image.layer.masksToBounds = true
         return image
     }()
 
-    lazy var titleLabel = {
+    lazy var branchScheduleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .poppins(ofSize: 14, weight: .regular)
+        label.text = "Сегодня с 11:00 до 22:00"
+        label.textAlignment = .center
+        label.textColor = .darkBlueCustom
+        label.numberOfLines = 1
+        label.backgroundColor = .white
+        label.layer.cornerRadius = 8    //14
+        label.layer.masksToBounds = true
+        return label
+    }()
+
+
+    lazy var branchNameLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.text = "NeoCafe Dzerzhinka"
         return label
     }()
+
+    lazy var addressLabel = {
+        let label = UILabel()
+        label.text = "бульвар Эркиндик, 35"
+        label.textColor = .darkBlueCustom
+        label.font = .poppins(ofSize: 16, weight: .regular)
+        return label
+    }()
+
+    lazy var phoneLabel = {
+        let label = UILabel()
+        label.text = "0555 778 887"
+        label.textColor = .darkBlueCustom
+        label.font = .poppins(ofSize: 16, weight: .regular)
+        return label
+    }()
+
+    lazy var addressIcon: UIImageView = {
+        let image = UIImageView(image: Asset.Buttons.location.image.withRenderingMode(.alwaysTemplate))
+        image.tintColor = .orangeCustom
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
+    lazy var phoneIcon: UIImageView = {
+        let image = UIImageView(image: Asset.Buttons.phoneIcon.image.withRenderingMode(.alwaysTemplate))
+        image.tintColor = .orangeCustom
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,7 +83,12 @@ class BranchesModalCell: UICollectionViewCell {
 
     private func addSubviews() {
         contentView.addSubview(image)
-        contentView.addSubview(titleLabel)
+        contentView.addSubview(branchScheduleLabel)
+        contentView.addSubview(branchNameLabel)
+        contentView.addSubview(addressIcon)
+        contentView.addSubview(addressLabel)
+        contentView.addSubview(phoneIcon)
+        contentView.addSubview(phoneLabel)
     }
 
     func setupConstraints() {
@@ -45,10 +97,42 @@ class BranchesModalCell: UICollectionViewCell {
             make.height.equalTo(100)
         }
 
-        titleLabel.snp.makeConstraints { make in
+        branchScheduleLabel.snp.makeConstraints { make in
+            make.top.leading.equalTo(contentView).offset(24)
+            make.height.equalTo(26)
+            make.width.equalTo(177)
+        }
+
+        branchNameLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(18)
             make.leading.equalToSuperview().offset(12)
         }
+
+        addressIcon.snp.makeConstraints { make in
+            make.top.equalTo(branchNameLabel.snp.bottom).offset(10)
+            make.leading.equalTo(contentView).offset(16)
+            make.height.equalTo(17)
+            make.width.equalTo(14)
+        }
+
+        addressLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(addressIcon.snp.centerY)
+            make.leading.equalTo(addressIcon.snp.trailing).offset(8)
+            //            make.bottom.equalTo(addressIcon.snp.bottom).offset(4)
+        }
+
+        phoneIcon.snp.makeConstraints { make in
+            make.top.equalTo(addressIcon.snp.bottom).offset(10)
+            make.leading.equalTo(contentView).offset(16)
+            make.height.equalTo(16)
+            make.width.equalTo(16)
+        }
+
+        phoneLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(phoneIcon.snp.centerY)
+            make.leading.equalTo(phoneIcon.snp.trailing).offset(8)
+        }
+
     }
 
     private func setupShadow() {
@@ -61,7 +145,7 @@ class BranchesModalCell: UICollectionViewCell {
 
     func configureData(name: String, imageName: String) {
         image.image = UIImage(named: imageName)
-        titleLabel.text = name
+        branchNameLabel.text = name
     }
 
     required init?(coder: NSCoder) {

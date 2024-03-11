@@ -9,6 +9,21 @@ import SwiftUI
 
 class BranchesModalView: UIView {
 
+    lazy var blurredBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.6
+        return view
+    }()
+
+    lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 16
+        return view
+    }()
+
+
     lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
@@ -39,7 +54,6 @@ class BranchesModalView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
         addSubviews()
         setConstraints()
     }
@@ -53,7 +67,7 @@ class BranchesModalView: UIView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(176))
+            heightDimension: .fractionalHeight(0.32))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -64,12 +78,23 @@ class BranchesModalView: UIView {
     }
 
     func addSubviews() {
-        addSubview(closeButton)
-        addSubview(headerLabel)
-        addSubview(collectionView)
+        addSubview(blurredBackgroundView)
+        addSubview(contentView)
+        contentView.addSubview(closeButton)
+        contentView.addSubview(headerLabel)
+        contentView.addSubview(collectionView)
     }
 
     func setConstraints() {
+        blurredBackgroundView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(40)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
         closeButton.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
             make.width.equalTo(56)
@@ -77,14 +102,13 @@ class BranchesModalView: UIView {
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalTo(closeButton.snp.bottom)
             make.centerX.equalToSuperview()
         }
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(headerLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 

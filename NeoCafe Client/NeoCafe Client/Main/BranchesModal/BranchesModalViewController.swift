@@ -28,14 +28,15 @@ class BranchesModalViewController: UIViewController{
         super.viewDidLoad()
         branchesModalView.collectionView.dataSource = self
         branchesModalView.collectionView.delegate = self
-        addTargets()
+        setTargets()
     }
 
-    private func addTargets() {
+    private func setTargets() {
         branchesModalView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
 
     @objc func closeButtonTapped(_ sender: UIButton) {
+        print("branch modal: closeButtonTapped")
         dismiss(animated: true, completion: nil)
     }
 }
