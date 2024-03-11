@@ -60,7 +60,7 @@ class MenuView: UIView, BaseContentView {
     func addSubviews() {
         addSubview(header)
         header.addSubview(headerLabel)
-        header.addSubview(headerDropDownButton)
+        addSubview(headerDropDownButton)
         addSubview(searchBar)
         addSubview(collectionView)
     }
@@ -78,10 +78,10 @@ class MenuView: UIView, BaseContentView {
         }
 
         headerDropDownButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-16)
-            make.top.equalToSuperview().offset(75)
-            make.width.equalTo(10)
-            make.height.equalTo(5)
+            make.trailing.equalToSuperview().offset(-40)
+            make.top.equalToSuperview().offset(95)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
         }
 
         searchBar.snp.makeConstraints { make in

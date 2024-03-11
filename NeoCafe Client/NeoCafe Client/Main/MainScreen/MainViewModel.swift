@@ -10,30 +10,23 @@ protocol MainViewModelProtocol {
     var onNotificationsNavigate: EmptyCompletion? { get set }
     var onSearchNavigate: EmptyCompletion? { get set }
     var onMenuNavigate: EmptyCompletion? { get set }
-
     var categories: [CategoryModel]  { get }
-
-//    func getCategories(_: CategoryModel, completion: @escaping (Result<Void, Error>) -> Void)
     func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
 }
 
 
 class MainViewModel: NSObject, MainViewModelProtocol {
     var onNotificationsNavigate: EmptyCompletion?
-
     var onSearchNavigate: EmptyCompletion?
-
     var onMenuNavigate: EmptyCompletion?
-
     var categories: [CategoryModel] = []
-
     let provider: MoyaProvider<UserAPI>
 
     override init() {
-            self.provider = MoyaProvider<UserAPI>()
-            self.categories = []
-        }
-
+        self.provider = MoyaProvider<UserAPI>()
+        self.categories = []
+    }
+    
     func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void) {
         provider.request(.getCategories) { result in
             switch result {

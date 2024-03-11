@@ -12,7 +12,7 @@ enum UserAPI {
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
 //    case getCategories(id: Int, email: String, image: String)
     case getCategories
-    case getAllMenuItems
+    case getAllCategories
     case getProductDetails(productId: Int)
 }
 
@@ -33,7 +33,7 @@ extension UserAPI: TargetType {
             return "/customer/login/"
         case .getCategories:
             return "/menu/category/all/"
-        case .getAllMenuItems:
+        case .getAllCategories:
             return "/menu/item/all/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
@@ -48,7 +48,7 @@ extension UserAPI: TargetType {
             case .registerUser(_, _),
                  .loginUser(_, _):
                 return .post
-        case .getCategories, .getAllMenuItems, .getProductDetails:
+        case .getCategories, .getAllCategories, .getProductDetails:
             return .get
         }
     }
@@ -61,7 +61,7 @@ extension UserAPI: TargetType {
         case .registerUser(let email, let confirmationCode),
              .loginUser(let email, let confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
-        case .getCategories, .getAllMenuItems, .getProductDetails:
+        case .getCategories, .getAllCategories, .getProductDetails:
             return .requestPlain
         }
     }

@@ -8,7 +8,6 @@ import SnapKit
 import SwiftUI
 
 enum Section: String, CaseIterable {
-//    case header = ""
     case category = "Наше меню"
     case popular = "Популярное"
 
@@ -37,6 +36,7 @@ class MainView: UIView, BaseContentView {
         button.titleLabel?.font = .poppins(ofSize: 16, weight: .regular)
         button.setTitle(S.toMenu, for: .normal)
         button.setTitleColor(.orangeCustom, for: .normal)
+        button.isUserInteractionEnabled = true
         return button
     }()
 
@@ -60,6 +60,7 @@ class MainView: UIView, BaseContentView {
         super.init(frame: frame)
         setProperties()
         addSubviews()
+        header.isUserInteractionEnabled = true
         setupConstraints()
     }
 
@@ -70,7 +71,7 @@ class MainView: UIView, BaseContentView {
     func addSubviews() {
         addSubview(header)
         header.addSubview(headerLabel)
-        header.addSubview(notificationButton)
+        addSubview(notificationButton)
         addSubview(searchBar)
         addSubview(collectionView)
         addSubview(goToMenuButton)
@@ -85,11 +86,12 @@ class MainView: UIView, BaseContentView {
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
+            make.trailing.equalTo(notificationButton.snp.leading).offset(-20)
         }
 
         notificationButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }

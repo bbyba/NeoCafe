@@ -108,13 +108,13 @@ class MenuProductCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(id: Int,
+    func configureData(id: Int?,
                        name: String,
-                       description: String,
+                       description: String?,
                        itemImage: String,
                        pricePerUnit: Int,
-                       branch: Int,
-                       category: CategoryModel) {
+                       branch: Int?,
+                       category: CategoryModel?) {
         image.image = UIImage(named: itemImage)
         titleLabel.text = name
         priceLabel.text = String(pricePerUnit)

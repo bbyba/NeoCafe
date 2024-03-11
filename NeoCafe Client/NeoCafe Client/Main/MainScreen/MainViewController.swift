@@ -6,8 +6,8 @@
 import UIKit
 import SwiftUI
 
-class MainViewController: BaseViewController<MainViewModel, MainView> {
-    private lazy var mainView = MainView()
+class MainViewController: BaseViewController<MainViewModel, MainView>, UICollectionViewDelegate {
+    var loadingIndicator: UIActivityIndicatorView?
 
     var popularItems: [PopularItem] = [
         PopularItem(name: "POP1", image: Asset.Menu.coffee.name),
@@ -15,32 +15,57 @@ class MainViewController: BaseViewController<MainViewModel, MainView> {
         PopularItem(name: "POP3", image: Asset.Menu.bakery.name),
         PopularItem(name: "POP4", image: Asset.Menu.drink.name)]
 
-    override func loadView() {
-        view = mainView
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if loadingIndicator == nil {
+            let indicator = UIActivityIndicatorView(style: .large)
+            contentView.addSubview(indicator)
+            indicator.center = contentView.center
+            loadingIndicator = indicator
+        }
+
+        loadingIndicator?.startAnimating()
+        contentView.collectionView.isHidden = true
+        getCategories()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addTargets()
-        mainView.collectionView.dataSource = self
+    override func setTargets() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
 
+        contentView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
+    }
+
+//    func getCategories() {
+//        viewModel.getCategories { [weak self] result in
+//            switch result {
+//            case .success(_):
+//                DispatchQueue.main.async {
+//                    self?.contentView.collectionView.reloadData()
+//                }
+//            case .failure(let error):
+//                print("Error fetching categories: \(error)")
+//            }
+//        }
+//    }
+
+    func getCategories() {
         viewModel.getCategories { [weak self] result in
-            switch result {
-            case .success(_):
-                DispatchQueue.main.async {
-                    self?.mainView.collectionView.reloadData()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.loadingIndicator?.stopAnimating()
+                    self?.contentView.collectionView.isHidden = false
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    self?.loadingIndicator?.stopAnimating()
+                    print("Error fetching categories: \(error)")
                 }
-            case .failure(let error):
-                print("Error fetching categories: \(error)")
             }
         }
     }
 
-
-    private func addTargets() {
-        mainView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
-//        mainView.goToMenuButton.addTarget(self, action: #selector(goToMenuTapped), for: .touchUpInside)
-    }
 
     @objc func notificationsButtonTapped() {
         print("notificationsButtonTapped")
