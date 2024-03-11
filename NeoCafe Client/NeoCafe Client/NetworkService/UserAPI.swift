@@ -10,6 +10,8 @@ enum UserAPI {
     case loginUser(email: String, confirmationCode: String)    // Authenticate customer after providing email and confirmation code.
     case checkEmailRegister(email: String)  // Check if customer's email is in the database and send a verification code.
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
+//    case getCategories(id: Int, email: String, image: String)
+    case getCategories
 }
 
 extension UserAPI: TargetType {
@@ -27,6 +29,8 @@ extension UserAPI: TargetType {
             return "/customer/register/"
         case .loginUser(_, _):
             return "/customer/login/"
+        case .getCategories:
+            return "/menu/category/all/"
         }
     }
     
@@ -38,7 +42,9 @@ extension UserAPI: TargetType {
             case .registerUser(_, _),
                  .loginUser(_, _):
                 return .post
-            }
+        case .getCategories:
+            return .get
+        }
     }
 
     var task: Task {
@@ -49,6 +55,8 @@ extension UserAPI: TargetType {
         case .registerUser(let email, let confirmationCode),
              .loginUser(let email, let confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
+        case .getCategories:
+            return .requestPlain
         }
     }
 

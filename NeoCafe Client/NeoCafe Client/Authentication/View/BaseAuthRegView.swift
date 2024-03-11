@@ -54,6 +54,41 @@ class BaseAuthRegView: UIView {
         return label
     }()
 
+//    lazy var resendButton: UIButton = {
+//        let button = UIButton()
+//        let attributes: [NSAttributedString.Key: Any] = [
+//            .font: UIFont.poppins(ofSize: 16, weight: .semibold),
+//            .foregroundColor: UIColor.orangeCustom,
+//            .underlineStyle: NSUnderlineStyle.single.rawValue
+//        ]
+//        let attributedTitle = NSAttributedString(string: S.resend, attributes: attributes)
+//        button.setAttributedTitle(attributedTitle, for: .normal)
+//        return button
+//    }()
+
+    lazy var resendButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(S.resendAfter, for: .normal)
+        button.setTitleColor(.darkGreyCustom, for: .normal)
+        button.titleLabel?.font = .poppins(ofSize: 16, weight: .semibold)
+        return button
+    }()
+
+    lazy var timeCounter = {
+        let label = UILabel()
+        label.text = ""
+        label.font =  .poppins(ofSize: 14, weight: .bold)
+        label.textColor = .darkGreyCustom
+        return label
+    }()
+
+    lazy var resendButtonStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 2
+        return stack
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .whiteCustom
@@ -69,6 +104,9 @@ class BaseAuthRegView: UIView {
         textFieldStackView.addArrangedSubview(wrongEmailErrorLabel)
         textFieldStackView.addArrangedSubview(signInView)
         addSubview(getCodebutton)
+        addSubview(resendButtonStack)
+        resendButtonStack.addArrangedSubview(resendButton)
+        resendButtonStack.addArrangedSubview(timeCounter)
     }
 
     func setupConstraints() {
@@ -101,6 +139,13 @@ class BaseAuthRegView: UIView {
             make.height.equalTo(48)
             make.leading.trailing.equalToSuperview().inset(16)
         }
+
+        resendButtonStack.snp.makeConstraints { make in
+            make.top.equalTo(getCodebutton.snp.bottom).offset(16)
+            make.centerX.equalToSuperview().offset(-5)
+        }
+
+        resendButtonStack.isHidden = true
     }
 
     // MARK: - Switch between registration and authorization
@@ -118,9 +163,11 @@ class BaseAuthRegView: UIView {
         case 1:
             textFieldStackView.addArrangedSubview(registrationView)
             headerLabel.text = S.registration
+            resendButtonStack.isHidden = true
         default:
             textFieldStackView.addArrangedSubview(signInView)
             headerLabel.text = S.entry
+            resendButtonStack.isHidden = true
         }
 
         textFieldStackView.insertArrangedSubview(wrongEmailErrorLabel, at: 0)
@@ -135,6 +182,28 @@ class BaseAuthRegView: UIView {
 
         textFieldStackView.addArrangedSubview(codeConfirmationView)
         headerLabel.text = S.verificationCode
+        resendButtonStack.isHidden = false
+    }
+
+    func updateResendButtonAttributedTitle() {
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.poppins(ofSize: 16, weight: .semibold),
+            .foregroundColor: UIColor.orangeCustom,
+            .underlineStyle: NSUnderlineStyle.single.rawValue
+        ]
+        let attributedTitle = NSAttributedString(string: S.resend, attributes: attributes)
+        resendButton.setAttributedTitle(attributedTitle, for: .normal)
+    }
+
+    func resetResendButton() {
+        resendButton.setTitle(S.resend, for: .normal)
+        resendButton.setTitleColor(UIColor.darkGreyCustom, for: .normal)
+        resendButton.isEnabled = true
+        timeCounter.isHidden = true
+        timeCounter.text = ""
+
+        // Remove attributed title if it was set during error state
+//        baseAuthRegView.resendButton.setAttributedTitle(nil, for: .normal)
     }
 
     required init?(coder: NSCoder) {

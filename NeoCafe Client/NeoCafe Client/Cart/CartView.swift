@@ -116,7 +116,7 @@ class CartView: UIView {
 
         orderHistoryButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(55)
-            make.leading.equalTo(headerLabel.snp.trailing).offset(30)
+            make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }
 

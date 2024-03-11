@@ -10,11 +10,11 @@ final class InitializationCoordinator: BaseCoordinator {
     var onLoginNavigate: EmptyCompletion?
 
     lazy var startController: UIViewController = {
-        let vm = SplashViewModelImpl()
-        vm.onLoginNavigate = onLoginNavigate
-        let vc = SplashViewController(viewModel: vm)
-        router.setRootModule(vc, hideBar: true)
-        return vc
+        let viewModel = SplashViewModelImpl()
+        viewModel.onLoginNavigate = onLoginNavigate
+        let viewController = SplashViewController(viewModel: viewModel)
+        router.setRootModule(viewController, hideBar: true)
+        return viewController
     }()
 
     override var toPresent: UIViewController {

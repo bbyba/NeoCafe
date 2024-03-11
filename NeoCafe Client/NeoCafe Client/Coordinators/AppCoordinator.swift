@@ -44,7 +44,7 @@ final class ApplicationCoordinator: BaseCoordinator {
     
     func performLoginFlow() {
         let coordinator = AuthenticationCoordinator(router: router)
-        coordinator.onComplete = { [weak self, weak coordinator] in
+        coordinator.onMainNavigate = { [weak self, weak coordinator] in
             self?.removeChild(coordinator)
             self?.performMainFlow()
         }
@@ -54,14 +54,14 @@ final class ApplicationCoordinator: BaseCoordinator {
     }
 
     func performMainFlow() {
-        //        let coordinator = TabBarCoordinator(router: router)
-        //        coordinator.onComplete = { [weak self, weak coordinator] in
-        //            self?.removeChild(coordinator)
-        //            self?.performInitializationFlow()
-        //        }
-        //        addChild(coordinator)
-        //        coordinator.start()
-        //        router.setRootModule(coordinator, hideBar: true)
+        let coordinator = TabBarCoordinator(router: router)
+        coordinator.onComplete = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+//            self?.performInitializationFlow()
+        }
+        addChild(coordinator)
+        coordinator.start()
+        router.setRootModule(coordinator, hideBar: true)
     }
 
     private func setupColors() {

@@ -2,7 +2,7 @@ import UIKit
 
 public protocol ContentViewSetupable: UIView {
     func addSubviews()
-    func setConstraints()
+    func setupConstraints()
 }
 
 public protocol BaseContentView: ContentViewSetupable {

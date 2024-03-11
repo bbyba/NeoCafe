@@ -10,20 +10,13 @@ final class AuthenticationCoordinator: BaseCoordinator {
 
     var onMainNavigate: EmptyCompletion?
 
-//    lazy var startController: UIViewController = {
-//        let vm = AuthViewModelImpl()
-//        vm.onMainNavigate = onMainNavigate
-//        let vc = AuthenticationViewController(viewModel: vm)
-//        router.setRootModule(vc, hideBar: true)
-//        return vc
-//    }()
     lazy var startController: UIViewController = {
         let provider = MoyaProvider<UserAPI>()
-        let vm = AuthViewModelImpl(provider: provider)
-        vm.onMainNavigate = onMainNavigate
-        let vc = AuthenticationViewController()
-        router.setRootModule(vc, hideBar: true)
-        return vc
+        let viewModel = AuthViewModelImpl(provider: provider)
+        viewModel.onMainNavigate = onMainNavigate
+        let viewController = AuthenticationViewController()
+        router.setRootModule(viewController, hideBar: true)
+        return viewController
     }()
 
 

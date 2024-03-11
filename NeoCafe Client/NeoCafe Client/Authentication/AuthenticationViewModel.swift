@@ -25,15 +25,15 @@ protocol AuthViewModelProtocol {
 class AuthViewModelImpl: AuthViewModelProtocol {
     var onMainNavigate: EmptyCompletion?
     let provider: MoyaProvider<UserAPI>
-//    var currentState: ViewState = .signIn
+    //    var currentState: ViewState = .signIn
     var currentState: ViewState = .signIn {
-            didSet {
-                if currentState == .codeConfirmation {
-                    previousState = oldValue
-                }
-                self.updateViewState?(currentState)
+        didSet {
+            if currentState == .codeConfirmation {
+                previousState = oldValue
             }
+            self.updateViewState?(currentState)
         }
+    }
     var previousState: ViewState?
     var storedEmail: String?
     var updateViewState: ((ViewState) -> Void)?
@@ -44,13 +44,13 @@ class AuthViewModelImpl: AuthViewModelProtocol {
     }
 
     func changeViewState(to newState: ViewState) {
-            self.currentState = newState
-        }
+        self.currentState = newState
+    }
 
 
     func storeEmail(email: String) {
-            storedEmail = email
-        }
+        storedEmail = email
+    }
 
     func validateEmail(email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -74,59 +74,29 @@ class AuthViewModelImpl: AuthViewModelProtocol {
     }
 
     func authenticateUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void) {
-            guard currentState == .codeConfirmation, let prevState = previousState else {
-                completion(.failure(NSError(domain: "neocafe.client", code: 0, userInfo: [NSLocalizedDescriptionKey: "Authentication can only be done in codeConfirmation state with a valid previous state."])))
-                return
-            }
-
-            let action: UserAPI = prevState == .signIn ? .loginUser(email: email, confirmationCode: confirmationCode) : .registerUser(email: email, confirmationCode: confirmationCode)
-            provider.request(action) { result in
-                self.handleResult(result, completion: completion)
-            }
+        guard currentState == .codeConfirmation, let prevState = previousState else {
+            completion(.failure(NSError(domain: "neocafe.client", code: 0, userInfo: [NSLocalizedDescriptionKey: "Authentication can only be done in codeConfirmation state with a valid previous state."])))
+            return
         }
 
-
-        private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
-            switch result {
-            case .success(let response):
-                if (200...299).contains(response.statusCode) {
-                    completion(.success(()))
-                } else {
-                    let errorResponse = NSError(domain: "neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
-                    completion(.failure(errorResponse))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        let action: UserAPI = prevState == .signIn ? .loginUser(email: email, confirmationCode: confirmationCode) : .registerUser(email: email, confirmationCode: confirmationCode)
+        provider.request(action) { result in
+            self.handleResult(result, completion: completion)
         }
+    }
 
-//    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
-//        switch result {
-//        case .success(let response):
-//            if (200...299).contains(response.statusCode) {
-//                print("Request succeeded with status code: \(response.statusCode)")
-//                if let responseString = String(data: response.data, encoding: .utf8) {
-//                    print("Response data: \(responseString)")
-//                }
-//                completion(.success(()))
-//            } else {
-//                print("Request completed with error status code: \(response.statusCode)")
-//                if let responseString = String(data: response.data, encoding: .utf8) {
-//                    print("Error response data: \(responseString)")
-//                }
-//                let errorResponse = NSError(domain: "com.neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
-//                completion(.failure(errorResponse))
-//            }
-//
-//        case .failure(let error):
-//            print("Networking request failed with error: \(error.localizedDescription)")
-//            if let response = error.response {
-//                print("Error status code: \(response.statusCode)")
-//                if let errorResponseString = String(data: response.data, encoding: .utf8) {
-//                    print("Error response data: \(errorResponseString)")
-//                }
-//            }
-//            completion(.failure(error))
-//        }
-//    }
+
+    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
+        switch result {
+        case .success(let response):
+            if (200...299).contains(response.statusCode) {
+                completion(.success(()))
+            } else {
+                let errorResponse = NSError(domain: "neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
+                completion(.failure(errorResponse))
+            }
+        case .failure(let error):
+            completion(.failure(error))
+        }
+    }
 }
