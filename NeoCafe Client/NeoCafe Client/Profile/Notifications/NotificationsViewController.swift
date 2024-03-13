@@ -12,7 +12,7 @@ struct NotificationModel {
 }
 
 class NotificationsViewController: BaseViewController<NotificationsViewModel, NotificationView>{
-    var suggestions: [NotificationModel] = [
+    var notificationsList: [NotificationModel] = [
         NotificationModel(status: "Ваш заказ готов", details: "Капучино x1, Американо x2, Багровай заКапучино x1, Американо x2, Багровай за...", time: "19:02"),
         NotificationModel(status: "Вы закрыли счёт", details: "Капучино x1, Американо x2, Багровай заКапучино x1, Американо x2, Багровай за...", time: "19:02"),
         NotificationModel(status: "Ваш заказ оформлен", details: "Капучино x1, Американо x2, Багровай заКапучино x1, Американо x2, Багровай за...", time: "19:02")]
@@ -21,10 +21,17 @@ class NotificationsViewController: BaseViewController<NotificationsViewModel, No
         contentView.collectionView.delegate = self
         contentView.collectionView.dataSource = self
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.clearAllButton.addTarget(self, action: #selector(clearAllButtonTapped), for: .touchUpInside)
     }
 
     @objc func backButtonTapped() {
         viewModel.onBackNavigate?()
+    }
+
+    @objc func clearAllButtonTapped() {
+        print("Notifications: clearAllButtonTapped")
+        notificationsList.removeAll()
+        contentView.collectionView.reloadData()
     }
 }
 
@@ -34,7 +41,7 @@ extension NotificationsViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return suggestions.count
+        return notificationsList.count
     }
 
 
@@ -42,7 +49,7 @@ extension NotificationsViewController: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotificationsCell.identifier, for: indexPath) as? NotificationsCell else {
                 fatalError("Could not dequeue NotificationsCell")
             }
-        let category = suggestions[indexPath.row]
+        let category = notificationsList[indexPath.row]
         cell.configureData(status: category.status, details: category.details, time: category.time)
         return cell
         }

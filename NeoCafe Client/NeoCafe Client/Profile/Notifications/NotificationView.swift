@@ -95,7 +95,7 @@ class NotificationView: UIView, BaseContentView {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(clearAllButton.snp.bottom).offset(12)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-20)
         }
     }

@@ -3,9 +3,10 @@
 //  NeoCafe Client
 //
 
+import SwiftUI
 import UIKit
 
-class BranchesView: UIView {
+class BranchesView: UIView, BaseContentView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -29,9 +30,13 @@ class BranchesView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func setProperties() {
+        backgroundColor = .white
     }
 
     func addSubviews() {

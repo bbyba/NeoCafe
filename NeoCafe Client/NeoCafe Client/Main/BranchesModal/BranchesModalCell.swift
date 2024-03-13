@@ -143,9 +143,10 @@ class BranchesModalCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(name: String, imageName: String) {
-        image.image = UIImage(named: imageName)
+    func configureData(name: String, address: String) {
+//        image.image = UIImage(named: imageName)
         branchNameLabel.text = name
+        addressLabel.text = address
     }
 
     required init?(coder: NSCoder) {

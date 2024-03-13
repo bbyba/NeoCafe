@@ -27,11 +27,20 @@ class CartView: UIView {
         return button
     }()
 
-    lazy var segmentedControl: CustomSegmentedControl = {
-        let segmentedControl = CustomSegmentedControl(items: [S.toGo, S.eatHere])
-        segmentedControl.contentMode = .scaleToFill
-        segmentedControl.selectedSegmentIndex = 0
-        return segmentedControl
+    lazy var nameFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orangeCustom
+        view.layer.cornerRadius = 24
+        return view
+    }()
+
+    lazy var takeOutLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.toGoShort
+        label.font = .poppins(ofSize: 20, weight: .bold)
+        label.textColor = .whiteCustom
+        label.textAlignment = .center
+        return label
     }()
 
     lazy var collectionView: UICollectionView = {
@@ -92,10 +101,10 @@ class CartView: UIView {
         addSubview(header)
         header.addSubview(headerLabel)
         header.addSubview(orderHistoryButton)
-        addSubview(segmentedControl)
+        addSubview(nameFieldView)
+        nameFieldView.addSubview(takeOutLabel)
         addSubview(collectionView)
         addSubview(addMoreButton)
-
         addSubview(totalPriceLabel)
         totalPriceLabel.addArrangedSubview(totalLabel)
         totalPriceLabel.addArrangedSubview(priceLabel)
@@ -111,23 +120,27 @@ class CartView: UIView {
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
         }
 
         orderHistoryButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }
 
-        segmentedControl.snp.makeConstraints { make in
+        nameFieldView.snp.makeConstraints { make in
             make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
 
+        takeOutLabel.snp.makeConstraints { make in
+            make.centerY.centerX.equalToSuperview()
+        }
+
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(40)
+            make.top.equalTo(nameFieldView.snp.bottom).offset(40)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(addMoreButton.snp.top).offset(-20)
         }

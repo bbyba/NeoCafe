@@ -8,8 +8,8 @@
 import UIKit
 
 class CustomTextField: UITextField {
-    var iconName: UIImage
-    var customPlaceholder: String
+    var iconName: UIImage?
+    var customPlaceholder: String?
 
     let iconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,12 +18,12 @@ class CustomTextField: UITextField {
         return imageView
     }()
 
-    init(iconName: UIImage, customPlaceholder: String) {
-        self.iconName = iconName
-        self.customPlaceholder = customPlaceholder
-        super.init(frame: .zero)
-        setupTextField()
-    }
+    init(iconName: UIImage?, customPlaceholder: String) {
+            self.iconName = iconName
+            self.customPlaceholder = customPlaceholder
+            super.init(frame: .zero)
+            setupTextField()
+        }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,12 +48,20 @@ class CustomTextField: UITextField {
         backgroundColor = .greyCustom
         textColor = .darkBlueCustom
         font = .sFProDisplayFont(ofSize: 16)
-        attributedPlaceholder = NSAttributedString(string: customPlaceholder, attributes: [NSAttributedString.Key.font: font])
+        attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "", attributes: [NSAttributedString.Key.font: font])
         layer.cornerRadius = 18
+        iconImageView.isHidden = iconName == nil
         iconImageView.image = iconName
-        let leftViewContainer = UIView()
-        leftViewContainer.addSubview(iconImageView)
-        leftView = leftViewContainer
-        leftViewMode = .always
+
+        if let iconName = iconName {
+            let leftViewContainer = UIView()
+            leftViewContainer.addSubview(iconImageView)
+            leftView = leftViewContainer
+            leftViewMode = .always
+        } else {
+            leftView = nil
+            leftViewMode = .never
+        }
     }
+
 }

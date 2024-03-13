@@ -6,14 +6,21 @@ import Foundation
 import Moya
 
 enum UserAPI {
+    // Auth
     case registerUser(email: String, confirmationCode: String) // Register customer by adding to the database after providing email and confirmation code.
     case loginUser(email: String, confirmationCode: String)    // Authenticate customer after providing email and confirmation code.
     case checkEmailRegister(email: String)  // Check if customer's email is in the database and send a verification code.
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
+
+    // Main
 //    case getCategories(id: Int, email: String, image: String)
     case getCategories
     case getAllCategories
     case getProductDetails(productId: Int)
+
+
+    // Branch
+    case getBranches
 }
 
 extension UserAPI: TargetType {
@@ -37,6 +44,8 @@ extension UserAPI: TargetType {
             return "/menu/item/all/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
+        case .getBranches:
+            return "/branch/all/"
         }
     }
     
@@ -48,7 +57,7 @@ extension UserAPI: TargetType {
             case .registerUser(_, _),
                  .loginUser(_, _):
                 return .post
-        case .getCategories, .getAllCategories, .getProductDetails:
+        case .getCategories, .getAllCategories, .getProductDetails, .getBranches:
             return .get
         }
     }
@@ -61,7 +70,7 @@ extension UserAPI: TargetType {
         case .registerUser(let email, let confirmationCode),
              .loginUser(let email, let confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
-        case .getCategories, .getAllCategories, .getProductDetails:
+        case .getCategories, .getAllCategories, .getProductDetails, .getBranches:
             return .requestPlain
         }
     }

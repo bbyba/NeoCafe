@@ -10,7 +10,7 @@ import Moya
 class AuthenticationViewController: UIViewController {
     private lazy var baseAuthRegView = BaseAuthRegView()
     //    private var viewModel = AuthViewModel()
-    private var viewModel = AuthViewModelImpl(provider: MoyaProvider<UserAPI>())
+    var viewModel = AuthViewModel(provider: MoyaProvider<UserAPI>())
 
     var timer: Timer?
     var secondsRemaining = 5
@@ -114,8 +114,8 @@ class AuthenticationViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    print("Success: authenticateUser")
                     self?.viewModel.onMainNavigate?()
+                    print("Success: authenticateUser")
                 case .failure(let error):
                     print(error.localizedDescription)
                     self?.baseAuthRegView.updateResendButtonAttributedTitle()
@@ -188,3 +188,4 @@ extension AuthenticationViewController {
         }
     }
 }
+

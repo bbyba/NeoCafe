@@ -50,6 +50,13 @@ class CartViewController: UIViewController{
         print("Navigation controller: \(String(describing: navigationController))")
         navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
     }
+
+    @objc func orderButtonTapped() {
+        print("Cart: orderButtonTapped")
+        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+    }
+
+
 }
 
 extension CartViewController: UICollectionViewDataSource, UICollectionViewDelegate {

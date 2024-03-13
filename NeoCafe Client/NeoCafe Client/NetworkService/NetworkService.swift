@@ -15,7 +15,6 @@ class NetworkService {
             switch result {
             case .success(let response):
                 do {
-                    // Decoding the response into the expected generic type T
                     let decodedResponse = try JSONDecoder().decode(T.self, from: response.data)
                     DispatchQueue.main.async {
                         completion(.success(decodedResponse))

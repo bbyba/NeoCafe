@@ -35,10 +35,10 @@ class MainViewModel: NSObject, MainViewModelProtocol {
                     let categories = try JSONDecoder().decode([CategoryModel].self, from: response.data)
                     self.categories = categories.prefix(5).map { $0 }
 
-                    print("Fetched Categories:")
-                    self.categories.forEach { category in
-                        print("ID: \(category.id), Name: \(category.name), Image: \(category.image)")
-                    }
+//                    print("Fetched Categories:")
+//                    self.categories.forEach { category in
+//                        print("ID: \(category.id), Name: \(category.name), Image: \(category.image)")
+//                    }
 
                     completion(.success(self.categories))
                 } catch {

@@ -130,4 +130,3 @@ extension MainViewController: UICollectionViewDataSource {
         return header
     }
 }
-

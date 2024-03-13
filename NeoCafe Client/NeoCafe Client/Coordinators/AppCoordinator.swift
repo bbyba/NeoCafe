@@ -10,14 +10,6 @@ typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 final class ApplicationCoordinator: BaseCoordinator {
 
     private let window: UIWindow
-    
-//        override init(router: Router = RouterImpl()) {
-//            guard let scene = UIApplication.shared.windowScene else { fatalError("Window is required") }
-//            self.window = .init(windowScene: scene)
-//            super.init(router: router)
-//            window.rootViewController = router.navigationController
-//            window.makeKeyAndVisible()
-//        }
 
     init(window: UIWindow, router: Router = RouterImpl()) {
         self.window = window

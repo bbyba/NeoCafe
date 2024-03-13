@@ -11,11 +11,11 @@ final class BranchesCoordinator: BaseCoordinator {
         private var mainVC: BranchesViewController!
 
     override func start() {
-        //        let viewModel = MainViewModelImpl()
+                let viewModel = BranchesViewModel()
         //        viewModel.navigateToCourses = onCourses
         //        viewModel.openLessonDetail = { [weak self] in self?.openLessonDetail() }
         //        let viewController = LessonsScreenViewController(viewModel: viewModel)
-        let viewController = BranchesViewController()
+        let viewController = BranchesViewController(viewModel: viewModel)
         mainVC = viewController
         viewController.tabBarItem.title = S.branches
         viewController.tabBarItem.image = Asset.TabBar.branches.image

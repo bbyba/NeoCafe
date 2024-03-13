@@ -12,9 +12,10 @@ final class AuthenticationCoordinator: BaseCoordinator {
 
     lazy var startController: UIViewController = {
         let provider = MoyaProvider<UserAPI>()
-        let viewModel = AuthViewModelImpl(provider: provider)
+        let viewModel = AuthViewModel(provider: provider)
         viewModel.onMainNavigate = onMainNavigate
         let viewController = AuthenticationViewController()
+        viewController.viewModel = viewModel
         router.setRootModule(viewController, hideBar: true)
         return viewController
     }()
