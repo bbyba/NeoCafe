@@ -5,8 +5,7 @@
 
 import UIKit
 
-class BranchDetailViewController: UIViewController {
-    private lazy var branchDetailView = BranchDetailView()
+class BranchDetailViewController: BaseViewController<BranchDetailViewModel, BranchDetailView> {
 
     var suggestions: [PrItem] = [
         PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
@@ -17,23 +16,45 @@ class BranchDetailViewController: UIViewController {
         PrItem(image: Asset.coffeeCupTop.name, name: "POP6", price: 230),
         PrItem(image: Asset.coffeeCupTop.name, name: "POP7", price: 230)]
 
-    override func loadView() {
-        view = branchDetailView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        branchDetailView.collectionView.dataSource = self
-        branchDetailView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+        contentView.scheduleTableView.dataSource = self
+        contentView.scheduleTableView.delegate = self
+
         addTargets()
+        configureData()
     }
 
     private func addTargets() {
-        //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.goToMenuButton.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
+
+    }
+
+    func configureData() {
+        if let branch = viewModel.branch {
+            contentView.branchNameLabel.text = branch.branchName
+            contentView.branchAddressLabel.text = branch.address
+            contentView.scheduleTableView.reloadData()
+            //            contentView.collectionView.reloadData()
+        }
+    }
+
+    @objc func backButtonTapped() {
+        print("branchDetail: backButtonTapped")
+        viewModel.onBackNavigate?()
+    }
+
+    @objc func goToMenuButtonTapped() {
+        print("branchDetail: goToMenuButton")
+        viewModel.onMenuNavigate?()
     }
 }
 
 extension BranchDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    // MARK: - Suggestions
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -58,5 +79,30 @@ extension BranchDetailViewController: UICollectionViewDataSource, UICollectionVi
         }
         header.configureTitle(title: S.pleasantAddition)
         return header
+    }
+}
+
+// MARK: - Schedule
+extension BranchDetailViewController: UITableViewDelegate, UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 7
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 22
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleTableViewCell", for: indexPath) as? ScheduleTableViewCell else {
+            fatalError("Unable to dequeue ScheduleTableViewCell")
+        }
+        cell.selectionStyle = .none
+        if let schedule = viewModel.branch?.schedules[indexPath.row] {
+            let scheduleString = "\(schedule.day): \(schedule.startTime.dropLast(3)) - \(schedule.endTime.dropLast(3))"
+//            let scheduleString = "\(schedule.day): \(branch.todaySchedule)"
+            cell.workingHours.text = scheduleString
+        }
+        return cell
     }
 }

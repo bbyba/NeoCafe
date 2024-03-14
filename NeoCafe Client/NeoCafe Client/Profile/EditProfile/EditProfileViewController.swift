@@ -5,23 +5,26 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController{
-    private lazy var editProfileView = EditProfileView()
-
-    override func loadView() {
-        view = editProfileView
-    }
-
+class EditProfileViewController: BaseViewController<EditProfileViewModel, EditProfileView> {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()
     }
 
     private func addTargets() {
-//        branchesModalView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
 
-    @objc func closeButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+    @objc func backButtonTapped() {
+        print("EditProfile: backButtonTapped")
+        viewModel.onBackNavigate?()
     }
+
+//    func configureData() {
+//        if let branch = viewModel.branch {
+//            contentView.branchNameLabel.text = branch.branchName
+//            contentView.branchAddressLabel.text = branch.address
+//        }
+//    }
 }

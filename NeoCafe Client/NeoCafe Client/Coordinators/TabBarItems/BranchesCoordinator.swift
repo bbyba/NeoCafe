@@ -8,14 +8,12 @@ final class BranchesCoordinator: BaseCoordinator {
 
     //    var onCourses: EmptyCompletion?
     //
-        private var mainVC: BranchesViewController!
+    private var mainVC: BranchesViewController!
 
     override func start() {
-                let viewModel = BranchesViewModel()
-        //        viewModel.navigateToCourses = onCourses
-        //        viewModel.openLessonDetail = { [weak self] in self?.openLessonDetail() }
-        //        let viewController = LessonsScreenViewController(viewModel: viewModel)
+        let viewModel = BranchesViewModel()
         let viewController = BranchesViewController(viewModel: viewModel)
+        viewController.coordinator = self
         mainVC = viewController
         viewController.tabBarItem.title = S.branches
         viewController.tabBarItem.image = Asset.TabBar.branches.image
@@ -24,16 +22,11 @@ final class BranchesCoordinator: BaseCoordinator {
         router.setRootModule(viewController, hideBar: false)
     }
 
-    //    func openLessonDetail() {
-    //        let vm = LessonDetailScreenViewModel()
-    //        vm.openLessonTasks = { [weak self] in self?.openLessonTaskDetail() }
-    //        let vc = LessonDetailScreenViewController(viewModel: vm)
-    //        router.push(vc, hideBottomBar: true)
-    //    }
-    //
-    //    func openLessonTaskDetail() {
-    //        let vm = LessonTaskViewModel()
-    //        let vc = LessonTaskViewController(viewModel: vm)
-    //        router.push(vc, hideBottomBar: true)
-    //    }
+    func openBranchDetail(branch: BranchModel) {
+        let viewModel = BranchDetailViewModel()
+        viewModel.branch = branch
+        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true)}
+        let branchDetailViewController = BranchDetailViewController(viewModel: viewModel)
+        router.push(branchDetailViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
 }

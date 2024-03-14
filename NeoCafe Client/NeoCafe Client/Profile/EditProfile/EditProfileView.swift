@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class EditProfileView: UIView {
+class EditProfileView: UIView, BaseContentView {
 
     lazy var header = CustomHeaderView()
 
@@ -20,7 +20,7 @@ class EditProfileView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.editing
-        label.font = .poppins(ofSize: 24, weight: .bold)
+        label.font = .poppins(ofSize: 32, weight: .bold)
         label.textColor = .ivoryCustom
         label.textAlignment = .center
         return label
@@ -61,7 +61,6 @@ class EditProfileView: UIView {
         personalInfoStack.addArrangedSubview(emailTextField)
 
         addSubview(saveButton)
-
     }
 
     func setupConstraints() {
@@ -71,8 +70,7 @@ class EditProfileView: UIView {
         }
 
         backButton.snp.makeConstraints { make in
-                        make.top.equalToSuperview().offset(70)
-//            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
             make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
@@ -81,9 +79,9 @@ class EditProfileView: UIView {
             make.top.equalToSuperview().offset(70)
             make.height.equalTo(29)
             make.centerX.equalToSuperview()
-//            make.centerY.equalToSuperview()
+            //            make.centerY.equalToSuperview()
         }
-        
+
         personalInfoStack.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(50)
             make.leading.trailing.equalToSuperview().inset(16)

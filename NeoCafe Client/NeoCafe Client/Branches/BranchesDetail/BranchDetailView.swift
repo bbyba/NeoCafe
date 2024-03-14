@@ -6,7 +6,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class BranchDetailView: UIView {
+class BranchDetailView: UIView, BaseContentView {
 
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -68,7 +68,7 @@ class BranchDetailView: UIView {
         button.setImage(Asset.Buttons.location.image, for: .normal)
         button.tintColor = .whiteCustom
         button.backgroundColor = .orangeCustom
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 22
         button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return button
     }()
@@ -85,6 +85,15 @@ class BranchDetailView: UIView {
         button.setProperties(title: S.menuButton, backgroundColor: .darkBlueCustom)
         return button
     }()
+
+    lazy var scheduleTableView:  UITableView = {
+        let tableView = UITableView()
+        tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: "ScheduleTableViewCell")
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
+    }()
+
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(MenuProductCell.self, forCellWithReuseIdentifier: MenuProductCell.identifier)
@@ -103,8 +112,7 @@ class BranchDetailView: UIView {
         return stack
     }()
 
-
-    lazy var stack: UIStackView = {
+    lazy var scheduleLabelStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         return stack
@@ -114,32 +122,33 @@ class BranchDetailView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addSubviews()
-        setConstraints()
+        setupConstraints()
     }
 
     func addSubviews() {
         addSubview(image)
-        image.addSubview(backButton)
+        addSubview(backButton)
         addSubview(branchNameLabel)
         addSubview(branchAddressLabel)
         addSubview(buttonStack)
         buttonStack.addArrangedSubview(phoneButton)
         buttonStack.addArrangedSubview(locationButton)
-        addSubview(stack)
-        stack.addArrangedSubview(scheduleLabel)
-        stack.addArrangedSubview(dropDownButton)
+        addSubview(scheduleLabelStack)
+        scheduleLabelStack.addArrangedSubview(scheduleLabel)
+        scheduleLabelStack.addArrangedSubview(dropDownButton)
+        addSubview(scheduleTableView)
         addSubview(collectionView)
         addSubview(goToMenuButton)
     }
 
-    func setConstraints() {
+    func setupConstraints() {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(220)
         }
 
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
+            make.top.equalToSuperview().offset(50)
             make.leading.equalToSuperview().offset(16)
             make.height.width.equalTo(40)
         }
@@ -159,20 +168,20 @@ class BranchDetailView: UIView {
         buttonStack.snp.makeConstraints { make in
             make.top.equalTo(branchAddressLabel.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
-            make.height.equalTo(44)
+//            make.height.equalTo(46)
         }
 
         phoneButton.snp.makeConstraints { make in
             make.leading.equalToSuperview()
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(44)
         }
 
         locationButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
-            make.height.width.equalTo(40)
+            make.height.width.equalTo(44)
         }
 
-        stack.snp.makeConstraints { make in
+        scheduleLabelStack.snp.makeConstraints { make in
             make.top.equalTo(buttonStack.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
 //            make.height.equalTo(24)
@@ -186,8 +195,14 @@ class BranchDetailView: UIView {
             make.trailing.equalToSuperview()
         }
 
+        scheduleTableView.snp.makeConstraints { make in
+            make.top.equalTo(scheduleLabelStack.snp.bottom).offset(8)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(150)
+        }
+
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(stack.snp.bottom).offset(32)
+            make.top.equalTo(scheduleTableView.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(goToMenuButton.snp.top).offset(-16)
             //                        make.height.equalTo(320)

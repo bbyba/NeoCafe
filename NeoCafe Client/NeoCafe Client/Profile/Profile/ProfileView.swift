@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProfileView: UIView {
+class ProfileView: UIView, BaseContentView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -102,7 +102,7 @@ class ProfileView: UIView {
     func addSubviews() {
         addSubview(header)
         header.addSubview(headerLabel)
-        header.addSubview(logoutButton)
+        addSubview(logoutButton)
         addSubview(nameFieldView)
         nameFieldView.addSubview(nameLabel)
         nameFieldView.addSubview(editButton)

@@ -16,6 +16,10 @@
 		DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F2FA2BA04AC000C33E21 /* BonusModalViewModel.swift */; };
 		DD73F2FD2BA04E9000C33E21 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F2FC2BA04E9000C33E21 /* CartViewModel.swift */; };
 		DD73F3012BA1F55B00C33E21 /* BranchesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3002BA1F55B00C33E21 /* BranchesViewModel.swift */; };
+		DD73F3032BA36C4900C33E21 /* BranchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3022BA36C4900C33E21 /* BranchDetailViewModel.swift */; };
+		DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */; };
+		DD73F3072BA3877200C33E21 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3062BA3877200C33E21 /* EditProfileViewModel.swift */; };
+		DD73F3092BA38D6800C33E21 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */; };
 		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
 		DD92BCE12B98D50900E0825E /* BranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE02B98D50900E0825E /* BranchesView.swift */; };
 		DD92BCE32B98D53A00E0825E /* BranchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */; };
@@ -120,6 +124,10 @@
 		DD73F2FA2BA04AC000C33E21 /* BonusModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusModalViewModel.swift; sourceTree = "<group>"; };
 		DD73F2FC2BA04E9000C33E21 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		DD73F3002BA1F55B00C33E21 /* BranchesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewModel.swift; sourceTree = "<group>"; };
+		DD73F3022BA36C4900C33E21 /* BranchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchDetailViewModel.swift; sourceTree = "<group>"; };
+		DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DD73F3062BA3877200C33E21 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DD92BCE02B98D50900E0825E /* BranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesView.swift; sourceTree = "<group>"; };
 		DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewController.swift; sourceTree = "<group>"; };
@@ -277,6 +285,8 @@
 			isa = PBXGroup;
 			children = (
 				DD9DD1082B95E23000C489F6 /* ProfileView.swift */,
+				DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */,
+				DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -305,6 +315,8 @@
 			children = (
 				DD92BCE72B99827C00E0825E /* BranchDetailView.swift */,
 				DD92BCE52B99827600E0825E /* BranchDetailViewController.swift */,
+				DD73F3022BA36C4900C33E21 /* BranchDetailViewModel.swift */,
+				DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */,
 			);
 			path = BranchesDetail;
 			sourceTree = "<group>";
@@ -397,6 +409,7 @@
 		DD9DD0DC2B9104DE00C489F6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DD9DD10F2B95F7A500C489F6 /* Notifications */,
 				DD9DD0D32B90DC3A00C489F6 /* BranchesModal */,
 				DD93C1902B82C89900339287 /* MainScreen */,
 				DDAD65E02B8CB9D900F72345 /* MenuScreen */,
@@ -449,10 +462,8 @@
 		DD9DD0EF2B946F9000C489F6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */,
 				DD73F2FF2BA1EF4600C33E21 /* Profile */,
 				DD9DD10E2B95F79200C489F6 /* EditProfile */,
-				DD9DD10F2B95F7A500C489F6 /* Notifications */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -484,6 +495,7 @@
 			children = (
 				DD9DD10C2B95F73900C489F6 /* EditProfileView.swift */,
 				DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */,
+				DD73F3062BA3877200C33E21 /* EditProfileViewModel.swift */,
 			);
 			path = EditProfile;
 			sourceTree = "<group>";
@@ -825,8 +837,10 @@
 				DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */,
 				DDCB6B7A2B9B7DB900407089 /* Extension+UIViews.swift in Sources */,
 				DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */,
+				DD73F3032BA36C4900C33E21 /* BranchDetailViewModel.swift in Sources */,
 				DDCB6B892B9FC53600407089 /* NotificationsCell.swift in Sources */,
 				DD92BCE82B99827C00E0825E /* BranchDetailView.swift in Sources */,
+				DD73F3092BA38D6800C33E21 /* ScheduleCell.swift in Sources */,
 				DDAD65DD2B8CB29700F72345 /* MainView.swift in Sources */,
 				DD9DD0D52B90DF6600C489F6 /* BranchesModalView.swift in Sources */,
 				DD92BCE62B99827600E0825E /* BranchDetailViewController.swift in Sources */,
@@ -851,6 +865,7 @@
 				DDAD65D52B8CB09B00F72345 /* PopularCell.swift in Sources */,
 				DD9DD1032B95E0E400C489F6 /* CartCoordinator.swift in Sources */,
 				DDAD65DF2B8CB3B100F72345 /* CustomHeaderView.swift in Sources */,
+				DD73F3072BA3877200C33E21 /* EditProfileViewModel.swift in Sources */,
 				DD73F3012BA1F55B00C33E21 /* BranchesViewModel.swift in Sources */,
 				DDCB6B872B9FBDF000407089 /* NotificationsViewModel.swift in Sources */,
 				DD9556152B79F67300FB65AF /* UserAPI.swift in Sources */,
@@ -882,6 +897,7 @@
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
 				DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */,
 				DD9DD0F62B94795C00C489F6 /* Presentable.swift in Sources */,
+				DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */,
 				DD73F2F92BA04A5900C33E21 /* BonusViewController.swift in Sources */,
 				DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */,
 				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,

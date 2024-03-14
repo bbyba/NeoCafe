@@ -7,6 +7,7 @@ import SwiftUI
 import UIKit
 
 class BranchesView: UIView, BaseContentView {
+    
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {

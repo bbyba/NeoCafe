@@ -5,7 +5,8 @@
 
 import UIKit
 
-class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView>{
+class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView> {
+    var coordinator: BranchesCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +61,8 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
-        let branchDetailViewController = BranchDetailViewController()
-        branchDetailViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(branchDetailViewController, animated: true)
+        let selectedBranch = viewModel.branchesList[indexPath.row]
+        coordinator?.openBranchDetail(branch: selectedBranch)
     }
+
 }

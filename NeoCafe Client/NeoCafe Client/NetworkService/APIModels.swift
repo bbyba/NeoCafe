@@ -133,3 +133,14 @@ extension BranchModel {
     }
 }
 
+
+
+
+
+// MARK: - Temporary
+
+struct NotificationModel {
+    let status: String
+    let details: String
+    let time: String
+}

@@ -11,6 +11,4 @@ protocol NotificationsViewModelProtocol {
 }
 class NotificationsViewModel: NSObject, NotificationsViewModelProtocol {
     var onBackNavigate: EmptyCompletion?
-    
-
 }

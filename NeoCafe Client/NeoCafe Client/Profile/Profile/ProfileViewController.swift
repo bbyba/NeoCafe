@@ -8,8 +8,8 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class ProfileViewController: UIViewController {
-    private lazy var profileView = ProfileView()
+class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
+    var coordinator: ProfileCoordinator?
 
     var currentOrders: [OrderHistoryModel] = [
         OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "Сейчас"),
@@ -22,28 +22,20 @@ class ProfileViewController: UIViewController {
         OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "10 августа")
     ]
 
-    override func loadView() {
-        view = profileView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileView.collectionView.dataSource = self
-        profileView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
         addTargets()
     }
 
     private func addTargets() {
-        profileView.editButton.addTarget(self, action: #selector(editProfileViewController), for: .touchUpInside)
+        contentView.editButton.addTarget(self, action: #selector(editProfileTapped), for: .touchUpInside)
     }
 
-    @objc func notificationsButtonTapped() {
-        print("notificationsButtonTapped")
-    }
-
-    @objc func editProfileViewController() {
-        let editProfileViewController = EditProfileViewController()
-        navigationController?.pushViewController(editProfileViewController, animated: true)
+    @objc func editProfileTapped() {
+        print("Profile: editProfileTapped")
+        viewModel.onEditProfileNavigate?()
     }
 }
 

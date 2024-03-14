@@ -21,7 +21,6 @@ class NotificationsCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .regular)
         label.textColor = .black
-//        label.text = "Капучино x1, Американо x2, Багровай зКапучино x1, Американо x2, Багровай за"
         return label
     }()
 
@@ -29,7 +28,6 @@ class NotificationsCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .darkBlueCustom
-//        label.text = "19:02"
         return label
     }()
 
