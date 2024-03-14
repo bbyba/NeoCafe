@@ -12,7 +12,7 @@ class BranchesView: UIView, BaseContentView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.branches
-        label.font = .poppins(ofSize: 28, weight: .semibold)
+        label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
@@ -21,7 +21,6 @@ class BranchesView: UIView, BaseContentView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(BranchesModalCell.self, forCellWithReuseIdentifier: BranchesModalCell.identifier)
-//        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -53,7 +52,7 @@ class BranchesView: UIView, BaseContentView {
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
         }
 
         collectionView.snp.makeConstraints { make in
@@ -77,20 +76,8 @@ class BranchesView: UIView, BaseContentView {
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 12, trailing: 16)
-//
-//        let headerSize = NSCollectionLayoutSize(
-//            widthDimension: .fractionalWidth(1.0),
-//            heightDimension: .estimated(44))
-//
-//        let header = NSCollectionLayoutBoundarySupplementaryItem(
-//            layoutSize: headerSize,
-//            elementKind: UICollectionView.elementKindSectionHeader,
-//            alignment: .top
-//        )
-//        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
 
         let section = NSCollectionLayoutSection(group: group)
-//        section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
 
     }

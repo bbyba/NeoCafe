@@ -56,7 +56,8 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
                 fatalError("Could not dequeue PopularCell")
             }
         let branch = branches[indexPath.row]
-        cell.configureData(name: branch.name, address: branch.image)
+        cell.configureDataModal(branchName: branch.name)
+//        cell.configureData(branch)
         return cell
         }
 }

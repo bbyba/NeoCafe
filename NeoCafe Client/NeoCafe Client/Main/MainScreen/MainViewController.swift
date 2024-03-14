@@ -37,19 +37,6 @@ class MainViewController: BaseViewController<MainViewModel, MainView>, UICollect
         contentView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
     }
 
-//    func getCategories() {
-//        viewModel.getCategories { [weak self] result in
-//            switch result {
-//            case .success(_):
-//                DispatchQueue.main.async {
-//                    self?.contentView.collectionView.reloadData()
-//                }
-//            case .failure(let error):
-//                print("Error fetching categories: \(error)")
-//            }
-//        }
-//    }
-
     func getCategories() {
         viewModel.getCategories { [weak self] result in
             DispatchQueue.main.async {

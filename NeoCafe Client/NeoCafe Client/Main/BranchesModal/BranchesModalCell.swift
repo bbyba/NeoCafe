@@ -10,7 +10,7 @@ class BranchesModalCell: UICollectionViewCell {
 
     lazy var image: UIImageView = {
         let image = UIImageView()
-        //        image.image = UIImage(named: Asset.branchesModal.name)
+        image.image = UIImage(named: Asset.branchesModal.name)
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 12
         image.layer.masksToBounds = true
@@ -20,7 +20,6 @@ class BranchesModalCell: UICollectionViewCell {
     lazy var branchScheduleLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .regular)
-        label.text = "Сегодня с 11:00 до 22:00"
         label.textAlignment = .center
         label.textColor = .darkBlueCustom
         label.numberOfLines = 1
@@ -35,13 +34,11 @@ class BranchesModalCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .darkBlueCustom
-        label.text = "NeoCafe Dzerzhinka"
         return label
     }()
 
     lazy var addressLabel = {
         let label = UILabel()
-        label.text = "бульвар Эркиндик, 35"
         label.textColor = .darkBlueCustom
         label.font = .poppins(ofSize: 16, weight: .regular)
         return label
@@ -49,7 +46,6 @@ class BranchesModalCell: UICollectionViewCell {
 
     lazy var phoneLabel = {
         let label = UILabel()
-        label.text = "0555 778 887"
         label.textColor = .darkBlueCustom
         label.font = .poppins(ofSize: 16, weight: .regular)
         return label
@@ -143,10 +139,20 @@ class BranchesModalCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(name: String, address: String) {
-//        image.image = UIImage(named: imageName)
-        branchNameLabel.text = name
-        addressLabel.text = address
+    func configureData(_ branch: BranchModel) {
+        branchNameLabel.text = branch.branchName
+        addressLabel.text = branch.address
+        phoneLabel.text = branch.phoneNumber
+
+        if let todayScheduleText = branch.todaySchedule {
+            branchScheduleLabel.text = "\(S.todaySchedule) \(todayScheduleText)"
+        } else {
+            branchScheduleLabel.text = S.scheduleNotAvailanle
+        }
+    }
+
+    func configureDataModal(branchName: String) {
+        branchNameLabel.text = branchName
     }
 
     required init?(coder: NSCoder) {

@@ -313,8 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				DDAD65DA2B8CB27200F72345 /* MainModel.swift */,
-				DDCA37112B8B748600451066 /* View */,
 				DDF8B5912B70ED3C005FE06A /* MainViewController.swift */,
+				DDCA37112B8B748600451066 /* View */,
 				DDCB6B7E2B9E381000407089 /* MainViewModel.swift */,
 			);
 			path = MainScreen;

@@ -72,8 +72,9 @@
 
 // Branches
 "schedule" = "График работы: ";
-"todaySchedule" = "Сегодня с 9:00 до 10:00";
+"todaySchedule" = "Сегодня с ";
 "weekSchedule" = "Пн: 11:00 - 22:00";
+"scheduleNotAvailanle" = "График не доступен";
 
 // Profile
 "bonuses" = "Бонусы";

@@ -13,7 +13,7 @@ class ProfileView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.profile
-        label.font = .poppins(ofSize: 28, weight: .semibold)
+        label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
@@ -122,18 +122,18 @@ class ProfileView: UIView {
 
         headerLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
         }
 
         logoutButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(55)
+            make.top.equalToSuperview().offset(70)
             make.trailing.equalToSuperview().inset(40)
             make.height.width.equalTo(40)
         }
 
         nameFieldView.snp.makeConstraints { make in
             //            make.top.equalTo(header.snp.bottom).offset(-24)
-            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.centerY.equalTo(header.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(78)
         }

@@ -114,10 +114,12 @@ internal enum S {
   internal static let save = S.tr("Localizable", "save", fallback: "Сохранить")
   /// График работы: 
   internal static let schedule = S.tr("Localizable", "schedule", fallback: "График работы: ")
+  /// График не доступен
+  internal static let scheduleNotAvailanle = S.tr("Localizable", "scheduleNotAvailanle", fallback: "График не доступен")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
-  /// Сегодня с 9:00 до 10:00
-  internal static let todaySchedule = S.tr("Localizable", "todaySchedule", fallback: "Сегодня с 9:00 до 10:00")
+  /// Сегодня с 
+  internal static let todaySchedule = S.tr("Localizable", "todaySchedule", fallback: "Сегодня с ")
   /// Возьму с собой
   internal static let toGo = S.tr("Localizable", "toGo", fallback: "Возьму с собой")
   /// С собой

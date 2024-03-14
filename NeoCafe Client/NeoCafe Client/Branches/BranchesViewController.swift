@@ -24,17 +24,16 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
             DispatchQueue.main.async {
                 switch result {
                 case .success(_):
+                    self?.contentView.collectionView.reloadData()
 
                     self?.viewModel.branchesList.forEach { branch in
-                        print("ID: \(branch.id), Name: \(branch.branchName), Phone Number: \(branch.phoneNumber), Link 2GIS: \(branch.link2gis), Table Quantity: \(branch.tableQuantity), Image: \(String(describing: branch.image)), Description: \(branch.description)")
+                        print("Branch ID: \(branch.id), Name: \(branch.branchName), Address: \(branch.address)")
                         branch.schedules.forEach { schedule in
-                            print("Schedule Day: \(schedule.day)")
+                            print("Schedule Day: \(schedule.day), Start Time: \(schedule.startTime), End Time: \(schedule.endTime)")
                         }
                     }
                 case .failure(let error):
-//                    print("Error fetching branches: \(error)")
-                                        print("Error vc failure")
-
+                    print("\(error)")
                 }
             }
         }
@@ -56,7 +55,7 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
             fatalError("Could not dequeue PopularCell")
         }
         let branch = viewModel.branchesList[indexPath.row]
-        cell.configureData(name: branch.branchName, address: branch.address)
+        cell.configureData(branch)
         return cell
     }
 
