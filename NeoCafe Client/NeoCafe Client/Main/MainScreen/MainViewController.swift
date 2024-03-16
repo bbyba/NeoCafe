@@ -88,8 +88,8 @@ extension MainViewController: UICollectionViewDataSource {
             cell.configureData(name: category.name, imageName: category.image!)
             return cell
         case .popular:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {
-                fatalError("Could not dequeue PopularCell")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
+                fatalError("Could not dequeue BigProductCell")
             }
             let popularItem = popularItems[indexPath.row]
             return cell

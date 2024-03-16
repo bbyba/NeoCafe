@@ -5,8 +5,8 @@
 
 import UIKit
 
-class PopularCell: UICollectionViewCell {
-    static let identifier = "PopularCell"
+class BigProductCell: UICollectionViewCell {
+    static let identifier = "BigProductCell"
 
     lazy var image: UIImageView = {
         let image = UIImageView()

@@ -39,8 +39,8 @@ extension ProductViewController: UICollectionViewDataSource, UICollectionViewDel
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {
-                fatalError("Could not dequeue PopularCell")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
+                fatalError("Could not dequeue BigProductCell")
             }
         let category = suggestions[indexPath.row]
         cell.configureData(name: category.name, imageName: category.image, description: "nil", price: String(category.price))

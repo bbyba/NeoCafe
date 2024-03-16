@@ -15,6 +15,18 @@ struct AuthenticationModel: Codable {
     let confirmation_code: String
 }
 
+struct AuthResponseModel: Codable {
+    let message, accessToken, refreshToken: String
+    let customerProfile: CustomerProfile?
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case accessToken = "access_token"
+        case refreshToken = "refresh_token"
+        case customerProfile = "customer_profile"
+    }
+}
+
 // MARK: - Main
 struct AllMenuItems: Codable {
     let count: Int
@@ -90,33 +102,6 @@ struct Schedule: Codable {
     }
 }
 
-//extension BranchModel {
-//    var formattedSchedule: String {
-//        return schedules.map { schedule in
-//            let formattedStartTime = String(schedule.startTime.dropLast(3))
-//            let formattedEndTime = String(schedule.endTime.dropLast(3))
-//            return "\(schedule.day): \(formattedStartTime) - \(formattedEndTime)"
-//        }.joined(separator: "\n")
-//    }
-//}
-
-//extension BranchModel {
-//    func todaysSchedule() -> String? {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "E" // Day of the week, format like "Mon", "Tue", etc.
-//        dateFormatter.locale = Locale(identifier: "ru_RU") // Use Russian locale to match the day symbols
-//        let todaySymbol = dateFormatter.string(from: Date())
-//
-//        if let todaySchedule = schedules.first(where: { $0.day == todaySymbol }) {
-//            let formattedStartTime = String(todaySchedule.startTime.dropLast(3))
-//            let formattedEndTime = String(todaySchedule.endTime.dropLast(3))
-//            return "\(formattedStartTime) - \(formattedEndTime)"
-//        } else {
-//            return nil
-//        }
-//    }
-//}
-
 extension BranchModel {
     var todaySchedule: String? {
         let dateFormatter = DateFormatter()
@@ -135,7 +120,65 @@ extension BranchModel {
 
 
 
+// MARK: - Profile
+struct CustomerProfile: Codable {
+    let customerID: Int
+    let firstName: String
+    let bonusPoints: Int
+    let email: String
+    let orders: [Order]?
 
+    enum CodingKeys: String, CodingKey {
+        case customerID = "customer_id"
+        case firstName = "first_name"
+        case bonusPoints = "bonus_points"
+        case email, orders
+    }
+}
+
+// MARK: - Order
+struct Order: Codable {
+    let id, totalPrice: Int
+    let table: Table
+    let status, createdAt: String
+    let customer: Int
+    let updatedAt, completedAt: String
+    let branch: Int
+    let orderType, totalSum: String
+    let employee: Int
+    let ito: [Ito]
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case totalPrice = "total_price"
+        case table, status
+        case createdAt = "created_at"
+        case customer
+        case updatedAt = "updated_at"
+        case completedAt = "completed_at"
+        case branch
+        case orderType = "order_type"
+        case totalSum = "total_sum"
+        case employee
+        case ito = "ITO"
+    }
+}
+
+// MARK: - Ito
+struct Ito: Codable {
+    let id, item, quantity: Int
+}
+
+// MARK: - Table
+struct Table: Codable {
+    let tableNumber: Int
+    let status: String
+
+    enum CodingKeys: String, CodingKey {
+        case tableNumber = "table_number"
+        case status
+    }
+}
 
 // MARK: - Temporary
 

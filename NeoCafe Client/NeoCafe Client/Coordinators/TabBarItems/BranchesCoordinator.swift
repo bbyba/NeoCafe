@@ -15,10 +15,13 @@ final class BranchesCoordinator: BaseCoordinator {
         let viewController = BranchesViewController(viewModel: viewModel)
         viewController.coordinator = self
         mainVC = viewController
+        presentViewController(viewController)
+    }
+
+    private func presentViewController(_ viewController: UIViewController) {
         viewController.tabBarItem.title = S.branches
         viewController.tabBarItem.image = Asset.TabBar.branches.image
         viewController.tabBarItem.selectedImage = Asset.TabBar.branches.image.withTintColor(.orangeCustom)
-        //        viewController.tabBarItem.image = Asset.TabBar.main.image.withTintColor(Colors.green.color)
         router.setRootModule(viewController, hideBar: false)
     }
 

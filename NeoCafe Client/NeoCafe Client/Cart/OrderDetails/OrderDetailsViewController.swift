@@ -54,8 +54,8 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {
-                fatalError("Could not dequeue PopularCell")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
+                fatalError("Could not dequeue BigProductCell")
             }
         let order = orderDetails[indexPath.row]
         cell.configureData(name: order.name, imageName: order.image, description: "nil", price: String(order.price))

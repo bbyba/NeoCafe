@@ -45,7 +45,7 @@ class CartView: UIView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(PopularCell.self, forCellWithReuseIdentifier: PopularCell.identifier)
+        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false

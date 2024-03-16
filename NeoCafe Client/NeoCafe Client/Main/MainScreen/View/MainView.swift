@@ -48,7 +48,7 @@ class MainView: UIView, BaseContentView {
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: "CategoryCell")
-        collectionView.register(PopularCell.self, forCellWithReuseIdentifier: "PopularCell")
+        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: "BigProductCell")
         collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false

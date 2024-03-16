@@ -27,10 +27,16 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
         addTargets()
+//        getUserData()
     }
 
     private func addTargets() {
         contentView.editButton.addTarget(self, action: #selector(editProfileTapped), for: .touchUpInside)
+    }
+
+    func configureUserData(_ userData: CustomerProfile) {
+        contentView.nameLabel.text = userData.firstName
+        contentView.totalBonusPointsNumber.text = String(userData.bonusPoints)
     }
 
     @objc func editProfileTapped() {
@@ -51,12 +57,18 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         case .completed:
             return completedOrders.count
         }
+        //        guard let orders = viewModel.orders else { return 0 }
+        //                switch OrderHistorySection.allCases[section] {
+        //                case .current:
+        //                    return orders.filter { !$0.isCompleted }.count
+        //                case .completed:
+        //                    return orders.filter { $0.isCompleted }.count
+        //                }
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {fatalError("Could not dequeue PopularCell")}
-
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {fatalError("Could not dequeue BigProductCell")}
+        
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = currentOrders[indexPath.row]
@@ -71,6 +83,16 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
             cell.hidePlusButton()
             return cell
         }
+
+//        guard let orders = viewModel.orders else { fatalError("Orders are not available") }
+//        let filteredOrders: [Order] = orders.filter { OrderHistorySection.allCases[indexPath.section] == .current ? !$0.isCompleted : $0.isCompleted }
+//
+//        let order = filteredOrders[indexPath.row]
+//        cell.configureData(name: order.name, imageName: order.image, description: order.description, price: order.status)
+//        cell.hideStepper()
+//        cell.hidePlusButton()
+//        return cell
+//    }
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

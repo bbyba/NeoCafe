@@ -70,7 +70,7 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {fatalError("Could not dequeue PopularCell")}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {fatalError("Could not dequeue BigProductCell")}
 
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:

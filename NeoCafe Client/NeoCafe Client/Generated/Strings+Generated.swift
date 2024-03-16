@@ -86,8 +86,9 @@ internal enum S {
   /// История заказов
   internal static let orderHistory = S.tr("Localizable", "orderHistory", fallback: "История заказов")
   /// Введите 4-х значный код,
-  ///  отправленный на почту
-  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту")
+  ///  отправленный на почту 
+  ///  burte.bsn@gmail.com
+  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n burte.bsn@gmail.com")
   /// Наше меню
   internal static let ourMenu = S.tr("Localizable", "ourMenu", fallback: "Наше меню")
   /// Отлично!

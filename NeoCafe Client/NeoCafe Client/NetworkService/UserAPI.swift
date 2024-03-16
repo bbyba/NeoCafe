@@ -18,16 +18,20 @@ enum UserAPI {
     case getAllCategories
     case getProductDetails(productId: Int)
 
-
     // Branch
     case getBranches
+
+    // Profile
+    case getProfile(userID: Int)
+    case getProfileEdit(userID: Int)
+    case patchProfile(userID: Int, firstName: String)
 }
 
 extension UserAPI: TargetType {
     var baseURL: URL {
         return URL(string: "https://tokyo-backender.org.kg")!
     }
-    
+
     var path: String {
         switch self {
         case .checkEmailRegister(_):
@@ -46,18 +50,29 @@ extension UserAPI: TargetType {
             return "/menu/item/\(productId)/"
         case .getBranches:
             return "/branch/all/"
+        case .getProfile(let userID):
+            return "/profile/customer/\(userID)/"
+        case .getProfileEdit(let userID):
+            return "/profile/customer/\(userID)/edit/"
+        case .patchProfile(let userId, let firstName):
+            return "/profile/customer/\(userId)/edit/"
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
-            case .checkEmailRegister(_),
-                 .checkEmailLogin(_):
-                return .post
-            case .registerUser(_, _),
-                 .loginUser(_, _):
-                return .post
-        case .getCategories, .getAllCategories, .getProductDetails, .getBranches:
+        case .checkEmailRegister(_),
+                .checkEmailLogin(_):
+            return .post
+        case .registerUser(_, _),
+                .loginUser(_, _):
+            return .post
+        case .getCategories,
+                .getAllCategories,
+                .getProductDetails,
+                .getBranches,
+                .getProfile,
+                .getProfileEdit:
             return .get
         }
     }
@@ -65,12 +80,17 @@ extension UserAPI: TargetType {
     var task: Task {
         switch self {
         case .checkEmailRegister(let email),
-             .checkEmailLogin(let email):
+                .checkEmailLogin(let email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
         case .registerUser(let email, let confirmationCode),
-             .loginUser(let email, let confirmationCode):
+                .loginUser(let email, let confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
-        case .getCategories, .getAllCategories, .getProductDetails, .getBranches:
+        case .getCategories,
+                .getAllCategories,
+                .getProductDetails,
+                .getBranches,
+                .getProfile,
+                .getProfileEdit:
             return .requestPlain
         }
     }

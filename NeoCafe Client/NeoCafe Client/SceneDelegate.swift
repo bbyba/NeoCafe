@@ -38,8 +38,6 @@ import UIKit
 //        applicationCoordinator.start()
 //    }
 
-
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -56,22 +54,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = applicationCoordinator.toPresent
         window.makeKeyAndVisible()
     }
-
-
-
-
-
-
-//class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-//    var window: UIWindow?
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        window.windowScene = windowScene
-//        window.rootViewController = TabBarViewController()
-////        window.rootViewController = MenuViewController()
-//
-//        window.makeKeyAndVisible()
-//        self.window = window
-//    }
 }

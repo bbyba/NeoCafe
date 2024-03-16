@@ -70,8 +70,8 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularCell.identifier, for: indexPath) as? PopularCell else {
-                fatalError("Could not dequeue PopularCell")
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
+                fatalError("Could not dequeue BigProductCell")
             }
         let product = orderedProducts[indexPath.row]
         cell.configureData(name: product.name, imageName: product.image, description: "nil", price: String(product.price))

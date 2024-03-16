@@ -53,7 +53,7 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
-            fatalError("Could not dequeue PopularCell")
+            fatalError("Could not dequeue BigProductCell")
         }
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)

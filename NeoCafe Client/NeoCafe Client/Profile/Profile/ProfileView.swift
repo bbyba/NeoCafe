@@ -34,7 +34,7 @@ class ProfileView: UIView, BaseContentView {
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Laura"
+        label.text = "Jane"
         label.font = .poppins(ofSize: 24, weight: .medium)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
@@ -68,7 +68,7 @@ class ProfileView: UIView, BaseContentView {
 
     lazy var totalBonusPointsNumber: UILabel = {
         let label = UILabel()
-        label.text = "100"
+        label.text = "10"
         label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
@@ -84,7 +84,7 @@ class ProfileView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(PopularCell.self, forCellWithReuseIdentifier: PopularCell.identifier)
+        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
         collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
