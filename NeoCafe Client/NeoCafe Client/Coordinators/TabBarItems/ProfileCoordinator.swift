@@ -9,15 +9,6 @@ final class ProfileCoordinator: BaseCoordinator {
 
     private var mainVC: ProfileViewController!
 
-//    override func start() {
-//        let viewModel = ProfileViewModel()
-//        viewModel.onEditProfileNavigate = { [weak self] in self?.openEditProfile()}
-//        let viewController = ProfileViewController(viewModel: viewModel)
-//        viewController.coordinator = self
-//        mainVC = viewController
-//        presentViewController(viewController)
-//    }
-
     override func start() {
         let viewModel = ProfileViewModel()
         viewModel.onEditProfileNavigate = { [weak self] in self?.openEditProfile()}
@@ -46,9 +37,22 @@ final class ProfileCoordinator: BaseCoordinator {
 
     func openEditProfile() {
         let viewModel = EditProfileViewModel()
-        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true)}
-        let editProfileViewController = EditProfileViewController(viewModel: viewModel)
-        router.push(editProfileViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
-    }
+        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true) }
+        viewModel.onEditCompleted = { [weak self] in self?.start() }
 
+
+        viewModel.getPersonalDataEdit { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let userData):
+                    let editProfileViewController = EditProfileViewController(viewModel: viewModel)
+                    viewModel.personalDataEdit = userData
+                    editProfileViewController.configureData(userData)
+                    self?.router.push(editProfileViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+                case .failure(let error):
+                    print("Error fetching user edit data: \(error)")
+                }
+            }
+        }
+    }
 }

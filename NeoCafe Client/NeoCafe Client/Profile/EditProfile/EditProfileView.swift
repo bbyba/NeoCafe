@@ -33,7 +33,7 @@ class EditProfileView: UIView, BaseContentView {
         return stack
     }()
 
-    lazy var nameTextField = CustomTextField(iconName: Asset.TextField.profileTextField.image, customPlaceholder: "Иван")
+    lazy var nameTextField = CustomTextField(iconName: Asset.TextField.profileTextField.image, customPlaceholder: S.enterYourName)
 
     lazy var emailTextField = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.exampleEmail)
 
@@ -49,6 +49,7 @@ class EditProfileView: UIView, BaseContentView {
         backgroundColor = .whiteCustom
         addSubviews()
         setupConstraints()
+        emailTextField.isUserInteractionEnabled = false
     }
 
     func addSubviews() {

@@ -63,5 +63,4 @@ class CustomTextField: UITextField {
             leftViewMode = .never
         }
     }
-
 }

@@ -53,6 +53,8 @@ internal enum S {
   internal static let enterBonusPoints = S.tr("Localizable", "enterBonusPoints", fallback: "Введите количество бонусов,\n которое хотите списать")
   /// Введите почту
   internal static let enterEmail = S.tr("Localizable", "enterEmail", fallback: "Введите почту")
+  /// Введите своё имя
+  internal static let enterYourName = S.tr("Localizable", "enterYourName", fallback: "Введите своё имя")
   /// Вход
   internal static let entry = S.tr("Localizable", "entry", fallback: "Вход")
   /// example@email.com

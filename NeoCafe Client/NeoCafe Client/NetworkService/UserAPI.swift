@@ -74,6 +74,8 @@ extension UserAPI: TargetType {
                 .getProfile,
                 .getProfileEdit:
             return .get
+        case .patchProfile:
+            return .patch
         }
     }
 
@@ -92,6 +94,9 @@ extension UserAPI: TargetType {
                 .getProfile,
                 .getProfileEdit:
             return .requestPlain
+        case .patchProfile(let userID, let firstName):
+            let parameters = ["first_name": firstName]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
 
