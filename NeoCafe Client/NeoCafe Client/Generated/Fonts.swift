@@ -24,8 +24,7 @@ internal enum FontFamily {
     internal static let bold = FontConvertible(name: "Poppins-Bold", family: "Poppins", path: "Poppins-Bold.ttf")
     internal static let medium = FontConvertible(name: "Poppins-Medium", family: "Poppins", path: "Poppins-Medium.ttf")
     internal static let regular = FontConvertible(name: "Poppins-Regular", family: "Poppins", path: "Poppins-Regular.ttf")
-    internal static let semiBold = FontConvertible(name: "Poppins-SemiBold", family: "Poppins", path: "Poppins-SemiBold.ttf")
-    internal static let all: [FontConvertible] = [bold, medium, regular, semiBold]
+    internal static let all: [FontConvertible] = [bold, medium, regular]
   }
   internal enum SFProDisplay {
     internal static let regular = FontConvertible(name: "SFProDisplay-Regular", family: "SF Pro Display", path: "SF-Pro-Display-Regular.otf")
