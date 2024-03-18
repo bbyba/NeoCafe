@@ -12,9 +12,10 @@
 "enterEmail" = "Введите почту";
 "wrongEmail" = "Неправильный адрес электронной почты, попробуйте ещё раз";
 "exampleEmail" = "example@email.com";
-"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту";
+"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n burte.bsn@gmail.com";
 "wrongCode" = "Код введён неверно,\n попробуйте еще раз";
-"resend" = "Отправить ещё раз через";
+"resend" = "Отправить ещё раз";
+"resendAfter" = "Отправить ещё раз через";
 "verificationCode" = "Код подтверждения";
 "register" = "Зарегистрироваться";
 "confirm" = "Подтвердить";
@@ -31,3 +32,57 @@
 "cart" = "Корзина";
 "branches" = "Филиалы";
 "profile" = "Профиль";
+
+
+// Menu
+"menu2" = "Меню: ";
+"categories" = "Категории";
+"toTheBasket" = "В корзину";
+"pleasantAddition" = "Приятное дополнение";
+"chooseBranch" = "Выберите филиал";
+"oopsSomethingsWrong" = "Упс, что-то пошло не так";
+"reload" = "Повторить";
+
+// Cart
+"toGo" = "Возьму с собой";
+"toGoShort" = "С собой";
+"eatHere" = "В заведении";
+"addMore" = "Добавить ещё";
+"order" = "Заказать";
+"orderHistory" = "История заказов";
+"useBonusPoints" = "Списание бонусов";
+"availablePointsWant" = "У вас есть 100 бонусов, хотите использовать их?";
+"yourBonusPoints" = "Ваши бонусы:";
+"enterBonusPoints" = "Введите количество бонусов,\n которое хотите списать";
+"no" = "Нет";
+"yes" = "Да";
+"use" = "Списать";
+"cancel" = "Отмена";
+"perfect" = "Отлично!";
+"orderAcceptedWait" = "Ваш заказ принят, пожалуйста ожидайте";
+"emptyCart" = "Ваша корзина пуста";
+"openOrder" = "Открытый заказ";
+"finished" = "Завершенные";
+"toMenu" = "В меню";
+"orderHash" = "Заказ #";
+"total" = "Итого: ";
+"closeOrder" = "Закрыть счёт";
+"availablePoints" = "Бонусы к списанию:";
+"popularMenu" = "Популярные блюда";
+
+// Branches
+"schedule" = "График работы: ";
+"todaySchedule" = "Сегодня с ";
+"weekSchedule" = "Пн: 11:00 - 22:00";
+"scheduleNotAvailanle" = "График не доступен";
+
+// Profile
+"bonuses" = "Бонусы";
+"currentOrder" = "Актуальный заказ";
+"bonusMessageProfile" = "Накапливайте бонусы и совершайте \n выгодные для Вас заказы! \n 1 бонус = 1 сом";
+"editing" = "Редактирование";
+"save" = "Сохранить";
+"notifications" = "Уведомления";
+"clearAll" = "Очистить всё";
+"enterYourName" = "Введите своё имя";
+
