@@ -106,7 +106,7 @@ extension BranchModel {
     var todaySchedule: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateFormat = "E" // gives the day format like "Mon", "Tue"
+        dateFormatter.dateFormat = "E"
         let todayShortString = dateFormatter.string(from: Date())
 
         if let todaySchedule = schedules.first(where: { $0.day == todayShortString }) {

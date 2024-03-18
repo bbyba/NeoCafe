@@ -71,7 +71,7 @@ class OrderHistoryView: UIView {
 
     lazy var orderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.order, backgroundColor: Asset.Colors.darkBlue.color)
+        button.setProperties(title: S.order, backgroundColor:.darkBlueCustom)
 
         return button
     }()

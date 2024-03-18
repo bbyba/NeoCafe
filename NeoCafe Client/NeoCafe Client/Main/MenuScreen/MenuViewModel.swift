@@ -33,11 +33,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
                     do {
                         let categories = try JSONDecoder().decode([CategoryModel].self, from: response.data)
                         self?.allCategories = categories
-                        
-//                        print("Fetched Categories:")
-//                        categories.forEach { category in
-//                            print("ID: \(category.id), Name: \(category.name), Image: \(category.image ?? "No image")")
-//                        }
                         completion(.success(categories))
                     } catch {
                         print("Error decoding categories: \(error)")

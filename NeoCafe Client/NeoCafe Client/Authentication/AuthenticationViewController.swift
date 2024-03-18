@@ -109,7 +109,6 @@ class AuthenticationViewController: UIViewController {
         print("confirm button tapped")
         print("\(storedEmail) and \(code)")
 
-//        viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { result in
         viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -124,7 +123,6 @@ class AuthenticationViewController: UIViewController {
         }
 
     }
-
 
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
@@ -142,11 +140,9 @@ class AuthenticationViewController: UIViewController {
         switch self.viewModel.currentState {
         case .codeConfirmation:
             print("current viewstate: \(self.viewModel.currentState)")
-            print("authenticateUserRequest")
             authenticateUserRequest()
         default:
             print("current viewstate: \(self.viewModel.currentState)")
-            print("requestCodeButton")
             requestCodeButton()
         }
     }
