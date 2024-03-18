@@ -4,35 +4,38 @@
 //
 
 import UIKit
-struct BranchesModel {
-    let image: String
-    let name: String
+
+protocol BranchSelectionDelegate: AnyObject {
+    func branchDidSelect(branchID: Int, branchName: String)
 }
 
-class BranchesModalViewController: UIViewController{
-    private lazy var branchesModalView = BranchesModalView()
-
-    var branches: [BranchesModel] = [
-        BranchesModel(image: Asset.branchesModal.name, name: "NeoCafe Dzerzhinka 1"),
-        BranchesModel(image: Asset.branchesModal.name, name: "NeoCafe Dzerzhinka 2"),
-        BranchesModel(image: Asset.branchesModal.name, name: "NeoCafe Dzerzhinka 3"),
-        BranchesModel(image: Asset.branchesModal.name, name: "NeoCafe Dzerzhinka 4"),
-        BranchesModel(image: Asset.branchesModal.name, name: "NeoCafe Dzerzhinka 5"),
-    ]
-
-    override func loadView() {
-        view = branchesModalView
-    }
+class BranchesModalViewController: BaseViewController<BranchesViewModel, BranchesModalView>{
+    weak var delegate: BranchSelectionDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        branchesModalView.collectionView.dataSource = self
-        branchesModalView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
         setTargets()
+        fetchBranchesData()
     }
 
-    private func setTargets() {
-        branchesModalView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+    func fetchBranchesData() {
+        viewModel.getBranches { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let branches):
+                    self?.viewModel.branchesList = branches
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Error fetching branches: \(error)")
+                }
+            }
+        }
+    }
+
+    override func setTargets() {
+        contentView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
 
     @objc func closeButtonTapped(_ sender: UIButton) {
@@ -47,17 +50,20 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return branches.count
+        return viewModel.branchesList.count
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
-        let branch = branches[indexPath.row]
-        cell.configureDataModal(branchName: branch.name)
-//        cell.configureData(branch)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
+            fatalError("Could not dequeue BigProductCell") }
+        let branch = viewModel.branchesList[indexPath.row]
+        cell.configureData(branch)
         return cell
         }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedBranch = viewModel.branchesList[indexPath.row]
+        delegate?.branchDidSelect(branchID: selectedBranch.id, branchName: selectedBranch.branchName)
+        dismiss(animated: true, completion: nil)
+    }
 }

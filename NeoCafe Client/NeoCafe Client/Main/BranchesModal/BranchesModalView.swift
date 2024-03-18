@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class BranchesModalView: UIView {
+class BranchesModalView: UIView, BaseContentView {
 
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
@@ -55,7 +55,7 @@ class BranchesModalView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
-        setConstraints()
+        setupConstraints()
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -85,7 +85,7 @@ class BranchesModalView: UIView {
         contentView.addSubview(collectionView)
     }
 
-    func setConstraints() {
+    func setupConstraints() {
         blurredBackgroundView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

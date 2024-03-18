@@ -10,13 +10,15 @@ protocol CartViewModelProtocol {
     var onBonusModalsNavigate: EmptyCompletion? { get set }
 //    var onSearchNavigate: EmptyCompletion? { get set }
 //    var onMenuNavigate: EmptyCompletion? { get set }
-//    var categories: [CategoryModel]  { get }
-//    func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+    var orderList: [Ito]?  { get }
+//    func postOrder(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
 }
 
 
 class CartViewModel: NSObject, CartViewModelProtocol {
     var onBonusModalsNavigate: EmptyCompletion?
+    var orderList: [Ito]?
+
 //    var onSearchNavigate: EmptyCompletion?
 //    var onMenuNavigate: EmptyCompletion?
 //    var categories: [CategoryModel] = []

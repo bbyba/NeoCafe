@@ -39,17 +39,17 @@ class BigProductCell: UICollectionViewCell {
         return label
     }()
 
-    lazy var plusButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = .whiteCustom
-        button.backgroundColor = .orangeCustom
-        button.layer.cornerRadius = 14
-        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner]
-        return button
-    }()
-
-    lazy var stepper = CustomStepper()
+//    lazy var plusButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(systemName: "plus"), for: .normal)
+//        button.tintColor = .whiteCustom
+//        button.backgroundColor = .orangeCustom
+//        button.layer.cornerRadius = 14
+//        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner]
+//        return button
+//    }()
+//
+    lazy var stepper = SwitchingStepper()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,7 +57,7 @@ class BigProductCell: UICollectionViewCell {
         layer.cornerRadius = 14
         addSubviews()
         setupConstraints()
-        addTargets()
+//        addTargets()
         setupShadow()
     }
 
@@ -66,7 +66,7 @@ class BigProductCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
-        contentView.addSubview(plusButton)
+//        contentView.addSubview(plusButton)
         contentView.addSubview(stepper)
     }
 
@@ -92,17 +92,17 @@ class BigProductCell: UICollectionViewCell {
             make.leading.equalTo(image.snp.trailing).offset(12)
         }
 
-        plusButton.snp.makeConstraints { make in
+        stepper.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.height.equalTo(40)
-            make.width.equalTo(54)
+            make.width.equalTo(90)
         }
-
-        stepper.snp.makeConstraints { make in
-            make.height.equalTo(32)
-            make.trailing.bottom.equalToSuperview().inset(2)
-        }
-        stepper.isHidden = true
+//
+//        stepper.snp.makeConstraints { make in
+//            make.height.equalTo(32)
+//            make.trailing.bottom.equalToSuperview().inset(2)
+//        }
+//        stepper.isHidden = true
     }
 
     private func setupShadow() {
@@ -120,36 +120,36 @@ class BigProductCell: UICollectionViewCell {
         priceLabel.text = price
     }
 
-    private func addTargets() {
-        plusButton.addTarget(self, action: #selector(showStepper), for: .touchUpInside)
-        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
-    }
+//    private func addTargets() {
+//        plusButton.addTarget(self, action: #selector(showStepper), for: .touchUpInside)
+//        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+//    }
 
-    @objc private func showStepper() {
-        toggleCounter(isStepperVisible: true)
-    }
-
-    @objc private func stepperValueChanged(_ sender: CustomStepper) {
-        if sender.currentValue == 1 && sender.isDecrementing {
-            toggleCounter(isStepperVisible: false)
-            sender.isDecrementing = false
-        }
-    }
-
-
-    private func toggleCounter(isStepperVisible: Bool) {
-        plusButton.isHidden = isStepperVisible
-        stepper.isHidden = !isStepperVisible
-    }
-
-    func  hideStepper() {
-        stepper.isHidden = true
-    }
-    
-    func hidePlusButton() {
-        plusButton.isHidden = true
-    }
-
+//    @objc private func showStepper() {
+//        toggleCounter(isStepperVisible: true)
+//    }
+//
+//    @objc private func stepperValueChanged(_ sender: CustomStepper) {
+//        if sender.currentValue == 1 && sender.isDecrementing {
+//            toggleCounter(isStepperVisible: false)
+//            sender.isDecrementing = false
+//        }
+//    }
+//
+//
+//    private func toggleCounter(isStepperVisible: Bool) {
+//        plusButton.isHidden = isStepperVisible
+//        stepper.isHidden = !isStepperVisible
+//    }
+//
+//    func  hideStepper() {
+//        stepper.isHidden = true
+//    }
+//    
+//    func hidePlusButton() {
+//        plusButton.isHidden = true
+//    }
+//
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

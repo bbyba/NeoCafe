@@ -20,6 +20,7 @@
 		DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */; };
 		DD73F3072BA3877200C33E21 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3062BA3877200C33E21 /* EditProfileViewModel.swift */; };
 		DD73F3092BA38D6800C33E21 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */; };
+		DD73F30B2BA630BE00C33E21 /* SwitchingStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */; };
 		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
 		DD92BCE12B98D50900E0825E /* BranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE02B98D50900E0825E /* BranchesView.swift */; };
 		DD92BCE32B98D53A00E0825E /* BranchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */; };
@@ -128,6 +129,7 @@
 		DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DD73F3062BA3877200C33E21 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
+		DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchingStepper.swift; sourceTree = "<group>"; };
 		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DD92BCE02B98D50900E0825E /* BranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesView.swift; sourceTree = "<group>"; };
 		DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewController.swift; sourceTree = "<group>"; };
@@ -276,7 +278,6 @@
 			children = (
 				DD9DD0E22B91229500C489F6 /* EmptyCartView.swift */,
 				DD9DD0DE2B91054A00C489F6 /* CartView.swift */,
-				DD73F2FC2BA04E9000C33E21 /* CartViewModel.swift */,
 			);
 			path = CartView;
 			sourceTree = "<group>";
@@ -422,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				DD9DD0E02B91107E00C489F6 /* CartViewController.swift */,
+				DD73F2FC2BA04E9000C33E21 /* CartViewModel.swift */,
 				DD73F2FE2BA1EF2100C33E21 /* CartView */,
 				DD73F2F52BA0125800C33E21 /* BonusModals */,
 				DD9DD0E62B91471400C489F6 /* OrderHistory */,
@@ -616,6 +618,7 @@
 				DD9DD0F02B94793A00C489F6 /* BaseCoordinator */,
 				DD9556162B7A00E400FB65AF /* NetworkService */,
 				DD84CBA82B7B372B00580D4A /* Generated */,
+				DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */,
 			);
 			path = "NeoCafe Client";
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				DD9DD10B2B95E74900C489F6 /* ProfileViewController.swift in Sources */,
 				DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */,
 				DDCB6B832B9EF55400407089 /* NetworkService.swift in Sources */,
+				DD73F30B2BA630BE00C33E21 /* SwitchingStepper.swift in Sources */,
 				DDF8B5CA2B70F21D005FE06A /* AuthenticationViewModel.swift in Sources */,
 				DD9DD1072B95E10000C489F6 /* ProfileCoordinator.swift in Sources */,
 				DDAD65E22B8CBB9100F72345 /* AuthenticationViewController.swift in Sources */,

@@ -18,10 +18,25 @@ class MenuView: UIView, BaseContentView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = S.menu2
-        label.font = .poppins(ofSize: 32, weight: .semibold)
+        label.font = .poppins(ofSize: 32, weight: .bold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
+    }()
+
+    lazy var branchNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .poppins(ofSize: 24, weight: .semibold)
+        label.textColor = .ivoryCustom
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var headerStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 5
+        return stack
     }()
 
     lazy var headerDropDownButton: UIButton = {
@@ -59,7 +74,9 @@ class MenuView: UIView, BaseContentView {
 
     func addSubviews() {
         addSubview(header)
-        header.addSubview(headerLabel)
+        header.addSubview(headerStack)
+        headerStack.addArrangedSubview(headerLabel)
+        headerStack.addArrangedSubview(branchNameLabel)
         addSubview(headerDropDownButton)
         addSubview(searchBar)
         addSubview(collectionView)
@@ -72,10 +89,15 @@ class MenuView: UIView, BaseContentView {
             make.height.equalTo(140)
         }
 
-        headerLabel.snp.makeConstraints { make in
+        headerStack.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(70)
         }
+
+//        branchNameLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(headerLabel.snp.trailing).offset(5)
+//            make.bottom.equalToSuperview().offset(-55)
+//        }
 
         headerDropDownButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-40)

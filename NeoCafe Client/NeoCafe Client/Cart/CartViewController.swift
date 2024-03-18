@@ -75,7 +75,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
         let product = orderedProducts[indexPath.row]
         cell.configureData(name: product.name, imageName: product.image, description: "nil", price: String(product.price))
-        cell.hideStepper()
+//        cell.hideStepper()
         return cell
         }
 }

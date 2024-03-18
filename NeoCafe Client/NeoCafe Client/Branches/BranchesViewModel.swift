@@ -30,7 +30,6 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
             case .success(let response):
                 do {
                     self.branchesList = try JSONDecoder().decode([BranchModel].self, from: response.data)
-                    print("Received JSON: \(String(data: response.data, encoding: .utf8) ?? "Invalid JSON")")
                     completion(.success(self.branchesList))
                 } catch {
                     completion(.failure(error))

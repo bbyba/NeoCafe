@@ -12,11 +12,12 @@ enum UserAPI {
     case checkEmailRegister(email: String)  // Check if customer's email is in the database and send a verification code.
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
 
-    // Main
+    // Main & Menu
 //    case getCategories(id: Int, email: String, image: String)
     case getCategories
     case getAllCategories
     case getProductDetails(productId: Int)
+    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
 
     // Branch
     case getBranches
@@ -46,6 +47,8 @@ extension UserAPI: TargetType {
             return "/menu/category/all/"
         case .getAllCategories:
             return "/menu/item/all/"
+        case .getMenuItemsByBranchCategory(let branchID, let categoryID):
+            return "/branch-menu/\(branchID)/\(categoryID)/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
         case .getBranches:
@@ -72,7 +75,8 @@ extension UserAPI: TargetType {
                 .getProductDetails,
                 .getBranches,
                 .getProfile,
-                .getProfileEdit:
+                .getProfileEdit,
+                .getMenuItemsByBranchCategory:
             return .get
         case .patchProfile:
             return .patch
@@ -97,6 +101,10 @@ extension UserAPI: TargetType {
         case .patchProfile(let userID, let firstName):
             let parameters = ["first_name": firstName]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .getMenuItemsByBranchCategory(let branchID, let categoryID):
+            let parameters = ["branch_id": branchID, "category_id": categoryID]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+
         }
     }
 

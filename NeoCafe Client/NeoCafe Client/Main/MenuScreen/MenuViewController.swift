@@ -5,9 +5,11 @@
 
 import UIKit
 
-class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
-    lazy var menuView = MenuView()
+class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSelectionDelegate {
     var selectedCategoryIndex = 0
+    var selectedBranchID: Int?
+    var selectedBranchName: String?
+    weak var branchDelegate: BranchSelectionDelegate?
 
     var popularItems: [PrItem] = [
         PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
@@ -18,48 +20,48 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
         PrItem(image: Asset.coffeeCupTop.name, name: "POP6", price: 230),
         PrItem(image: Asset.coffeeCupTop.name, name: "POP7", price: 230)]
 
-    override func loadView() {
-        view = menuView
-    }
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        menuView.collectionView.dataSource = self
-//        menuView.collectionView.delegate = self
-//        self.navigationItem.hidesBackButton = true
-//        addTargets()
-//        let initialIndexPath = IndexPath(item: selectedCategoryIndex, section: Int(MenuSection.category.rawValue) ?? 0)
-//            menuView.collectionView.selectItem(at: initialIndexPath, animated: false, scrollPosition: [])
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        menuView.collectionView.dataSource = self
-        menuView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
         self.navigationItem.hidesBackButton = true
         setTargets()
 
         viewModel.getAllCategories { [weak self] result in
             switch result {
             case .success(_):
-                self?.menuView.collectionView.reloadData()
+                self?.contentView.collectionView.reloadData()
             case .failure(let error):
                 print("Error fetching categories: \(error)")
             }
         }
+        updateBranchUI()
+    }
+
+    private func updateBranchUI() {
+        if let branchName = selectedBranchName {
+            contentView.branchNameLabel.text = branchName
+        } else {
+            contentView.branchNameLabel.text = "Select Branch"
+        }
+    }
+
+    func branchDidSelect(branchID: Int, branchName: String) {
+        self.selectedBranchID = branchID
+        self.selectedBranchName = branchName
+        updateBranchUI()
     }
 
     override func setTargets() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        menuView.headerDropDownButton.addTarget(self, action: #selector(menuDropdownButtonTapped), for: .touchUpInside)
+        contentView.headerDropDownButton.addTarget(self, action: #selector(menuDropdownButtonTapped), for: .touchUpInside)
     }
 
     @objc func menuDropdownButtonTapped() {
         print("MENU: branches modal dropdown tapped")
         viewModel.onBranchesNavigate?()
     }
-
 }
 
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {

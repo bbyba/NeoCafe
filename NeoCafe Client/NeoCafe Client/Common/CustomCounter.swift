@@ -6,7 +6,7 @@
 import UIKit
 import SnapKit
 
-class CustomStepper: UIControl{
+class CustomStepper: UIControl {
     var isDecrementing = false
 
     lazy var valueLabel: UILabel = {
@@ -106,14 +106,7 @@ class CustomStepper: UIControl{
         button.backgroundColor = color
         return button
     }
-//    
-//    private func stepperButton(color: UIColor, imageName: UIImage) -> UIButton {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-//        button.backgroundColor = color
-//        button.setImage(imageName, for: .normal)
-//        return button
-//    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

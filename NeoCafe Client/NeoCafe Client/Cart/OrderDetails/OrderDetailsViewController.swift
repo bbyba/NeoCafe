@@ -59,7 +59,7 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
             }
         let order = orderDetails[indexPath.row]
         cell.configureData(name: order.name, imageName: order.image, description: "nil", price: String(order.price))
-        cell.hidePlusButton()
+//        cell.hidePlusButton()
         return cell
         }
 
