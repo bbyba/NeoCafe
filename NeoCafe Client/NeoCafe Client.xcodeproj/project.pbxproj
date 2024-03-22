@@ -11,6 +11,9 @@
 		DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7012B8571FB002D8977 /* SplashView.swift */; };
 		DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7032B85721A002D8977 /* SplashViewController.swift */; };
 		DD3FA30D2B8D0BB500B89DDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */; };
+		DD6035132BA989B5003FFDDC /* BranchesModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6035122BA989B5003FFDDC /* BranchesModalViewModel.swift */; };
+		DD6035152BA9EDB7003FFDDC /* Extension+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6035142BA9EDB7003FFDDC /* Extension+Currency.swift */; };
+		DD6035172BADA975003FFDDC /* Extension+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6035162BADA975003FFDDC /* Extension+Notifications.swift */; };
 		DD73F2F72BA0129800C33E21 /* BonusModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F2F62BA0129800C33E21 /* BonusModalView.swift */; };
 		DD73F2F92BA04A5900C33E21 /* BonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F2F82BA04A5900C33E21 /* BonusViewController.swift */; };
 		DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F2FA2BA04AC000C33E21 /* BonusModalViewModel.swift */; };
@@ -79,7 +82,7 @@
 		DD9DD1112B95FBAA00C489F6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */; };
 		DD9DD1132B95FF2D00C489F6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1122B95FF2D00C489F6 /* NotificationView.swift */; };
 		DD9DD1152B95FF3A00C489F6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1142B95FF3A00C489F6 /* NotificationsViewController.swift */; };
-		DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */; };
+		DDAD65D32B8CB04F00F72345 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */; };
 		DDAD65D52B8CB09B00F72345 /* BigProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
 		DDAD65D92B8CB23200F72345 /* CollectionViewSingleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D82B8CB23200F72345 /* CollectionViewSingleHeader.swift */; };
@@ -120,6 +123,9 @@
 		DD03C7012B8571FB002D8977 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		DD03C7032B85721A002D8977 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		DD6035122BA989B5003FFDDC /* BranchesModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesModalViewModel.swift; sourceTree = "<group>"; };
+		DD6035142BA9EDB7003FFDDC /* Extension+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Currency.swift"; sourceTree = "<group>"; };
+		DD6035162BADA975003FFDDC /* Extension+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Notifications.swift"; sourceTree = "<group>"; };
 		DD73F2F62BA0129800C33E21 /* BonusModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusModalView.swift; sourceTree = "<group>"; };
 		DD73F2F82BA04A5900C33E21 /* BonusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusViewController.swift; sourceTree = "<group>"; };
 		DD73F2FA2BA04AC000C33E21 /* BonusModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusModalViewModel.swift; sourceTree = "<group>"; };
@@ -188,7 +194,7 @@
 		DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DD9DD1122B95FF2D00C489F6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		DD9DD1142B95FF3A00C489F6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCounter.swift; sourceTree = "<group>"; };
+		DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
 		DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigProductCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		DDAD65D82B8CB23200F72345 /* CollectionViewSingleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSingleHeader.swift; sourceTree = "<group>"; };
@@ -326,9 +332,9 @@
 			isa = PBXGroup;
 			children = (
 				DDAD65DA2B8CB27200F72345 /* MainModel.swift */,
-				DDF8B5912B70ED3C005FE06A /* MainViewController.swift */,
 				DDCA37112B8B748600451066 /* View */,
 				DDCB6B7E2B9E381000407089 /* MainViewModel.swift */,
+				DDF8B5912B70ED3C005FE06A /* MainViewController.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -340,6 +346,8 @@
 				DD93C1982B838BC100339287 /* Extension+UIColor.swift */,
 				DDCB6B792B9B7DB900407089 /* Extension+UIViews.swift */,
 				DDCB6B7B2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift */,
+				DD6035142BA9EDB7003FFDDC /* Extension+Currency.swift */,
+				DD6035162BADA975003FFDDC /* Extension+Notifications.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -401,8 +409,9 @@
 			isa = PBXGroup;
 			children = (
 				DD9DD0D42B90DF6600C489F6 /* BranchesModalView.swift */,
-				DD9DD0D82B90E36700C489F6 /* BranchesModalViewController.swift */,
 				DD9DD0D62B90DFB500C489F6 /* BranchesModalCell.swift */,
+				DD9DD0D82B90E36700C489F6 /* BranchesModalViewController.swift */,
+				DD6035122BA989B5003FFDDC /* BranchesModalViewModel.swift */,
 			);
 			path = BranchesModal;
 			sourceTree = "<group>";
@@ -542,7 +551,7 @@
 				DD93C1932B82CBEE00339287 /* CustomSearchBar.swift */,
 				DDF8B5D72B70F2BA005FE06A /* CustomButton.swift */,
 				DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */,
-				DDAD65D22B8CB04F00F72345 /* CustomCounter.swift */,
+				DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */,
 				DDAD65DE2B8CB3B100F72345 /* CustomHeaderView.swift */,
 			);
 			name = CustomUI;
@@ -837,10 +846,11 @@
 				DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */,
 				DD9DD0FF2B95ADCD00C489F6 /* AuthenticationCoordinator.swift in Sources */,
 				DDF8B5C32B70F1C7005FE06A /* BaseAuthRegView.swift in Sources */,
+				DD6035152BA9EDB7003FFDDC /* Extension+Currency.swift in Sources */,
 				DD9DD0FD2B94D35200C489F6 /* SplashViewModel.swift in Sources */,
 				DD93C18D2B7FF77800339287 /* Ext+UIViewController.swift in Sources */,
 				DDCB6B7A2B9B7DB900407089 /* Extension+UIViews.swift in Sources */,
-				DDAD65D32B8CB04F00F72345 /* CustomCounter.swift in Sources */,
+				DDAD65D32B8CB04F00F72345 /* CustomStepper.swift in Sources */,
 				DD73F3032BA36C4900C33E21 /* BranchDetailViewModel.swift in Sources */,
 				DDCB6B892B9FC53600407089 /* NotificationsCell.swift in Sources */,
 				DD92BCE82B99827C00E0825E /* BranchDetailView.swift in Sources */,
@@ -850,6 +860,7 @@
 				DD92BCE62B99827600E0825E /* BranchDetailViewController.swift in Sources */,
 				DDCB6B852B9F0F4F00407089 /* MenuViewModel.swift in Sources */,
 				DD9D083F2B7BF2F800BAB6CD /* Fonts.swift in Sources */,
+				DD6035132BA989B5003FFDDC /* BranchesModalViewModel.swift in Sources */,
 				DD9DD0D02B8FF4A700C489F6 /* ProductViewModel.swift in Sources */,
 				DD9DD10D2B95F73900C489F6 /* EditProfileView.swift in Sources */,
 				DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */,
@@ -902,6 +913,7 @@
 				DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */,
 				DD9DD0F62B94795C00C489F6 /* Presentable.swift in Sources */,
 				DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */,
+				DD6035172BADA975003FFDDC /* Extension+Notifications.swift in Sources */,
 				DD73F2F92BA04A5900C33E21 /* BonusViewController.swift in Sources */,
 				DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */,
 				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,

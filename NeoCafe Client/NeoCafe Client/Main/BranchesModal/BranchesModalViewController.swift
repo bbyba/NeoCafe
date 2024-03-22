@@ -9,7 +9,9 @@ protocol BranchSelectionDelegate: AnyObject {
     func branchDidSelect(branchID: Int, branchName: String)
 }
 
-class BranchesModalViewController: BaseViewController<BranchesViewModel, BranchesModalView>{
+class BranchesModalViewController: BaseViewController<BranchesModalViewModel, BranchesModalView>{
+//class BranchesModalViewController: BaseViewController<BranchesViewModel, BranchesModalView>{
+
     weak var delegate: BranchSelectionDelegate?
 
     override func viewDidLoad() {
@@ -59,7 +61,7 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)
         return cell
-        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]

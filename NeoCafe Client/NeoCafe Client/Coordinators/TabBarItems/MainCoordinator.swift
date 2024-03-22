@@ -15,22 +15,16 @@ final class MainCoordinator: BaseCoordinator {
 
     override func start() {
         let viewModel = MainViewModel()
-        viewModel.onMenuNavigate = { [weak self] in self?.openMenu(0) }
-        viewModel.onNotificationsNavigate = { [weak self] in self?.openNotifications()}
+        viewModel.onMenuNavigate = { [weak self] in
+            self?.openMenu(withBranchID: nil, branchName: nil)
+        }
+        viewModel.onNotificationsNavigate = { [weak self] in
+            self?.openNotifications()
+        }
         let viewController = MainViewController(viewModel: viewModel)
         mainVC = viewController
         presentViewController(viewController)
     }
-
-    //
-    //    override func start() {
-    //        let viewModel = MainViewModel()
-    //        viewModel.onMenuNavigate = { [weak self] in self?.openMenu(0) }
-    //        viewModel.onNotificationsNavigate = { [weak self] in self?.openNotifications()}
-    //        let viewController = MainViewController(viewModel: viewModel)
-    //        mainVC = viewController
-    //        presentViewController(viewController)
-    //    }
 
     private func presentViewController(_ viewController: UIViewController) {
         viewController.tabBarItem.title = S.main
@@ -41,66 +35,44 @@ final class MainCoordinator: BaseCoordinator {
 
     private func openNotifications() {
         let viewModel = NotificationsViewModel()
-        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true)}
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
         let notificationsViewController = NotificationsViewController(viewModel: viewModel)
-        //        router.push(notificationsViewController, hideBottomBar: false)
         router.push(notificationsViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    private func openMenu(_ categoryNum: Int) {
-        if shouldShowBranchesFirst {
-            openBranches(initialSelection: true)
-        } else {
-            let menuViewController = createMenuViewController()
+    private func openMenu(withBranchID branchID: Int?, branchName: String?) {
+            let menuViewController = createMenuViewController(branchID: branchID, branchName: branchName)
             router.push(menuViewController, hideBottomBar: false)
-        }
     }
 
-    private func showMenuWithBranch(branchID: Int, branchName: String) {
-        let menuViewController = createMenuViewController()
+    private func createMenuViewController(branchID: Int?, branchName: String?) -> MenuViewController {
+        let menuViewModel = MenuViewModel()
+        menuViewModel.onBranchesNavigate = { [weak self] in
+            self?.openBranches(initialSelection: false)
+        }
+        let menuViewController = MenuViewController(viewModel: menuViewModel)
         menuViewController.selectedBranchID = branchID
         menuViewController.selectedBranchName = branchName
-        router.push(menuViewController, hideBottomBar: false)
-    }
-
-    private func createMenuViewController() -> MenuViewController {
-        let menuViewModel = MenuViewModel()
-        menuViewModel.onBranchesNavigate = { [weak self] in self?.openBranches(initialSelection: false) }
-        let menuViewController = MenuViewController(viewModel: menuViewModel)
         return menuViewController
     }
 
-
     private func openBranches(initialSelection: Bool) {
-        let branchesViewModel = BranchesViewModel()
+        let branchesViewModel = BranchesModalViewModel()
+        branchesViewModel.onBranchesSelectedNavigate = { [weak self] branchID, branchName in
+            self?.shouldShowBranchesFirst = false
+            self?.openMenu(withBranchID: branchID, branchName: branchName)
+        }
         let branchesViewController = BranchesModalViewController(viewModel: branchesViewModel)
         branchesViewController.delegate = self
         branchesViewController.modalPresentationStyle = .overFullScreen
-        if initialSelection {
-            router.present(branchesViewController, animated: true)
-        } else {
-            router.present(branchesViewController, animated: true)
-//            router.push(branchesViewController, hideBottomBar: false)
-        }
+        router.present(branchesViewController, animated: true)
     }
-
 }
-
-//extension MainCoordinator: BranchSelectionDelegate {
-//    func branchDidSelect(branchID: Int, branchName: String) {
-//        let menuViewController = MenuViewController(viewModel: MenuViewModel())
-//        menuViewController.selectedBranchID = branchID
-//        menuViewController.contentView.branchNameLabel.text = branchName
-//        router.push(menuViewController, hideBottomBar: false)
-//    }
-//}
 
 extension MainCoordinator: BranchSelectionDelegate {
     func branchDidSelect(branchID: Int, branchName: String) {
-        shouldShowBranchesFirst = false
-        let menuViewController = createMenuViewController()
-        menuViewController.selectedBranchID = branchID
-        menuViewController.selectedBranchName = branchName
-        router.push(menuViewController, hideBottomBar: false)
+        openMenu(withBranchID: branchID, branchName: branchName)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CustomCounter.swift
+//  CustomStepper.swift
 //  NeoCafe Client
 //
 
@@ -18,9 +18,6 @@ class CustomStepper: UIControl {
 
     lazy var incrementButton = stepperButton(color: .orangeCustom, titleColor: .ivoryCustom, text: "+")
     lazy var decrementButton = stepperButton(color: .greyCustom, titleColor: .darkBlueCustom, text: "-")
-
-//    lazy var incrementButton = stepperButton(color: .orangeCustom, imageName: Asset.stepperPlus.image)
-//    lazy var decrementButton = stepperButton(color: .greyCustom, imageName: Asset.stepperMinus.image)
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
@@ -50,8 +47,8 @@ class CustomStepper: UIControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        incrementButton.layer.cornerRadius = 17
-        decrementButton.layer.cornerRadius = 17
+        incrementButton.layer.cornerRadius = 20
+        decrementButton.layer.cornerRadius = 20
     }
 
 

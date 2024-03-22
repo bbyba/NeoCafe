@@ -39,9 +39,9 @@ struct Item: Codable {
     let id: Int
     let name: String
     let description: String
-    let itemImage: String
+    let itemImage: String?
     let pricePerUnit: Int
-    let branch: Int
+    let branch: Int?
     let category: CategoryModel
     let ingredients: [Ingredient]?
 
@@ -106,7 +106,7 @@ extension BranchModel {
     var todaySchedule: String? {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ru_RU")
-        dateFormatter.dateFormat = "E" // gives the day format like "Mon", "Tue"
+        dateFormatter.dateFormat = "E"
         let todayShortString = dateFormatter.string(from: Date())
 
         if let todaySchedule = schedules.first(where: { $0.day == todayShortString }) {
@@ -166,7 +166,17 @@ struct Order: Codable {
 
 // MARK: - Ito
 struct Ito: Codable {
-    let id, item, quantity: Int
+    let id, item: Int
+    let itemName: String
+    let quantity: Int
+    let totalPrice: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id, item
+        case itemName = "item_name"
+        case quantity
+        case totalPrice = "total_price"
+    }
 }
 
 // MARK: - Table

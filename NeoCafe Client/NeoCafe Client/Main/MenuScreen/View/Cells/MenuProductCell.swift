@@ -7,6 +7,9 @@ import UIKit
 
 class MenuProductCell: UICollectionViewCell {
     static let identifier = "MenuProductCell"
+    var onAddToCart: ((Item) -> Void)?
+    private var currentItem: Item?
+
 
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -21,15 +24,8 @@ class MenuProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
+        label.numberOfLines = 0 
         label.text = "Cafe Latte"
-        return label
-    }()
-
-    lazy var descriptionLabel = {
-        let label = UILabel()
-        label.font = .poppins(ofSize: 12, weight: .regular)
-        label.textColor = .darkBlueCustom
-        label.text = "Espresso with Milk"
         return label
     }()
 
@@ -37,7 +33,6 @@ class MenuProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .orangeCustom
-        label.text = "270 T"
         return label
     }()
 
@@ -57,14 +52,17 @@ class MenuProductCell: UICollectionViewCell {
         layer.cornerRadius = 14
         addSubviews()
         setupConstraints()
-//        addTargets()
+        addTargets()
         setupShadow()
+    }
+
+    private func addTargets() {
+        plusButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
     }
 
     private func addSubviews() {
         contentView.addSubview(image)
         contentView.addSubview(titleLabel)
-//        contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(plusButton)
     }
@@ -79,16 +77,11 @@ class MenuProductCell: UICollectionViewCell {
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(8)
-            make.leading.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview().offset(10)
         }
 
-//        descriptionLabel.snp.makeConstraints { make in
-//            make.top.equalTo(titleLabel.snp.bottom).offset(6)
-//            make.leading.equalTo(image.snp.trailing).offset(12)
-//            make.trailing.equalToSuperview().offset(-40)
-//        }
-
         priceLabel.snp.makeConstraints { make in
+//            make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.bottom.equalToSuperview().offset(-10)
             make.leading.equalToSuperview().offset(10)
         }
@@ -108,16 +101,29 @@ class MenuProductCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(id: Int?,
-                       name: String,
-                       description: String?,
-                       itemImage: String,
-                       pricePerUnit: Int,
-                       branch: Int?,
-                       category: CategoryModel?) {
-        image.image = UIImage(named: itemImage)
-        titleLabel.text = name
-        priceLabel.text = String(pricePerUnit)
+//    func configureData(id: Int?,
+//                       name: String,
+////                       description: String?,
+//                       itemImage: String,
+//                       pricePerUnit: Int,
+//                       branch: Int?,
+//                       category: CategoryModel?) {
+//        image.image = UIImage(named: itemImage)
+//        titleLabel.text = name
+//        priceLabel.text = String(pricePerUnit)
+//    }
+
+    func configureData(item: Item) {
+        currentItem = item
+        image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
+        titleLabel.text = item.name
+        priceLabel.text = "\(item.pricePerUnit)"
+    }
+
+    @objc private func addToCartButtonTapped() {
+        if let currentItem = currentItem {
+            onAddToCart?(currentItem)
+        }
     }
 
     required init?(coder: NSCoder) {

@@ -13,7 +13,7 @@ final class CartCoordinator: BaseCoordinator {
     override func start() {
         let viewModel = CartViewModel()
 //        viewModel.onBonusModalsNavigate = { [weak self] in self?.openBonusModals()}
-        let viewController = CartViewController()
+        let viewController = CartViewController(viewModel: viewModel)
         mainVC = viewController
         viewController.tabBarItem.title = S.cart
         viewController.tabBarItem.image = Asset.TabBar.cart.image

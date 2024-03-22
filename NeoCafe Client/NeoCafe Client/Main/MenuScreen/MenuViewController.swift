@@ -11,15 +11,6 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
     var selectedBranchName: String?
     weak var branchDelegate: BranchSelectionDelegate?
 
-    var popularItems: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP4", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP5", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP6", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP7", price: 230)]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.collectionView.dataSource = self
@@ -35,6 +26,16 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
                 print("Error fetching categories: \(error)")
             }
         }
+
+        viewModel.getMenuItemsByBranchCategory { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.contentView.collectionView.reloadData()
+            case .failure(let error):
+                print("Error fetching categories: \(error)")
+            }
+        }
+        
         updateBranchUI()
     }
 
@@ -74,8 +75,7 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         case .category:
             return viewModel.allCategories.count
         case .productItem:
-//            return viewModel.menuItems.count
-            return popularItems.count
+            return viewModel.menuItems.count
         }
     }
 
@@ -94,10 +94,11 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuProductCell.identifier, for: indexPath) as? MenuProductCell else {
                 fatalError("Could not dequeue MenuProductCell")
             }
-//            let productItem = viewModel.menuItems[indexPath.row]
-//            cell.configureData(id: productItem.id, name: productItem.name, description: productItem.description, itemImage: productItem.itemImage, pricePerUnit: productItem.pricePerUnit, branch: productItem.branch, category: productItem.category)
-            let popularItem = popularItems[indexPath.row]
-            cell.configureData(id: nil, name: popularItem.name, description: nil, itemImage: popularItem.image, pricePerUnit: popularItem.price, branch: nil, category: nil)
+            let menuItem = viewModel.menuItems[indexPath.row]
+            cell.configureData(item: menuItem)
+            cell.onAddToCart = { [weak self] item in
+                self?.viewModel.addToCart(menuItem: item)
+            }
             return cell
         }
     }
@@ -131,15 +132,8 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.isCategorySelected = true
 
         case .productItem:
-//            let menuItemSquare = viewModel.menuItems[indexPath.row]
-//            let productDetailViewController = ProductViewController()
-//            productDetailViewController.hidesBottomBarWhenPushed = true
-//            navigationController?.pushViewController(productDetailViewController, animated: true)
-
-            let menuItemSquare = popularItems[indexPath.row]
-            let productDetailViewController = ProductViewController()
-            productDetailViewController.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(productDetailViewController, animated: true)
+            let menuItemSquare = viewModel.menuItems[indexPath.row]
+            viewModel.onProductDetailNavigate?()
         }
     }
 }

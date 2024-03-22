@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class EmptyCartView: UIView {
+class EmptyCartView: UIView, BaseContentView {
 
     lazy var header = CustomHeaderView()
 
@@ -95,7 +95,6 @@ class EmptyCartView: UIView {
         }
 
         toMenuButton.snp.makeConstraints { make in
-//            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.centerX.equalToSuperview()

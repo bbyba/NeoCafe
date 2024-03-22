@@ -17,7 +17,9 @@ enum UserAPI {
     case getCategories
     case getAllCategories
     case getProductDetails(productId: Int)
-    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
+//    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
+        case getMenuItemsByBranchCategory(branchID: Int)
+
 
     // Branch
     case getBranches
@@ -47,8 +49,8 @@ extension UserAPI: TargetType {
             return "/menu/category/all/"
         case .getAllCategories:
             return "/menu/item/all/"
-        case .getMenuItemsByBranchCategory(let branchID, let categoryID):
-            return "/branch-menu/\(branchID)/\(categoryID)/"
+        case .getMenuItemsByBranchCategory(let branchID):
+            return "/branch-menu/\(branchID)/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
         case .getBranches:
@@ -61,6 +63,7 @@ extension UserAPI: TargetType {
             return "/profile/customer/\(userId)/edit/"
         }
     }
+
 
     var method: Moya.Method {
         switch self {
@@ -96,13 +99,11 @@ extension UserAPI: TargetType {
                 .getProductDetails,
                 .getBranches,
                 .getProfile,
-                .getProfileEdit:
+                .getProfileEdit,
+                .getMenuItemsByBranchCategory:
             return .requestPlain
-        case .patchProfile(let userID, let firstName):
+        case .patchProfile(_, let firstName):
             let parameters = ["first_name": firstName]
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .getMenuItemsByBranchCategory(let branchID, let categoryID):
-            let parameters = ["branch_id": branchID, "category_id": categoryID]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
 
         }
