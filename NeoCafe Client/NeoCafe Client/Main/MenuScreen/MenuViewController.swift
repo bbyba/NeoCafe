@@ -13,7 +13,6 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
         super.viewDidLoad()
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        self.navigationItem.hidesBackButton = true
         setTargets()
         fetchMenuData()
     }
@@ -132,10 +131,9 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
                 }
             }
             cell.isCategorySelected = true
-
         case .productItem:
-            let menuItemSquare = viewModel.menuItems[indexPath.row]
-            viewModel.onProductDetailNavigate?()
+            let menuItem = viewModel.menuItems[indexPath.row]
+            viewModel.onProductDetailNavigate?(menuItem.id)
         }
     }
 }

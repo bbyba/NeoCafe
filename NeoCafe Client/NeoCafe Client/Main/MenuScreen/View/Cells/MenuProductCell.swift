@@ -77,7 +77,7 @@ class MenuProductCell: UICollectionViewCell {
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(image.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().offset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
 
         priceLabel.snp.makeConstraints { make in
@@ -101,23 +101,11 @@ class MenuProductCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-//    func configureData(id: Int?,
-//                       name: String,
-////                       description: String?,
-//                       itemImage: String,
-//                       pricePerUnit: Int,
-//                       branch: Int?,
-//                       category: CategoryModel?) {
-//        image.image = UIImage(named: itemImage)
-//        titleLabel.text = name
-//        priceLabel.text = String(pricePerUnit)
-//    }
-
     func configureData(item: Item) {
         currentItem = item
         image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
         titleLabel.text = item.name
-        priceLabel.text = "\(item.pricePerUnit)"
+        priceLabel.text = "\(item.pricePerUnit) с"
     }
 
     @objc private func addToCartButtonTapped() {

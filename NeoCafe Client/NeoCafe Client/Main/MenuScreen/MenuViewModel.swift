@@ -9,8 +9,8 @@ import Moya
 protocol MenuViewModelProtocol {
     var onSearchNavigate: EmptyCompletion? { get set }
     var onBranchesNavigate: EmptyCompletion? { get set }
-    var onProductDetailNavigate: EmptyCompletion? { get set }
     var onAddToCartNavigate: EmptyCompletion? { get set }
+    var onProductDetailNavigate: ((Int) -> Void)? { get set }
 
     var allCategories: [CategoryModel] { get }
     var menuItems: [Item] { get }
@@ -21,11 +21,11 @@ protocol MenuViewModelProtocol {
 }
 
 class MenuViewModel: NSObject, MenuViewModelProtocol {
-    var onBranchesNavigate: EmptyCompletion?
     var onSearchNavigate: EmptyCompletion?
-    var onProductDetailNavigate: EmptyCompletion?
+    var onBranchesNavigate: EmptyCompletion?
     var onAddToCartNavigate: EmptyCompletion?
-    
+    var onProductDetailNavigate: ((Int) -> Void)?
+
     var allCategories: [CategoryModel] = []
     var menuItems: [Item] = []
     var selectedBranchID: Int?

@@ -137,6 +137,13 @@ class BranchesModalCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
+    func hideAddressPhone() {
+        addressIcon.isHidden = true
+        addressLabel.isHidden = true
+        phoneIcon.isHidden = true
+        phoneLabel.isHidden = true
+    }
+
     func configureData(_ branch: BranchModel) {
         branchNameLabel.text = branch.branchName
         addressLabel.text = branch.address

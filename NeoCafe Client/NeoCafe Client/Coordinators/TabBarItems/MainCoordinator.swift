@@ -54,11 +54,24 @@ final class MainCoordinator: BaseCoordinator {
         menuViewModel.onBranchesNavigate = { [weak self] in
             self?.openBranches()
         }
+        menuViewModel.onProductDetailNavigate = { [weak self] productId in
+            self?.openProductDetails(productId: productId)
+        }
         let menuViewController = MenuViewController(viewModel: menuViewModel)
         if let validBranchID = branchID, let validBranchName = branchName {
             menuViewController.branchDidSelect(branchID: validBranchID, branchName: validBranchName)
         }
-        router.push(menuViewController, hideBottomBar: false)
+        router.push(menuViewController, animated: true, hideBottomBar: false, hideNavBar: true, completion: nil)
+    }
+
+    private func openProductDetails(productId: Int) {
+        let productViewModel = ProductViewModel()
+        productViewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        let productViewController = ProductViewController(viewModel: productViewModel)
+        productViewController.fetchProductData(productId: productId)
+        router.push(productViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
     private func openBranches() {

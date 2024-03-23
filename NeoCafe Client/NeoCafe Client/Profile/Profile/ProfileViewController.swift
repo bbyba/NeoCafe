@@ -35,7 +35,6 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
     }
 
     @objc func editProfileTapped() {
-        print("Profile: editProfileTapped")
         viewModel.onEditProfileNavigate?()
     }
 }

@@ -7,14 +7,14 @@ import UIKit
 import Moya
 
 protocol BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion? { get set }
+    var onBranchDetailNavigate: ((Int) -> Void)? { get set }
 //    var onSearchNavigate: EmptyCompletion? { get set }
     var branchesList: [BranchModel]  { get }
     func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
 }
 
 class BranchesViewModel: NSObject, BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion?
+    var onBranchDetailNavigate: ((Int) -> Void)?
     var branchesList: [BranchModel]
     let provider: MoyaProvider<UserAPI>
 

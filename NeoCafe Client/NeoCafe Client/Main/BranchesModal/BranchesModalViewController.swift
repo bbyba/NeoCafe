@@ -58,6 +58,7 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
             fatalError("Could not dequeue BigProductCell") }
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)
+        cell.hideAddressPhone()
         return cell
     }
 

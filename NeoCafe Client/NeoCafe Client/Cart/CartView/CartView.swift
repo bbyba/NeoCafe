@@ -175,7 +175,7 @@ class CartView: UIView, BaseContentView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.33))
+            heightDimension: .fractionalHeight(0.37))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

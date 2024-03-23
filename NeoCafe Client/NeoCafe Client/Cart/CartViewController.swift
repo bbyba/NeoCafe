@@ -5,6 +5,7 @@
 
 
 import UIKit
+
 struct productModel {
     let image: String
     let name: String
@@ -113,7 +114,27 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView,
+                        trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
+                        -> UISwipeActionsConfiguration? {
 
+        // Create a UIContextualAction for deleting an item from the cart.
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            guard let strongSelf = self else { return }
 
+            // Remove the item from the cart model.
+            let itemToRemove = CartViewModel.shared.orderList[indexPath.row]
+            CartViewModel.shared.remove(item: itemToRemove)
+
+            // Update the UI accordingly.
+            strongSelf.updateCartView()
+
+            // Call completion handler to dismiss the swipe action button.
+            completionHandler(true)
+        }
+
+        // Return a swipe actions configuration with the delete action.
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 
 }

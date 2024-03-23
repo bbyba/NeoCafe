@@ -63,6 +63,6 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]
         coordinator?.openBranchDetail(branch: selectedBranch)
+//        viewModel.onBranchDetailNavigate?(selectedBranch.id)
     }
-
 }

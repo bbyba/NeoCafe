@@ -187,7 +187,7 @@ extension MenuView {
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
 //            heightDimension: .absolute(220))
-            heightDimension: .fractionalHeight(0.33))
+            heightDimension: .fractionalHeight(0.4))
 
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])

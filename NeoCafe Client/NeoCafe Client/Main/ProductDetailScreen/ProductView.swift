@@ -100,12 +100,12 @@ class ProductView: UIView, BaseContentView {
     func setupConstraints() {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(220)
+            make.height.equalTo(230)
         }
 
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
