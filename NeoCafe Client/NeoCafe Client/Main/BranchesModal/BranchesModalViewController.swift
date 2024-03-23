@@ -10,7 +10,6 @@ protocol BranchSelectionDelegate: AnyObject {
 }
 
 class BranchesModalViewController: BaseViewController<BranchesModalViewModel, BranchesModalView>{
-//class BranchesModalViewController: BaseViewController<BranchesViewModel, BranchesModalView>{
 
     weak var delegate: BranchSelectionDelegate?
 
@@ -41,7 +40,6 @@ class BranchesModalViewController: BaseViewController<BranchesModalViewModel, Br
     }
 
     @objc func closeButtonTapped(_ sender: UIButton) {
-        print("branch modal: closeButtonTapped")
         dismiss(animated: true, completion: nil)
     }
 }

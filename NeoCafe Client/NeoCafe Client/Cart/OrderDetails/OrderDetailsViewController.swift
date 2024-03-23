@@ -14,13 +14,7 @@ struct OrderDetailsModel {
 class OrderDetailsViewController: UIViewController{
     lazy var orderDetailsView = OrderDetailsView()
 
-    var orderDetails: [OrderDetailsModel] = [
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-    ]
+    var orderDetails: [Item] = []
 
     override func loadView() {
         view = orderDetailsView
@@ -58,8 +52,7 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
                 fatalError("Could not dequeue BigProductCell")
             }
         let order = orderDetails[indexPath.row]
-        cell.configureData(name: order.name, imageName: order.image, description: "nil", price: String(order.price))
-//        cell.hidePlusButton()
+        cell.configureData(item: order)
         return cell
         }
 

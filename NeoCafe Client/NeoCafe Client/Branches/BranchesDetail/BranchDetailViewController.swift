@@ -4,6 +4,12 @@
 //
 
 import UIKit
+struct PrItem {
+    let image: String
+    let name: String
+    let price: Int
+}
+
 
 class BranchDetailViewController: BaseViewController<BranchDetailViewModel, BranchDetailView> {
 

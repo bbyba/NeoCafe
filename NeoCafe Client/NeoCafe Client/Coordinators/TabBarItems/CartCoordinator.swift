@@ -6,13 +6,19 @@
 import UIKit
 
 final class CartCoordinator: BaseCoordinator {
-    var onBonusModalsNavigate: EmptyCompletion?
+    var onOrderNavigate: EmptyCompletion?
 
     private var mainVC: CartViewController!
 
     override func start() {
         let viewModel = CartViewModel()
-//        viewModel.onBonusModalsNavigate = { [weak self] in self?.openBonusModals()}
+//        viewModel.onAddMoreNavigate = { [weak self] in
+//            self?.mainCoordinator?.openMenu(withBranchID: nil, branchName: nil)
+//        }
+        viewModel.onOrderNavigate = { [weak self] in
+            self?.openBonusModals()
+        }
+
         let viewController = CartViewController(viewModel: viewModel)
         mainVC = viewController
         viewController.tabBarItem.title = S.cart

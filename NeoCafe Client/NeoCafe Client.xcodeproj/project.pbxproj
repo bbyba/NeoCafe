@@ -86,7 +86,6 @@
 		DDAD65D52B8CB09B00F72345 /* BigProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
 		DDAD65D92B8CB23200F72345 /* CollectionViewSingleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D82B8CB23200F72345 /* CollectionViewSingleHeader.swift */; };
-		DDAD65DB2B8CB27200F72345 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65DA2B8CB27200F72345 /* MainModel.swift */; };
 		DDAD65DD2B8CB29700F72345 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65DC2B8CB29700F72345 /* MainView.swift */; };
 		DDAD65DF2B8CB3B100F72345 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65DE2B8CB3B100F72345 /* CustomHeaderView.swift */; };
 		DDAD65E22B8CBB9100F72345 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65E12B8CBB9100F72345 /* AuthenticationViewController.swift */; };
@@ -198,7 +197,6 @@
 		DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigProductCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		DDAD65D82B8CB23200F72345 /* CollectionViewSingleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSingleHeader.swift; sourceTree = "<group>"; };
-		DDAD65DA2B8CB27200F72345 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		DDAD65DC2B8CB29700F72345 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		DDAD65DE2B8CB3B100F72345 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		DDAD65E12B8CBB9100F72345 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 		DD93C1902B82C89900339287 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				DDAD65DA2B8CB27200F72345 /* MainModel.swift */,
 				DDCA37112B8B748600451066 /* View */,
 				DDCB6B7E2B9E381000407089 /* MainViewModel.swift */,
 				DDF8B5912B70ED3C005FE06A /* MainViewController.swift */,
@@ -526,8 +523,8 @@
 			isa = PBXGroup;
 			children = (
 				DD7584012B8F34FF007CCF5F /* View */,
-				DD9DD0BF2B8FD68400C489F6 /* MenuViewController.swift */,
 				DDCB6B842B9F0F4E00407089 /* MenuViewModel.swift */,
+				DD9DD0BF2B8FD68400C489F6 /* MenuViewController.swift */,
 			);
 			path = MenuScreen;
 			sourceTree = "<group>";
@@ -827,7 +824,6 @@
 				DD9DD0FB2B94CA0700C489F6 /* InitializationCoordinator.swift in Sources */,
 				DD9DD0CA2B8FF1BA00C489F6 /* BaseContentView.swift in Sources */,
 				DD9DD0E12B91107E00C489F6 /* CartViewController.swift in Sources */,
-				DDAD65DB2B8CB27200F72345 /* MainModel.swift in Sources */,
 				DDCB6B7F2B9E381000407089 /* MainViewModel.swift in Sources */,
 				DD9DD1152B95FF3A00C489F6 /* NotificationsViewController.swift in Sources */,
 				DDF8B5C62B70F1FF005FE06A /* Model.swift in Sources */,

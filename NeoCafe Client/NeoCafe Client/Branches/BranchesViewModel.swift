@@ -13,7 +13,6 @@ protocol BranchesViewModelProtocol {
     func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
 }
 
-
 class BranchesViewModel: NSObject, BranchesViewModelProtocol {
     var onBranchesDetailNavigate: EmptyCompletion?
     var branchesList: [BranchModel]
@@ -37,7 +36,6 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
                 }
             case .failure(let error):
                 completion(.failure(error))
-
             }
         }
     }

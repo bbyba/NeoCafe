@@ -11,15 +11,10 @@ import SwiftUI
 class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
     var coordinator: ProfileCoordinator?
 
-    var currentOrders: [OrderHistoryModel] = [
-        OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "Сейчас"),
+    var currentOrders: [Item] = [
     ]
 
-    var completedOrders: [OrderHistoryModel] = [
-        OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "Вчера"),
-        OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "17 августа"),
-        OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "13 августа"),
-        OrderHistoryModel(image: Asset.coffeeCupTop.name, name: "NeoCafe Dzerzhinka", description: "Латте, Капучино, Багров...", status: "10 августа")
+    var completedOrders: [Item] = [
     ]
 
     override func viewDidLoad() {
@@ -72,13 +67,15 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = currentOrders[indexPath.row]
-            cell.configureData(name: currentOrder.name, imageName: currentOrder.image, description: currentOrder.description, price: currentOrder.status)
+//            cell.configureData(name: currentOrder.name, imageName: currentOrder.image, description: currentOrder.description, price: currentOrder.status)
+            cell.configureData(item: currentOrder)
 //            cell.hideStepper()
 //            cell.hidePlusButton()
             return cell
         case .completed:
             let completedOrder = completedOrders[indexPath.row]
-            cell.configureData(name: completedOrder.name, imageName: completedOrder.image, description: completedOrder.description, price: completedOrder.status)
+//            cell.configureData(name: completedOrder.name, imageName: completedOrder.image, description: completedOrder.description, price: completedOrder.status)
+            cell.configureData(item: completedOrder)
 //            cell.hideStepper()
 //            cell.hidePlusButton()
             return cell

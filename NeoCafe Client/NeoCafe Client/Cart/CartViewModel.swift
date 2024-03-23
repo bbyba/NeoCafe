@@ -7,9 +7,8 @@ import UIKit
 import Moya
 
 protocol CartViewModelProtocol {
-    var onBonusModalsNavigate: EmptyCompletion? { get set }
-//    var onSearchNavigate: EmptyCompletion? { get set }
-//    var onMenuNavigate: EmptyCompletion? { get set }
+    var onAddMoreNavigate: EmptyCompletion? { get set }
+    var onOrderNavigate: EmptyCompletion? { get set }
     var orderList: [Item]  { get }
 //    func postOrder(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
 }
@@ -17,9 +16,8 @@ protocol CartViewModelProtocol {
 
 class CartViewModel: NSObject, CartViewModelProtocol {
     static var shared = CartViewModel()
-    var onBonusModalsNavigate: EmptyCompletion?
+    var onAddMoreNavigate: EmptyCompletion?
     var onOrderNavigate: EmptyCompletion?
-    var onMenuNavigate: EmptyCompletion?
     var totalPrice: Int = 0
     var itemQuantities: [Int: Int] = [:]
 

@@ -13,8 +13,8 @@ enum UserAPI {
     case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
 
     // Main & Menu
-//    case getCategories(id: Int, email: String, image: String)
     case getCategories
+    case getPopularItems(branchID: Int)
     case getAllCategories
     case getProductDetails(productId: Int)
 //    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
@@ -37,6 +37,7 @@ extension UserAPI: TargetType {
 
     var path: String {
         switch self {
+        // Auth
         case .checkEmailRegister(_):
             return "/customer/check-email-register/"
         case .checkEmailLogin(_):
@@ -45,21 +46,29 @@ extension UserAPI: TargetType {
             return "/customer/register/"
         case .loginUser(_, _):
             return "/customer/login/"
+
+        // Main & Menu
         case .getCategories:
             return "/menu/category/all/"
+        case .getPopularItems(let branchID):
+            return "/branch/\(branchID)/top-selling-menu-items/"
         case .getAllCategories:
             return "/menu/item/all/"
         case .getMenuItemsByBranchCategory(let branchID):
             return "/branch-menu/\(branchID)/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
+
+        // Branches
         case .getBranches:
             return "/branch/all/"
+
+        // Profile
         case .getProfile(let userID):
             return "/profile/customer/\(userID)/"
         case .getProfileEdit(let userID):
             return "/profile/customer/\(userID)/edit/"
-        case .patchProfile(let userId, let firstName):
+        case .patchProfile(let userId, _):
             return "/profile/customer/\(userId)/edit/"
         }
     }
@@ -79,7 +88,8 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory:
+                .getMenuItemsByBranchCategory,
+                .getPopularItems:
             return .get
         case .patchProfile:
             return .patch
@@ -100,7 +110,8 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory:
+                .getMenuItemsByBranchCategory,
+                .getPopularItems:
             return .requestPlain
         case .patchProfile(_, let firstName):
             let parameters = ["first_name": firstName]

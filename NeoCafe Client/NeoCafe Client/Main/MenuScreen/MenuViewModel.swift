@@ -17,25 +17,23 @@ protocol MenuViewModelProtocol {
     var selectedBranchID: Int? { get set }
     var selectedBranchName: String? { get set }
     func getAllCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void)
 }
 
 class MenuViewModel: NSObject, MenuViewModelProtocol {
-    var selectedBranchID: Int?
-    var selectedBranchName: String?
-
     var onBranchesNavigate: EmptyCompletion?
     var onSearchNavigate: EmptyCompletion?
     var onProductDetailNavigate: EmptyCompletion?
     var onAddToCartNavigate: EmptyCompletion?
-
+    
     var allCategories: [CategoryModel] = []
     var menuItems: [Item] = []
-    var branchId: Int
+    var selectedBranchID: Int?
+    var selectedBranchName: String?
     //    var categoryID: Int
     let provider: MoyaProvider<UserAPI>
 
     override init() {
-        self.branchId = 1
         self.provider = MoyaProvider<UserAPI>()
     }
 
@@ -60,21 +58,14 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
         }
     }
 
-    func getMenuItemsByBranchCategory(completion: @escaping (Result<[Item], Error>) -> Void) {
-        //        provider.request(.getMenuItemsByBranchCategory(categoryID: self.categoryID)) { [weak self] result in
-        provider.request(.getMenuItemsByBranchCategory(branchID: 1)) { [weak self] result in
-
+    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void) {
+        provider.request(.getMenuItemsByBranchCategory(branchID: branchID)) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     do {
                         let menuItems = try JSONDecoder().decode([Item].self, from: response.data)
                         self?.menuItems = menuItems
-
-                        print("Fetched menuItems:")
-                        menuItems.forEach { menuItem in
-                            print("ID: \(menuItem.id), Name: \(menuItem.name), price: \(menuItem.pricePerUnit), category: \(menuItem.category)")
-                        }
                         completion(.success(menuItems))
                     } catch {
                         print("Error decoding menuItems: \(error)")
@@ -90,7 +81,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
     func addToCart(menuItem: Item) {
         CartViewModel.shared.filterItems(newItem: menuItem)
-        print("Added to cart: \(menuItem.name)")
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
         onAddToCartNavigate?()
     }

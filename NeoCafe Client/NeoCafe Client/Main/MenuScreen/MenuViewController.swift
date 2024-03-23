@@ -7,8 +7,6 @@ import UIKit
 
 class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSelectionDelegate {
     var selectedCategoryIndex = 0
-    var selectedBranchID: Int?
-    var selectedBranchName: String?
     weak var branchDelegate: BranchSelectionDelegate?
 
     override func viewDidLoad() {
@@ -17,40 +15,45 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
         contentView.collectionView.delegate = self
         self.navigationItem.hidesBackButton = true
         setTargets()
-
-        viewModel.getAllCategories { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.contentView.collectionView.reloadData()
-            case .failure(let error):
-                print("Error fetching categories: \(error)")
-            }
-        }
-
-        viewModel.getMenuItemsByBranchCategory { [weak self] result in
-            switch result {
-            case .success(_):
-                self?.contentView.collectionView.reloadData()
-            case .failure(let error):
-                print("Error fetching categories: \(error)")
-            }
-        }
-        
-        updateBranchUI()
+        fetchMenuData()
     }
 
-    private func updateBranchUI() {
-        if let branchName = selectedBranchName {
-            contentView.branchNameLabel.text = branchName
-        } else {
-            contentView.branchNameLabel.text = "Select Branch"
+    func fetchMenuData() {
+        getCategoriesMenu()
+        getMenubyBranch()
+    }
+
+    func getCategoriesMenu() {
+        viewModel.getAllCategories { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Error fetching categories: \(error)")
+                }
+            }
+        }
+    }
+
+    func getMenubyBranch() {
+        guard let branchID = viewModel.selectedBranchID else { return }
+        viewModel.getMenuItemsByBranchCategory(branchID: branchID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Error fetching categories: \(error)")
+                }
+            }
         }
     }
 
     func branchDidSelect(branchID: Int, branchName: String) {
-        self.selectedBranchID = branchID
-        self.selectedBranchName = branchName
-        updateBranchUI()
+        viewModel.selectedBranchID = branchID
+        viewModel.selectedBranchName = branchName
+        contentView.branchNameLabel.text = viewModel.selectedBranchName?.isEmpty == false ? viewModel.selectedBranchName : "Select Branch"
     }
 
     override func setTargets() {
@@ -60,7 +63,6 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
     }
 
     @objc func menuDropdownButtonTapped() {
-        print("MENU: branches modal dropdown tapped")
         viewModel.onBranchesNavigate?()
     }
 }

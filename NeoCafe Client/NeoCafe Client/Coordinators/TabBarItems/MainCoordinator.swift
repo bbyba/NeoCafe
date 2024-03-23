@@ -12,14 +12,19 @@ final class MainCoordinator: BaseCoordinator {
     private var mainVC: MainViewController!
     var tabBarCoordinator: TabBarCoordinator?
     private var shouldShowBranchesFirst = true
+    private var selectedBranchID: Int?
+    private var selectedBranchName: String?
 
     override func start() {
         let viewModel = MainViewModel()
         viewModel.onMenuNavigate = { [weak self] in
-            self?.openMenu(withBranchID: nil, branchName: nil)
+            self?.openMenu(branchID: self?.selectedBranchID, branchName: self?.selectedBranchName)
         }
         viewModel.onNotificationsNavigate = { [weak self] in
             self?.openNotifications()
+        }
+        viewModel.onBranchesModalNavigate = { [weak self] in
+            self?.openBranchesMain(initialSelection: true)
         }
         let viewController = MainViewController(viewModel: viewModel)
         mainVC = viewController
@@ -42,27 +47,40 @@ final class MainCoordinator: BaseCoordinator {
         router.push(notificationsViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    private func openMenu(withBranchID branchID: Int?, branchName: String?) {
-            let menuViewController = createMenuViewController(branchID: branchID, branchName: branchName)
-            router.push(menuViewController, hideBottomBar: false)
-    }
-
-    private func createMenuViewController(branchID: Int?, branchName: String?) -> MenuViewController {
+    private func openMenu(branchID: Int?, branchName: String?) {
         let menuViewModel = MenuViewModel()
+        menuViewModel.selectedBranchID = branchID
+        menuViewModel.selectedBranchName = branchName
         menuViewModel.onBranchesNavigate = { [weak self] in
-            self?.openBranches(initialSelection: false)
+            self?.openBranches()
         }
         let menuViewController = MenuViewController(viewModel: menuViewModel)
-        menuViewController.selectedBranchID = branchID
-        menuViewController.selectedBranchName = branchName
-        return menuViewController
+        if let validBranchID = branchID, let validBranchName = branchName {
+            menuViewController.branchDidSelect(branchID: validBranchID, branchName: validBranchName)
+        }
+        router.push(menuViewController, hideBottomBar: false)
     }
 
-    private func openBranches(initialSelection: Bool) {
+    private func openBranches() {
         let branchesViewModel = BranchesModalViewModel()
-        branchesViewModel.onBranchesSelectedNavigate = { [weak self] branchID, branchName in
-            self?.shouldShowBranchesFirst = false
-            self?.openMenu(withBranchID: branchID, branchName: branchName)
+        let branchesViewController = BranchesModalViewController(viewModel: branchesViewModel)
+        branchesViewController.delegate = self
+        branchesViewController.modalPresentationStyle = .overFullScreen
+        router.present(branchesViewController, animated: true)
+    }
+
+    private func openBranchesMain(initialSelection: Bool) {
+        let branchesViewModel = BranchesModalViewModel()
+        branchesViewModel.onBranchSelectedNavigate = { [weak self] branchID, branchName in
+            self?.selectedBranchID = branchID
+            self?.selectedBranchName = branchName
+            if initialSelection {
+                DispatchQueue.main.async {
+                    self?.mainVC.viewModel.selectedBranchID = branchID
+                    self?.mainVC.viewModel.selectedBranchName = branchName
+                    self?.mainVC.updateForSelectedBranch()
+                }
+            }
         }
         let branchesViewController = BranchesModalViewController(viewModel: branchesViewModel)
         branchesViewController.delegate = self
@@ -73,6 +91,13 @@ final class MainCoordinator: BaseCoordinator {
 
 extension MainCoordinator: BranchSelectionDelegate {
     func branchDidSelect(branchID: Int, branchName: String) {
-        openMenu(withBranchID: branchID, branchName: branchName)
+        selectedBranchID = branchID
+        selectedBranchName = branchName
+
+        DispatchQueue.main.async {
+            self.mainVC.viewModel.selectedBranchID = branchID
+            self.mainVC.viewModel.selectedBranchName = branchName
+            self.mainVC.updateForSelectedBranch()
+        }
     }
 }

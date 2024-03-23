@@ -11,9 +11,8 @@ protocol BranchesModalViewModelProtocol {
     func branchDidSelect(branchID: Int, branchName: String)
 }
 
-
 class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
-    var onBranchesSelectedNavigate: ((Int, String) -> Void)?
+    var onBranchSelectedNavigate: ((Int, String) -> Void)?
     var branchesList: [BranchModel]
     let provider: MoyaProvider<UserAPI>
 
@@ -41,7 +40,7 @@ class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
     }
 
     func branchDidSelect(branchID: Int, branchName: String) {
-        onBranchesSelectedNavigate?(branchID, branchName)
+        onBranchSelectedNavigate?(branchID, branchName)
     }
 }
 
