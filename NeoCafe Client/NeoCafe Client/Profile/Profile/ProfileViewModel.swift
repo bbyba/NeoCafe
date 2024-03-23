@@ -7,7 +7,6 @@ import Moya
 
 protocol ProfileViewModelProtocol {
     var onEditProfileNavigate: EmptyCompletion? { get set }
-//    var onSearchNavigate: EmptyCompletion? { get set }
     var personalData: CustomerProfile?  { get }
     var orders: [Order]?  { get }
     func getPersonalData(completion: @escaping (Result<CustomerProfile, Error>) -> Void)

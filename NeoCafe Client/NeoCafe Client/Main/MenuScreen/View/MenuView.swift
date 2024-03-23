@@ -26,7 +26,7 @@ class MenuView: UIView, BaseContentView {
 
     lazy var branchNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 24, weight: .semibold)
+        label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
@@ -94,14 +94,9 @@ class MenuView: UIView, BaseContentView {
             make.top.equalToSuperview().offset(70)
         }
 
-//        branchNameLabel.snp.makeConstraints { make in
-//            make.leading.equalTo(headerLabel.snp.trailing).offset(5)
-//            make.bottom.equalToSuperview().offset(-55)
-//        }
-
         headerDropDownButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-40)
-            make.top.equalToSuperview().offset(95)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(85)
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
@@ -191,7 +186,9 @@ extension MenuView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(207))
+//            heightDimension: .absolute(220))
+            heightDimension: .fractionalHeight(0.33))
+
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 

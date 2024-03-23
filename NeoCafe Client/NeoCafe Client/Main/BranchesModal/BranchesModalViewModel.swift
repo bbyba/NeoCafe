@@ -1,20 +1,18 @@
 //
-//  BranchesViewModel.swift
+//  BranchesModalViewModel.swift
 //  NeoCafe Client
-//
 
 import UIKit
 import Moya
 
-protocol BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion? { get set }
-//    var onSearchNavigate: EmptyCompletion? { get set }
+protocol BranchesModalViewModelProtocol {
     var branchesList: [BranchModel]  { get }
     func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
+    func branchDidSelect(branchID: Int, branchName: String)
 }
 
-class BranchesViewModel: NSObject, BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion?
+class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
+    var onBranchSelectedNavigate: ((Int, String) -> Void)?
     var branchesList: [BranchModel]
     let provider: MoyaProvider<UserAPI>
 
@@ -36,10 +34,13 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
                 }
             case .failure(let error):
                 completion(.failure(error))
+
             }
         }
     }
+
+    func branchDidSelect(branchID: Int, branchName: String) {
+        onBranchSelectedNavigate?(branchID, branchName)
+    }
 }
-
-
 

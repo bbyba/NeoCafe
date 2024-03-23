@@ -11,8 +11,9 @@ final class ProfileCoordinator: BaseCoordinator {
 
     override func start() {
         let viewModel = ProfileViewModel()
-        viewModel.onEditProfileNavigate = { [weak self] in self?.openEditProfile()}
-
+        viewModel.onEditProfileNavigate = { [weak self] in
+            self?.openEditProfile()
+        }
         viewModel.getPersonalData { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -37,10 +38,12 @@ final class ProfileCoordinator: BaseCoordinator {
 
     func openEditProfile() {
         let viewModel = EditProfileViewModel()
-        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true) }
-        viewModel.onEditCompleted = { [weak self] in self?.start() }
-
-
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        viewModel.onEditCompleted = { [weak self] in
+            self?.start()
+        }
         viewModel.getPersonalDataEdit { [weak self] result in
             DispatchQueue.main.async {
                 switch result {

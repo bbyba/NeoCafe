@@ -4,27 +4,20 @@
 //
 import UIKit
 
-class ProductViewController: UIViewController {
-    private lazy var productView = ProductView()
-
-    var suggestions: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230)]
-
-    override func loadView() {
-        view = productView
-    }
-
+class ProductViewController: BaseViewController<ProductViewModel, ProductView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        productView.collectionView.dataSource = self
-        productView.collectionView.delegate = self
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
         addTargets()
     }
 
     private func addTargets() {
-        //            baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func backButtonTapped() {
+        viewModel.onBackNavigate?()
     }
 }
 
@@ -37,13 +30,12 @@ extension ProductViewController: UICollectionViewDataSource, UICollectionViewDel
         return 3
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
                 fatalError("Could not dequeue BigProductCell")
             }
-        let category = suggestions[indexPath.row]
-        cell.configureData(name: category.name, imageName: category.image, description: "nil", price: String(category.price))
+        let suggestion = viewModel.suggestions[indexPath.row]
+        cell.configureData(item: suggestion)
         return cell
         }
 

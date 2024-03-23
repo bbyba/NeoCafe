@@ -1,11 +1,12 @@
 //
-//  PopularCell.swift
+//  BigProductCell.swift
 //  NeoCafe Client
 //
 
 import UIKit
 
 class BigProductCell: UICollectionViewCell {
+    var onStepperValueChanged: ((_ newValue: Int) -> Void)?
     static let identifier = "BigProductCell"
 
     lazy var image: UIImageView = {
@@ -19,7 +20,7 @@ class BigProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
-        label.text = "Cafe Latte"
+        label.numberOfLines = 0
         return label
     }()
 
@@ -27,7 +28,7 @@ class BigProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 12, weight: .regular)
         label.textColor = .darkBlueCustom
-        label.text = "Espresso with Milk"
+        label.numberOfLines = 0
         return label
     }()
 
@@ -35,21 +36,11 @@ class BigProductCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .orangeCustom
-        label.text = "270 T"
         return label
     }()
 
-//    lazy var plusButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(systemName: "plus"), for: .normal)
-//        button.tintColor = .whiteCustom
-//        button.backgroundColor = .orangeCustom
-//        button.layer.cornerRadius = 14
-//        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner]
-//        return button
-//    }()
-//
-    lazy var stepper = SwitchingStepper()
+    lazy var switchingStepper = SwitchingStepper()
+    lazy var stepper = CustomStepper()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,17 +48,20 @@ class BigProductCell: UICollectionViewCell {
         layer.cornerRadius = 14
         addSubviews()
         setupConstraints()
-//        addTargets()
         setupShadow()
+        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
     }
+
 
     private func addSubviews() {
         contentView.addSubview(image)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
-//        contentView.addSubview(plusButton)
+        //        contentView.addSubview(plusButton)
+        contentView.addSubview(switchingStepper)
         contentView.addSubview(stepper)
+        stepper.isHidden = true
     }
 
     func setupConstraints() {
@@ -92,17 +86,17 @@ class BigProductCell: UICollectionViewCell {
             make.leading.equalTo(image.snp.trailing).offset(12)
         }
 
-        stepper.snp.makeConstraints { make in
+        switchingStepper.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.height.equalTo(40)
-            make.width.equalTo(90)
+            make.width.equalTo(130)
         }
-//
-//        stepper.snp.makeConstraints { make in
-//            make.height.equalTo(32)
-//            make.trailing.bottom.equalToSuperview().inset(2)
-//        }
-//        stepper.isHidden = true
+
+        stepper.snp.makeConstraints { make in
+            make.trailing.bottom.equalToSuperview().inset(12)
+            make.height.equalTo(40)
+            make.width.equalTo(115)
+        }
     }
 
     private func setupShadow() {
@@ -113,43 +107,23 @@ class BigProductCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
-    func configureData(name: String, imageName: String, description: String, price: String) {
-        image.image = UIImage(named: imageName)
-        titleLabel.text = name
-        descriptionLabel.text = description
-        priceLabel.text = price
+    func configureData(item: Item) {
+        image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
+        titleLabel.text = item.name
+        descriptionLabel.text = item.description
+        priceLabel.text = "\(item.pricePerUnit)"
     }
 
-//    private func addTargets() {
-//        plusButton.addTarget(self, action: #selector(showStepper), for: .touchUpInside)
-//        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
-//    }
+    func configureForCart() {
+        switchingStepper.isHidden = true
+        stepper.isHidden = false
+    }
+    
+    @objc private func stepperValueChanged(_ sender: CustomStepper) {
+        onStepperValueChanged?(sender.currentValue)
+    }
 
-//    @objc private func showStepper() {
-//        toggleCounter(isStepperVisible: true)
-//    }
-//
-//    @objc private func stepperValueChanged(_ sender: CustomStepper) {
-//        if sender.currentValue == 1 && sender.isDecrementing {
-//            toggleCounter(isStepperVisible: false)
-//            sender.isDecrementing = false
-//        }
-//    }
-//
-//
-//    private func toggleCounter(isStepperVisible: Bool) {
-//        plusButton.isHidden = isStepperVisible
-//        stepper.isHidden = !isStepperVisible
-//    }
-//
-//    func  hideStepper() {
-//        stepper.isHidden = true
-//    }
-//    
-//    func hidePlusButton() {
-//        plusButton.isHidden = true
-//    }
-//
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

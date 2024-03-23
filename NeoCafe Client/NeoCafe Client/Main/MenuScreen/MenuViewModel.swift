@@ -10,15 +10,27 @@ protocol MenuViewModelProtocol {
     var onSearchNavigate: EmptyCompletion? { get set }
     var onBranchesNavigate: EmptyCompletion? { get set }
     var onProductDetailNavigate: EmptyCompletion? { get set }
+    var onAddToCartNavigate: EmptyCompletion? { get set }
+
     var allCategories: [CategoryModel] { get }
+    var menuItems: [Item] { get }
+    var selectedBranchID: Int? { get set }
+    var selectedBranchName: String? { get set }
     func getAllCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void)
 }
 
 class MenuViewModel: NSObject, MenuViewModelProtocol {
     var onBranchesNavigate: EmptyCompletion?
     var onSearchNavigate: EmptyCompletion?
     var onProductDetailNavigate: EmptyCompletion?
+    var onAddToCartNavigate: EmptyCompletion?
+    
     var allCategories: [CategoryModel] = []
+    var menuItems: [Item] = []
+    var selectedBranchID: Int?
+    var selectedBranchName: String?
+    //    var categoryID: Int
     let provider: MoyaProvider<UserAPI>
 
     override init() {
@@ -33,11 +45,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
                     do {
                         let categories = try JSONDecoder().decode([CategoryModel].self, from: response.data)
                         self?.allCategories = categories
-                        
-//                        print("Fetched Categories:")
-//                        categories.forEach { category in
-//                            print("ID: \(category.id), Name: \(category.name), Image: \(category.image ?? "No image")")
-//                        }
                         completion(.success(categories))
                     } catch {
                         print("Error decoding categories: \(error)")
@@ -49,5 +56,32 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
                 }
             }
         }
+    }
+
+    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void) {
+        provider.request(.getMenuItemsByBranchCategory(branchID: branchID)) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    do {
+                        let menuItems = try JSONDecoder().decode([Item].self, from: response.data)
+                        self?.menuItems = menuItems
+                        completion(.success(menuItems))
+                    } catch {
+                        print("Error decoding menuItems: \(error)")
+                        completion(.failure(error))
+                    }
+                case .failure(let error):
+                    print("Error fetching menuItems: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    func addToCart(menuItem: Item) {
+        CartViewModel.shared.filterItems(newItem: menuItem)
+        NotificationCenter.default.post(name: .cartUpdated, object: nil)
+        onAddToCartNavigate?()
     }
 }

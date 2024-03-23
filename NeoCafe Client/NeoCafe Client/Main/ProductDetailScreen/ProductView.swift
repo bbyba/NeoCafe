@@ -7,8 +7,8 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProductView: UIView {
-//    lazy var header = CustomHeaderView()
+class ProductView: UIView, BaseContentView {
+    
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.coffeeCupFront.name)
@@ -82,12 +82,12 @@ class ProductView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addSubviews()
-        setConstraints()
+        setupConstraints()
     }
 
     func addSubviews() {
         addSubview(image)
-        image.addSubview(backButton)
+        addSubview(backButton)
         addSubview(productNameLabel)
         addSubview(descriptionLabel)
         addSubview(collectionView)
@@ -97,7 +97,7 @@ class ProductView: UIView {
         stack.addArrangedSubview(addToCartButton)
     }
 
-    func setConstraints() {
+    func setupConstraints() {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(220)

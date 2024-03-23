@@ -5,9 +5,6 @@
 import UIKit
 
 final class BranchesCoordinator: BaseCoordinator {
-
-    //    var onCourses: EmptyCompletion?
-    //
     private var mainVC: BranchesViewController!
 
     override func start() {
@@ -28,7 +25,9 @@ final class BranchesCoordinator: BaseCoordinator {
     func openBranchDetail(branch: BranchModel) {
         let viewModel = BranchDetailViewModel()
         viewModel.branch = branch
-        viewModel.onBackNavigate = { [weak self] in self?.router.popModule(animated: true)}
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
         let branchDetailViewController = BranchDetailViewController(viewModel: viewModel)
         router.push(branchDetailViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
