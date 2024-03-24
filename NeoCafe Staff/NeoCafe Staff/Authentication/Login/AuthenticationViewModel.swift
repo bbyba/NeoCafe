@@ -1,17 +1,17 @@
 //
-//  RegisterViewModel.swift
-//  NeoCafe Client
+//  AuthenticationViewModel.swift
+//  NeoCafe Staff
 //
 
 import UIKit
 import Moya
 
-protocol AuthViewModelProtocol {
+protocol AuthenticationViewModelProtocol {
     var onCodeConfirmationNavigate: EmptyCompletion? { get set }
     func requestConfirmationCode(email: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
-class AuthViewModel: NSObject, AuthViewModelProtocol {
+class AuthenticationViewModel: NSObject, AuthenticationViewModelProtocol {
     var onCodeConfirmationNavigate: EmptyCompletion?
 //    let provider: MoyaProvider<UserAPI>
 

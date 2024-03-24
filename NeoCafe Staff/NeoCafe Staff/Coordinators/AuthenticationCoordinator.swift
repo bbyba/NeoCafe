@@ -12,8 +12,8 @@ final class AuthenticationCoordinator: BaseCoordinator {
 
     lazy var startController: UIViewController = {
         //        let provider = MoyaProvider<UserAPI>()
-        //        let viewModel = AuthViewModel(provider: provider)
-        let viewModel = AuthViewModel()
+        //        let viewModel = AuthenticationViewModel(provider: provider)
+        let viewModel = AuthenticationViewModel()
         viewModel.onCodeConfirmationNavigate = { [ weak self ] in
             self?.openCodeConfirmation()
         }

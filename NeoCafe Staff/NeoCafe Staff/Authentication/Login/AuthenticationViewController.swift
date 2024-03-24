@@ -7,7 +7,7 @@ import UIKit
 import SwiftUI
 import Moya
 
-class AuthenticationViewController: BaseViewController<AuthViewModel, AuthenticationView> {
+class AuthenticationViewController: BaseViewController<AuthenticationViewModel, AuthenticationView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()

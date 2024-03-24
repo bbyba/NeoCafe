@@ -1,13 +1,12 @@
 //
 //  AuthenticationView.swift
-//  NeoCafe Client
+//  NeoCafe Staff
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class AuthenticationView: UIView, BaseContentView {
+class AuthenticationView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -18,8 +17,11 @@ class AuthenticationView: UIView, BaseContentView {
         return label
     }()
 
-    lazy var loginTextField = CustomTextField(iconName: Asset.Images.person.image, customPlaceholder: S.enterLogin)
-    lazy var passwordTextField = CustomTextField(iconName: Asset.Images.lock.image, customPlaceholder: S.enterPassword)
+    lazy var loginTextField = CustomTextField(iconName: Asset.Images.person.image, 
+                                              customPlaceholder: S.enterLogin)
+
+    lazy var passwordTextField = CustomTextField(iconName: Asset.Images.lock.image,
+                                                 customPlaceholder: S.enterPassword)
 
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView()
@@ -36,9 +38,19 @@ class AuthenticationView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension AuthenticationView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -76,7 +88,4 @@ class AuthenticationView: UIView, BaseContentView {
         }
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

@@ -24,7 +24,7 @@ class CustomSegmentedControl: UISegmentedControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = Asset.Colors.grey.color
+        backgroundColor = .greyCustom
         layer.cornerRadius = 25
         layer.masksToBounds = true
         let fontAttributes: [NSAttributedString.Key: Any] = [
@@ -37,7 +37,7 @@ class CustomSegmentedControl: UISegmentedControl {
 
         let selectedImageViewIndex = numberOfSegments
         if let selectedImageView = subviews[selectedImageViewIndex] as? UIImageView {
-            selectedImageView.backgroundColor = Asset.Colors.orange.color
+            selectedImageView.backgroundColor = .orangeCustom
             selectedImageView.image = nil
             selectedImageView.bounds = selectedImageView.bounds.insetBy(dx: segmentInset, dy: segmentInset)
             selectedImageView.layer.masksToBounds = true

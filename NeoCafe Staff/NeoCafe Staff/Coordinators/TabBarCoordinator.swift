@@ -4,12 +4,14 @@
 //
 
 import UIKit
+import SnapKit
 
 final class TabBarCoordinator: BaseCoordinator {
 
     var orderCoordinator: OrderCoordinator?
     var newOrderCoordinator: NewOrderCoordinator?
     var menuCoordinator: MenuCoordinator?
+    private var tabBarShadow: UIView?
 
     private lazy var tabBarViewController = configure(CustomTabBarController()) { tabBarController in
         configureAppearance(for: tabBarController)
@@ -66,26 +68,45 @@ final class TabBarCoordinator: BaseCoordinator {
     }
 
     private func configureAppearance(for tabBarController: UITabBarController) {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .clear
-        let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = .whiteCustom
-        navigationBarAppearance.shadowColor = .clear
-        tabBarController.tabBar.tintColor = .blueCustom
-        //        tabBarController.tabBar.unselectedItemTintColor = Colors.inputText.color
-        tabBarController.tabBar.layer.cornerRadius = 0
-        tabBarController.tabBar.layer.masksToBounds = true
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = .white
 
+            appearance.stackedLayoutAppearance.normal.iconColor = .darkGreyCustom
+            appearance.stackedLayoutAppearance.selected.iconColor = .blueCustom
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.darkGreyCustom]
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.blueCustom]
+
+            appearance.backgroundEffect = UIBlurEffect(style: .light)
+            appearance.shadowColor = .clear
             tabBarController.tabBar.standardAppearance = appearance
-            tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+            tabBarController.tabBar.scrollEdgeAppearance = appearance
+        } else {
+            tabBarController.tabBar.barTintColor = .white
+            tabBarController.tabBar.isTranslucent = true
+        }
+        configureShadow(for: tabBarController)
+    }
+
+    private func configureShadow(for tabBarController: UITabBarController) {
+        tabBarShadow?.removeFromSuperview()
+        tabBarShadow = UIView(frame: CGRect(x: 0, y: 0, width: tabBarController.tabBar.bounds.width, height: tabBarController.tabBar.bounds.height))
+        tabBarShadow!.backgroundColor = .white
+        tabBarShadow!.layer.cornerRadius = 20
+        tabBarShadow!.layer.masksToBounds = false
+        tabBarShadow!.layer.shadowColor = UIColor.black.cgColor
+        tabBarShadow!.layer.shadowOffset = CGSize(width: 0, height: -1)
+        tabBarShadow!.layer.shadowOpacity = 0.1
+        tabBarShadow!.layer.shadowRadius = 5
+
+        tabBarController.tabBar.insertSubview(tabBarShadow!, at: 0)
+        tabBarShadow!.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(tabBarController.tabBar)
+            make.height.equalTo(tabBarController.tabBar.snp.height)
         }
     }
 }
-
 
 final class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {

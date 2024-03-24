@@ -30,10 +30,12 @@ internal enum Asset {
     internal static let coral = ColorAsset(name: "coral")
     internal static let darkBlue = ColorAsset(name: "darkBlue")
     internal static let darkGrey = ColorAsset(name: "darkGrey")
+    internal static let greenTable = ColorAsset(name: "greenTable")
     internal static let grey = ColorAsset(name: "grey")
     internal static let ivory = ColorAsset(name: "ivory")
     internal static let lightBlue = ColorAsset(name: "lightBlue")
     internal static let orange = ColorAsset(name: "orange")
+    internal static let skyBlue = ColorAsset(name: "skyBlue")
     internal static let white = ColorAsset(name: "white")
     internal static let yellow = ColorAsset(name: "yellow")
   }
@@ -43,12 +45,18 @@ internal enum Asset {
     internal static let bell = ImageAsset(name: "bell")
     internal static let exit = ImageAsset(name: "exit")
     internal static let lock = ImageAsset(name: "lock")
+    internal static let logout = ImageAsset(name: "logout")
     internal static let person = ImageAsset(name: "person")
     internal static let profile = ImageAsset(name: "profile")
   }
   internal static let error404 = ImageAsset(name: "error404")
   internal static let neocafe = ImageAsset(name: "neocafe")
   internal static let splashImage = ImageAsset(name: "splashImage")
+  internal enum TabBar {
+    internal static let newOrderTab = ImageAsset(name: "newOrderTab")
+    internal static let orderTab = ImageAsset(name: "orderTab")
+    internal static let selectedOrderTab = ImageAsset(name: "selectedOrderTab")
+  }
   internal static let threeBrans = ImageAsset(name: "threeBrans")
   internal static let twoBeans = ImageAsset(name: "twoBeans")
 }

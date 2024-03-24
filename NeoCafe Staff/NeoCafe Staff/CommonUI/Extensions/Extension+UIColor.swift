@@ -10,24 +10,32 @@ extension UIColor {
         return Asset.Colors.lightBlue.color
     }
 
-    static var blueCustom: UIColor {
-        return Asset.Colors.blue.color
+    static var skyBlueCustom: UIColor {
+        return Asset.Colors.skyBlue.color
     }
 
-    static var coralCustom: UIColor {
-        return Asset.Colors.coral.color
+    static var blueCustom: UIColor {
+        return Asset.Colors.blue.color
     }
 
     static var darkBlueCustom: UIColor {
         return Asset.Colors.darkBlue.color
     }
 
+    static var greyCustom: UIColor {
+        return Asset.Colors.grey.color
+    }
+
     static var darkGreyCustom: UIColor {
         return Asset.Colors.darkGrey.color
     }
 
-    static var greyCustom: UIColor {
-        return Asset.Colors.grey.color
+    static var coralCustom: UIColor {
+        return Asset.Colors.coral.color
+    }
+
+    static var greenTableCustom: UIColor {
+        return Asset.Colors.greenTable.color
     }
 
     static var ivoryCustom: UIColor {

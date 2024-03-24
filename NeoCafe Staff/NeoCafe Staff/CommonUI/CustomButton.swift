@@ -12,19 +12,14 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         configure()
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        configure()
-    }
-
+    
     private func configure() {
         layer.cornerRadius = 18
         titleLabel?.font = .poppins(ofSize: 16, weight: .bold)
         layer.borderWidth = 2
     }
 
-    func setProperties(title: String, backgroundColor: UIColor, titleColor: UIColor = .white, showBorder: Bool = false) {
+    func setProperties(title: String, backgroundColor: UIColor, titleColor: UIColor = .whiteCustom, showBorder: Bool = false) {
         setTitle(title, for: .normal)
         self.backgroundColor = backgroundColor
         setTitleColor(titleColor, for: .normal)
@@ -35,5 +30,9 @@ class CustomButton: UIButton {
         } else {
             layer.borderWidth = 0
         }
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

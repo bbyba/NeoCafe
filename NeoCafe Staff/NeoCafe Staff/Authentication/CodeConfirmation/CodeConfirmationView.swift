@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SVPinView
 
-class CodeConfirmationView: UIView, BaseContentView {
+class CodeConfirmationView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -43,14 +43,7 @@ class CodeConfirmationView: UIView, BaseContentView {
         return pinView
     }()
 
-    lazy var backButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Images.arrowBack.image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .lightBlueCustom
-        button.clipsToBounds = true
-        return button
-    }()
+    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, backgroundColor: .lightBlueCustom)
 
     lazy var confirmButton: CustomButton = {
         let button = CustomButton()
@@ -83,9 +76,27 @@ class CodeConfirmationView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func resetResendButton() {
+        resendButton.setTitle(S.resend, for: .normal)
+        resendButton.setTitleColor(UIColor.darkGreyCustom, for: .normal)
+        resendButton.isEnabled = true
+        timeCounter.isHidden = true
+        timeCounter.text = ""
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension CodeConfirmationView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -113,7 +124,7 @@ class CodeConfirmationView: UIView, BaseContentView {
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
+            make.centerY.equalTo(backButton.snp.centerY)
             make.height.equalTo(29)
             make.centerX.equalToSuperview()
         }
@@ -143,17 +154,5 @@ class CodeConfirmationView: UIView, BaseContentView {
         }
 
         resendButtonStack.isHidden = true
-    }
-
-    func resetResendButton() {
-        resendButton.setTitle(S.resend, for: .normal)
-        resendButton.setTitleColor(UIColor.darkGreyCustom, for: .normal)
-        resendButton.isEnabled = true
-        timeCounter.isHidden = true
-        timeCounter.text = ""
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

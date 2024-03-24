@@ -14,7 +14,7 @@ class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewMod
 
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-//        contentView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
+        contentView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
 
     }
 
@@ -23,6 +23,7 @@ class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewMod
     }
 
     @objc func confirmButtonTapped() {
+        viewModel.onMainNavigate?()
     }
 }
 

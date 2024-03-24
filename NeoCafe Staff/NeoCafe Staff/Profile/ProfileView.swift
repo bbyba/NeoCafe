@@ -6,7 +6,7 @@
 import UIKit
 import SnapKit
 
-class ProfileView: UIView, BaseContentView {
+class ProfileView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -17,39 +17,46 @@ class ProfileView: UIView, BaseContentView {
         return label
     }()
 
-    lazy var backButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Images.arrowBack.image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .lightBlueCustom
-        button.clipsToBounds = true
-        return button
-    }()
-
-    lazy var logoutButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Images.exit.image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .lightBlueCustom
-        button.clipsToBounds = true
-        return button
-    }()
-
-    lazy var nameTextField = CustomTextField(iconName: Asset.Images.profile.image, customPlaceholder: "Alex")
-
     lazy var scheduleLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.text = S.workSchedule
+        label.textColor = .darkBlueCustom
         return label
     }()
 
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.name
+        label.font = .poppins(ofSize: 14, weight: .regular)
+        label.textColor = .lightBlueCustom
+        return label
+    }()
+
+    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, 
+                                            backgroundColor: .lightBlueCustom)
+
+    lazy var logoutButton = CustomRoundButton(withImage: Asset.Images.logout.image, 
+                                              backgroundColor: .lightBlueCustom)
+
+    lazy var nameTextField = CustomTextField(iconName: Asset.Images.profile.image, 
+                                             customPlaceholder: "Alex")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProfileView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -57,6 +64,7 @@ class ProfileView: UIView, BaseContentView {
         header.addSubview(backButton)
         header.addSubview(headerLabel)
         header.addSubview(logoutButton)
+        addSubview(nameLabel)
         addSubview(nameTextField)
         addSubview(scheduleLabel)
     }
@@ -74,9 +82,8 @@ class ProfileView: UIView, BaseContentView {
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
-            make.height.equalTo(29)
             make.centerX.equalToSuperview()
+            make.centerY.equalTo(backButton.snp.centerY)
         }
 
         logoutButton.snp.makeConstraints { make in
@@ -85,20 +92,21 @@ class ProfileView: UIView, BaseContentView {
             make.height.width.equalTo(40)
         }
 
-        nameTextField.snp.makeConstraints { make in
+        nameLabel.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(48)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
+        nameTextField.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(4)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
 
         scheduleLabel.snp.makeConstraints { make in
-            make.top.equalTo(nameTextField.snp.bottom).offset(4)
+            make.top.equalTo(nameTextField.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
