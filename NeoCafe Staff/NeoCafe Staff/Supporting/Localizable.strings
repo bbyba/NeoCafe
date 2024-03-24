@@ -1,0 +1,20 @@
+/*
+  Localizable.strings
+  NeoCafe Staff
+*/
+
+// Authorization
+"welcome" = "Добро пожаловать в";
+"entry" = "Вход";
+"enterLogin" = "Введите логин";
+"enterPassword" = "Введите пароль";
+"wrongLogin" = "Неправильный логин";
+"getCode" = "Получить код";
+"confirm" = "Подтвердить";
+"exampleEmail" = "example@email.com";
+"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n email@gmail.com";
+"wrongCode" = "Код введён неверно,\n попробуйте еще раз";
+"resend" = "Отправить ещё раз";
+"resendAfter" = "Отправить ещё раз через";
+"verificationCode" = "Код подтверждения";
+"search" = "Поиск";

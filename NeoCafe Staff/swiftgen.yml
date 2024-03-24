@@ -1,0 +1,28 @@
+input_dir: /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Supporting
+output_dir: /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Generated
+
+## XCAssets
+xcassets:
+  inputs:
+    - /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Supporting/Assets.xcassets
+  outputs:
+    templateName: swift5
+    params:
+         forceProvidesNamespaces: true 
+    output: /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Generated/XCAssets+Generated.swift
+
+fonts:
+  inputs:
+   - Fonts
+  outputs:
+    templateName: swift5
+    output: Fonts.swift
+
+strings:
+  inputs:
+   - /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Supporting/Localizable.strings
+  outputs:
+    templateName: structured-swift5
+    output: /Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/Generated/Strings+Generated.swift
+    params:
+        enumName: S
