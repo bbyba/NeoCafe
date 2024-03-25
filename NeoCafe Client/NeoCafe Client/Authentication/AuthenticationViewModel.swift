@@ -22,7 +22,7 @@ protocol AuthViewModelProtocol {
     func authenticateUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
-class AuthViewModel: AuthViewModelProtocol {
+class AuthViewModel: NSObject, AuthViewModelProtocol {
     var onMainNavigate: EmptyCompletion?
     let provider: MoyaProvider<UserAPI>
     //    var currentState: ViewState = .signIn

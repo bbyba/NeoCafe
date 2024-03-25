@@ -96,8 +96,8 @@ class BranchDetailView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(MenuProductCell.self, forCellWithReuseIdentifier: MenuProductCell.identifier)
-        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+        collectionView.register(cell: MenuProductCell.self)
+        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false

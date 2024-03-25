@@ -69,9 +69,7 @@ extension ProductViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         let suggestion = suggestions[indexPath.row]
 //        let suggestion = viewModel.suggestions[indexPath.row]
 //        cell.configureData(item: suggestion)
@@ -79,9 +77,7 @@ extension ProductViewController: UICollectionViewDataSource, UICollectionViewDel
         }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as? CollectionViewSingleHeader else {
-            fatalError("Could not dequeue Header")
-        }
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: S.pleasantAddition)
         return header
     }

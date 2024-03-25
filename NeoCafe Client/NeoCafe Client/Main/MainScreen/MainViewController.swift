@@ -92,16 +92,12 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch Section.allCases[indexPath.section] {
         case .category:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
-                fatalError("Could not dequeue CategoryCell")
-            }
+            let cell: CategoryCell = collectionView.dequeue(for: indexPath)
             let category = viewModel.categories[indexPath.row]
             cell.configureData(name: category.name, imageName: category.image!)
             return cell
         case .popular:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
+            let cell: BigProductCell = collectionView.dequeue(for: indexPath)
             let popularItem = viewModel.popularItems[indexPath.row]
             cell.configureData(item: popularItem)
             return cell
@@ -112,8 +108,7 @@ extension MainViewController: UICollectionViewDataSource {
         guard kind == UICollectionView.elementKindSectionHeader else {
             fatalError("Unexpected element kind")
         }
-
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as! CollectionViewSingleHeader
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = Section(rawValue: Section.allCases[indexPath.section].rawValue) {
             switch sectionKind {

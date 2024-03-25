@@ -26,15 +26,8 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
                 switch result {
                 case .success(_):
                     self?.contentView.collectionView.reloadData()
-
-                    self?.viewModel.branchesList.forEach { branch in
-                        print("Branch ID: \(branch.id), Name: \(branch.branchName), Address: \(branch.address)")
-                        branch.schedules.forEach { schedule in
-                            print("Schedule Day: \(schedule.day), Start Time: \(schedule.startTime), End Time: \(schedule.endTime)")
-                        }
-                    }
                 case .failure(let error):
-                    print("\(error)")
+                    print("Error fetching branches: \(error)")
                 }
             }
         }
@@ -50,11 +43,8 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
         return viewModel.branchesList.count
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
-            fatalError("Could not dequeue BigProductCell")
-        }
+        let cell: BranchesModalCell = collectionView.dequeue(for: indexPath)
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)
         return cell

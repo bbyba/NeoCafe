@@ -5,8 +5,7 @@
 
 import UIKit
 
-class MenuProductCell: UICollectionViewCell {
-    static let identifier = "MenuProductCell"
+class MenuProductCell: BaseCollectionViewCell {
     var onAddToCart: ((Item) -> Void)?
     private var currentItem: Item?
 

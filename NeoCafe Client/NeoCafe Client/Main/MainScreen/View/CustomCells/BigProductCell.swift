@@ -5,9 +5,8 @@
 
 import UIKit
 
-class BigProductCell: UICollectionViewCell {
+class BigProductCell: BaseCollectionViewCell {
     var onStepperValueChanged: ((_ newValue: Int) -> Void)?
-    static let identifier = "BigProductCell"
 
     lazy var image: UIImageView = {
         let image = UIImageView()

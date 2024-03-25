@@ -5,9 +5,7 @@
 
 import UIKit
 
-class MenuCategoryCell: UICollectionViewCell {
-    static let identifier = "MenuCategoryCell"
-
+class MenuCategoryCell: BaseCollectionViewCell {
     lazy var titleLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .medium)

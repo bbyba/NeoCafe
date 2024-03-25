@@ -72,6 +72,14 @@ struct Ingredient: Codable {
 
 
 // MARK: - Branches
+
+struct BranchesResponse: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
+    let results: [BranchModel]
+}
+
 struct BranchModel: Codable {
     let id: Int
     let branchName, address, phoneNumber: String

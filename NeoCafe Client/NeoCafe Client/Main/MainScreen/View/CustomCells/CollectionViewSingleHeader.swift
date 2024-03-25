@@ -6,8 +6,7 @@
 import UIKit
 import SnapKit
 
-class CollectionViewSingleHeader: UICollectionReusableView {
-    static let identifier = "CollectionViewSingleHeader"
+class CollectionViewSingleHeader: BaseCollectionViewCell {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()

@@ -83,18 +83,14 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch MenuSection.allCases[indexPath.section] {
         case .category:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuCategoryCell.identifier, for: indexPath) as? MenuCategoryCell else {
-                fatalError("Could not dequeue MenuCategoryCell")
-            }
+            let cell: MenuCategoryCell = collectionView.dequeue(for: indexPath)
             let category = viewModel.allCategories[indexPath.row]
             cell.configureData(name: category.name)
             cell.isCategorySelected = (indexPath.row == selectedCategoryIndex)
             return cell
 
         case .productItem:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuProductCell.identifier, for: indexPath) as? MenuProductCell else {
-                fatalError("Could not dequeue MenuProductCell")
-            }
+            let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.menuItems[indexPath.row]
             cell.configureData(item: menuItem)
             cell.onAddToCart = { [weak self] item in
@@ -105,9 +101,7 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as? CollectionViewSingleHeader else {
-            fatalError("Could not dequeue Header")
-        }
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
             switch sectionKind {

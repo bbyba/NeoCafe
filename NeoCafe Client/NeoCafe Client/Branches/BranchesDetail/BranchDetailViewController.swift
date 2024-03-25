@@ -55,7 +55,6 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
     }
 
     @objc func goToMenuButtonTapped() {
-        print("branchDetail: goToMenuButton")
         viewModel.onMenuNavigate?()
     }
 }
@@ -70,18 +69,14 @@ extension BranchDetailViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuProductCell.identifier, for: indexPath) as? MenuProductCell else {
-                fatalError("Could not dequeue MenuProductCell")
-            }
+        let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
         let suggestionItem = viewModel.suggestionItems[indexPath.row]
         cell.configureData(item: suggestionItem)
         return cell
         }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as? CollectionViewSingleHeader else {
-            fatalError("Could not dequeue Header")
-        }
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: S.pleasantAddition)
         return header
     }

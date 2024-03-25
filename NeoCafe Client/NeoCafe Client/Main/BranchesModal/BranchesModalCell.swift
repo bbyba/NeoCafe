@@ -5,9 +5,7 @@
 
 import UIKit
 
-class BranchesModalCell: UICollectionViewCell {
-    static let identifier = "BranchesModalCell"
-
+class BranchesModalCell: BaseCollectionViewCell {
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.branchesModal.name)

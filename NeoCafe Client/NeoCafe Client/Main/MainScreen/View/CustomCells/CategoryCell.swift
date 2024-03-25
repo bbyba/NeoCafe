@@ -5,8 +5,7 @@
 
 import UIKit
 
-class CategoryCell: UICollectionViewCell {
-    static let identifier = "CategoryCell"
+class CategoryCell: BaseCollectionViewCell {
 
     lazy var image: UIImageView = {
         let image = UIImageView()

@@ -92,10 +92,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-            fatalError("Could not dequeue BigProductCell")
-        }
-
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         let item = CartViewModel.shared.orderList[indexPath.row]
         cell.configureData(item: item)
         cell.configureForCart()
@@ -118,22 +115,14 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
                         trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
                         -> UISwipeActionsConfiguration? {
 
-        // Create a UIContextualAction for deleting an item from the cart.
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
             guard let strongSelf = self else { return }
 
-            // Remove the item from the cart model.
             let itemToRemove = CartViewModel.shared.orderList[indexPath.row]
             CartViewModel.shared.remove(item: itemToRemove)
-
-            // Update the UI accordingly.
             strongSelf.updateCartView()
-
-            // Call completion handler to dismiss the swipe action button.
             completionHandler(true)
         }
-
-        // Return a swipe actions configuration with the delete action.
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 

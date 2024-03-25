@@ -84,8 +84,8 @@ class ProfileView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
-        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+        collectionView.register(cell: BigProductCell.self)
+        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -132,7 +132,6 @@ class ProfileView: UIView, BaseContentView {
         }
 
         nameFieldView.snp.makeConstraints { make in
-            //            make.top.equalTo(header.snp.bottom).offset(-24)
             make.centerY.equalTo(header.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(78)

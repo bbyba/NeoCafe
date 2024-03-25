@@ -6,9 +6,7 @@
 import UIKit
 
 
-class NotificationsCell: UICollectionViewCell {
-    static let identifier = "NotificationsCell"
-
+class NotificationsCell: BaseCollectionViewCell {
     lazy var orderStatusLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)

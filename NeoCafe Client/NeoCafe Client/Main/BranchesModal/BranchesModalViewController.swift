@@ -54,8 +54,7 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
-            fatalError("Could not dequeue BigProductCell") }
+        let cell: BranchesModalCell = collectionView.dequeue(for: indexPath)
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)
         cell.hideAddressPhone()
