@@ -16,6 +16,9 @@ final class NewOrderCoordinator: BaseCoordinator {
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
+        viewModel.onMakeNewOrderNavigate = { [ weak self ] in
+            self?.openMakeNewOrder()
+        }
         let viewController = NewOrderViewController(viewModel: viewModel)
         mainVC = viewController
         presentViewController(viewController)
@@ -46,6 +49,15 @@ final class NewOrderCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = NotificationsViewController(viewModel: viewModel)
+        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
+
+    func openMakeNewOrder() {
+        let viewModel = NewOrderMenuViewModel()
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        let viewController = NewOrderMenuViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 }

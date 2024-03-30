@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0E7A6B0D64465F4E55B6D964 /* Pods_NeoCafe_Staff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687432E3A7E053774CD3E3FA /* Pods_NeoCafe_Staff.framework */; };
+		DD5313412BB881D90017D73A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313402BB881D90017D73A /* MenuView.swift */; };
+		DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313422BB881E20017D73A /* MenuViewModel.swift */; };
+		DD5313452BB881F20017D73A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313442BB881F20017D73A /* MenuViewController.swift */; };
+		DD6C1A122BB866730081DC71 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1A112BB866730081DC71 /* MenuCell.swift */; };
 		DD79D7842BB1C75800F20E94 /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79D7832BB1C75800F20E94 /* CustomRoundButton.swift */; };
 		DD9052112BB2BBEC009599CE /* TableOrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */; };
 		DD9052132BB2BBF2009599CE /* TableOrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */; };
@@ -16,7 +20,7 @@
 		DD9052192BB2C061009599CE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052182BB2C061009599CE /* Model.swift */; };
 		DD90521B2BB2CA54009599CE /* CustomBigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521A2BB2CA54009599CE /* CustomBigCell.swift */; };
 		DD90521D2BB7D147009599CE /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521C2BB7D147009599CE /* NewOrderViewController.swift */; };
-		DD90521F2BB7D150009599CE /* NewOrderVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521E2BB7D150009599CE /* NewOrderVIewModel.swift */; };
+		DD90521F2BB7D150009599CE /* NewOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521E2BB7D150009599CE /* NewOrderViewModel.swift */; };
 		DD9C3C722BB8556B007A849D /* NewOrderMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C3C712BB8556B007A849D /* NewOrderMenuView.swift */; };
 		DD9C3C742BB85575007A849D /* NewOrderMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C3C732BB85575007A849D /* NewOrderMenuViewController.swift */; };
 		DD9C3C762BB8557A007A849D /* NewOrderMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C3C752BB8557A007A849D /* NewOrderMenuViewModel.swift */; };
@@ -90,6 +94,10 @@
 /* Begin PBXFileReference section */
 		687432E3A7E053774CD3E3FA /* Pods_NeoCafe_Staff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Staff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D61D933E79C59F8BCAC15EF /* Pods-NeoCafe Staff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Staff.release.xcconfig"; path = "Target Support Files/Pods-NeoCafe Staff/Pods-NeoCafe Staff.release.xcconfig"; sourceTree = "<group>"; };
+		DD5313402BB881D90017D73A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		DD5313422BB881E20017D73A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		DD5313442BB881F20017D73A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		DD6C1A112BB866730081DC71 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		DD79D7832BB1C75800F20E94 /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
 		DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsView.swift; sourceTree = "<group>"; };
 		DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -98,7 +106,7 @@
 		DD9052182BB2C061009599CE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DD90521A2BB2CA54009599CE /* CustomBigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBigCell.swift; sourceTree = "<group>"; };
 		DD90521C2BB7D147009599CE /* NewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
-		DD90521E2BB7D150009599CE /* NewOrderVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderVIewModel.swift; sourceTree = "<group>"; };
+		DD90521E2BB7D150009599CE /* NewOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewModel.swift; sourceTree = "<group>"; };
 		DD9C3C712BB8556B007A849D /* NewOrderMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderMenuView.swift; sourceTree = "<group>"; };
 		DD9C3C732BB85575007A849D /* NewOrderMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderMenuViewController.swift; sourceTree = "<group>"; };
 		DD9C3C752BB8557A007A849D /* NewOrderMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderMenuViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				DD9C3C712BB8556B007A849D /* NewOrderMenuView.swift */,
+				DD6C1A112BB866730081DC71 /* MenuCell.swift */,
 				DD9C3C732BB85575007A849D /* NewOrderMenuViewController.swift */,
 				DD9C3C752BB8557A007A849D /* NewOrderMenuViewModel.swift */,
 			);
@@ -395,7 +404,7 @@
 			children = (
 				DDA250F72BB08F3B00C73F62 /* NewOrderView.swift */,
 				DD90521C2BB7D147009599CE /* NewOrderViewController.swift */,
-				DD90521E2BB7D150009599CE /* NewOrderVIewModel.swift */,
+				DD90521E2BB7D150009599CE /* NewOrderViewModel.swift */,
 			);
 			path = NewOrder;
 			sourceTree = "<group>";
@@ -403,6 +412,9 @@
 		DDA250E12BB051F000C73F62 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				DD5313402BB881D90017D73A /* MenuView.swift */,
+				DD5313422BB881E20017D73A /* MenuViewModel.swift */,
+				DD5313442BB881F20017D73A /* MenuViewController.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -615,6 +627,7 @@
 			files = (
 				DD9052192BB2C061009599CE /* Model.swift in Sources */,
 				DDA250B32BAF5B6700C73F62 /* AuthenticationViewModel.swift in Sources */,
+				DD5313412BB881D90017D73A /* MenuView.swift in Sources */,
 				DDC4A4F82BB179BA00F9E6BC /* BaseCollectionViewCell.swift in Sources */,
 				DDA2507E2BAF5A1D00C73F62 /* CustomHeaderView.swift in Sources */,
 				DDA2508F2BAF5AB400C73F62 /* MenuCoordinator.swift in Sources */,
@@ -629,6 +642,7 @@
 				DDA250942BAF5AB400C73F62 /* TabBarCoordinator.swift in Sources */,
 				DDA2508D2BAF5AB400C73F62 /* OrderCoordinator.swift in Sources */,
 				DD9052112BB2BBEC009599CE /* TableOrderDetailsView.swift in Sources */,
+				DD5313452BB881F20017D73A /* MenuViewController.swift in Sources */,
 				DDA250F22BB0894900C73F62 /* NotificationsCell.swift in Sources */,
 				DDA2509B2BAF5B1600C73F62 /* SplashViewModel.swift in Sources */,
 				DD9C3C762BB8557A007A849D /* NewOrderMenuViewModel.swift in Sources */,
@@ -651,12 +665,13 @@
 				DD79D7842BB1C75800F20E94 /* CustomRoundButton.swift in Sources */,
 				DDF8B5B22B70ED5D005FE06A /* ViewController.swift in Sources */,
 				DD9052172BB2BEAD009599CE /* CollectionViewHeader.swift in Sources */,
+				DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */,
 				DDA2507A2BAF5A1D00C73F62 /* Extension+UIColor.swift in Sources */,
 				DDA250D72BB010D300C73F62 /* CodeConfirmationViewModel.swift in Sources */,
 				DDF8B5AE2B70ED5D005FE06A /* AppDelegate.swift in Sources */,
 				DDA250CD2BAFF0D100C73F62 /* Fonts.swift in Sources */,
 				DDA250DC2BB02C6F00C73F62 /* ProfileViewModel.swift in Sources */,
-				DD90521F2BB7D150009599CE /* NewOrderVIewModel.swift in Sources */,
+				DD90521F2BB7D150009599CE /* NewOrderViewModel.swift in Sources */,
 				DDA250782BAF5A1D00C73F62 /* Extension+Notifications.swift in Sources */,
 				DDA250572BAF593E00C73F62 /* Presentable.swift in Sources */,
 				DD90521D2BB7D147009599CE /* NewOrderViewController.swift in Sources */,
@@ -669,6 +684,7 @@
 				DDF8B5B02B70ED5D005FE06A /* SceneDelegate.swift in Sources */,
 				DDA250F02BB0889200C73F62 /* NotificationsView.swift in Sources */,
 				DDA250F62BB089AB00C73F62 /* NotificationsViewModel.swift in Sources */,
+				DD6C1A122BB866730081DC71 /* MenuCell.swift in Sources */,
 				DDA250822BAF5A1D00C73F62 /* CustomTextField.swift in Sources */,
 				DDA250B22BAF5B6700C73F62 /* AuthenticationViewController.swift in Sources */,
 				DDA250932BAF5AB400C73F62 /* InitializationCoordinator.swift in Sources */,
