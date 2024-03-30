@@ -30,19 +30,21 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
     }
-
+    
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        let isShowingTables = sender.selectedSegmentIndex == 0
-        contentView.tablesCollectionView.isHidden = !isShowingTables
-        contentView.statusStackView.isHidden = !isShowingTables
-        contentView.ordersByStatusCollectionView.isHidden = isShowingTables
-        if sender.selectedSegmentIndex == 0 {
-            contentView.tablesCollectionView.reloadData()
-        } else {
-            contentView.ordersByStatusCollectionView.reloadData()
+        switch sender.selectedSegmentIndex {
+        case 0:
+            contentView.statusStackView.isHidden = false
+            contentView.tablesCollectionView.isHidden = false
+            contentView.ordersByStatusCollectionView.isHidden = true
+        case 1:
+            contentView.tablesCollectionView.isHidden = true
+            contentView.ordersByStatusCollectionView.isHidden = false
+            contentView.statusStackView.isHidden = true
+        default:
+            break
         }
     }
-
 }
 
 extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -93,4 +95,28 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
         return UICollectionViewCell(frame: .zero)
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        if collectionView == contentView.tablesCollectionView {
+            let table = viewModel.tables[indexPath.row]
+            viewModel.onOrderDetailsNavigate?()
+        } else if collectionView == contentView.ordersByStatusCollectionView {
+            print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
+            switch OrderStatus.allCases[indexPath.section] {
+            case .statusCategory:
+                guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
+                for visibleCell in collectionView.visibleCells {
+                    if let categoryCell = visibleCell as? CategoryCell {
+                        categoryCell.isCategorySelected = false
+                    }
+                }
+                cell.isCategorySelected = true
+            case .statusOrder:
+                let singleOrder = viewModel.ordersList[indexPath.row]
+                viewModel.onOrderDetailsNavigate?()
+            }
+        }
+    }
+
 }

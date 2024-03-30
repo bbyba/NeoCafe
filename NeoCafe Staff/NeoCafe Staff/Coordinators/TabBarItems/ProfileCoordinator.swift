@@ -7,7 +7,7 @@
 //
 //final class ProfileCoordinator: BaseCoordinator {
 //
-//    private var mainVC: ProfileViewController!
+//    private var mainViewController: ProfileViewController!
 //
 //    override func start() {
 //        let viewModel = ProfileViewModel()

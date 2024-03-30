@@ -5,7 +5,6 @@
 import UIKit
 
 final class OrderCoordinator: BaseCoordinator {
-    private var mainVC: OrderViewController!
 
     override func start() {
         let viewModel = OrderViewModel()
@@ -15,8 +14,10 @@ final class OrderCoordinator: BaseCoordinator {
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
+        viewModel.onOrderDetailsNavigate = { [ weak self ] in
+            self?.openOrderDetails()
+        }
         let viewController = OrderViewController(viewModel: viewModel)
-        mainVC = viewController
         presentViewController(viewController)
     }
 
@@ -45,6 +46,15 @@ final class OrderCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = NotificationsViewController(viewModel: viewModel)
+        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
+
+    func openOrderDetails() {
+        let viewModel = TableOrderDetailsViewModel()
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        let viewController = TableOrderDetailsViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 }

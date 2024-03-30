@@ -30,6 +30,7 @@ class NotificationsCell: BaseCollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setProperties()
         addSubviews()
         setupConstraints()
         setBorder()
@@ -41,11 +42,6 @@ class NotificationsCell: BaseCollectionViewCell {
         timeLabel.text = time
     }
 
-    func setBorder() {
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.darkBlueCustom.cgColor
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,6 +51,11 @@ extension NotificationsCell: BaseContentView {
     func setProperties() {
         backgroundColor = .whiteCustom
         layer.cornerRadius = 14
+    }
+    
+    func setBorder() {
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.darkBlueCustom.cgColor
     }
 
     func addSubviews() {

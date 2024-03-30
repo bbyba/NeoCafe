@@ -99,7 +99,7 @@ class NewOrderView: UIView, BaseContentView {
         return stackView
     }()
 
-    lazy var tablesCollectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(TablesCollectionViewCell.self, forCellWithReuseIdentifier: "TablesCollectionViewCell")
         collectionView.backgroundColor = .clear
@@ -122,7 +122,7 @@ class NewOrderView: UIView, BaseContentView {
         header.addSubview(notificationsButton)
         addSubview(collectionViewHeaderLabel)
         addSubview(statusStackView)
-        addSubview(tablesCollectionView)
+        addSubview(collectionView)
     }
 
     func setupConstraints() {
@@ -150,7 +150,7 @@ class NewOrderView: UIView, BaseContentView {
         }
 
         collectionViewHeaderLabel.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.bottom).offset(16)
+            make.top.equalTo(header.snp.bottom).offset(35)
             make.leading.equalToSuperview().offset(16)
         }
 
@@ -167,7 +167,7 @@ class NewOrderView: UIView, BaseContentView {
             make.width.height.equalTo(20)
         }
 
-        tablesCollectionView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(statusStackView.snp.bottom).offset(32)
             make.bottom.leading.trailing.equalToSuperview()
         }

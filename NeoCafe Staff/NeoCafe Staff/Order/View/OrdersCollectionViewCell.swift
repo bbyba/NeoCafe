@@ -37,7 +37,7 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
-        label.textColor = .darkBlueCustom
+        label.textColor = .blueCustom
         return label
     }()
 
@@ -60,6 +60,7 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         setProperties()
         addSubviews()
         setupConstraints()
+        setBorder()
         //        updateCellAppearanceByStatus(status: String)
     }
 
@@ -74,7 +75,7 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         switch status {
         case "Новый":
             statusCircle.backgroundColor = .skyBlueCustom
-            statusLabel.text = S.newOrder
+            statusLabel.text = S.newStatus
         case "В процессе":
             statusCircle.backgroundColor = .yellowCustom
             statusLabel.text = S.processingStatus
@@ -100,8 +101,13 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
 
 extension OrdersCollectionViewCell: BaseContentView {
     func setProperties() {
-        backgroundColor = .greenTableCustom
+        backgroundColor = .whiteCustom
         layer.cornerRadius = 14
+    }
+
+    func setBorder() {
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.greyCustom.cgColor
     }
 
     func addSubviews() {
@@ -113,11 +119,11 @@ extension OrdersCollectionViewCell: BaseContentView {
 
     func setupConstraints() {
         tableNumber.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().offset(16)
+            make.top.leading.equalToSuperview().offset(14)
         }
 
         statusStack.snp.makeConstraints { make in
-            make.top.equalTo(tableNumber.snp.bottom).offset(15)
+            make.top.equalTo(tableNumber.snp.bottom).offset(13)
             make.leading.equalToSuperview().offset(16)
         }
 
@@ -128,6 +134,10 @@ extension OrdersCollectionViewCell: BaseContentView {
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(orderNumber.snp.bottom).offset(20)
             make.trailing.equalToSuperview().offset(-16)
+        }
+
+        statusCircle.snp.makeConstraints { make in
+            make.width.height.equalTo(16)
         }
     }
 }

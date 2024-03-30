@@ -6,17 +6,17 @@
 import UIKit
 
 final class NewOrderCoordinator: BaseCoordinator {
-    private var mainVC: OrderViewController!
+    private var mainVC: NewOrderViewController!
 
     override func start() {
-        let viewModel = OrderViewModel()
+        let viewModel = NewOrderViewModel()
         viewModel.onProfileNavigate = { [ weak self ] in
             self?.openProfile()
         }
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
-        let viewController = OrderViewController(viewModel: viewModel)
+        let viewController = NewOrderViewController(viewModel: viewModel)
         mainVC = viewController
         presentViewController(viewController)
     }

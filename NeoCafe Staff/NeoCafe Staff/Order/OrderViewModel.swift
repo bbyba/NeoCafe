@@ -20,6 +20,9 @@ struct OrderModel {
 protocol OrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
+    var onOrderDetailsNavigate: EmptyCompletion? { get set }
+    var onTableOrdersNavigate: EmptyCompletion? { get set }
+
     var tables: [TableModel] { get set }
     var ordersList: [OrderModel] {  get set }
 }
@@ -27,6 +30,9 @@ protocol OrderViewModelProtocol {
 class OrderViewModel: NSObject, OrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
+    var onOrderDetailsNavigate: EmptyCompletion?
+    var onTableOrdersNavigate: EmptyCompletion?
+
     var tables: [TableModel]  = [
         TableModel(tableNumber: 1, isBusy: true),
         TableModel(tableNumber: 2, isBusy: false),

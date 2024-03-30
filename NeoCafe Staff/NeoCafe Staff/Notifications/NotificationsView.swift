@@ -19,7 +19,7 @@ class NotificationView: UIView {
         return label
     }()
 
-    lazy var backButton = CustomRoundButton(withImage: Asset.Images.person.image,
+    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image,
                                             backgroundColor: .lightBlueCustom)
 
     lazy var clearAllButton: UIButton = {

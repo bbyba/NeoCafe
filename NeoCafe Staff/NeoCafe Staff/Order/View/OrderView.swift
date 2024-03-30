@@ -10,6 +10,7 @@ enum OrderStatus: String, CaseIterable {
     case statusCategory
     case statusOrder
 }
+
 class OrderView: UIView {
     lazy var header = CustomHeaderView()
 
@@ -169,19 +170,24 @@ extension OrderView {
             heightDimension: .fractionalHeight(1.0))
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: nil, top: nil, trailing: .fixed(8), bottom: nil)
+        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil,
+                                                         top: nil,
+                                                         trailing: .fixed(8),
+                                                         bottom: nil)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .estimated(90),
             heightDimension: .absolute(34))
 
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, 
+                                                       subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0, leading: 16, bottom: 0, trailing: 16)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                        leading: 16,
+                                                        bottom: 20,
+                                                        trailing: 16)
         section.interGroupSpacing = 8
         return section
 
@@ -196,18 +202,23 @@ extension OrderView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(80))
+            heightDimension: .absolute(110))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, 
+                                                      leading: 16,
+                                                      bottom: 8,
+                                                      trailing: 16)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, 
+                                                        leading: 0,
+                                                        bottom: 0,
+                                                        trailing: 0)
         return section
     }
 }
-
 
 extension OrderView: BaseContentView {
     func setProperties() {
@@ -221,7 +232,7 @@ extension OrderView: BaseContentView {
         addSubview(segmentedControl)
         addSubview(statusStackView)
         addSubview(tablesCollectionView)
-        //        addSubview(ordersByStatusCollectionView)
+        addSubview(ordersByStatusCollectionView)
     }
 
     func setupConstraints() {
@@ -273,11 +284,11 @@ extension OrderView: BaseContentView {
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
 
-//        ordersByStatusCollectionView.snp.makeConstraints { make in
-//            make.top.equalTo(segmentedControl.snp.bottom).offset(24)
-//            make.leading.trailing.equalToSuperview()
-//            make.bottom.equalTo(safeAreaLayoutGuide)
-//        }
-//        ordersByStatusCollectionView.isHidden = true
+        ordersByStatusCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
+        }
+        ordersByStatusCollectionView.isHidden = true
     }
 }

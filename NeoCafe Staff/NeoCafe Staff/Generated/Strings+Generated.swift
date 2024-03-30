@@ -84,6 +84,8 @@ internal enum S {
   internal static let tableNo = S.tr("Localizable", "tableNo", fallback: "Стол №")
   /// Столы
   internal static let tables = S.tr("Localizable", "tables", fallback: "Столы")
+  /// Итого:
+  internal static let total = S.tr("Localizable", "total", fallback: "Итого:")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
   /// Официант: 
