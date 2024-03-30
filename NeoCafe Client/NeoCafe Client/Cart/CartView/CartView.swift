@@ -45,7 +45,7 @@ class CartView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
+        collectionView.register(cell: BigProductCell.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -175,7 +175,7 @@ class CartView: UIView, BaseContentView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.33))
+            heightDimension: .fractionalHeight(0.37))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

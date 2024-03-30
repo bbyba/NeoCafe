@@ -14,12 +14,10 @@ final class AuthenticationCoordinator: BaseCoordinator {
         let provider = MoyaProvider<UserAPI>()
         let viewModel = AuthViewModel(provider: provider)
         viewModel.onMainNavigate = onMainNavigate
-        let viewController = AuthenticationViewController()
-        viewController.viewModel = viewModel
+        let viewController = AuthenticationViewController(viewModel: viewModel)
         router.setRootModule(viewController, hideBar: true)
         return viewController
     }()
-
 
     override var toPresent: UIViewController {
         startController

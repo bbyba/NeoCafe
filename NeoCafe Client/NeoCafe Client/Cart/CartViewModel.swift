@@ -35,14 +35,24 @@ class CartViewModel: NSObject, CartViewModelProtocol {
         self.provider = MoyaProvider<UserAPI>()
     }
 
-    func filterItems(newItem: Item) {
-        if let index = orderList.firstIndex(where: { item in item.id == newItem.id }) {
-            itemQuantities[newItem.id] = (itemQuantities[newItem.id] ?? 0) + 1
+    func filterItems(newItem: Item, quantity: Int = 1) {
+        if orderList.firstIndex(where: { $0.id == newItem.id }) != nil {
+            itemQuantities[newItem.id] = (itemQuantities[newItem.id] ?? 0) + quantity
         } else {
             orderList.append(newItem)
-            itemQuantities[newItem.id] = 1
+            itemQuantities[newItem.id] = quantity
         }
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
+    }
+
+    func remove(item: Item) {
+        // Find the index of the item in the orderList.
+        if let index = orderList.firstIndex(where: { $0.id == item.id }) {
+            // Remove the item from the list.
+            orderList.remove(at: index)
+            // Remove the item quantity from itemQuantities dictionary if exists.
+            itemQuantities.removeValue(forKey: item.id)
+        }
     }
 
 

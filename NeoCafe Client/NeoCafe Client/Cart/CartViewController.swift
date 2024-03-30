@@ -5,6 +5,7 @@
 
 
 import UIKit
+
 struct productModel {
     let image: String
     let name: String
@@ -91,10 +92,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-            fatalError("Could not dequeue BigProductCell")
-        }
-
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         let item = CartViewModel.shared.orderList[indexPath.row]
         cell.configureData(item: item)
         cell.configureForCart()
@@ -113,7 +111,19 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView,
+                        trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
+                        -> UISwipeActionsConfiguration? {
 
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            guard let strongSelf = self else { return }
 
+            let itemToRemove = CartViewModel.shared.orderList[indexPath.row]
+            CartViewModel.shared.remove(item: itemToRemove)
+            strongSelf.updateCartView()
+            completionHandler(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 
 }

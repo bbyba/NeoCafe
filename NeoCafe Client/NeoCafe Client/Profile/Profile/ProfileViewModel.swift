@@ -29,7 +29,6 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
             case .success(let response):
                 do {
                     self.personalData = try JSONDecoder().decode(CustomerProfile.self, from: response.data)
-                    print("Received JSON: \(String(data: response.data, encoding: .utf8) ?? "Invalid JSON")")
                     completion(.success(self.personalData!))
                 } catch {
                     completion(.failure(error))

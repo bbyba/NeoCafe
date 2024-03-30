@@ -38,9 +38,9 @@ class NotificationView: UIView, BaseContentView {
         return button
     }()
 
-    lazy var collectionView: UICollectionView = {
+    lazy var notificationsCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(NotificationsCell.self, forCellWithReuseIdentifier: NotificationsCell.identifier)
+        collectionView.register(cell: NotificationsCell.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -63,7 +63,7 @@ class NotificationView: UIView, BaseContentView {
         header.addSubview(backButton)
         header.addSubview(headerLabel)
         addSubview(clearAllButton)
-        addSubview(collectionView)
+        addSubview(notificationsCollectionView)
     }
 
     func setupConstraints() {
@@ -74,26 +74,23 @@ class NotificationView: UIView, BaseContentView {
 
         backButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(70)
-            //            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
             make.height.equalTo(29)
             make.centerX.equalToSuperview()
-            //            make.centerY.equalToSuperview()
+            make.centerY.equalTo(backButton.snp.centerY)
         }
 
         clearAllButton.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(40)
-//            make.top.equalToSuperview().offset(156)
             make.height.equalTo(19)
             make.trailing.equalToSuperview().offset(-24)
         }
 
-        collectionView.snp.makeConstraints { make in
+        notificationsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(clearAllButton.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-20)

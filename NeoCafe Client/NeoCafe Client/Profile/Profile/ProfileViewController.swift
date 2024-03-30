@@ -35,7 +35,6 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
     }
 
     @objc func editProfileTapped() {
-        print("Profile: editProfileTapped")
         viewModel.onEditProfileNavigate?()
     }
 }
@@ -52,50 +51,29 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         case .completed:
             return completedOrders.count
         }
-        //        guard let orders = viewModel.orders else { return 0 }
-        //                switch OrderHistorySection.allCases[section] {
-        //                case .current:
-        //                    return orders.filter { !$0.isCompleted }.count
-        //                case .completed:
-        //                    return orders.filter { $0.isCompleted }.count
-        //                }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {fatalError("Could not dequeue BigProductCell")}
-        
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = currentOrders[indexPath.row]
-//            cell.configureData(name: currentOrder.name, imageName: currentOrder.image, description: currentOrder.description, price: currentOrder.status)
             cell.configureData(item: currentOrder)
 //            cell.hideStepper()
 //            cell.hidePlusButton()
             return cell
         case .completed:
             let completedOrder = completedOrders[indexPath.row]
-//            cell.configureData(name: completedOrder.name, imageName: completedOrder.image, description: completedOrder.description, price: completedOrder.status)
             cell.configureData(item: completedOrder)
 //            cell.hideStepper()
 //            cell.hidePlusButton()
             return cell
         }
-
-//        guard let orders = viewModel.orders else { fatalError("Orders are not available") }
-//        let filteredOrders: [Order] = orders.filter { OrderHistorySection.allCases[indexPath.section] == .current ? !$0.isCompleted : $0.isCompleted }
-//
-//        let order = filteredOrders[indexPath.row]
-//        cell.configureData(name: order.name, imageName: order.image, description: order.description, price: order.status)
-//        cell.hideStepper()
-//        cell.hidePlusButton()
-//        return cell
-//    }
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionHeader else {fatalError("Unexpected element kind") }
-
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as! CollectionViewSingleHeader
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = OrderHistorySection(rawValue: OrderHistorySection.allCases[indexPath.section].rawValue) {
             switch sectionKind {

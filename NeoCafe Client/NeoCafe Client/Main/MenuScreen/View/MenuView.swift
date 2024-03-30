@@ -52,9 +52,9 @@ class MenuView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
-        collectionView.register(MenuCategoryCell.self, forCellWithReuseIdentifier: MenuCategoryCell.identifier)
-        collectionView.register(MenuProductCell.self, forCellWithReuseIdentifier: MenuProductCell.identifier)
-        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+        collectionView.register(cell: MenuCategoryCell.self)
+        collectionView.register(cell: MenuProductCell.self)
+        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -187,7 +187,7 @@ extension MenuView {
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
 //            heightDimension: .absolute(220))
-            heightDimension: .fractionalHeight(0.33))
+            heightDimension: .fractionalHeight(0.4))
 
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])

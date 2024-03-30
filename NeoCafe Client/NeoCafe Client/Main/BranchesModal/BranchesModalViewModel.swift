@@ -26,7 +26,8 @@ class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
             switch result {
             case .success(let response):
                 do {
-                    self.branchesList = try JSONDecoder().decode([BranchModel].self, from: response.data)
+                    let branchesResponse = try JSONDecoder().decode(BranchesResponse.self, from: response.data)
+                    self.branchesList = branchesResponse.results
                     completion(.success(self.branchesList))
                 } catch {
                     completion(.failure(error))

@@ -93,6 +93,8 @@
 		DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D8482B7601A30068598D /* RegistrationView.swift */; };
 		DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84B2B7602A20068598D /* SignInView.swift */; };
 		DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */; };
+		DDC4A4FC2BB17CD800F9E6BC /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4A4FB2BB17CD800F9E6BC /* BaseCollectionViewCell.swift */; };
+		DDC4A4FE2BB17CED00F9E6BC /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4A4FD2BB17CED00F9E6BC /* BaseTableViewCell.swift */; };
 		DDCB6B782B9B7B4100407089 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B772B9B7B4100407089 /* TabBarCoordinator.swift */; };
 		DDCB6B7A2B9B7DB900407089 /* Extension+UIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B792B9B7DB900407089 /* Extension+UIViews.swift */; };
 		DDCB6B7C2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B7B2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift */; };
@@ -108,7 +110,6 @@
 		DDF8B5972B70ED3E005FE06A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5962B70ED3E005FE06A /* Assets.xcassets */; };
 		DDF8B59A2B70ED3E005FE06A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5982B70ED3E005FE06A /* LaunchScreen.storyboard */; };
 		DDF8B5C32B70F1C7005FE06A /* BaseAuthRegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C22B70F1C7005FE06A /* BaseAuthRegView.swift */; };
-		DDF8B5C62B70F1FF005FE06A /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C52B70F1FF005FE06A /* Model.swift */; };
 		DDF8B5CA2B70F21D005FE06A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5C92B70F21D005FE06A /* AuthenticationViewModel.swift */; };
 		DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */; };
 		DDF8B5D32B70F299005FE06A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5D22B70F299005FE06A /* CustomTextField.swift */; };
@@ -204,6 +205,8 @@
 		DDC1D8482B7601A30068598D /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		DDC1D84B2B7602A20068598D /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationView.swift; sourceTree = "<group>"; };
+		DDC4A4FB2BB17CD800F9E6BC /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DDC4A4FD2BB17CED00F9E6BC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DDCB6B772B9B7B4100407089 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		DDCB6B792B9B7DB900407089 /* Extension+UIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViews.swift"; sourceTree = "<group>"; };
 		DDCB6B7B2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewCell+Register.swift"; sourceTree = "<group>"; };
@@ -221,7 +224,6 @@
 		DDF8B5992B70ED3E005FE06A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDF8B59B2B70ED3E005FE06A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDF8B5C22B70F1C7005FE06A /* BaseAuthRegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAuthRegView.swift; sourceTree = "<group>"; };
-		DDF8B5C52B70F1FF005FE06A /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DDF8B5C92B70F21D005FE06A /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		DDF8B5D22B70F299005FE06A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -398,6 +400,8 @@
 				DD9DD0C92B8FF1BA00C489F6 /* BaseContentView.swift */,
 				DD9DD0CB2B8FF1F800C489F6 /* BaseContentViewController.swift */,
 				DD9DD0CD2B8FF21700C489F6 /* BaseContentViewModelController.swift */,
+				DDC4A4FB2BB17CD800F9E6BC /* BaseCollectionViewCell.swift */,
+				DDC4A4FD2BB17CED00F9E6BC /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -532,7 +536,6 @@
 		DDC1D84A2B7601A70068598D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DDF8B5C52B70F1FF005FE06A /* Model.swift */,
 				DDF8B5C22B70F1C7005FE06A /* BaseAuthRegView.swift */,
 				DDC1D84B2B7602A20068598D /* SignInView.swift */,
 				DDC1D8482B7601A30068598D /* RegistrationView.swift */,
@@ -826,7 +829,6 @@
 				DD9DD0E12B91107E00C489F6 /* CartViewController.swift in Sources */,
 				DDCB6B7F2B9E381000407089 /* MainViewModel.swift in Sources */,
 				DD9DD1152B95FF3A00C489F6 /* NotificationsViewController.swift in Sources */,
-				DDF8B5C62B70F1FF005FE06A /* Model.swift in Sources */,
 				DD9DD10B2B95E74900C489F6 /* ProfileViewController.swift in Sources */,
 				DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */,
 				DDCB6B832B9EF55400407089 /* NetworkService.swift in Sources */,
@@ -879,6 +881,7 @@
 				DD73F3072BA3877200C33E21 /* EditProfileViewModel.swift in Sources */,
 				DD73F3012BA1F55B00C33E21 /* BranchesViewModel.swift in Sources */,
 				DDCB6B872B9FBDF000407089 /* NotificationsViewModel.swift in Sources */,
+				DDC4A4FE2BB17CED00F9E6BC /* BaseTableViewCell.swift in Sources */,
 				DD9556152B79F67300FB65AF /* UserAPI.swift in Sources */,
 				DD9DD0D72B90DFB500C489F6 /* BranchesModalCell.swift in Sources */,
 				DD93C18F2B81C5CC00339287 /* Network.swift in Sources */,
@@ -909,6 +912,7 @@
 				DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */,
 				DD9DD0F62B94795C00C489F6 /* Presentable.swift in Sources */,
 				DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */,
+				DDC4A4FC2BB17CD800F9E6BC /* BaseCollectionViewCell.swift in Sources */,
 				DD6035172BADA975003FFDDC /* Extension+Notifications.swift in Sources */,
 				DD73F2F92BA04A5900C33E21 /* BonusViewController.swift in Sources */,
 				DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */,
