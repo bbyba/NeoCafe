@@ -7,18 +7,17 @@ import UIKit
 import Moya
 
 final class MenuCoordinator: BaseCoordinator {
-    private var mainVC: OrderViewController!
+    private var mainViewController: MenuViewController!
 
     override func start() {
-        let viewModel = OrderViewModel()
+        let viewModel = MenuViewModel()
         viewModel.onProfileNavigate = { [ weak self ] in
             self?.openProfile()
         }
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
-        let viewController = OrderViewController(viewModel: viewModel)
-        mainVC = viewController
+        let viewController = MenuViewController(viewModel: viewModel)
         presentViewController(viewController)
     }
 

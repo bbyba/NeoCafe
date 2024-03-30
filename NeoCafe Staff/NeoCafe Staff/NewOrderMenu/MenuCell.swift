@@ -18,6 +18,7 @@ class MenuCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .regular)
         label.textColor = .lightBlueCustom
+        label.textAlignment = .left
         return label
     }()
 
@@ -28,6 +29,15 @@ class MenuCell: BaseCollectionViewCell {
         return button
     }()
 
+    lazy var priceLabelMenu: UILabel = {
+        let label = UILabel()
+        label.font = .poppins(ofSize: 16, weight: .semibold)
+        label.textColor = .lightBlueCustom
+        label.textAlignment = .right
+        return label
+    }()
+
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setProperties()
@@ -36,11 +46,21 @@ class MenuCell: BaseCollectionViewCell {
         setupConstraints()
     }
 
-    func configureData(menuItem: Item) {
-        itemName.text = "\(menuItem.name)"
-        priceLabel.text = "(\(menuItem.pricePerUnit))"
+    func configureData(menuItem: Item, newOrderView: Bool) {
+        itemName.text = menuItem.name
+        if newOrderView {
+            priceLabel.text = "(\(menuItem.pricePerUnit))"
+            priceLabelMenu.isHidden = true
+            priceLabel.isHidden = false
+            plusButton.isHidden = false
+        } else {
+            priceLabelMenu.text = "\(menuItem.pricePerUnit) сом"
+            priceLabelMenu.isHidden = false
+            priceLabel.isHidden = true
+            plusButton.isHidden = true
+        }
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,6 +84,7 @@ extension MenuCell: BaseContentView {
         contentView.addSubview(itemName)
         contentView.addSubview(priceLabel)
         contentView.addSubview(plusButton)
+        contentView.addSubview(priceLabelMenu)
     }
 
     func setupConstraints() {
@@ -83,5 +104,9 @@ extension MenuCell: BaseContentView {
             make.centerY.equalToSuperview()
         }
 
+        priceLabelMenu.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+        }
     }
 }
