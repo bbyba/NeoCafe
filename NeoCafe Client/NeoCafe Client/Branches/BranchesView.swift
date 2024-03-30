@@ -80,7 +80,6 @@ class BranchesView: UIView, BaseContentView {
 
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
     required init?(coder: NSCoder) {
