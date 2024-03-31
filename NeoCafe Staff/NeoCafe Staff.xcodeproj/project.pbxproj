@@ -19,6 +19,11 @@
 		DD8089D72BB9476500474F1B /* MakeNewOrderPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089D62BB9476500474F1B /* MakeNewOrderPopup.swift */; };
 		DD8089D92BB9490800474F1B /* MakeNewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089D82BB9490800474F1B /* MakeNewOrderViewController.swift */; };
 		DD8089DB2BB9492E00474F1B /* MakeNewOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089DA2BB9492E00474F1B /* MakeNewOrderViewModel.swift */; };
+		DD8089DE2BB9C46500474F1B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089DD2BB9C46500474F1B /* NetworkService.swift */; };
+		DD8089E02BB9C4CD00474F1B /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */; };
+		DD8089E22BB9CD5C00474F1B /* InjectionDefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */; };
+		DD8089E52BB9D1AE00474F1B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DD8089E42BB9D1AE00474F1B /* Factory */; };
+		DD8089E72BB9D35D00474F1B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E62BB9D35D00474F1B /* Models.swift */; };
 		DD9052112BB2BBEC009599CE /* TableOrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */; };
 		DD9052132BB2BBF2009599CE /* TableOrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */; };
 		DD9052152BB2BBF8009599CE /* TableOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */; };
@@ -115,6 +120,10 @@
 		DD8089D62BB9476500474F1B /* MakeNewOrderPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewOrderPopup.swift; sourceTree = "<group>"; };
 		DD8089D82BB9490800474F1B /* MakeNewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewOrderViewController.swift; sourceTree = "<group>"; };
 		DD8089DA2BB9492E00474F1B /* MakeNewOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeNewOrderViewModel.swift; sourceTree = "<group>"; };
+		DD8089DD2BB9C46500474F1B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionDefaultContainer.swift; sourceTree = "<group>"; };
+		DD8089E62BB9D35D00474F1B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsView.swift; sourceTree = "<group>"; };
 		DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewModel.swift; sourceTree = "<group>"; };
 		DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7A6B0D64465F4E55B6D964 /* Pods_NeoCafe_Staff.framework in Frameworks */,
+				DD8089E52BB9D1AE00474F1B /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +257,17 @@
 				DD8089DA2BB9492E00474F1B /* MakeNewOrderViewModel.swift */,
 			);
 			path = MakeNewOrder;
+			sourceTree = "<group>";
+		};
+		DD8089DC2BB9C44F00474F1B /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				DD8089DD2BB9C46500474F1B /* NetworkService.swift */,
+				DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */,
+				DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */,
+				DD8089E62BB9D35D00474F1B /* Models.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 		DD90520F2BB2BBD0009599CE /* TableOrderDetails */ = {
@@ -373,8 +394,8 @@
 			isa = PBXGroup;
 			children = (
 				DDA250A42BAF5B6700C73F62 /* CodeConfirmationView.swift */,
-				DDA250D42BB010C100C73F62 /* CodeConfirmationViewController.swift */,
 				DDA250D62BB010D300C73F62 /* CodeConfirmationViewModel.swift */,
+				DDA250D42BB010C100C73F62 /* CodeConfirmationViewController.swift */,
 			);
 			path = CodeConfirmation;
 			sourceTree = "<group>";
@@ -533,6 +554,7 @@
 				DDA250EE2BB0885B00C73F62 /* Notifications */,
 				DDA250732BAF5A1D00C73F62 /* CommonUI */,
 				DDA250522BAF58C600C73F62 /* Supporting */,
+				DD8089DC2BB9C44F00474F1B /* NetworkLayer */,
 				DDA250C92BAFF0B100C73F62 /* Generated */,
 				DDF8B5B82B70ED5E005FE06A /* LaunchScreen.storyboard */,
 				DD9052182BB2C061009599CE /* Model.swift */,
@@ -559,6 +581,9 @@
 			dependencies = (
 			);
 			name = "NeoCafe Staff";
+			packageProductDependencies = (
+				DD8089E42BB9D1AE00474F1B /* Factory */,
+			);
 			productName = "NeoCafe Staff";
 			productReference = DDF8B5AA2B70ED5D005FE06A /* NeoCafe Staff.app */;
 			productType = "com.apple.product-type.application";
@@ -587,6 +612,9 @@
 				Base,
 			);
 			mainGroup = DDF8B5A12B70ED5D005FE06A;
+			packageReferences = (
+				DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = DDF8B5AB2B70ED5D005FE06A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -713,9 +741,11 @@
 				DDA250812BAF5A1D00C73F62 /* CustomStepper.swift in Sources */,
 				DDA2508E2BAF5AB400C73F62 /* NewOrderCoordinator.swift in Sources */,
 				DDC4A4FA2BB179D400F9E6BC /* BaseTableViewCell.swift in Sources */,
+				DD8089DE2BB9C46500474F1B /* NetworkService.swift in Sources */,
 				DDA250752BAF5A1D00C73F62 /* BaseContentViewController.swift in Sources */,
 				DDA250772BAF5A1D00C73F62 /* Extension+Currency.swift in Sources */,
 				DDA250802BAF5A1D00C73F62 /* CustomSegmentedControl.swift in Sources */,
+				DD8089E02BB9C4CD00474F1B /* UserAPI.swift in Sources */,
 				DDA250742BAF5A1D00C73F62 /* BaseContentView.swift in Sources */,
 				DDE375F72BB9362000210347 /* CoffeeDetailsViewController.swift in Sources */,
 				DDA250AD2BAF5B6700C73F62 /* AuthenticationView.swift in Sources */,
@@ -731,6 +761,7 @@
 				DDF8B5AE2B70ED5D005FE06A /* AppDelegate.swift in Sources */,
 				DDA250CD2BAFF0D100C73F62 /* Fonts.swift in Sources */,
 				DDE375F92BB9365700210347 /* CoffeeDetailsViewModel.swift in Sources */,
+				DD8089E72BB9D35D00474F1B /* Models.swift in Sources */,
 				DDA250DC2BB02C6F00C73F62 /* ProfileViewModel.swift in Sources */,
 				DD90521F2BB7D150009599CE /* NewOrderViewModel.swift in Sources */,
 				DDA250782BAF5A1D00C73F62 /* Extension+Notifications.swift in Sources */,
@@ -760,6 +791,7 @@
 				DDA250CF2BAFF0DC00C73F62 /* Strings+Generated.swift in Sources */,
 				DDA250DA2BB02C6400C73F62 /* ProfileView.swift in Sources */,
 				DDA250792BAF5A1D00C73F62 /* Extension+UICollectionViewCell+Register.swift in Sources */,
+				DD8089E22BB9CD5C00474F1B /* InjectionDefaultContainer.swift in Sources */,
 				DDA250FF2BB1188700C73F62 /* CategoryCell.swift in Sources */,
 				DD8089D72BB9476500474F1B /* MakeNewOrderPopup.swift in Sources */,
 			);
@@ -976,6 +1008,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD8089E42BB9D1AE00474F1B /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DDF8B5A22B70ED5D005FE06A /* Project object */;
 }
