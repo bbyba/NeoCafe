@@ -85,6 +85,16 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
             //            viewModel.onAddItemNavigate?(menuItem.id)
+            if menuItem.category.name == "Кофе" {
+                openCoffeeModal(for: menuItem)
+            }
         }
+    }
+
+    // Temporary
+    private func openCoffeeModal(for item: Item) {
+        let coffeeModalVC = CoffeeDetailsViewController(viewModel: CoffeeDetailsViewModel())
+        coffeeModalVC.modalPresentationStyle = .overFullScreen
+        present(coffeeModalVC, animated: true, completion: nil)
     }
 }
