@@ -28,6 +28,7 @@ class CodeConfirmationViewModel: NSObject, CodeConfirmationViewModelProtocol {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
+                    UserDefaultsService.shared.saveTokensAndIDs(response: response)
                     self.onMainNavigate?()
                 }
                 print(response)

@@ -24,6 +24,7 @@
 		DD8089E22BB9CD5C00474F1B /* InjectionDefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */; };
 		DD8089E52BB9D1AE00474F1B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DD8089E42BB9D1AE00474F1B /* Factory */; };
 		DD8089E72BB9D35D00474F1B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E62BB9D35D00474F1B /* Models.swift */; };
+		DD8089E92BBA71D700474F1B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E82BBA71D700474F1B /* UserDefaults.swift */; };
 		DD9052112BB2BBEC009599CE /* TableOrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */; };
 		DD9052132BB2BBF2009599CE /* TableOrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */; };
 		DD9052152BB2BBF8009599CE /* TableOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */; };
@@ -56,7 +57,6 @@
 		DDA2508D2BAF5AB400C73F62 /* OrderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250832BAF5AB400C73F62 /* OrderCoordinator.swift */; };
 		DDA2508E2BAF5AB400C73F62 /* NewOrderCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250842BAF5AB400C73F62 /* NewOrderCoordinator.swift */; };
 		DDA2508F2BAF5AB400C73F62 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250852BAF5AB400C73F62 /* MenuCoordinator.swift */; };
-		DDA250902BAF5AB400C73F62 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250862BAF5AB400C73F62 /* ProfileCoordinator.swift */; };
 		DDA250912BAF5AB400C73F62 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250882BAF5AB400C73F62 /* AppCoordinator.swift */; };
 		DDA250922BAF5AB400C73F62 /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA250892BAF5AB400C73F62 /* AuthenticationCoordinator.swift */; };
 		DDA250932BAF5AB400C73F62 /* InitializationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA2508A2BAF5AB400C73F62 /* InitializationCoordinator.swift */; };
@@ -124,6 +124,7 @@
 		DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionDefaultContainer.swift; sourceTree = "<group>"; };
 		DD8089E62BB9D35D00474F1B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		DD8089E82BBA71D700474F1B /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsView.swift; sourceTree = "<group>"; };
 		DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewModel.swift; sourceTree = "<group>"; };
 		DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +157,6 @@
 		DDA250832BAF5AB400C73F62 /* OrderCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCoordinator.swift; sourceTree = "<group>"; };
 		DDA250842BAF5AB400C73F62 /* NewOrderCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewOrderCoordinator.swift; sourceTree = "<group>"; };
 		DDA250852BAF5AB400C73F62 /* MenuCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
-		DDA250862BAF5AB400C73F62 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DDA250882BAF5AB400C73F62 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DDA250892BAF5AB400C73F62 /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
 		DDA2508A2BAF5AB400C73F62 /* InitializationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationCoordinator.swift; sourceTree = "<group>"; };
@@ -266,6 +266,7 @@
 				DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */,
 				DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */,
 				DD8089E62BB9D35D00474F1B /* Models.swift */,
+				DD8089E82BBA71D700474F1B /* UserDefaults.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -363,7 +364,6 @@
 				DDA250832BAF5AB400C73F62 /* OrderCoordinator.swift */,
 				DDA250842BAF5AB400C73F62 /* NewOrderCoordinator.swift */,
 				DDA250852BAF5AB400C73F62 /* MenuCoordinator.swift */,
-				DDA250862BAF5AB400C73F62 /* ProfileCoordinator.swift */,
 			);
 			path = TabBarItems;
 			sourceTree = "<group>";
@@ -721,7 +721,6 @@
 				DDA250CB2BAFF0C700C73F62 /* XCAssets+Generated.swift in Sources */,
 				DDA2507C2BAF5A1D00C73F62 /* Extension+UIViews.swift in Sources */,
 				DDA250DE2BB02C7D00C73F62 /* ProfileViewController.swift in Sources */,
-				DDA250902BAF5AB400C73F62 /* ProfileCoordinator.swift in Sources */,
 				DD9052152BB2BBF8009599CE /* TableOrderDetailsViewController.swift in Sources */,
 				DDA250942BAF5AB400C73F62 /* TabBarCoordinator.swift in Sources */,
 				DDA2508D2BAF5AB400C73F62 /* OrderCoordinator.swift in Sources */,
@@ -743,6 +742,7 @@
 				DDC4A4FA2BB179D400F9E6BC /* BaseTableViewCell.swift in Sources */,
 				DD8089DE2BB9C46500474F1B /* NetworkService.swift in Sources */,
 				DDA250752BAF5A1D00C73F62 /* BaseContentViewController.swift in Sources */,
+				DD8089E92BBA71D700474F1B /* UserDefaults.swift in Sources */,
 				DDA250772BAF5A1D00C73F62 /* Extension+Currency.swift in Sources */,
 				DDA250802BAF5A1D00C73F62 /* CustomSegmentedControl.swift in Sources */,
 				DD8089E02BB9C4CD00474F1B /* UserAPI.swift in Sources */,
