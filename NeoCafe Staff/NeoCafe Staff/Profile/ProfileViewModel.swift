@@ -9,7 +9,7 @@ import Moya
 protocol ProfileViewModelProtocol {
     var onLogoutNavigate: EmptyCompletion? { get set }
     var onBackNavigate: EmptyCompletion? { get set }
-//    func getProfile()
+    func getProfile()
 }
 
 class ProfileViewModel: NSObject, ProfileViewModelProtocol {
@@ -17,12 +17,8 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
 
     var onLogoutNavigate: EmptyCompletion?
     var onBackNavigate: EmptyCompletion?
-    var profileData: ProfileResponse? {
-            didSet {
-                self.onProfileDataFetched?()
-            }
-        }
-    var onProfileDataFetched: EmptyCompletion?
+    var profileData: ProfileResponse?
+    var onProfileDataFetched: (() -> Void)?
 
     func getProfile() {
         networkService.sendRequest(successModelType: ProfileResponse.self,
@@ -32,7 +28,9 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-//                    self.onMainNavigate?()
+                    self.profileData = response
+                    self.onProfileDataFetched?()
+                    print(response)
                 }
                 print(response)
             case .failure(let error):

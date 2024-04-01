@@ -5,11 +5,6 @@
 
 import Foundation
 
-struct TableModel {
-    let tableNumber: Int
-    let isBusy: Bool
-}
-
 struct OrderModel {
     let tableNumber: Int
     let orderNumber: Int
@@ -25,23 +20,21 @@ protocol OrderViewModelProtocol {
 
     var tables: [TableModel] { get set }
     var ordersList: [OrderModel] {  get set }
+
+//    func getTables()
 }
 
 class OrderViewModel: NSObject, OrderViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
     var onOrderDetailsNavigate: EmptyCompletion?
     var onTableOrdersNavigate: EmptyCompletion?
 
-    var tables: [TableModel]  = [
-        TableModel(tableNumber: 1, isBusy: true),
-        TableModel(tableNumber: 2, isBusy: false),
-        TableModel(tableNumber: 3, isBusy: false),
-        TableModel(tableNumber: 4, isBusy: false),
-        TableModel(tableNumber: 5, isBusy: true),
-        TableModel(tableNumber: 6, isBusy: false),
-        TableModel(tableNumber: 7, isBusy: false),
-    ]
+    var onTablesFetched: (() -> Void)?
+
+    var tables: [TableModel]  = []
 
     var ordersList: [OrderModel] = [
         OrderModel(tableNumber: 1, orderNumber: 123, status: "Новый", time: "19:02"),
@@ -53,4 +46,22 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
     var categories: [String] = [
         S.all, S.newStatus, S.processingStatus, S.readyStatus, S.doneStatus, S.cancelledStatus
     ]
+
+//    func getTables() {
+//        networkService.sendRequest(successModelType: [TableModel].self,
+//                                   endpoint: MultiTarget(UserAPI.getTablesByBranch(branchID: UserDefaultsService.shared.branchID)))
+//        { [weak self] result in
+//            guard let self else { return }
+//            switch result {
+//            case .success(let response):
+//                DispatchQueue.main.async {
+//                    self.tables = response
+//                    self.onTablesFetched?()
+//                }
+//                print(response)
+//            case .failure(let error):
+//                print("handle error: \(error)")
+//            }
+//        }
+//    }
 }

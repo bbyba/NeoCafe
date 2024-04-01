@@ -5,14 +5,54 @@
 
 import UIKit
 
-class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
+class NewOrderMenuViewController: BaseViewController<MenuViewModel, NewOrderMenuView> {
     var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        addTargets()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Loader.shared.showLoader(view: self.view)
+        setupBindings()
+        viewModel.getCategories()
+        viewModel.getMenuItems()
+    }
+
+    private func setupViews() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        addTargets()
+    }
+
+    private func setupBindings() {
+        viewModel.onCategoriesFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false{
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+
+        viewModel.onMenuItemsFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.menuItems.isEmpty == false && self?.viewModel.allCategories.isEmpty == false {
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+    }
+
+    private func selectFirstCategory() {
+        guard let firstCategory = viewModel.allCategories.first else { return }
+        viewModel.filterMenuItems(byCategory: firstCategory)
+        selectedCategoryIndex = 0
         contentView.collectionView.reloadData()
     }
 
@@ -22,6 +62,12 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
 
     @objc private func backButtonTapped() {
         viewModel.onBackNavigate?()
+    }
+
+    private func checkIfDataLoadedThenHideLoader() {
+        if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
+            Loader.shared.hideLoader(view: self.view)
+        }
     }
 }
 
@@ -78,7 +124,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         switch MenuSection.allCases[indexPath.section] {
         case .category:
             let category = viewModel.allCategories[indexPath.row]
-            viewModel.filterMenuItems(byCategory: category)
+//            viewModel.filterMenuItems(byCategory: category)
             selectedCategoryIndex = indexPath.row
             collectionView.reloadData()
 

@@ -53,7 +53,7 @@ final class NewOrderCoordinator: BaseCoordinator {
     }
 
     func openMakeNewOrder() {
-        let viewModel = NewOrderMenuViewModel()
+        let viewModel = MenuViewModel()
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }

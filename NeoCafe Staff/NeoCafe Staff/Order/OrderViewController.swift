@@ -6,17 +6,30 @@
 import UIKit
 
 class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        addTargets()
+        getTables()
+    }
 
+    private func setupViews() {
         contentView.tablesCollectionView.dataSource = self
         contentView.tablesCollectionView.delegate = self
         contentView.ordersByStatusCollectionView.dataSource = self
         contentView.ordersByStatusCollectionView.delegate = self
-
-        addTargets()
     }
 
+    private func getTables() {
+        Loader.shared.showLoader(view: self.view)
+        TableService.shared.getTables {
+            DispatchQueue.main.async {
+                Loader.shared.hideLoader(view: self.view)
+                self.contentView.tablesCollectionView.reloadData()
+            }
+        }
+    }
 
     private func addTargets() {
         contentView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -30,7 +43,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
     }
-    
+
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -61,7 +74,9 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if collectionView == contentView.tablesCollectionView {
-            return viewModel.tables.count
+//            return viewModel.tables.count
+            return TableService.shared.tables.count
+
         } else if collectionView == contentView.ordersByStatusCollectionView {
             switch OrderStatus.allCases[section] {
             case .statusCategory:
@@ -76,8 +91,10 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == contentView.tablesCollectionView {
             let cell: TablesCollectionViewCell = collectionView.dequeue(for: indexPath)
-            let table = viewModel.tables[indexPath.row]
-            cell.configureData(tableNum: table.tableNumber, isBusy: table.isBusy)
+//            let table = viewModel.tables[indexPath.row]
+            let table = TableService.shared.tables[indexPath.row]
+            cell.configureData(tableModel: table)
+            contentView.tablesCollectionView.reloadData()
             return cell
         } else if collectionView == contentView.ordersByStatusCollectionView {
             switch OrderStatus.allCases[indexPath.section] {
@@ -99,7 +116,8 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         if collectionView == contentView.tablesCollectionView {
-            let table = viewModel.tables[indexPath.row]
+//            let table = viewModel.tables[indexPath.row]
+            let table = TableService.shared.tables[indexPath.row]
             viewModel.onOrderDetailsNavigate?()
         } else if collectionView == contentView.ordersByStatusCollectionView {
             print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")

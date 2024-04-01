@@ -41,12 +41,12 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     ]
 
     var menuItems: [Item] = [
-        Item(id: 1, name: "Латте", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 1, name: "Кофе", image: nil), ingredients: nil),
-        Item(id: 2, name: "Капучино", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 1, name: "Кофе", image: nil), ingredients: nil),
-        Item(id: 3, name: "Cake", description: "m", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 2, name: "Десерты", image: nil), ingredients: nil),
-        Item(id: 4, name: "Croissant", description: "cc", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 3, name: "Выпечка", image: nil), ingredients: nil),
-        Item(id: 5, name: "Green Tea", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 4, name: "Tea", image: nil), ingredients: nil),
-        Item(id: 6, name: "Waffles", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 5, name: "Brunch", image: nil), ingredients: nil),
+//        Item(id: 1, name: "Латте", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 1, name: "Кофе", image: nil), ingredients: nil),
+//        Item(id: 2, name: "Капучино", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 1, name: "Кофе", image: nil), ingredients: nil),
+//        Item(id: 3, name: "Cake", description: "m", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 2, name: "Десерты", image: nil), ingredients: nil),
+//        Item(id: 4, name: "Croissant", description: "cc", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 3, name: "Выпечка", image: nil), ingredients: nil),
+//        Item(id: 5, name: "Green Tea", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 4, name: "Tea", image: nil), ingredients: nil),
+//        Item(id: 6, name: "Waffles", description: "Delicious coffee", itemImage: nil, pricePerUnit: 140, branch: nil, category: CategoryModel(id: 5, name: "Brunch", image: nil), ingredients: nil),
     ]
 
     var filteredMenuItems: [Item] = []

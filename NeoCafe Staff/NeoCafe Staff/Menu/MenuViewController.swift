@@ -13,8 +13,43 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
         addTargets()
+        //        contentView.collectionView.reloadData()
+        Loader.shared.showLoader(view: self.view)
+        viewModel.getCategories()
+        viewModel.getMenuItems()
+        setupBindings()
+    }
+
+    private func setupBindings() {
+        viewModel.onCategoriesFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty  == false  {
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+
+        viewModel.onMenuItemsFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.menuItems.isEmpty  == false  && self?.viewModel.allCategories.isEmpty  == false  {
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+    }
+
+
+    private func selectFirstCategory() {
+        guard let firstCategory = viewModel.allCategories.first else { return }
+        viewModel.filterMenuItems(byCategory: firstCategory)
+        selectedCategoryIndex = 0
         contentView.collectionView.reloadData()
     }
+
 
     private func addTargets() {
         contentView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -24,8 +59,15 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     @objc private func profileButtonTapped() {
         viewModel.onProfileNavigate?()
     }
+
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
+    }
+
+    private func checkIfDataLoadedThenHideLoader() {
+        if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
+            Loader.shared.hideLoader(view: self.view)
+        }
     }
 }
 
@@ -92,3 +134,4 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 }
+ 

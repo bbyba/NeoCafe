@@ -39,16 +39,6 @@ class UserDefaultsService {
         set { UserDefaults.standard.set(newValue, forKey:  UserIDData.userID.rawValue) }
     }
 
-//    var branchID: Int {
-//        get { UserDefaults.standard.integer(forKey: "branchID") }
-//        set { UserDefaults.standard.set(newValue, forKey: "branchID") }
-//    }
-//
-//    var userID: Int {
-//        get { UserDefaults.standard.integer(forKey: "userID") }
-//        set { UserDefaults.standard.set(newValue, forKey: "userID") }
-//    }
-
     func saveTokensAndIDs(response: AuthenticationResponse) {
         self.accessToken = response.accessToken
         self.refreshToken = response.refreshToken

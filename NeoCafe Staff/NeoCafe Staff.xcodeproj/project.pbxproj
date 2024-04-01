@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E7A6B0D64465F4E55B6D964 /* Pods_NeoCafe_Staff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687432E3A7E053774CD3E3FA /* Pods_NeoCafe_Staff.framework */; };
+		DD2567A32BBBA2E90071432E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A22BBBA2E90071432E /* Loader.swift */; };
+		DD2567A52BBBCFB90071432E /* TableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A42BBBCFB90071432E /* TableService.swift */; };
 		DD5313412BB881D90017D73A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313402BB881D90017D73A /* MenuView.swift */; };
 		DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313422BB881E20017D73A /* MenuViewModel.swift */; };
 		DD5313452BB881F20017D73A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313442BB881F20017D73A /* MenuViewController.swift */; };
@@ -29,7 +31,6 @@
 		DD9052132BB2BBF2009599CE /* TableOrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */; };
 		DD9052152BB2BBF8009599CE /* TableOrderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */; };
 		DD9052172BB2BEAD009599CE /* CollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052162BB2BEAD009599CE /* CollectionViewHeader.swift */; };
-		DD9052192BB2C061009599CE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052182BB2C061009599CE /* Model.swift */; };
 		DD90521B2BB2CA54009599CE /* CustomBigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521A2BB2CA54009599CE /* CustomBigCell.swift */; };
 		DD90521D2BB7D147009599CE /* NewOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521C2BB7D147009599CE /* NewOrderViewController.swift */; };
 		DD90521F2BB7D150009599CE /* NewOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD90521E2BB7D150009599CE /* NewOrderViewModel.swift */; };
@@ -109,6 +110,8 @@
 /* Begin PBXFileReference section */
 		687432E3A7E053774CD3E3FA /* Pods_NeoCafe_Staff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Staff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D61D933E79C59F8BCAC15EF /* Pods-NeoCafe Staff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Staff.release.xcconfig"; path = "Target Support Files/Pods-NeoCafe Staff/Pods-NeoCafe Staff.release.xcconfig"; sourceTree = "<group>"; };
+		DD2567A22BBBA2E90071432E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		DD2567A42BBBCFB90071432E /* TableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableService.swift; sourceTree = "<group>"; };
 		DD5313402BB881D90017D73A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		DD5313422BB881E20017D73A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		DD5313442BB881F20017D73A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -129,7 +132,6 @@
 		DD9052122BB2BBF2009599CE /* TableOrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewModel.swift; sourceTree = "<group>"; };
 		DD9052142BB2BBF8009599CE /* TableOrderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOrderDetailsViewController.swift; sourceTree = "<group>"; };
 		DD9052162BB2BEAD009599CE /* CollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewHeader.swift; sourceTree = "<group>"; };
-		DD9052182BB2C061009599CE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DD90521A2BB2CA54009599CE /* CustomBigCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBigCell.swift; sourceTree = "<group>"; };
 		DD90521C2BB7D147009599CE /* NewOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewController.swift; sourceTree = "<group>"; };
 		DD90521E2BB7D150009599CE /* NewOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOrderViewModel.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */,
 				DD8089E62BB9D35D00474F1B /* Models.swift */,
 				DD8089E82BBA71D700474F1B /* UserDefaults.swift */,
+				DD2567A42BBBCFB90071432E /* TableService.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				DD53134B2BB8901D0017D73A /* CircularCheckbox.swift */,
 				DDE375EF2BB897DF00210347 /* SquareCheckbox.swift */,
 				DD90521A2BB2CA54009599CE /* CustomBigCell.swift */,
+				DD2567A22BBBA2E90071432E /* Loader.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -557,7 +561,6 @@
 				DD8089DC2BB9C44F00474F1B /* NetworkLayer */,
 				DDA250C92BAFF0B100C73F62 /* Generated */,
 				DDF8B5B82B70ED5E005FE06A /* LaunchScreen.storyboard */,
-				DD9052182BB2C061009599CE /* Model.swift */,
 			);
 			path = "NeoCafe Staff";
 			sourceTree = "<group>";
@@ -707,7 +710,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD9052192BB2C061009599CE /* Model.swift in Sources */,
 				DD53134C2BB8901D0017D73A /* CircularCheckbox.swift in Sources */,
 				DDA250B32BAF5B6700C73F62 /* AuthenticationViewModel.swift in Sources */,
 				DD5313412BB881D90017D73A /* MenuView.swift in Sources */,
@@ -716,6 +718,7 @@
 				DDA2507E2BAF5A1D00C73F62 /* CustomHeaderView.swift in Sources */,
 				DDA2508F2BAF5AB400C73F62 /* MenuCoordinator.swift in Sources */,
 				DDA250F42BB0899000C73F62 /* NotificationsViewController.swift in Sources */,
+				DD2567A32BBBA2E90071432E /* Loader.swift in Sources */,
 				DDA250912BAF5AB400C73F62 /* AppCoordinator.swift in Sources */,
 				DDA250FD2BB1180100C73F62 /* OrdersCollectionViewCell.swift in Sources */,
 				DDA250CB2BAFF0C700C73F62 /* XCAssets+Generated.swift in Sources */,
@@ -769,6 +772,7 @@
 				DD90521D2BB7D147009599CE /* NewOrderViewController.swift in Sources */,
 				DDA2507F2BAF5A1D00C73F62 /* CustomSearchBar.swift in Sources */,
 				DDA2507B2BAF5A1D00C73F62 /* Extension+UIFont.swift in Sources */,
+				DD2567A52BBBCFB90071432E /* TableService.swift in Sources */,
 				DD8089D92BB9490800474F1B /* MakeNewOrderViewController.swift in Sources */,
 				DDA250E72BB0553A00C73F62 /* OrderViewModel.swift in Sources */,
 				DDA250F82BB08F3B00C73F62 /* NewOrderView.swift in Sources */,

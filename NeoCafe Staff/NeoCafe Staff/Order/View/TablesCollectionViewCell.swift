@@ -6,7 +6,6 @@
 import UIKit
 
 class TablesCollectionViewCell: BaseCollectionViewCell {
-    var isBusy: Bool = true
 
     lazy var tableNumber: UILabel = {
         let label = UILabel()
@@ -20,23 +19,14 @@ class TablesCollectionViewCell: BaseCollectionViewCell {
         setProperties()
         addSubviews()
         setupConstraints()
-        updateCellAppearance()
     }
 
-    func configureData(tableNum: Int, isBusy: Bool) {
-        tableNumber.text = "\(tableNum)"
-        self.isBusy = isBusy
-        updateCellAppearance()
-    }
+    func configureData(tableModel: TableModel) {
+        tableNumber.text = "\(tableModel.tableNumber)"
+        let isAvailable = tableModel.isAvailable
 
-    func updateCellAppearance() {
-        if isBusy {
-            backgroundColor = .greyCustom
-            tableNumber.textColor = .darkBlueCustom
-        } else {
-            backgroundColor = .greenTableCustom
-            tableNumber.textColor = .whiteCustom
-        }
+        backgroundColor = isAvailable ? .greenTableCustom : .greyCustom
+        tableNumber.textColor = isAvailable ? .whiteCustom : .darkBlueCustom
     }
 
     required init?(coder: NSCoder) {
