@@ -64,8 +64,8 @@ internal enum S {
   internal static let orderSuccesfullyClosed = S.tr("Localizable", "orderSuccesfullyClosed", fallback: "Заказ успешно закрыт")
   /// Введите 4-х значный код,
   ///  отправленный на почту 
-  ///  email@gmail.com
-  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n email@gmail.com")
+  ///  jackie@chan.kg
+  internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n jackie@chan.kg")
   /// В процессе
   internal static let processingStatus = S.tr("Localizable", "processingStatus", fallback: "В процессе")
   /// Профиль

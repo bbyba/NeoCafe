@@ -1,11 +1,11 @@
 //
-//  NewOrderMenuViewController.swift
+//  MenuViewController.swift
 //  NeoCafe Staff
 //
 
 import UIKit
 
-class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
+class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
@@ -17,15 +17,19 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     }
 
     private func addTargets() {
-        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        contentView.notificationsButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
     }
 
-    @objc private func backButtonTapped() {
-        viewModel.onBackNavigate?()
+    @objc private func profileButtonTapped() {
+        viewModel.onProfileNavigate?()
+    }
+    @objc private func notificationsButtonTapped() {
+        viewModel.onNotificationsNavigate?()
     }
 }
 
-extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return MenuSection.allCases.count
     }
@@ -51,7 +55,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         case .productItem:
             let cell: MenuCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
-            cell.configureData(menuItem: menuItem, newOrderView: true)
+            cell.configureData(menuItem: menuItem, newOrderView: false)
             //            cell.onAddToCart = { [weak self] item in
             //                self?.viewModel.addToCart(menuItem: item)
             //            }
@@ -85,16 +89,6 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
             //            viewModel.onAddItemNavigate?(menuItem.id)
-            if menuItem.category.name == "Кофе" {
-                openCoffeeModal(for: menuItem)
-            }
         }
-    }
-
-    // Temporary
-    private func openCoffeeModal(for item: Item) {
-        let coffeeModalVC = CoffeeDetailsViewController(viewModel: CoffeeDetailsViewModel())
-        coffeeModalVC.modalPresentationStyle = .overFullScreen
-        present(coffeeModalVC, animated: true, completion: nil)
     }
 }

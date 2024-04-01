@@ -1,16 +1,15 @@
 //
-//  NewOrderMenuViewModel.swift
+//  MenuViewModel.swift
 //  NeoCafe Staff
 //
 
 import UIKit
 import Moya
 
-protocol NewOrderMenuViewModelProtocol {
+protocol MenuViewModelProtocol {
 
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
-    var onBackNavigate: EmptyCompletion? { get set }
 
 
     var onTableNavigate: EmptyCompletion? { get set }
@@ -22,10 +21,9 @@ protocol NewOrderMenuViewModelProtocol {
     var menuItems: [Item] { get }
 }
 
-class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
+class MenuViewModel: NSObject, MenuViewModelProtocol {
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
-    var onBackNavigate: EmptyCompletion?
 
     var onTableNavigate: EmptyCompletion?
     var onSearchNavigate: EmptyCompletion?

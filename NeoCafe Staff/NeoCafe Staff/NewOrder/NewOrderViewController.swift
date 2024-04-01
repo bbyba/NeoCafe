@@ -48,6 +48,6 @@ extension NewOrderViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let table = viewModel.tables[indexPath.row]
-        viewModel.onOrderDetailsNavigate?()
+        viewModel.onMakeNewOrderNavigate?()
     }
 }

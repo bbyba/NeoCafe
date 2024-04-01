@@ -1,30 +1,28 @@
 //
-//  NewOrderMenuView.swift
+//  MenuView.swift
 //  NeoCafe Staff
 //
 
 import UIKit
 import SnapKit
 
-enum MenuSection: String, CaseIterable {
-    case category
-    case productItem
-}
-
-class NewOrderMenuView: UIView {
+class MenuView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = S.newOrder
+        label.text = S.menu
         label.font = .poppins(ofSize: 24, weight: .bold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
         return label
     }()
 
-    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, 
-                                            backgroundColor: .lightBlueCustom)
+    lazy var profileButton = CustomRoundButton(withImage: Asset.Images.account.image,
+                                               backgroundColor: .lightBlueCustom)
+
+    lazy var notificationsButton = CustomRoundButton(withImage: Asset.Images.bell.image,
+                                                     backgroundColor: .lightBlueCustom)
 
     lazy var searchBar: CustomSearchBar = {
         let searchBar = CustomSearchBar()
@@ -56,9 +54,9 @@ class NewOrderMenuView: UIView {
 }
 
 
-extension NewOrderMenuView {
+extension MenuView {
     private func generateLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, 
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
                                                             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 
             let sectionLayoutKind = MenuSection.allCases[sectionIndex]
@@ -85,24 +83,8 @@ extension NewOrderMenuView {
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.zIndex = 2
-        header.contentInsets = NSDirectionalEdgeInsets(top: 0,
-                                                       leading: 16,
-                                                       bottom: 0,
-                                                       trailing: 12)
-
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                         leading: 16,
                                                         bottom: 0,
@@ -126,12 +108,12 @@ extension NewOrderMenuView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight( 1.0 / 7.5 ))
+            heightDimension: .fractionalHeight( 1.0 / 8.0 ))
 
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, 
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                       leading: 16,
                                                       bottom: 12,
                                                       trailing: 16)
@@ -147,7 +129,7 @@ extension NewOrderMenuView {
 }
 
 
-extension NewOrderMenuView: BaseContentView {
+extension MenuView: BaseContentView {
 
     func setProperties() {
         backgroundColor = .white
@@ -155,8 +137,9 @@ extension NewOrderMenuView: BaseContentView {
 
     func addSubviews() {
         addSubview(header)
-        header.addSubview(backButton)
+        header.addSubview(profileButton)
         header.addSubview(headerLabel)
+        header.addSubview(notificationsButton)
         addSubview(searchBar)
         addSubview(collectionView)
     }
@@ -167,27 +150,33 @@ extension NewOrderMenuView: BaseContentView {
             make.height.equalTo(140)
         }
 
-        backButton.snp.makeConstraints { make in
+        profileButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(70)
             make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 
         headerLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(backButton.snp.centerY)
+            make.centerY.equalTo(profileButton.snp.centerY)
             make.height.equalTo(29)
             make.centerX.equalToSuperview()
         }
 
+        notificationsButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(70)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.width.equalTo(40)
+        }
+
         searchBar.snp.makeConstraints { make in
-            //            make.top.equalTo(header.snp.bottom).offset(-24)
+//            make.top.equalTo(header.snp.bottom).offset(-24)
             make.centerY.equalTo(header.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.top.equalTo(searchBar.snp.bottom).offset(24)
             make.bottom.width.equalToSuperview()
         }
     }

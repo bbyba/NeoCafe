@@ -12,7 +12,7 @@
 "getCode" = "Получить код";
 "confirm" = "Подтвердить";
 "exampleEmail" = "example@email.com";
-"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n email@gmail.com";
+"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n jackie@chan.kg";
 "wrongCode" = "Код введён неверно,\n попробуйте еще раз";
 "resend" = "Отправить ещё раз";
 "resendAfter" = "Отправить ещё раз через";

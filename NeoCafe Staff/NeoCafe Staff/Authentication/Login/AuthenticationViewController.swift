@@ -18,6 +18,11 @@ class AuthenticationViewController: BaseViewController<AuthenticationViewModel, 
     }
 
     @objc private func getCodeButtonTapped() {
-        viewModel.onCodeConfirmationNavigate?()
+        guard let username = contentView.loginTextField.text, !username.isEmpty,
+              let password = contentView.passwordTextField.text, !password.isEmpty else {
+            return
+        }
+
+        viewModel.requestConfirmationCode(username: username, password: password)
     }
 }
