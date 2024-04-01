@@ -31,11 +31,7 @@ final class CircularCheckbox: UIView {
 
     func toggle() {
         self.isChecked = !isChecked
-        if self.isChecked {
-            orangeCircle.isHidden = false
-        } else {
-            orangeCircle.isHidden = true
-        }
+        orangeCircle.isHidden = !self.isChecked
     }
 
     func addSubviews() {

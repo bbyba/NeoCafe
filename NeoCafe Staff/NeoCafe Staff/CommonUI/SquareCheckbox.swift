@@ -28,11 +28,7 @@ final class SquareCheckbox: UIView {
 
     func toggle() {
         self.isChecked = !isChecked
-        if self.isChecked {
-            orangeCheck.isHidden = false
-        } else {
-            orangeCheck.isHidden = true
-        }
+        orangeCheck.isHidden = !self.isChecked
     }
 
     func addSubviews() {
