@@ -18,7 +18,8 @@ enum UserAPI {
     case getAllCategories
     case getProductDetails(productId: Int)
 //    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
-        case getMenuItemsByBranchCategory(branchID: Int)
+//        case getMenuItemsByBranchCategory(branchID: Int)
+    case getMenuItemsAll
 
 
     // Branch
@@ -54,8 +55,10 @@ extension UserAPI: TargetType {
             return "/branch/\(branchID)/top-selling-menu-items/"
         case .getAllCategories:
             return "/menu/item/all/"
-        case .getMenuItemsByBranchCategory(let branchID):
-            return "/branch-menu/\(branchID)/"
+//        case .getMenuItemsByBranchCategory(let branchID):
+//            return "/branch-menu/\(branchID)/"
+        case .getMenuItemsAll:
+            return "/menu/item/all/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
 
@@ -88,7 +91,8 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory,
+//                .getMenuItemsByBranchCategory,
+                .getMenuItemsAll,
                 .getPopularItems:
             return .get
         case .patchProfile:
@@ -110,7 +114,8 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory,
+//                .getMenuItemsByBranchCategory,
+                .getMenuItemsAll,
                 .getPopularItems:
             return .requestPlain
         case .patchProfile(_, let firstName):

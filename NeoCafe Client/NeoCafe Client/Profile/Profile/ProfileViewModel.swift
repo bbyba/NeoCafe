@@ -24,7 +24,7 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
     }
 
     func getPersonalData(completion: @escaping (Result<CustomerProfile, Error>) -> Void) {
-        provider.request(.getProfile(userID: 13)) { result in
+        provider.request(.getProfile(userID: 18)) { result in
             switch result {
             case .success(let response):
                 do {

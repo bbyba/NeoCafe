@@ -99,8 +99,7 @@ extension BranchDetailViewController: UITableViewDelegate, UITableViewDataSource
         }
         cell.selectionStyle = .none
         if let schedule = viewModel.branch?.schedules[indexPath.row] {
-            let scheduleString = "\(schedule.day): \(schedule.startTime.dropLast(3)) - \(schedule.endTime.dropLast(3))"
-//            let scheduleString = "\(schedule.day): \(branch.todaySchedule)"
+            let scheduleString = "\(schedule.day): \(schedule.startTime) - \(schedule.endTime)"
             cell.workingHours.text = scheduleString
         }
         return cell

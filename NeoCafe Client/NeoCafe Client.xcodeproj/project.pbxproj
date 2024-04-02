@@ -10,6 +10,7 @@
 		B18546FCF9870DF3864F7D37 /* Pods_NeoCafe_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */; };
 		DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7012B8571FB002D8977 /* SplashView.swift */; };
 		DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7032B85721A002D8977 /* SplashViewController.swift */; };
+		DD2567A92BBC26DC0071432E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A82BBC26DC0071432E /* Loader.swift */; };
 		DD3FA30D2B8D0BB500B89DDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */; };
 		DD6035132BA989B5003FFDDC /* BranchesModalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6035122BA989B5003FFDDC /* BranchesModalViewModel.swift */; };
 		DD6035152BA9EDB7003FFDDC /* Extension+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6035142BA9EDB7003FFDDC /* Extension+Currency.swift */; };
@@ -122,6 +123,7 @@
 		9D1EA6A4749DB070AC752431 /* Pods_NeoCafe_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeoCafe_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD03C7012B8571FB002D8977 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		DD03C7032B85721A002D8977 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		DD2567A82BBC26DC0071432E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		DD6035122BA989B5003FFDDC /* BranchesModalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesModalViewModel.swift; sourceTree = "<group>"; };
 		DD6035142BA9EDB7003FFDDC /* Extension+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Currency.swift"; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				DD9DD0C82B8FF19900C489F6 /* Base */,
 				DDCA370D2B8B616100451066 /* CustomUI */,
 				DD93C1952B83868000339287 /* Extensions */,
+				DD2567A82BBC26DC0071432E /* Loader.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				DD73F30B2BA630BE00C33E21 /* SwitchingStepper.swift in Sources */,
 				DDF8B5CA2B70F21D005FE06A /* AuthenticationViewModel.swift in Sources */,
 				DD9DD1072B95E10000C489F6 /* ProfileCoordinator.swift in Sources */,
+				DD2567A92BBC26DC0071432E /* Loader.swift in Sources */,
 				DDAD65E22B8CBB9100F72345 /* AuthenticationViewController.swift in Sources */,
 				DD9DD0F92B94798C00C489F6 /* AppCoordinator.swift in Sources */,
 				DD9DD0BE2B8FD66800C489F6 /* MenuView.swift in Sources */,

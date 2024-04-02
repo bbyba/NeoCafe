@@ -32,42 +32,60 @@ struct AllMenuItems: Codable {
     let count: Int
     let next: String?
     let previous: String?
+    let results: Results
+}
+
+struct Results: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
     let results: [Item]
 }
 
 struct Item: Codable {
     let id: Int
-    let name: String
-    let description: String
+    let name, description: String
     let itemImage: String?
     let pricePerUnit: Int
     let branch: Int?
-    let category: CategoryModel
-    let ingredients: [Ingredient]?
+    let category: Category
+    let ingredients: [Ingredient]
 
     enum CodingKeys: String, CodingKey {
-        case id, name, description, branch, category, ingredients
+        case id, name, description
         case itemImage = "item_image"
         case pricePerUnit = "price_per_unit"
+        case branch, category, ingredients
     }
 }
 
-struct CategoryModel: Codable {
+struct Category: Codable {
     let id: Int
     let name: String
-    let image: String?
 }
 
 struct Ingredient: Codable {
     let id: Int
     let name: String
     let quantity: Int
-    let measurementUnit: String
+    let measurementUnit: MeasurementUnit
 
     enum CodingKeys: String, CodingKey {
         case id, name, quantity
         case measurementUnit = "measurement_unit"
     }
+}
+
+enum MeasurementUnit: String, Codable {
+    case гр = "гр"
+    case мл = "мл"
+    case шт = "шт"
+}
+
+struct CategoryModel: Codable {
+    let id: Int
+    let name: String
+    let image: String?
 }
 
 
@@ -118,8 +136,8 @@ extension BranchModel {
         let todayShortString = dateFormatter.string(from: Date())
 
         if let todaySchedule = schedules.first(where: { $0.day == todayShortString }) {
-            let formattedStartTime = String(todaySchedule.startTime.dropLast(3))
-            let formattedEndTime = String(todaySchedule.endTime.dropLast(3))
+            let formattedStartTime = String(todaySchedule.startTime)
+            let formattedEndTime = String(todaySchedule.endTime)
             return "\(formattedStartTime) - \(formattedEndTime)"
         }
         return nil
@@ -130,17 +148,18 @@ extension BranchModel {
 
 // MARK: - Profile
 struct CustomerProfile: Codable {
-    let customerID: Int
+    let id: Int
+    let userID: Int
     let firstName: String
-    let bonusPoints: Int
     let email: String
-    let orders: [Order]?
+    let bonusPoints: Int
+//    let orders: [Order]?
 
     enum CodingKeys: String, CodingKey {
-        case customerID = "customer_id"
+        case userID = "user_id"
         case firstName = "first_name"
         case bonusPoints = "bonus_points"
-        case email, orders
+        case id, email
     }
 }
 

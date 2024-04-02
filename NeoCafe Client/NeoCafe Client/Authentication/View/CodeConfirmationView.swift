@@ -44,12 +44,15 @@ class CodeConfirmationView: UIStackView {
         addArrangedSubview(enterCodeMessageLabel)
         addArrangedSubview(otpField)
         self.alignment = .center
-        self.distribution = .equalSpacing
 
         otpField.snp.makeConstraints { make in
+//            make.centerX.equalToSuperview()
+//            make.height.equalTo(52)
+            make.top.equalTo(enterCodeMessageLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.height.equalTo(52)
+            make.height.equalTo(50)
         }
+        
     }
 
     required init(coder: NSCoder) {

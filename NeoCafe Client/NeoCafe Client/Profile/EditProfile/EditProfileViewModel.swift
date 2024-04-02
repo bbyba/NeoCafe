@@ -25,7 +25,7 @@ class EditProfileViewModel: NSObject, EditProfileViewModelProtocol {
     }
 
     func getPersonalDataEdit(completion: @escaping (Result<CustomerProfile, Error>) -> Void) {
-        provider.request(.getProfileEdit(userID: 13)) { result in
+        provider.request(.getProfileEdit(userID: 18)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -43,7 +43,7 @@ class EditProfileViewModel: NSObject, EditProfileViewModelProtocol {
     }
 
     func patchProfile(firstName: String, completion: @escaping (Result<CustomerProfile, Error>) -> Void) {
-        provider.request(.patchProfile(userID: 13, firstName: firstName)) { result in
+        provider.request(.patchProfile(userID: 18, firstName: firstName)) { result in
             switch result {
             case .success(let response):
                 do {
