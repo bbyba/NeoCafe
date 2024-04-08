@@ -10,6 +10,7 @@
 		0E7A6B0D64465F4E55B6D964 /* Pods_NeoCafe_Staff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687432E3A7E053774CD3E3FA /* Pods_NeoCafe_Staff.framework */; };
 		DD2567A32BBBA2E90071432E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A22BBBA2E90071432E /* Loader.swift */; };
 		DD2567A52BBBCFB90071432E /* TableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A42BBBCFB90071432E /* TableService.swift */; };
+		DD2567AB2BBEBC5E0071432E /* SharedCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567AA2BBEBC5E0071432E /* SharedCart.swift */; };
 		DD5313412BB881D90017D73A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313402BB881D90017D73A /* MenuView.swift */; };
 		DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313422BB881E20017D73A /* MenuViewModel.swift */; };
 		DD5313452BB881F20017D73A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313442BB881F20017D73A /* MenuViewController.swift */; };
@@ -112,6 +113,7 @@
 		6D61D933E79C59F8BCAC15EF /* Pods-NeoCafe Staff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoCafe Staff.release.xcconfig"; path = "Target Support Files/Pods-NeoCafe Staff/Pods-NeoCafe Staff.release.xcconfig"; sourceTree = "<group>"; };
 		DD2567A22BBBA2E90071432E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		DD2567A42BBBCFB90071432E /* TableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableService.swift; sourceTree = "<group>"; };
+		DD2567AA2BBEBC5E0071432E /* SharedCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCart.swift; sourceTree = "<group>"; };
 		DD5313402BB881D90017D73A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		DD5313422BB881E20017D73A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		DD5313442BB881F20017D73A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */,
 				DD8089E62BB9D35D00474F1B /* Models.swift */,
 				DD8089E82BBA71D700474F1B /* UserDefaults.swift */,
+				DD2567AA2BBEBC5E0071432E /* SharedCart.swift */,
 				DD2567A42BBBCFB90071432E /* TableService.swift */,
 			);
 			path = NetworkLayer;
@@ -785,6 +788,7 @@
 				DDA250822BAF5A1D00C73F62 /* CustomTextField.swift in Sources */,
 				DDE375F02BB897DF00210347 /* SquareCheckbox.swift in Sources */,
 				DDA250B22BAF5B6700C73F62 /* AuthenticationViewController.swift in Sources */,
+				DD2567AB2BBEBC5E0071432E /* SharedCart.swift in Sources */,
 				DDA250932BAF5AB400C73F62 /* InitializationCoordinator.swift in Sources */,
 				DDA250E52BB0552C00C73F62 /* OrderViewController.swift in Sources */,
 				DD9052132BB2BBF2009599CE /* TableOrderDetailsViewModel.swift in Sources */,

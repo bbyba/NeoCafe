@@ -35,14 +35,6 @@ struct AuthenticationResponse: Codable {
 struct ProfileResponse: Codable {
     let id: Int
     let user: User
-    let userType: String
-    let branch: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case id, user
-        case userType = "user_type"
-        case branch
-    }
 }
 
 struct User: Codable {
@@ -76,7 +68,6 @@ struct EmployeeSchedule: Codable {
     }
 }
 
-
 // MARK: - Menu
 
 struct AllMenuItems: Codable {
@@ -93,7 +84,7 @@ struct Results: Codable {
     let results: [Item]
 }
 
-struct Item: Codable {
+struct Item: Codable, Hashable {
     let id: Int
     let name, description: String
     let itemImage: String?
@@ -110,12 +101,12 @@ struct Item: Codable {
     }
 }
 
-struct Category: Codable {
+struct Category: Codable, Hashable {
     let id: Int
     let name: String
 }
 
-struct Ingredient: Codable {
+struct Ingredient: Codable, Hashable {
     let id: Int
     let name: String
     let quantity: Int
@@ -170,7 +161,7 @@ struct OrderDetailsModel: Codable {
 struct Ito: Codable {
     let id, item: Int
     let itemName: String
-    let quantity: Int
+    var quantity: Int
     let totalPrice: String
 
     enum CodingKeys: String, CodingKey {
@@ -182,7 +173,7 @@ struct Ito: Codable {
 }
 
 // MARK: - Tables
-struct TableModel: Codable {
+struct TableModel: Codable, Hashable {
     let id, tableNumber: Int
     let isAvailable: Bool
     let branch: Int

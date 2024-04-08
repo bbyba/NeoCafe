@@ -61,6 +61,7 @@ extension NewOrderViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let table = TableService.shared.tables[indexPath.row]
-        viewModel.onMakeNewOrderNavigate?()
+        viewModel.selectedTable = table
+        viewModel.onMakeNewOrderNavigate?(table)
     }
 }

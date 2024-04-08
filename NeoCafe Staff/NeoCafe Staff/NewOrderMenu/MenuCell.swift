@@ -6,6 +6,7 @@
 import UIKit
 
 class MenuCell: BaseCollectionViewCell {
+    var onAddToCart: EmptyCompletion?
 
     lazy var itemName: UILabel = {
         let label = UILabel()
@@ -44,6 +45,7 @@ class MenuCell: BaseCollectionViewCell {
         setupShadow()
         addSubviews()
         setupConstraints()
+        plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
     }
 
     func configureData(menuItem: Item, newOrderView: Bool) {
@@ -60,7 +62,11 @@ class MenuCell: BaseCollectionViewCell {
             plusButton.isHidden = true
         }
     }
-    
+
+    @objc private func plusButtonTapped() {
+        self.onAddToCart?()
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

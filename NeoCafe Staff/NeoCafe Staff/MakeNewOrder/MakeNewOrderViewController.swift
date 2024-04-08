@@ -2,13 +2,12 @@
 //  MakeNewOrderViewController.swift
 //  NeoCafe Staff
 //
-//  Created by Burte Bayaraa on 2024.03.31.
-//
 
-import Foundation
 import UIKit
 
 class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, MakeNewOrderPopup> {
+    var selectedTable: TableModel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,8 +17,19 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
         addTargets()
     }
 
+
+//    private func updateUI() {
+//        contentView.totalLabel.text = String(viewModel.totalPrice(for: selectedTable))
+//    }
+
     private func addTargets() {
         contentView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPopup))
+        contentView.blurredBackgroundView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func dismissPopup() {
+        viewModel.onBackNavigate?()
     }
 
     @objc private func orderButtonTapped() {
@@ -33,13 +43,14 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.orderedItems.count
+        //        guard let selectedTable = selectedTable else { return 0 }
+        return viewModel.cart.getItems().count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CustomBigCell = collectionView.dequeue(for: indexPath)
-        let orderedItem = viewModel.orderedItems[indexPath.row]
-        cell.configureData(item: orderedItem)
+        let item = viewModel.cart.getItems()[indexPath.row]
+        cell.configureData(item: item.item, quantity: item.quantity)
         return cell
     }
 }

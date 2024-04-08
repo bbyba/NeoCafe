@@ -23,8 +23,35 @@ class NewOrderMenuView: UIView {
         return label
     }()
 
+    lazy var orderLabel: UILabel = {
+        let label = UILabel()
+        let number = UILabel()
+        label.text = ""
+        label.font = .poppins(ofSize: 16, weight: .semibold)
+        label.textColor = .whiteCustom
+        label.textAlignment = .left
+        return label
+    }()
+
+    lazy var amountLabel: UILabel = {
+        let label = UILabel()
+        let number = UILabel()
+        label.text = ""
+        label.font = .poppins(ofSize: 16, weight: .semibold)
+        label.textColor = .whiteCustom
+        label.textAlignment = .right
+        return label
+    }()
+
     lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, 
                                             backgroundColor: .lightBlueCustom)
+
+    lazy var orderInfoButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .orangeCustom
+        button.layer.cornerRadius = 18
+        return button
+    }()
 
     lazy var searchBar: CustomSearchBar = {
         let searchBar = CustomSearchBar()
@@ -49,6 +76,13 @@ class NewOrderMenuView: UIView {
         setupConstraints()
     }
 
+    func updateOrderNoInfo(orderNumber: Int) {
+        orderLabel.text = "\(S.orderNo)\(orderNumber)"
+      }
+
+    func updateAmountInfo(orderAmount: Int) {
+        amountLabel.text = "\(orderAmount) сом"
+      }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -159,6 +193,9 @@ extension NewOrderMenuView: BaseContentView {
         header.addSubview(headerLabel)
         addSubview(searchBar)
         addSubview(collectionView)
+        addSubview(orderInfoButton)
+        orderInfoButton.addSubview(orderLabel)
+        orderInfoButton.addSubview(amountLabel)
     }
 
     func setupConstraints() {
@@ -188,7 +225,27 @@ extension NewOrderMenuView: BaseContentView {
 
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(8)
-            make.bottom.width.equalToSuperview()
+            make.width.equalToSuperview()
+            make.bottom.equalTo(orderInfoButton.snp.top).offset(-20)
         }
+
+        orderInfoButton.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(54)
+//            orderInfoButton.isHidden = Cart.shared.items.isEmpty
+
+        }
+
+        orderLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+        }
+
+        amountLabel.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.centerY.equalToSuperview()
+        }
+
+        orderInfoButton.isHidden = true
     }
 }

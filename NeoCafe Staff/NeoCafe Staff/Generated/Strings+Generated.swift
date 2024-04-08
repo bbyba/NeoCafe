@@ -58,6 +58,8 @@ internal enum S {
   internal static let no = S.tr("Localizable", "no", fallback: "Нет")
   /// Уведомления
   internal static let notifications = S.tr("Localizable", "notifications", fallback: "Уведомления")
+  /// Заказ №
+  internal static let orderNo = S.tr("Localizable", "orderNo", fallback: "Заказ №")
   /// Заказы
   internal static let orders = S.tr("Localizable", "orders", fallback: "Заказы")
   /// Заказ успешно закрыт
