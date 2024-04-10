@@ -21,7 +21,8 @@ class AuthenticationView: UIView {
                                               customPlaceholder: S.enterLogin)
 
     lazy var passwordTextField = CustomTextField(iconName: Asset.Images.lock.image,
-                                                 customPlaceholder: S.enterPassword)
+                                                 customPlaceholder: S.enterPassword,
+                                                 isPasswordField: true)
 
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView()

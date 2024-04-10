@@ -135,7 +135,7 @@ extension MakeNewOrderPopup: BaseContentView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0 / 3.3))
+            heightDimension: .fractionalHeight(1.0 / 3))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

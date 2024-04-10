@@ -7,25 +7,28 @@ import UIKit
 
 class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
 
-//    override func viewWillAppear(_ animated: Bool) {
-//            super.viewWillAppear(animated)
-//            viewModel.getProfile()
-//        }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.nameTextField.isUserInteractionEnabled = false
         addTargets()
+        setupBindings()
+
+        Loader.shared.showLoader(view: self.view)
+        viewModel.getProfile()
     }
 
     private func setupBindings() {
         viewModel.onProfileDataFetched = { [weak self] in
-            self?.updateProfileViews()
+            DispatchQueue.main.async {
+                Loader.shared.hideLoader(view: self?.view ?? UIView())
+                self?.updateProfileViews()
+            }
         }
     }
 
     private func updateProfileViews() {
         if let profileData = viewModel.profileData {
-            contentView.nameLabel.text = profileData.user.firstName
+            contentView.nameTextField.text = profileData.user.firstName
         }
     }
 

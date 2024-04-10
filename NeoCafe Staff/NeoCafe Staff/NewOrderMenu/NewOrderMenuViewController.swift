@@ -7,21 +7,80 @@ import UIKit
 
 class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
     var selectedCategoryIndex = 0
+    var selectedTable: TableModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        addTargets()
+        Loader.shared.showLoader(view: self.view)
+        viewModel.getCategories()
+        viewModel.getMenuItems()
+        setupBindings()
+        contentView.updateOrderNoInfo(orderNumber: 1)
+        contentView.updateAmountInfo(orderAmount: 180)
+    }
+
+    private func setupViews() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        addTargets()
+    }
+
+    private func setupBindings() {
+        viewModel.onCategoriesFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false{
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+
+        viewModel.onMenuItemsFetched = { [weak self] in
+            DispatchQueue.main.async {
+                if self?.viewModel.menuItems.isEmpty == false && self?.viewModel.allCategories.isEmpty == false {
+                    self?.selectFirstCategory()
+                }
+                self?.contentView.collectionView.reloadData()
+                self?.checkIfDataLoadedThenHideLoader()
+            }
+        }
+    }
+
+    private func selectFirstCategory() {
+        guard let firstCategory = viewModel.allCategories.first else { return }
+        viewModel.filterMenuItems(byCategory: firstCategory)
+        selectedCategoryIndex = 0
         contentView.collectionView.reloadData()
     }
 
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.orderInfoButton.addTarget(self, action: #selector(orderInfoButtonTapped), for: .touchUpInside)
+    }
+
+    private func addToCart(menuItem: Item) {
+        guard let selectedTable = selectedTable else { return }
+        let cart = viewModel.separateCartsForTables[selectedTable]
+        cart?.addItem(menuItem)
     }
 
     @objc private func backButtonTapped() {
         viewModel.onBackNavigate?()
+    }
+
+    @objc private func orderInfoButtonTapped() {
+        print("orderInfoButtonTapped")
+        guard let selectedTable = selectedTable else { return }
+        viewModel.onMakeNewOrderNavigate?()
+
+    }
+
+    private func checkIfDataLoadedThenHideLoader() {
+        if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
+            Loader.shared.hideLoader(view: self.view)
+        }
     }
 }
 
@@ -52,9 +111,9 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
             let cell: MenuCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
             cell.configureData(menuItem: menuItem, newOrderView: true)
-            //            cell.onAddToCart = { [weak self] item in
-            //                self?.viewModel.addToCart(menuItem: item)
-            //            }
+            cell.onAddToCart = { [weak self] in
+                self?.addToCart(menuItem: menuItem)
+            }
             return cell
         }
     }
@@ -65,7 +124,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
             switch sectionKind {
             case .category:
-                header.configureTitle(title: S.tableNo)
+                header.configureTitle(title: "\(viewModel.tableInfo())")
             case .productItem:
                 break
             }
@@ -74,7 +133,6 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
         switch MenuSection.allCases[indexPath.section] {
         case .category:
             let category = viewModel.allCategories[indexPath.row]
@@ -85,6 +143,8 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
             //            viewModel.onAddItemNavigate?(menuItem.id)
+            guard let selectedTable = selectedTable else { return }
+            let cart = viewModel.createCart(for: selectedTable)
             if menuItem.category.name == "Кофе" {
                 openCoffeeModal(for: menuItem)
             }

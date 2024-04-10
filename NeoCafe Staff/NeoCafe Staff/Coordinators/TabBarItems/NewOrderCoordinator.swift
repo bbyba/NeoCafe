@@ -16,8 +16,8 @@ final class NewOrderCoordinator: BaseCoordinator {
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
-        viewModel.onMakeNewOrderNavigate = { [ weak self ] in
-            self?.openMakeNewOrder()
+        viewModel.onMakeNewOrderNavigate = { [weak self] table in
+            self?.openMakeNewOrder(table: table)
         }
         let viewController = NewOrderViewController(viewModel: viewModel)
         mainVC = viewController
@@ -52,12 +52,25 @@ final class NewOrderCoordinator: BaseCoordinator {
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    func openMakeNewOrder() {
-        let viewModel = NewOrderMenuViewModel()
+    func openMakeNewOrder(table: TableModel) {
+        let viewModel = NewOrderMenuViewModel(selectedTable: table)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
+        viewModel.onMakeNewOrderPopupNavigate = { [weak self] cart, table in
+            self?.openMakeNewOrderPopup(cart: cart, table: table)
+        }
         let viewController = NewOrderMenuViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
+
+    func openMakeNewOrderPopup(cart: Cart, table: TableModel) {
+        let viewModel = MakeNewOrderViewModel(cart: cart, table: table)
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.dismissModule(animated: true, completion: nil)
+        }
+        let viewController = MakeNewOrderViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController)
     }
 }

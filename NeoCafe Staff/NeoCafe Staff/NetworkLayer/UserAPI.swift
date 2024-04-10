@@ -10,6 +10,9 @@ enum UserAPI  {
     case requestConfirmationCode(username: String, password: String)
     case login(email: String, confirmation_code: String)
     case getProfile(userID: Int)
+    case getCategories
+    case getMenuItems
+    case getTablesByBranch(branchID: Int)
 }
 
 extension UserAPI: TargetType {
@@ -27,6 +30,12 @@ extension UserAPI: TargetType {
             "/waiter/login/"
         case .getProfile(let userID):
             "/profile/waiter/\(userID)/"
+        case .getCategories:
+            "/menu/category/all/"
+        case .getMenuItems:
+            "/menu/item/all/"
+        case .getTablesByBranch(let branchID):
+            "/tables/branch/\(branchID)/"
         }
     }
 
@@ -35,7 +44,10 @@ extension UserAPI: TargetType {
         case .requestConfirmationCode,
                 .login:
             return .post
-        case .getProfile:
+        case .getProfile,
+                .getCategories,
+                .getMenuItems,
+                .getTablesByBranch:
             return .get
         }
     }
@@ -52,7 +64,10 @@ extension UserAPI: TargetType {
                                                    "confirmation_code": confirmation_code],
                                       encoding: JSONEncoding.default)
 
-        case .getProfile:
+        case .getProfile,
+                .getCategories,
+                .getMenuItems,
+                .getTablesByBranch:
             return .requestPlain
         }
     }
@@ -61,7 +76,10 @@ extension UserAPI: TargetType {
         switch self {
         case .requestConfirmationCode, 
                 .login,
-                .getProfile:
+                .getProfile,
+                .getCategories,
+                .getMenuItems,
+                .getTablesByBranch:
             return ["Content-Type": "application/json"]
         }
     }

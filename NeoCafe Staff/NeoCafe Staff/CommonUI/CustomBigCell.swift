@@ -16,6 +16,14 @@ class CustomBigCell: BaseCollectionViewCell {
         return label
     }()
 
+    lazy var priceLabel = {
+        let label = UILabel()
+        label.font = .poppins(ofSize: 14, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        label.numberOfLines = 0
+        return label
+    }()
+
     lazy var descriptionLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 12, weight: .regular)
@@ -35,9 +43,16 @@ class CustomBigCell: BaseCollectionViewCell {
         stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
     }
 
-    func configureData(item: WaiterItem) {
+    //    func configureData(item: Item) {
+    //        titleLabel.text = item.name
+    //        descriptionLabel.text = item.description
+    //        priceLabel.text = "(\(item.pricePerUnit) с за шт)"
+    //    }
+    func configureData(item: Item, quantity: Int) {
         titleLabel.text = item.name
         descriptionLabel.text = item.description
+        priceLabel.text = "(\(item.pricePerUnit) с за шт)"
+        stepper.currentValue = quantity
     }
 
     @objc private func stepperValueChanged(_ sender: CustomStepper) {
@@ -60,12 +75,18 @@ extension CustomBigCell: BaseContentView {
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(stepper)
+        contentView.addSubview(priceLabel)
     }
 
     func setupConstraints() {
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(16)
+        }
+
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.leading.equalTo(titleLabel.snp.trailing).offset(4)
         }
 
         descriptionLabel.snp.makeConstraints { make in
@@ -75,7 +96,7 @@ extension CustomBigCell: BaseContentView {
 
         stepper.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
+            make.top.equalTo(priceLabel.snp.bottom).offset(2)
             make.height.equalTo(36)
         }
 

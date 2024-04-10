@@ -8,21 +8,33 @@ import Foundation
 protocol NewOrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
-    var onMakeNewOrderNavigate: EmptyCompletion? { get set }
+//    var onMakeNewOrderNavigate: EmptyCompletion? { get set }
+    var onMakeNewOrderNavigate: ((TableModel) -> Void)? { get set }
+
 }
 
 class NewOrderViewModel: NSObject, NewOrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
-    var onMakeNewOrderNavigate: EmptyCompletion?
+    var onMakeNewOrderNavigate: ((TableModel) -> Void)?
+//    var onMakeNewOrderNavigate: EmptyCompletion?
 
-    var tables: [TableModel]  = [
-        TableModel(tableNumber: 1, isBusy: true),
-        TableModel(tableNumber: 2, isBusy: false),
-        TableModel(tableNumber: 3, isBusy: false),
-        TableModel(tableNumber: 4, isBusy: false),
-        TableModel(tableNumber: 5, isBusy: true),
-        TableModel(tableNumber: 6, isBusy: false),
-        TableModel(tableNumber: 7, isBusy: false),
-    ]
+
+//    var tables: [TableModel] = []
+//    var cartsForTables: [TableModel: Cart] = [:]
+    var selectedTable: TableModel?
+
+//    func createCart(for table: TableModel) -> Cart {
+//        if let cart = cartsForTables[table] {
+//            print("Cart created for table ID: \(table.id)")
+//            print("Existing Cart: \(cart)")
+//            return cart
+//        } else {
+//            let newCart = Cart()
+//            cartsForTables[table] = newCart
+//            print("Cart created for table ID: \(table.id)")
+//            print("New Cart: \(newCart)")
+//            return newCart
+//        }
+//    }
 }
