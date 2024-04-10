@@ -46,7 +46,7 @@ class ProductViewModel: NSObject, ProductViewModelProtocol {
 
     func addToCart() {
         guard let product = productDetail else { return }
-        CartViewModel.shared.filterItems(newItem: product, quantity: productQuantity)
+        Cart.shared.filterItems(newItem: product, quantity: productQuantity)
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
         onAddToCartNavigate?()
     }

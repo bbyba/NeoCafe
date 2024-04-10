@@ -43,16 +43,48 @@ class BigProductCell: BaseCollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
-        layer.cornerRadius = 14
+        setProperties()
         addSubviews()
         setupConstraints()
         setupShadow()
         stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
     }
 
+    func configureData(item: Item) {
+        image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
+        titleLabel.text = item.name
+        descriptionLabel.text = item.description
+        priceLabel.text = "\(item.pricePerUnit)"
+    }
+    
+    func configureForCart(item: Item, quantity: Int) {
+        switchingStepper.isHidden = true
+        stepper.isHidden = false
+        image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
+        titleLabel.text = item.name
+        descriptionLabel.text = item.description
+        priceLabel.text = "\(item.pricePerUnit)"
+        stepper.currentValue = quantity
+    }
 
-    private func addSubviews() {
+    @objc private func stepperValueChanged(_ sender: CustomStepper) {
+        onStepperValueChanged?(sender.currentValue)
+    }
+
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+extension BigProductCell: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
+        layer.cornerRadius = 14
+    }
+
+    func addSubviews() {
         contentView.addSubview(image)
         contentView.addSubview(titleLabel)
         contentView.addSubview(descriptionLabel)
@@ -98,32 +130,11 @@ class BigProductCell: BaseCollectionViewCell {
         }
     }
 
-    private func setupShadow() {
+    func setupShadow() {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 4)
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 5.0
         layer.masksToBounds = false
-    }
-
-    func configureData(item: Item) {
-        image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
-        titleLabel.text = item.name
-        descriptionLabel.text = item.description
-        priceLabel.text = "\(item.pricePerUnit)"
-    }
-
-    func configureForCart() {
-        switchingStepper.isHidden = true
-        stepper.isHidden = false
-    }
-    
-    @objc private func stepperValueChanged(_ sender: CustomStepper) {
-        onStepperValueChanged?(sender.currentValue)
-    }
-
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

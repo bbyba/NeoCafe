@@ -77,40 +77,9 @@ class OrderHistoryView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
-    }
-
-    func addSubviews() {
-        addSubview(header)
-        header.addSubview(backButton)
-        header.addSubview(headerLabel)
-        addSubview(collectionView)
-    }
-
-    func setupConstraints() {
-        header.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(140)
-        }
-
-        backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
-            make.leading.equalToSuperview().inset(16)
-            make.height.width.equalTo(40)
-        }
-
-        headerLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(70)
-        }
-
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(header.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-20)
-        }
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -147,5 +116,42 @@ class OrderHistoryView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension OrderHistoryView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
+    }
+
+    func addSubviews() {
+        addSubview(header)
+        header.addSubview(backButton)
+        header.addSubview(headerLabel)
+        addSubview(collectionView)
+    }
+
+    func setupConstraints() {
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(140)
+        }
+
+        backButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().inset(16)
+            make.height.width.equalTo(40)
+        }
+
+        headerLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(70)
+        }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(header.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
     }
 }

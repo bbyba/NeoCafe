@@ -21,7 +21,7 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view = CartViewModel.shared.orderList.isEmpty ? emptyCartView : cartView
+        self.view = Cart.shared.orderList.isEmpty ? emptyCartView : cartView
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
         addTargets()
@@ -31,7 +31,7 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
 
     private func updateCartView() {
         DispatchQueue.main.async { [weak self] in
-            let shouldShowEmptyView = CartViewModel.shared.orderList.isEmpty
+            let shouldShowEmptyView = Cart.shared.orderList.isEmpty
             self?.view = shouldShowEmptyView ? self?.emptyCartView : self?.cartView
             if !shouldShowEmptyView {
                 self?.cartView.collectionView.dataSource = self
@@ -44,7 +44,7 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
 
 
     private func updateTotalPrice() {
-        let totalPriceString = "\(CartViewModel.shared.calculateTotalPrice()) с"
+        let totalPriceString = "\(Cart.shared.getTotalPrice()) с"
         if view == cartView {
             cartView.priceLabel.text = totalPriceString
         }
@@ -88,42 +88,37 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return CartViewModel.shared.orderList.count
+        return Cart.shared.orderList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
-        let item = CartViewModel.shared.orderList[indexPath.row]
-        cell.configureData(item: item)
-        cell.configureForCart()
-
-        let itemQuantity = CartViewModel.shared.itemQuantities[item.id] ?? 1
-        cell.stepper.currentValue = itemQuantity
-        let totalPrice = item.pricePerUnit * itemQuantity
-        cell.priceLabel.text = "\(totalPrice) с"
+        let item = Cart.shared.getItems()[indexPath.row]
+        cell.configureForCart(item: item.item, quantity: item.quantity)
 
         cell.onStepperValueChanged = { [weak self] newValue in
-            let updatedTotalPrice = item.pricePerUnit * newValue
+            let updatedTotalPrice = item.item.pricePerUnit * newValue
             cell.priceLabel.text = "\(updatedTotalPrice) с"
-            CartViewModel.shared.itemQuantities[item.id] = newValue
+//            Cart.shared.itemQuantities[item.item.id] = newValue
+            
             self?.updateTotalPrice()
         }
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
-                        -> UISwipeActionsConfiguration? {
-
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
-            guard let strongSelf = self else { return }
-
-            let itemToRemove = CartViewModel.shared.orderList[indexPath.row]
-            CartViewModel.shared.remove(item: itemToRemove)
-            strongSelf.updateCartView()
-            completionHandler(true)
-        }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
+//    func collectionView(_ collectionView: UICollectionView,
+//                        trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
+//                        -> UISwipeActionsConfiguration? {
+//
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+//            guard let strongSelf = self else { return }
+//
+//            let itemToRemove = Cart.shared.getItems()[indexPath.row]
+//            Cart.shared.removeItem(<#T##item: Item##Item#>)(item: itemToRemove)
+//            strongSelf.updateCartView()
+//            completionHandler(true)
+//        }
+//        return UISwipeActionsConfiguration(actions: [deleteAction])
+//    }
 
 }

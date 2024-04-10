@@ -103,8 +103,7 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
 
     func addToCart(menuItem: Item) {
-        CartViewModel.shared.filterItems(newItem: menuItem)
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
+        Cart.shared.addItem(menuItem)
         onAddToCartNavigate?()
     }
 }

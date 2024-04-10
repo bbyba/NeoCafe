@@ -10,9 +10,9 @@ final class CartCoordinator: BaseCoordinator {
 
     override func start() {
         let viewModel = CartViewModel()
-        viewModel.onOrderNavigate = { [weak self] in
-            self?.openBonusModals()
-        }
+//        viewModel.onOrderNavigate = { [weak self] in
+//            self?.openBonusModals()
+//        }
         let viewController = CartViewController(viewModel: viewModel)
 //        mainVC = viewController
         viewController.tabBarItem.title = S.cart

@@ -6,6 +6,10 @@
 import Foundation
 
 // MARK: - Authentication
+struct MessageResponse: Codable {
+    let message: String
+}
+
 struct CheckEmailModel: Codable {
     let email: String
 }
@@ -42,7 +46,7 @@ struct Results: Codable {
     let results: [Item]
 }
 
-struct Item: Codable {
+struct Item: Codable, Hashable {
     let id: Int
     let name, description: String
     let itemImage: String?
@@ -59,12 +63,12 @@ struct Item: Codable {
     }
 }
 
-struct Category: Codable {
+struct Category: Codable, Hashable  {
     let id: Int
     let name: String
 }
 
-struct Ingredient: Codable {
+struct Ingredient: Codable, Hashable {
     let id: Int
     let name: String
     let quantity: Int

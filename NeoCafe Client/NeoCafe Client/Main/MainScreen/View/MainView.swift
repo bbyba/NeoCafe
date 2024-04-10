@@ -13,7 +13,7 @@ enum Section: String, CaseIterable {
 
 }
 
-class MainView: UIView, BaseContentView {
+class MainView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -62,51 +62,6 @@ class MainView: UIView, BaseContentView {
         addSubviews()
         header.isUserInteractionEnabled = true
         setupConstraints()
-    }
-
-    func setProperties() {
-        backgroundColor = .white
-    }
-
-    func addSubviews() {
-        addSubview(header)
-        header.addSubview(headerLabel)
-        addSubview(notificationButton)
-        addSubview(searchBar)
-        addSubview(collectionView)
-        addSubview(goToMenuButton)
-    }
-
-
-    func setupConstraints() {
-        header.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(140)
-        }
-
-        headerLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(70)
-            make.trailing.equalTo(notificationButton.snp.leading).offset(-20)
-        }
-
-        notificationButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(70)
-            make.trailing.equalToSuperview().inset(40)
-            make.height.width.equalTo(40)
-        }
-
-        searchBar.snp.makeConstraints { make in
-//            make.top.equalTo(header.snp.bottom).offset(-24)
-            make.centerY.equalTo(header.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
-        }
-
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(8)
-            make.bottom.leading.trailing.equalToSuperview()
-        }
     }
 
     required init?(coder: NSCoder) {
@@ -264,5 +219,53 @@ extension MainView {
         section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         return section
+    }
+}
+
+extension MainView: BaseContentView {
+
+    func setProperties() {
+        backgroundColor = .white
+    }
+
+    func addSubviews() {
+        addSubview(header)
+        header.addSubview(headerLabel)
+        addSubview(notificationButton)
+        addSubview(searchBar)
+        addSubview(collectionView)
+        addSubview(goToMenuButton)
+    }
+
+
+    func setupConstraints() {
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(140)
+        }
+
+        headerLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(70)
+            make.trailing.equalTo(notificationButton.snp.leading).offset(-20)
+        }
+
+        notificationButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(70)
+            make.trailing.equalToSuperview().inset(40)
+            make.height.width.equalTo(40)
+        }
+
+        searchBar.snp.makeConstraints { make in
+//            make.top.equalTo(header.snp.bottom).offset(-24)
+            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.bottom.leading.trailing.equalToSuperview()
+        }
     }
 }

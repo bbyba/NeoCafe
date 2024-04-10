@@ -5,12 +5,12 @@
 
 import Foundation
 
-protocol SplashViewModel {
+protocol SplashViewModelProtocol {
     var onLoginNavigate: EmptyCompletion? { get set }
     func toLoginNavigate()
 }
 
-final class SplashViewModelImpl: SplashViewModel {
+final class SplashViewModel: NSObject, SplashViewModelProtocol {
     var onLoginNavigate: EmptyCompletion?
 
     func toLoginNavigate() {

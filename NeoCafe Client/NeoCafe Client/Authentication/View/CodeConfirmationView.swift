@@ -46,8 +46,6 @@ class CodeConfirmationView: UIStackView {
         self.alignment = .center
 
         otpField.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.height.equalTo(52)
             make.top.equalTo(enterCodeMessageLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)

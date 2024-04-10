@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class BaseAuthRegView: UIView, BaseContentView {
+class BaseAuthRegView: UIView {
     lazy var registrationView = RegistrationView()
     lazy var signInView = SignInView()
     lazy var codeConfirmationView = CodeConfirmationView()
@@ -96,58 +96,6 @@ class BaseAuthRegView: UIView, BaseContentView {
         setupConstraints()
     }
 
-    func addSubviews() {
-        addSubview(header)
-        header.addSubview(headerLabel)
-        addSubview(segmentedControl)
-        addSubview(textFieldStackView)
-        textFieldStackView.addArrangedSubview(wrongEmailErrorLabel)
-        textFieldStackView.addArrangedSubview(signInView)
-        addSubview(getCodebutton)
-        addSubview(resendButtonStack)
-        resendButtonStack.addArrangedSubview(resendButton)
-        resendButtonStack.addArrangedSubview(timeCounter)
-    }
-
-    func setupConstraints() {
-        header.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(140)
-        }
-
-        headerLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(51)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(38)
-        }
-
-        segmentedControl.snp.makeConstraints { make in
-            make.centerY.equalTo(header.snp.bottom).offset(24)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(48)
-        }
-
-        textFieldStackView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(40)
-            make.centerX.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
-
-        getCodebutton.snp.makeConstraints { make in
-            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
-            make.centerX.equalToSuperview()
-            make.height.equalTo(48)
-            make.leading.trailing.equalToSuperview().inset(16)
-        }
-
-        resendButtonStack.snp.makeConstraints { make in
-            make.top.equalTo(getCodebutton.snp.bottom).offset(16)
-            make.centerX.equalToSuperview().offset(-5)
-        }
-
-        resendButtonStack.isHidden = true
-    }
-
     // MARK: - Switch between registration and authorization
 
     func updateViewForSegmentIndex(index: Int) {
@@ -208,5 +156,60 @@ class BaseAuthRegView: UIView, BaseContentView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+extension BaseAuthRegView: BaseContentView {
+    func addSubviews() {
+        addSubview(header)
+        header.addSubview(headerLabel)
+        addSubview(segmentedControl)
+        addSubview(textFieldStackView)
+        textFieldStackView.addArrangedSubview(wrongEmailErrorLabel)
+        textFieldStackView.addArrangedSubview(signInView)
+        addSubview(getCodebutton)
+        addSubview(resendButtonStack)
+        resendButtonStack.addArrangedSubview(resendButton)
+        resendButtonStack.addArrangedSubview(timeCounter)
+    }
+
+    func setupConstraints() {
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(140)
+        }
+
+        headerLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(51)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(38)
+        }
+
+        segmentedControl.snp.makeConstraints { make in
+            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+
+        textFieldStackView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(40)
+            make.centerX.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
+        getCodebutton.snp.makeConstraints { make in
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(48)
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+
+        resendButtonStack.snp.makeConstraints { make in
+            make.top.equalTo(getCodebutton.snp.bottom).offset(16)
+            make.centerX.equalToSuperview().offset(-5)
+        }
+
+        resendButtonStack.isHidden = true
     }
 }

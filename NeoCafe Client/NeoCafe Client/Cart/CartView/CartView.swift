@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class CartView: UIView, BaseContentView {
+class CartView: UIView {
 
     lazy var header = CustomHeaderView()
 
@@ -92,9 +92,38 @@ class CartView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.37))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension CartView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -108,7 +137,6 @@ class CartView: UIView, BaseContentView {
         addSubview(totalPriceLabel)
         totalPriceLabel.addArrangedSubview(totalLabel)
         totalPriceLabel.addArrangedSubview(priceLabel)
-
         addSubview(orderButton)
     }
 
@@ -158,34 +186,10 @@ class CartView: UIView, BaseContentView {
         }
 
         orderButton.snp.makeConstraints { make in
-//            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.centerX.equalToSuperview()
             make.height.equalTo(54)
         }
-    }
-
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.37))
-
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

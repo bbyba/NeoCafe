@@ -96,6 +96,10 @@
 		DDC1D84F2B7963530068598D /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */; };
 		DDC4A4FC2BB17CD800F9E6BC /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4A4FB2BB17CD800F9E6BC /* BaseCollectionViewCell.swift */; };
 		DDC4A4FE2BB17CED00F9E6BC /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4A4FD2BB17CED00F9E6BC /* BaseTableViewCell.swift */; };
+		DDCAE7452BC6DE4C00D94046 /* InjectionDefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCAE7442BC6DE4C00D94046 /* InjectionDefaultContainer.swift */; };
+		DDCAE7482BC6DF6F00D94046 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DDCAE7472BC6DF6F00D94046 /* Factory */; };
+		DDCAE74A2BC6EE8C00D94046 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCAE7492BC6EE8C00D94046 /* UserDefaults.swift */; };
+		DDCAE74C2BC6EF5300D94046 /* SharedCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCAE74B2BC6EF5300D94046 /* SharedCart.swift */; };
 		DDCB6B782B9B7B4100407089 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B772B9B7B4100407089 /* TabBarCoordinator.swift */; };
 		DDCB6B7A2B9B7DB900407089 /* Extension+UIViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B792B9B7DB900407089 /* Extension+UIViews.swift */; };
 		DDCB6B7C2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B7B2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift */; };
@@ -209,6 +213,9 @@
 		DDC1D84E2B7963530068598D /* CodeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationView.swift; sourceTree = "<group>"; };
 		DDC4A4FB2BB17CD800F9E6BC /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDC4A4FD2BB17CED00F9E6BC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		DDCAE7442BC6DE4C00D94046 /* InjectionDefaultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectionDefaultContainer.swift; sourceTree = "<group>"; };
+		DDCAE7492BC6EE8C00D94046 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		DDCAE74B2BC6EF5300D94046 /* SharedCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCart.swift; sourceTree = "<group>"; };
 		DDCB6B772B9B7B4100407089 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		DDCB6B792B9B7DB900407089 /* Extension+UIViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViews.swift"; sourceTree = "<group>"; };
 		DDCB6B7B2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UICollectionViewCell+Register.swift"; sourceTree = "<group>"; };
@@ -238,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B18546FCF9870DF3864F7D37 /* Pods_NeoCafe_Client.framework in Frameworks */,
+				DDCAE7482BC6DF6F00D94046 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,10 +364,12 @@
 		DD9556162B7A00E400FB65AF /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				DD9556142B79F67300FB65AF /* UserAPI.swift */,
-				DD93C18E2B81C5CC00339287 /* Network.swift */,
-				DDCB6B802B9E3DEA00407089 /* APIModels.swift */,
 				DDCB6B822B9EF55400407089 /* NetworkService.swift */,
+				DD9556142B79F67300FB65AF /* UserAPI.swift */,
+				DDCAE7442BC6DE4C00D94046 /* InjectionDefaultContainer.swift */,
+				DDCB6B802B9E3DEA00407089 /* APIModels.swift */,
+				DD93C18E2B81C5CC00339287 /* Network.swift */,
+				DDCAE7492BC6EE8C00D94046 /* UserDefaults.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -436,6 +446,7 @@
 			children = (
 				DD9DD0E02B91107E00C489F6 /* CartViewController.swift */,
 				DD73F2FC2BA04E9000C33E21 /* CartViewModel.swift */,
+				DDCAE74B2BC6EF5300D94046 /* SharedCart.swift */,
 				DD73F2FE2BA1EF2100C33E21 /* CartView */,
 				DD73F2F52BA0125800C33E21 /* BonusModals */,
 				DD9DD0E62B91471400C489F6 /* OrderHistory */,
@@ -686,6 +697,9 @@
 			dependencies = (
 			);
 			name = "NeoCafe Client";
+			packageProductDependencies = (
+				DDCAE7472BC6DF6F00D94046 /* Factory */,
+			);
 			productName = "NeoCafe Client";
 			productReference = DDF8B58A2B70ED3C005FE06A /* NeoCafe Client.app */;
 			productType = "com.apple.product-type.application";
@@ -714,6 +728,9 @@
 				Base,
 			);
 			mainGroup = DDF8B5812B70ED3C005FE06A;
+			packageReferences = (
+				DDCAE7462BC6DF6E00D94046 /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = DDF8B58B2B70ED3C005FE06A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -840,6 +857,7 @@
 				DD9DD1072B95E10000C489F6 /* ProfileCoordinator.swift in Sources */,
 				DD2567A92BBC26DC0071432E /* Loader.swift in Sources */,
 				DDAD65E22B8CBB9100F72345 /* AuthenticationViewController.swift in Sources */,
+				DDCAE74A2BC6EE8C00D94046 /* UserDefaults.swift in Sources */,
 				DD9DD0F92B94798C00C489F6 /* AppCoordinator.swift in Sources */,
 				DD9DD0BE2B8FD66800C489F6 /* MenuView.swift in Sources */,
 				DDC1D8492B7601A30068598D /* RegistrationView.swift in Sources */,
@@ -901,6 +919,7 @@
 				DD9DD1132B95FF2D00C489F6 /* NotificationView.swift in Sources */,
 				DD9DD0ED2B94586B00C489F6 /* OrderDetailsViewController.swift in Sources */,
 				DD9DD0BA2B8FD63C00C489F6 /* MenuCategoryCell.swift in Sources */,
+				DDCAE7452BC6DE4C00D94046 /* InjectionDefaultContainer.swift in Sources */,
 				DD9DD0C02B8FD68400C489F6 /* MenuViewController.swift in Sources */,
 				DD73F2FD2BA04E9000C33E21 /* CartViewModel.swift in Sources */,
 				DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */,
@@ -920,6 +939,7 @@
 				DD6035172BADA975003FFDDC /* Extension+Notifications.swift in Sources */,
 				DD73F2F92BA04A5900C33E21 /* BonusViewController.swift in Sources */,
 				DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */,
+				DDCAE74C2BC6EF5300D94046 /* SharedCart.swift in Sources */,
 				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,
 				DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,
@@ -1137,6 +1157,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DDCAE7462BC6DF6E00D94046 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DDCAE7472BC6DF6F00D94046 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDCAE7462BC6DF6E00D94046 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DDF8B5822B70ED3C005FE06A /* Project object */;
 }

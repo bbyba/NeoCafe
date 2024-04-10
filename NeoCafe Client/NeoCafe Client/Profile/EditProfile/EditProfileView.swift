@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class EditProfileView: UIView, BaseContentView {
+class EditProfileView: UIView {
 
     lazy var header = CustomHeaderView()
 
@@ -46,21 +46,29 @@ class EditProfileView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
         emailTextField.isUserInteractionEnabled = false
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension EditProfileView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
+    }
+    
     func addSubviews() {
         addSubview(header)
         header.addSubview(backButton)
         header.addSubview(headerLabel)
-
         addSubview(personalInfoStack)
         personalInfoStack.addArrangedSubview(nameTextField)
         personalInfoStack.addArrangedSubview(emailTextField)
-
         addSubview(saveButton)
     }
 
@@ -93,9 +101,5 @@ class EditProfileView: UIView, BaseContentView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
