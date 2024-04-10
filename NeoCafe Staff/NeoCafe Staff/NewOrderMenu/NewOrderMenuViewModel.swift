@@ -40,7 +40,7 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     var onCategoriesFetched: (() -> Void)?
     var onMenuItemsFetched: (() -> Void)?
 
-    var onMakeNewOrderPopupNavigate: ((Cart, TableModel) -> Void)?
+    var onMakeNewOrderPopupNavigate: ((TableModel) -> Void)?
 
     var filteredMenuItems: [Item] = []
 
@@ -49,25 +49,9 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     var selectedTable: TableModel?
     var tables: [TableModel] = []
 
-    //    var cart: Cart?
-
     init(selectedTable: TableModel) {
         self.selectedTable = selectedTable
         super.init()
-    }
-
-    func createCart(for table: TableModel) -> Cart {
-        if let cart = separateCartsForTables[table] {
-            print("Cart created for table ID: \(table.id)")
-            print("Existing Cart: \(cart)")
-            return cart
-        } else {
-            let newCart = Cart()
-            separateCartsForTables[table] = newCart
-            print("Cart created for table ID: \(table.id)")
-            print("New Cart: \(newCart)")
-            return newCart
-        }
     }
 
     func filterMenuItems(byCategory category: CategoryModel) {
@@ -95,7 +79,8 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
                 DispatchQueue.main.async {
                     self.allCategories = response
                     self.onCategoriesFetched?()
-                }            case .failure(let error):
+                }            
+            case .failure(let error):
                 print("handle error: \(error)")
             }
         }
@@ -111,7 +96,6 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
                 DispatchQueue.main.async {
                     self.menuItems = response.results.results
                     self.onMenuItemsFetched?()
-                    print("\(self.menuItems)")
                 }
             case .failure(let error):
                 print("Error fetching menu items: \(error)")

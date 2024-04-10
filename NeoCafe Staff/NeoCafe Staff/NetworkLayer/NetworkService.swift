@@ -27,6 +27,7 @@ class NetworkService: NetworkServiceProtocol {
         endpoint: MultiTarget,
         completion: @escaping ((Result<SuccessModel, MoyaError>) -> Void)
     ) {
+//        let provider = MoyaProvider<MultiTarget>(plugins: [AuthPlugin()])
         provider.request(endpoint) { result in
             switch result {
             case .success(let response):
@@ -79,5 +80,17 @@ class NetworkService: NetworkServiceProtocol {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+class AuthPlugin: PluginType {
+    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
+        var request = request
+        if let headers = target.headers {
+            for (key, value) in headers {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        return request
     }
 }

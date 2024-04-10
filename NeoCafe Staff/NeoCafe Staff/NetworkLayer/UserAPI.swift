@@ -13,6 +13,7 @@ enum UserAPI  {
     case getCategories
     case getMenuItems
     case getTablesByBranch(branchID: Int)
+    case getOrdersAll(branchID: Int)
 }
 
 extension UserAPI: TargetType {
@@ -36,6 +37,8 @@ extension UserAPI: TargetType {
             "/menu/item/all/"
         case .getTablesByBranch(let branchID):
             "/tables/branch/\(branchID)/"
+        case .getOrdersAll(let branchID):
+            "/orders/all/\(branchID)/"
         }
     }
 
@@ -47,7 +50,8 @@ extension UserAPI: TargetType {
         case .getProfile,
                 .getCategories,
                 .getMenuItems,
-                .getTablesByBranch:
+                .getTablesByBranch,
+                .getOrdersAll:
             return .get
         }
     }
@@ -55,32 +59,39 @@ extension UserAPI: TargetType {
     var task: Moya.Task {
         switch self {
         case .requestConfirmationCode(let username, let password):
-            return .requestParameters(parameters: ["username": username, 
+            return .requestParameters(parameters: ["username": username,
                                                    "password": password],
                                       encoding: JSONEncoding.default)
 
         case .login(let email, let confirmation_code):
-            return .requestParameters(parameters: ["email": email, 
+            return .requestParameters(parameters: ["email": email,
                                                    "confirmation_code": confirmation_code],
                                       encoding: JSONEncoding.default)
 
         case .getProfile,
                 .getCategories,
                 .getMenuItems,
-                .getTablesByBranch:
+                .getTablesByBranch,
+                .getOrdersAll:
             return .requestPlain
         }
     }
 
     var headers: [String : String]? {
         switch self {
-        case .requestConfirmationCode, 
+        case .requestConfirmationCode,
                 .login,
                 .getProfile,
                 .getCategories,
                 .getMenuItems,
                 .getTablesByBranch:
             return ["Content-Type": "application/json"]
+        case .getOrdersAll:
+                if let accessToken = UserDefaultsService.shared.accessToken {
+                    return ["Authorization": "Bearer \(accessToken)", "Content-Type": "application/json"]
+                } else {
+                    return nil
+                }
         }
     }
 }

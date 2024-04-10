@@ -2,23 +2,35 @@
 //  NewOrderMenuViewController.swift
 //  NeoCafe Staff
 //
-
 import UIKit
 
-class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
+class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView>, CartUpdateDelegate {
     var selectedCategoryIndex = 0
-    var selectedTable: TableModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         addTargets()
+        Cart.shared.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         Loader.shared.showLoader(view: self.view)
+        setupBindings()
         viewModel.getCategories()
         viewModel.getMenuItems()
-        setupBindings()
         contentView.updateOrderNoInfo(orderNumber: 1)
-        contentView.updateAmountInfo(orderAmount: 180)
+    }
+
+    func cartDidUpdate() {
+        print("Cart did update in NewOrderMenuViewController")
+        updateUI()
+    }
+
+    func updateUI() {
+        contentView.amountLabel.text = "\(Cart.shared.getTotalPrice()) сом"
+        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
     }
 
     private func setupViews() {
@@ -61,9 +73,8 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     }
 
     private func addToCart(menuItem: Item) {
-        guard let selectedTable = selectedTable else { return }
-        let cart = viewModel.separateCartsForTables[selectedTable]
-        cart?.addItem(menuItem)
+        Cart.shared.addItem(menuItem)
+        updateUI()
     }
 
     @objc private func backButtonTapped() {
@@ -71,11 +82,13 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     }
 
     @objc private func orderInfoButtonTapped() {
-        print("orderInfoButtonTapped")
-        guard let selectedTable = selectedTable else { return }
-        viewModel.onMakeNewOrderNavigate?()
-
+        guard let selectedTable = viewModel.selectedTable else {
+            print("Selected table is nil")
+            return
+        }
+        viewModel.onMakeNewOrderPopupNavigate?(selectedTable)
     }
+
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
@@ -142,9 +155,6 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
 
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
-            //            viewModel.onAddItemNavigate?(menuItem.id)
-            guard let selectedTable = selectedTable else { return }
-            let cart = viewModel.createCart(for: selectedTable)
             if menuItem.category.name == "Кофе" {
                 openCoffeeModal(for: menuItem)
             }
@@ -156,5 +166,13 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         let coffeeModalVC = CoffeeDetailsViewController(viewModel: CoffeeDetailsViewModel())
         coffeeModalVC.modalPresentationStyle = .overFullScreen
         present(coffeeModalVC, animated: true, completion: nil)
+    }
+}
+
+
+extension NewOrderMenuViewController: MakeNewOrderDelegate {
+    func didUpdateCartInPopup() {
+        print("Cart did update in NewOrderMenuViewController")
+        updateUI()
     }
 }

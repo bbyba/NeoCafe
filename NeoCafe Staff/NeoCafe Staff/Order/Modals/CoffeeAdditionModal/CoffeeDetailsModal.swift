@@ -28,7 +28,7 @@ class CoffeeDetailsModal: UIView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = S.deleteFromOrder
+        label.text = S.doneStatus
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .center

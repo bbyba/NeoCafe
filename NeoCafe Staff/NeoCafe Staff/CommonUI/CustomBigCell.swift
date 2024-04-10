@@ -7,6 +7,8 @@ import UIKit
 
 class CustomBigCell: BaseCollectionViewCell {
     var onStepperValueChanged: ((_ newValue: Int) -> Void)?
+    var onSwipeToDelete: ((IndexPath) -> Void)?
+
 
     lazy var titleLabel = {
         let label = UILabel()
@@ -41,18 +43,35 @@ class CustomBigCell: BaseCollectionViewCell {
         setupConstraints()
         setupShadow()
         stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+        addSwipeToDeleteGesture()
     }
 
-    //    func configureData(item: Item) {
-    //        titleLabel.text = item.name
-    //        descriptionLabel.text = item.description
-    //        priceLabel.text = "(\(item.pricePerUnit) с за шт)"
-    //    }
     func configureData(item: Item, quantity: Int) {
         titleLabel.text = item.name
         descriptionLabel.text = item.description
         priceLabel.text = "(\(item.pricePerUnit) с за шт)"
         stepper.currentValue = quantity
+    }
+
+    func configureDataOrderScreen(item: ITO) {
+        titleLabel.text = item.itemName
+//        descriptionLabel.text = item.description
+        priceLabel.text = "(\(item.totalPrice) с за шт)"
+        stepper.currentValue = item.quantity
+    }
+
+    private func addSwipeToDeleteGesture() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeToDelete(_:)))
+        swipeGesture.direction = .left
+        addGestureRecognizer(swipeGesture)
+    }
+
+    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+        guard let collectionView = superview as? UICollectionView,
+              let indexPath = collectionView.indexPath(for: self) else {
+            return
+        }
+        onSwipeToDelete?(indexPath)
     }
 
     @objc private func stepperValueChanged(_ sender: CustomStepper) {

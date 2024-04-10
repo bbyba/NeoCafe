@@ -57,15 +57,15 @@ final class NewOrderCoordinator: BaseCoordinator {
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        viewModel.onMakeNewOrderPopupNavigate = { [weak self] cart, table in
-            self?.openMakeNewOrderPopup(cart: cart, table: table)
+        viewModel.onMakeNewOrderPopupNavigate = { [weak self] table in
+            self?.openMakeNewOrderPopup(table: table)
         }
         let viewController = NewOrderMenuViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    func openMakeNewOrderPopup(cart: Cart, table: TableModel) {
-        let viewModel = MakeNewOrderViewModel(cart: cart, table: table)
+    func openMakeNewOrderPopup(table: TableModel) {
+        let viewModel = MakeNewOrderViewModel(table: table)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.dismissModule(animated: true, completion: nil)
         }

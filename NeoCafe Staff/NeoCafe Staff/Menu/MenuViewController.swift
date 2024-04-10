@@ -109,20 +109,6 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let header: CollectionViewHeader = collectionView.dequeue(forHeader: indexPath)
-//
-//        if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
-//            switch sectionKind {
-//            case .category:
-//                header.configureTitle(title: S.tableNo)
-//            case .productItem:
-//                break
-//            }
-//        }
-//        return header
-//    }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch MenuSection.allCases[indexPath.section] {
         case .category:
