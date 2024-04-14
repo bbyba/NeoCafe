@@ -5,37 +5,31 @@
 
 import UIKit
 
-protocol BranchSelectionDelegate: AnyObject {
-    func branchDidSelect(branchID: Int, branchName: String)
-}
-
-class BranchesModalViewController: BaseViewController<BranchesModalViewModel, BranchesModalView>{
-
-    weak var delegate: BranchSelectionDelegate?
+class BranchesModalViewController: BaseViewController<BranchesModalViewModel, BranchesModalView> {
+    weak var delegate: MenuViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
-        setTargets()
-        fetchBranchesData()
+        setupCollectionView()
+        addTargets()
+        viewModel.getBranches()
+        setupBindings()
     }
 
-    func fetchBranchesData() {
-        viewModel.getBranches { [weak self] result in
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+    }
+
+    private func setupBindings() {
+        viewModel.onBranchesFetched = { [weak self] in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let branches):
-                    self?.viewModel.branchesList = branches
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching branches: \(error)")
-                }
+                self?.contentView.collectionView.reloadData()
             }
         }
     }
 
-    override func setTargets() {
+    private func addTargets() {
         contentView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
 
@@ -63,7 +57,9 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]
-        delegate?.branchDidSelect(branchID: selectedBranch.id, branchName: selectedBranch.branchName)
+        viewModel.branchDidSelect(branchID: selectedBranch.id, branchName: selectedBranch.branchName)
+        delegate?.didSelectBranch(branchName: selectedBranch.branchName)
+        print("\(selectedBranch.branchName)")
         dismiss(animated: true, completion: nil)
     }
 }

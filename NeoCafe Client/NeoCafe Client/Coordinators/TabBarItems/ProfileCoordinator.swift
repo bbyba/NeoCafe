@@ -7,26 +7,14 @@ import UIKit
 
 final class ProfileCoordinator: BaseCoordinator {
 
-    private var mainVC: ProfileViewController!
-
     override func start() {
         let viewModel = ProfileViewModel()
         viewModel.onEditProfileNavigate = { [weak self] in
             self?.openEditProfile()
         }
-        viewModel.getPersonalData { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let userData):
-                    let viewController = ProfileViewController(viewModel: viewModel)
-                    viewController.coordinator = self
-                    viewController.configureUserData(userData)
-                    self?.presentViewController(viewController)
-                case .failure(let error):
-                    print("Error fetching user data: \(error)")
-                }
-            }
-        }
+        let viewController = ProfileViewController(viewModel: viewModel)
+        viewController.coordinator = self
+        presentViewController(viewController)
     }
 
     private func presentViewController(_ viewController: UIViewController) {

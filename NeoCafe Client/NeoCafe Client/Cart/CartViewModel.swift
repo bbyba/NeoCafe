@@ -7,18 +7,17 @@ import UIKit
 import Moya
 
 protocol CartViewModelProtocol {
-    var onAddMoreNavigate: EmptyCompletion? { get set }
-    var onOrderNavigate: EmptyCompletion? { get set }
-//    var orderList: [Item]  { get }
-//    func postOrder(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
+    var onMainMenuNavigate: EmptyCompletion? { get set }
+    var onBonusModalsNavigate: EmptyCompletion? { get set }
+    var onOrderHistoryNavigate: EmptyCompletion? { get set }
 }
 
-
 class CartViewModel: NSObject, CartViewModelProtocol {
-    var onAddMoreNavigate: EmptyCompletion?
-    var onOrderNavigate: EmptyCompletion?
-    var totalPrice: Int = 0
-//    var itemQuantities: [Int: Int] = [:]
-    var orderList: [Item: Int] = [:]
+    @InjectionInjected(\.networkService) var networkService
 
+    var onMainMenuNavigate: EmptyCompletion?
+    var onBonusModalsNavigate: EmptyCompletion?
+    var onOrderHistoryNavigate: EmptyCompletion?
+    var totalPrice: Int = 0
+    var orderList: [Item: Int] = [:]
 }

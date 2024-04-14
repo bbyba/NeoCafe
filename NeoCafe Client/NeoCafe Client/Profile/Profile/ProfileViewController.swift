@@ -19,10 +19,21 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+        addTargets()
+        viewModel.getPersonalData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.onPersonalDataFetched = { [weak self] personalData in
+            self?.configureUserData(personalData)
+        }
+    }
+
+    private func setupCollectionView() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        addTargets()
-//        getUserData()
     }
 
     private func addTargets() {

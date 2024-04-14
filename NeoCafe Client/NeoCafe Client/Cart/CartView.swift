@@ -20,20 +20,6 @@ class CartView: UIView {
         return label
     }()
 
-    lazy var orderHistoryButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
-        button.isUserInteractionEnabled = true
-        return button
-    }()
-
-    lazy var nameFieldView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .orangeCustom
-        view.layer.cornerRadius = 24
-        return view
-    }()
-
     lazy var takeOutLabel: UILabel = {
         let label = UILabel()
         label.text = S.toGoShort
@@ -52,36 +38,34 @@ class CartView: UIView {
         return collectionView
     }()
 
-    lazy var addMoreButton: CustomButton = {
-        let button = CustomButton()
-        button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
-        button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
-        return button
-    }()
-
-    lazy var totalLabel: UILabel = {
+    lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
-        label.text = S.total
         label.textAlignment = .center
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
         return label
     }()
 
-    lazy var priceLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0"
-        label.textAlignment = .center
-        label.font = .poppins(ofSize: 20, weight: .semibold)
-        label.textColor = .orangeCustom
-        return label
+    lazy var nameFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orangeCustom
+        view.layer.cornerRadius = 24
+        return view
     }()
 
-    lazy var totalPriceLabel: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 2
-        return stack
+    lazy var orderHistoryButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+
+    lazy var addMoreButton: CustomButton = {
+        let button = CustomButton()
+        button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
+        button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
+        button.isUserInteractionEnabled = true
+        return button
     }()
 
     lazy var orderButton: CustomButton = {
@@ -90,11 +74,45 @@ class CartView: UIView {
         return button
     }()
 
+    lazy var emptyCartLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.emptyCart
+        label.textAlignment = .center
+        label.font = .poppins(ofSize: 20, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var emptyCartImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: Asset.emptyCartImage.name)
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
+    lazy var toMenuButton: CustomButton = {
+        let button = CustomButton()
+        button.setProperties(title: S.toMenu, backgroundColor: Asset.Colors.darkBlue.color)
+
+        return button
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func switchCartViews(cartEmpty: Bool) {
+        emptyCartLabel.isHidden = !cartEmpty
+        emptyCartImage.isHidden = !cartEmpty
+        toMenuButton.isHidden = !cartEmpty
+        nameFieldView.isHidden = cartEmpty
+        collectionView.isHidden = cartEmpty
+        addMoreButton.isHidden = cartEmpty
+        totalPriceLabel.isHidden = cartEmpty
+        orderButton.isHidden = cartEmpty
     }
 
     private func createLayout() -> UICollectionViewLayout {
@@ -135,9 +153,10 @@ extension CartView: BaseContentView {
         addSubview(collectionView)
         addSubview(addMoreButton)
         addSubview(totalPriceLabel)
-        totalPriceLabel.addArrangedSubview(totalLabel)
-        totalPriceLabel.addArrangedSubview(priceLabel)
         addSubview(orderButton)
+        addSubview(emptyCartLabel)
+        addSubview(emptyCartImage)
+        addSubview(toMenuButton)
     }
 
     func setupConstraints() {
@@ -191,5 +210,27 @@ extension CartView: BaseContentView {
             make.centerX.equalToSuperview()
             make.height.equalTo(54)
         }
+
+        emptyCartLabel.snp.makeConstraints { make in
+            make.top.equalTo(header.snp.bottom).offset(48)
+            make.centerX.equalToSuperview()
+        }
+
+        emptyCartImage.snp.makeConstraints { make in
+            make.top.equalTo(emptyCartLabel.snp.bottom).offset(64)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.bottom.equalTo(toMenuButton.snp.top).offset(-108)
+        }
+
+        toMenuButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(54)
+        }
+
+        emptyCartLabel.isHidden = true
+        emptyCartImage.isHidden = true
+        toMenuButton.isHidden = true
     }
 }

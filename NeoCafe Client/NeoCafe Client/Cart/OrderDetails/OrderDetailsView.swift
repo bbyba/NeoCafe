@@ -19,7 +19,6 @@ class OrderDetailsView: UIView {
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = S.orderHash
         label.font = .poppins(ofSize: 24, weight: .bold)
         label.textColor = .ivoryCustom
         label.textAlignment = .center
@@ -46,7 +45,6 @@ class OrderDetailsView: UIView {
 
     lazy var totalLabel: UILabel = {
         let label = UILabel()
-        label.text = S.total
         label.textAlignment = .center
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
@@ -86,16 +84,9 @@ class OrderDetailsView: UIView {
         return stack
     }()
 
-    lazy var addMoreButton: CustomButton = {
-        let button = CustomButton()
-        button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
-        button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
-        return button
-    }()
-
     lazy var orderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.order, backgroundColor: Asset.Colors.darkBlue.color)
+        button.setProperties(title: S.order, backgroundColor: .darkBlueCustom)
         return button
     }()
 
@@ -140,6 +131,12 @@ class OrderDetailsView: UIView {
         section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
 
+    }
+
+    func hideElementsByStatus() {
+        orderButton.isHidden = true
+        availablePointsToUseLabel.isHidden = true
+        totalPriceLabel.isHidden = true
     }
 
     required init?(coder: NSCoder) {
@@ -204,8 +201,7 @@ extension OrderDetailsView: BaseContentView {
 
         orderButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
-            make.centerX.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(40)
             make.height.equalTo(54)
         }
     }

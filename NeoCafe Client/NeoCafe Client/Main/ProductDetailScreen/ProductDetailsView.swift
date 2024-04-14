@@ -1,5 +1,5 @@
 //
-//  ProductView.swift
+//  ProductDetailsView.swift
 //  NeoCafe Client
 //
 
@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProductView: UIView {
+class ProductDetailsView: UIView {
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -91,7 +91,7 @@ class ProductView: UIView {
 }
 
 
-extension ProductView {
+extension ProductDetailsView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -130,7 +130,7 @@ extension ProductView {
 }
 
 
-extension ProductView: BaseContentView {
+extension ProductDetailsView: BaseContentView {
     func setProperties() {
         backgroundColor = .white
     }
@@ -175,11 +175,9 @@ extension ProductView: BaseContentView {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(priceLabel.snp.top).offset(16)
-            //                        make.height.equalTo(320)
         }
 
         priceLabel.snp.makeConstraints { make in
-            //            make.top.equalTo(collectionView.snp.bottom).offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(addToCartButton.snp.top).offset(-7)
             make.height.equalTo(24)
@@ -192,7 +190,7 @@ extension ProductView: BaseContentView {
         }
 
         stepper.snp.makeConstraints { make in
-            make.width.lessThanOrEqualTo(120)
+            make.width.equalTo(120)
         }
 
         addToCartButton.snp.makeConstraints { make in

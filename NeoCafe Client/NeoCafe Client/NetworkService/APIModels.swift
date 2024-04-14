@@ -21,7 +21,7 @@ struct AuthenticationModel: Codable {
 
 struct AuthResponseModel: Codable {
     let message, accessToken, refreshToken: String
-    let customerProfile: CustomerProfile?
+    let customerProfile: CustomerProfile
 
     enum CodingKeys: String, CodingKey {
         case message
@@ -157,7 +157,6 @@ struct CustomerProfile: Codable {
     let firstName: String
     let email: String
     let bonusPoints: Int
-//    let orders: [Order]?
 
     enum CodingKeys: String, CodingKey {
         case userID = "user_id"
@@ -168,30 +167,29 @@ struct CustomerProfile: Codable {
 }
 
 // MARK: - Order
-struct Order: Codable {
-    let id, totalPrice: Int
-    let table: Table
-    let status, createdAt: String
-    let customer: Int
-    let updatedAt, completedAt: String
+struct OrderHistoryModel: Codable {
+    let id, orderNumber: Int
+    let orderStatus, orderType, createdAt, updatedAt: String
+    let completedAt: String
     let branch: Int
-    let orderType, totalSum: String
-    let employee: Int
+    let branchName, totalSum, customerProfile: String
     let ito: [Ito]
+    let bonusPointsToSubtract: Int
 
     enum CodingKeys: String, CodingKey {
         case id
-        case totalPrice = "total_price"
-        case table, status
+        case orderNumber = "order_number"
+        case orderStatus = "order_status"
+        case orderType = "order_type"
         case createdAt = "created_at"
-        case customer
         case updatedAt = "updated_at"
         case completedAt = "completed_at"
         case branch
-        case orderType = "order_type"
+        case branchName = "branch_name"
         case totalSum = "total_sum"
-        case employee
+        case customerProfile = "customer_profile"
         case ito = "ITO"
+        case bonusPointsToSubtract = "bonus_points_to_subtract"
     }
 }
 

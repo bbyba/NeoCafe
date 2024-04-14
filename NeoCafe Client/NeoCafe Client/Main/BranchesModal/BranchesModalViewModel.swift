@@ -7,40 +7,40 @@ import Moya
 
 protocol BranchesModalViewModelProtocol {
     var branchesList: [BranchModel]  { get }
-    func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
     func branchDidSelect(branchID: Int, branchName: String)
 }
 
 class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
+    var onBranchesFetched: EmptyCompletion?
     var onBranchSelectedNavigate: ((Int, String) -> Void)?
     var branchesList: [BranchModel]
-    let provider: MoyaProvider<UserAPI>
 
     override init() {
-        self.provider = MoyaProvider<UserAPI>()
         self.branchesList = []
     }
-
-    func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void) {
-        provider.request(.getBranches) { result in
+    
+    func getBranches() {
+        networkService.sendRequest(successModelType: BranchesResponse.self,
+                                   endpoint: MultiTarget(UserAPI.getBranches))
+        { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let response):
-                do {
-                    let branchesResponse = try JSONDecoder().decode(BranchesResponse.self, from: response.data)
-                    self.branchesList = branchesResponse.results
-                    completion(.success(self.branchesList))
-                } catch {
-                    completion(.failure(error))
-                    print("Error decoding: \(error)")
+                DispatchQueue.main.async {
+                    self.branchesList = response.results
+                    self.onBranchesFetched?()
                 }
             case .failure(let error):
-                completion(.failure(error))
-
+                print("handle error: \(error)")
             }
         }
     }
 
     func branchDidSelect(branchID: Int, branchName: String) {
+        UserDefaultsService.shared.branchID = branchID
+        UserDefaultsService.shared.branchName = branchName
         onBranchSelectedNavigate?(branchID, branchName)
     }
 }

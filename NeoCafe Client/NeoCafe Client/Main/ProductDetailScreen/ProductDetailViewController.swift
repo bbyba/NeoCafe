@@ -1,10 +1,10 @@
 //
-//  ProductViewController.swift
+//  ProductDetailViewController.swift
 //  NeoCafe Client
 //
 import UIKit
 
-class ProductViewController: BaseViewController<ProductViewModel, ProductView> {
+class ProductDetailViewController: BaseViewController<ProductDetailViewModel, ProductDetailsView> {
     
     var suggestions: [PrItem] = [
         PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
@@ -14,22 +14,13 @@ class ProductViewController: BaseViewController<ProductViewModel, ProductView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
+        setupCollectionView()
         addTargets()
     }
-    
-    func fetchProductData(productId: Int) {
-        viewModel.getProductDetails(productId: productId) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let productData):
-                    self?.configureProductData(productData: productData)
-                case .failure(let error):
-                    print("Error fetching product detail: \(error)")
-                }
-            }
-        }
+
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
     }
 
     func configureProductData(productData: Item) {
@@ -43,7 +34,6 @@ class ProductViewController: BaseViewController<ProductViewModel, ProductView> {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.addToCartButton.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)
         contentView.stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
-
     }
 
     @objc private func addToCartTapped() {
@@ -59,7 +49,7 @@ class ProductViewController: BaseViewController<ProductViewModel, ProductView> {
     }
 }
 
-extension ProductViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ProductDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

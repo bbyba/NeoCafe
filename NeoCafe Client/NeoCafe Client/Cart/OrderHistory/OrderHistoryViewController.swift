@@ -3,48 +3,35 @@
 //  NeoCafe Client
 //
 
-
 import UIKit
-struct OrderHistoryModel {
-    let image: String
-    let name: String
-    let description: String
-    let status: String
-}
 
 enum OrderHistorySection: String, CaseIterable {
     case current
     case completed
-
 }
 
-class OrderHistoryViewController: UIViewController{
-    private lazy var orderHistoryView = OrderHistoryView()
-
-
-    var currentOrders: [Item] = [
-    ]
-
-    var completedOrders: [Item] = [
-    ]
-
-    override func loadView() {
-        view = orderHistoryView
-    }
+class OrderHistoryViewController: BaseViewController<OrderHistoryViewModel, OrderHistoryView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        orderHistoryView.collectionView.dataSource = self
-        orderHistoryView.collectionView.delegate = self
+        setupCollectionView()
         addTargets()
+        viewModel.setupCompleteOrdersList()
+        viewModel.setupCurrentOrdersList()
+        contentView.collectionView.reloadData()
+    }
+
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
     }
 
     private func addTargets() {
-        orderHistoryView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
 
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        viewModel.onBackNavigate?()
     }
 }
 
@@ -56,9 +43,9 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch OrderHistorySection.allCases[section] {
         case .current:
-            return currentOrders.count
+            return viewModel.currentOrdersList.count
         case .completed:
-            return completedOrders.count
+            return viewModel.completeOrdersList.count
         }
     }
 
@@ -67,18 +54,12 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
-            let currentOrder = currentOrders[indexPath.row]
-//            cell.configureData(name: currentOrder.name, imageName: currentOrder.image, description: currentOrder.description, price: currentOrder.status)
-            cell.configureData(item: currentOrder)
-//            cell.hideStepper()
-//            cell.hidePlusButton()
+            let currentOrder = viewModel.currentOrdersList[indexPath.row]
+            cell.configureForOrderHistory(item: currentOrder, isOrderHistoryCell: true)
             return cell
         case .completed:
-            let completedOrder = completedOrders[indexPath.row]
-//            cell.configureData(name: completedOrder.name, imageName: completedOrder.image, description: completedOrder.description, price: completedOrder.status)
-            cell.configureData(item: completedOrder)
-//            cell.hideStepper()
-//            cell.hidePlusButton()
+            let completedOrder = viewModel.completeOrdersList[indexPath.row]
+            cell.configureForOrderHistory(item: completedOrder, isOrderHistoryCell: true)
             return cell
         }
     }
@@ -101,13 +82,16 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
-//            let currentOrder = currentOrders[indexPath.row]
-            let orderDetailsViewController = OrderDetailsViewController()
-            orderDetailsViewController.orderDetailsView.orderButton.isHidden = true
+            let currentOrder = viewModel.currentOrdersList[indexPath.row]
+            let ViewModel = OrderDetailsViewModel(orderDetails: currentOrder)
+            let orderDetailsViewController = OrderDetailsViewController(viewModel: ViewModel)
+            orderDetailsViewController.contentView.hideElementsByStatus()
             navigationController?.pushViewController(orderDetailsViewController, animated: true)
         case .completed:
-//            let completedOrder = completedOrders[indexPath.row]
-            let orderDetailsViewController = OrderDetailsViewController()
+            let completedOrder = viewModel.completeOrdersList[indexPath.row]
+            let ViewModel = OrderDetailsViewModel(orderDetails: completedOrder)
+            ViewModel.orderDetails = viewModel.completeOrdersList[indexPath.row]
+            let orderDetailsViewController = OrderDetailsViewController(viewModel: ViewModel)
             navigationController?.pushViewController(orderDetailsViewController, animated: true)
         }
     }

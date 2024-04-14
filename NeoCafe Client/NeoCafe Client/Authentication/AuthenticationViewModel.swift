@@ -17,14 +17,10 @@ protocol AuthViewModelProtocol {
     var onCodeConfirmationNavigate: EmptyCompletion? { get set }
     var currentState: ViewState { get }
     func changeViewState(to newState: ViewState)
-
     func validateEmail(email: String) -> Bool
-//    func requestConfirmationCode(email: String, completion: @escaping (Result<Void, Error>) -> Void)
-//    func authenticateUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class AuthViewModel: NSObject, AuthViewModelProtocol {
-
     @InjectionInjected(\.networkService) var networkService
 
     var onMainNavigate: EmptyCompletion?
@@ -45,7 +41,6 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
     func changeViewState(to newState: ViewState) {
         self.currentState = newState
     }
-
 
     func storeEmail(email: String) {
         storedEmail = email
@@ -97,6 +92,8 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
             case .success(let response):
                 DispatchQueue.main.async {
                      UserDefaultsService.shared.saveTokens(response: response)
+                    UserDefaultsService.shared.saveCustomerProfile(profile: response.customerProfile)
+                    print("\( String(describing: UserDefaultsService.shared.customerProfile))")
                     self.onMainNavigate?()
                 }
                 print(response)

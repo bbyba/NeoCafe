@@ -8,12 +8,12 @@ import Moya
 
 final class MainCoordinator: BaseCoordinator {
 
-    var onSearchNavigate: EmptyCompletion?
-    private var mainVC: MainViewController!
+    private var onSearchNavigate: EmptyCompletion?
+    var mainViewController: MainViewController!
     var tabBarCoordinator: TabBarCoordinator?
     private var shouldShowBranchesFirst = true
-    private var selectedBranchID: Int?
-    private var selectedBranchName: String?
+    var selectedBranchID: Int? = UserDefaultsService.shared.branchID
+    var selectedBranchName: String? = UserDefaultsService.shared.branchName
 
     override func start() {
         let viewModel = MainViewModel()
@@ -27,7 +27,7 @@ final class MainCoordinator: BaseCoordinator {
             self?.openBranchesMain(initialSelection: true)
         }
         let viewController = MainViewController(viewModel: viewModel)
-        mainVC = viewController
+        mainViewController = viewController
         presentViewController(viewController)
     }
 
@@ -43,74 +43,86 @@ final class MainCoordinator: BaseCoordinator {
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        let notificationsViewController = NotificationsViewController(viewModel: viewModel)
-        router.push(notificationsViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        let viewController = NotificationsViewController(viewModel: viewModel)
+        router.push(viewController,
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
-    private func openMenu(branchID: Int?, branchName: String?) {
-        let menuViewModel = MenuViewModel()
-        menuViewModel.selectedBranchID = branchID
-        menuViewModel.selectedBranchName = branchName
-        menuViewModel.onBranchesNavigate = { [weak self] in
-            self?.openBranches()
+    func openMenu(branchID: Int?, branchName: String?) {
+        let viewModel = MenuViewModel()
+        viewModel.selectedBranchID = branchID
+        viewModel.selectedBranchName = branchName
+        viewModel.onBranchesNavigate = { [weak self] in
+            self?.openBranchesMain(initialSelection: true)
         }
-        menuViewModel.onProductDetailNavigate = { [weak self] productId in
+        viewModel.onProductDetailNavigate = { [weak self] productId in
             self?.openProductDetails(productId: productId)
         }
-        let menuViewController = MenuViewController(viewModel: menuViewModel)
-        if let validBranchID = branchID, let validBranchName = branchName {
-            menuViewController.branchDidSelect(branchID: validBranchID, branchName: validBranchName)
-        }
-        router.push(menuViewController, animated: true, hideBottomBar: false, hideNavBar: true, completion: nil)
+        let viewController = MenuViewController(viewModel: viewModel)
+        viewController.delegate = self
+        router.push(viewController, 
+                    animated: true,
+                    hideBottomBar: false,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
     private func openProductDetails(productId: Int) {
-        let productViewModel = ProductViewModel()
-        productViewModel.onBackNavigate = { [weak self] in
+        let viewModel = ProductDetailViewModel()
+        viewModel.getProductDetails(productId: productId)
+        viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        let productViewController = ProductViewController(viewModel: productViewModel)
-        productViewController.fetchProductData(productId: productId)
-        router.push(productViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        let viewController = ProductDetailViewController(viewModel: viewModel)
+        viewModel.onProductDetailUpdate = { productDetail in
+            viewController.configureProductData(productData: productDetail)
+        }
+        router.push(viewController, 
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
+
     }
 
     private func openBranches() {
-        let branchesViewModel = BranchesModalViewModel()
-        let branchesViewController = BranchesModalViewController(viewModel: branchesViewModel)
-        branchesViewController.delegate = self
-        branchesViewController.modalPresentationStyle = .overFullScreen
-        router.present(branchesViewController, animated: true)
+        let viewModel = BranchesModalViewModel()
+        let viewController = BranchesModalViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController, animated: true)
     }
 
     private func openBranchesMain(initialSelection: Bool) {
-        let branchesViewModel = BranchesModalViewModel()
-        branchesViewModel.onBranchSelectedNavigate = { [weak self] branchID, branchName in
+        let viewModel = BranchesModalViewModel()
+        viewModel.onBranchSelectedNavigate = { [weak self] branchID, branchName in
             self?.selectedBranchID = branchID
             self?.selectedBranchName = branchName
             if initialSelection {
                 DispatchQueue.main.async {
-                    self?.mainVC.viewModel.selectedBranchID = branchID
-                    self?.mainVC.viewModel.selectedBranchName = branchName
-                    self?.mainVC.updateForSelectedBranch()
+                    self?.mainViewController.selectedBranchID = branchID
+                    self?.mainViewController.selectedBranchName = branchName
+                    self?.mainViewController.updateForSelectedBranch()
                 }
             }
         }
-        let branchesViewController = BranchesModalViewController(viewModel: branchesViewModel)
-        branchesViewController.delegate = self
-        branchesViewController.modalPresentationStyle = .overFullScreen
-        router.present(branchesViewController, animated: true)
+        let viewController = BranchesModalViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController, animated: true)
+    }
+
+    func openMenu() {
+        guard let tabBarViewController = tabBarCoordinator?.tabBarViewController else { return }
+        tabBarViewController.selectedIndex = 0
     }
 }
 
-extension MainCoordinator: BranchSelectionDelegate {
-    func branchDidSelect(branchID: Int, branchName: String) {
-        selectedBranchID = branchID
-        selectedBranchName = branchName
-
-        DispatchQueue.main.async {
-            self.mainVC.viewModel.selectedBranchID = branchID
-            self.mainVC.viewModel.selectedBranchName = branchName
-            self.mainVC.updateForSelectedBranch()
-        }
-    }
+extension MainCoordinator: MenuViewControllerDelegate {
+  func didSelectBranch(branchName: String?) {
+    selectedBranchName = branchName
+    mainViewController?.selectedBranchName = branchName
+    mainViewController?.updateForSelectedBranch()
+  }
 }

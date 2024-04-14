@@ -4,57 +4,36 @@
 //
 
 import UIKit
+protocol MenuViewControllerDelegate: AnyObject {
+    func didSelectBranch(branchName: String?)
+}
 
-class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSelectionDelegate {
+class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     var selectedCategoryIndex = 0
-    weak var branchDelegate: BranchSelectionDelegate?
+    var delegate: MenuViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
+        setupCollectionView()
         addTargets()
         Loader.shared.showLoader(view: self.view)
-        fetchMenuData()
+        fetchCategoriesAndItems()
         setupBindings()
+        contentView.branchNameLabel.text = UserDefaultsService.shared.branchName ?? "Select Branch"
     }
 
-    private func selectFirstCategory() {
-        guard let firstCategory = viewModel.allCategories.first else { return }
-        viewModel.filterMenuItems(byCategory: firstCategory)
-        selectedCategoryIndex = 0
-        contentView.collectionView.reloadData()
+    func didSelectBranch(branchName: String?) {
+        contentView.branchNameLabel.text = branchName
     }
 
-    func fetchMenuData() {
-        getCategoriesMenu()
-        getMenubyBranch()
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
     }
 
-    func getCategoriesMenu() {
-        viewModel.getAllCategories { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching categories: \(error)")
-                }
-            }
-        }
-    }
-
-    func getMenubyBranch() {
-        viewModel.getMenuItems { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching menu vc: \(error)")
-                }
-            }
-        }
+    private func fetchCategoriesAndItems() {
+        viewModel.getCategories()
+        viewModel.getMenuItems()
     }
 
     private func setupBindings() {
@@ -79,15 +58,18 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView>, BranchSel
         }
     }
 
-    func branchDidSelect(branchID: Int, branchName: String) {
-        viewModel.selectedBranchID = branchID
-        viewModel.selectedBranchName = branchName
-        contentView.branchNameLabel.text = viewModel.selectedBranchName?.isEmpty == false ? viewModel.selectedBranchName : "Select Branch"
+    private func updateBranchLabel() {
+        contentView.branchNameLabel.text = UserDefaultsService.shared.branchName
+    }
+
+    private func selectFirstCategory() {
+        guard let firstCategory = viewModel.allCategories.first else { return }
+        viewModel.filterMenuItems(byCategory: firstCategory)
+        selectedCategoryIndex = 0
+        contentView.collectionView.reloadData()
     }
 
     func addTargets() {
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
         contentView.headerDropDownButton.addTarget(self, action: #selector(menuDropdownButtonTapped), for: .touchUpInside)
     }
 
@@ -112,7 +94,6 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         case .category:
             return viewModel.allCategories.count
         case .productItem:
-            //            return viewModel.menuItems.count
             return viewModel.filteredMenuItems.count
         }
     }
@@ -129,7 +110,6 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         case .productItem:
             let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
-            //            let menuItem = viewModel.menuItems[indexPath.row]
             cell.configureData(item: menuItem)
             cell.onAddToCart = { [weak self] item in
                 self?.viewModel.addToCart(menuItem: item)
@@ -153,7 +133,6 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
         switch MenuSection.allCases[indexPath.section] {
         case .category:
             let category = viewModel.allCategories[indexPath.row]
@@ -161,8 +140,9 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
             selectedCategoryIndex = indexPath.row
             collectionView.reloadData()
         case .productItem:
-            let menuItem = viewModel.menuItems[indexPath.row]
+            let menuItem = viewModel.filteredMenuItems[indexPath.row]
             viewModel.onProductDetailNavigate?(menuItem.id)
+
         }
     }
 }

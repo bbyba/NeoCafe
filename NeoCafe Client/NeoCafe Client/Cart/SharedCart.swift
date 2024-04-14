@@ -4,10 +4,6 @@
 //
 
 import Foundation
-//
-//protocol CartUpdateDelegate: AnyObject {
-//    func cartDidUpdate()
-//}
 
 class Cart {
     static let shared = Cart()
@@ -37,7 +33,6 @@ class Cart {
     func removeItem(_ item: Item) {
         orderList.removeValue(forKey: item)
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
-
     }
 
     func removeAllItems() {

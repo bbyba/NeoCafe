@@ -8,35 +8,33 @@ import Moya
 
 protocol BranchesViewModelProtocol {
     var onBranchDetailNavigate: ((Int) -> Void)? { get set }
-//    var onSearchNavigate: EmptyCompletion? { get set }
     var branchesList: [BranchModel]  { get }
-    func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
 }
 
 class BranchesViewModel: NSObject, BranchesViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
     var onBranchDetailNavigate: ((Int) -> Void)?
+    var onBranchesFetched: EmptyCompletion?
     var branchesList: [BranchModel]
-    let provider: MoyaProvider<UserAPI>
 
     override init() {
-        self.provider = MoyaProvider<UserAPI>()
         self.branchesList = []
     }
 
-    func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void) {
-        provider.request(.getBranches) { result in
+    func getBranches() {
+        networkService.sendRequest(successModelType: BranchesResponse.self,
+                                   endpoint: MultiTarget(UserAPI.getBranches))
+        { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let response):
-                do {
-                    let branchesResponse = try JSONDecoder().decode(BranchesResponse.self, from: response.data)
-                    self.branchesList = branchesResponse.results
-                    completion(.success(self.branchesList))
-                } catch {
-                    completion(.failure(error))
-                    print("Error decoding: \(error)")
+                DispatchQueue.main.async {
+                    self.branchesList = response.results
+                    self.onBranchesFetched?()
                 }
             case .failure(let error):
-                completion(.failure(error))
+                print("Error fetching menu items: \(error)")
             }
         }
     }
