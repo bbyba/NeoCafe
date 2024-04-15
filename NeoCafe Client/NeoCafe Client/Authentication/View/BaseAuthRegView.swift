@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class BaseAuthRegView: UIView {
+class BaseAuthRegView: UIView, BaseContentView {
     lazy var registrationView = RegistrationView()
     lazy var signInView = SignInView()
     lazy var codeConfirmationView = CodeConfirmationView()

@@ -4,17 +4,13 @@
 //
 
 import UIKit
+struct PrItem {
+    let image: String
+    let name: String
+    let price: Int
+}
 
 class BranchDetailViewController: BaseViewController<BranchDetailViewModel, BranchDetailView> {
-
-    var suggestions: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP4", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP5", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP6", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP7", price: 230)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +18,30 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
         contentView.collectionView.delegate = self
         contentView.scheduleTableView.dataSource = self
         contentView.scheduleTableView.delegate = self
-
         addTargets()
         configureData()
+    }
+
+    func getSuggestionItems() {
+        guard let branch = viewModel.branch else { return }
+        viewModel.getSuggestionItems(branchID: branch.id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Failed to fetch suggestions: \(error)")
+                }
+            }
+        }
+    }
+
+    func configureData() {
+        if let branch = viewModel.branch {
+            contentView.branchNameLabel.text = branch.branchName
+            contentView.branchAddressLabel.text = branch.address
+            contentView.scheduleTableView.reloadData()
+        }
     }
 
     private func addTargets() {
@@ -33,50 +50,33 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
 
     }
 
-    func configureData() {
-        if let branch = viewModel.branch {
-            contentView.branchNameLabel.text = branch.branchName
-            contentView.branchAddressLabel.text = branch.address
-            contentView.scheduleTableView.reloadData()
-            //            contentView.collectionView.reloadData()
-        }
-    }
-
     @objc func backButtonTapped() {
-        print("branchDetail: backButtonTapped")
         viewModel.onBackNavigate?()
     }
 
     @objc func goToMenuButtonTapped() {
-        print("branchDetail: goToMenuButton")
         viewModel.onMenuNavigate?()
     }
 }
 
 extension BranchDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    // MARK: - Suggestions
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return suggestions.count
+        return viewModel.suggestionItems.count
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuProductCell.identifier, for: indexPath) as? MenuProductCell else {
-                fatalError("Could not dequeue MenuProductCell")
-            }
-        let category = suggestions[indexPath.row]
-//        cell.configureData(imageName: category.image, name: category.name, price: Int(category.price))
+        let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
+        let suggestionItem = viewModel.suggestionItems[indexPath.row]
+        cell.configureData(item: suggestionItem)
         return cell
         }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as? CollectionViewSingleHeader else {
-            fatalError("Could not dequeue Header")
-        }
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: S.pleasantAddition)
         return header
     }

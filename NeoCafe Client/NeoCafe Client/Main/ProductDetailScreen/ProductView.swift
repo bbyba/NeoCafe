@@ -7,8 +7,8 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProductView: UIView {
-//    lazy var header = CustomHeaderView()
+class ProductView: UIView, BaseContentView {
+    
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.coffeeCupFront.name)
@@ -46,8 +46,8 @@ class ProductView: UIView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
-        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+        collectionView.register(cell: BigProductCell.self)
+        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -82,12 +82,12 @@ class ProductView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addSubviews()
-        setConstraints()
+        setupConstraints()
     }
 
     func addSubviews() {
         addSubview(image)
-        image.addSubview(backButton)
+        addSubview(backButton)
         addSubview(productNameLabel)
         addSubview(descriptionLabel)
         addSubview(collectionView)
@@ -97,15 +97,15 @@ class ProductView: UIView {
         stack.addArrangedSubview(addToCartButton)
     }
 
-    func setConstraints() {
+    func setupConstraints() {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(220)
+            make.height.equalTo(230)
         }
 
         backButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(32)
-            make.leading.equalToSuperview().offset(16)
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().inset(16)
             make.height.width.equalTo(40)
         }
 

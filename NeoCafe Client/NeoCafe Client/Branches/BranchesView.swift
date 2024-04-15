@@ -21,7 +21,7 @@ class BranchesView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(BranchesModalCell.self, forCellWithReuseIdentifier: BranchesModalCell.identifier)
+        collectionView.register(cell: BranchesModalCell.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -80,7 +80,6 @@ class BranchesView: UIView, BaseContentView {
 
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
     required init?(coder: NSCoder) {

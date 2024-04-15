@@ -7,7 +7,6 @@ import Moya
 
 protocol ProfileViewModelProtocol {
     var onEditProfileNavigate: EmptyCompletion? { get set }
-//    var onSearchNavigate: EmptyCompletion? { get set }
     var personalData: CustomerProfile?  { get }
     var orders: [Order]?  { get }
     func getPersonalData(completion: @escaping (Result<CustomerProfile, Error>) -> Void)
@@ -30,7 +29,6 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
             case .success(let response):
                 do {
                     self.personalData = try JSONDecoder().decode(CustomerProfile.self, from: response.data)
-                    print("Received JSON: \(String(data: response.data, encoding: .utf8) ?? "Invalid JSON")")
                     completion(.success(self.personalData!))
                 } catch {
                     completion(.failure(error))

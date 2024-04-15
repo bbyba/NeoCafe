@@ -5,58 +5,81 @@
 
 
 import UIKit
+
 struct productModel {
     let image: String
     let name: String
     let price: Int
 }
 
-class CartViewController: UIViewController{
-    private lazy var cartView = CartView()
+class CartViewController: BaseViewController<CartViewModel, CartView> {
+
     private lazy var emptyCartView = EmptyCartView()
+    private lazy var cartView = CartView()
 
-
-    var orderedProducts: [productModel] = [
-        productModel(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        productModel(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        productModel(image: Asset.coffeeCupTop.name, name: "POP3", price: 230),
-        productModel(image: Asset.coffeeCupTop.name, name: "POP4", price: 230),
-        productModel(image: Asset.coffeeCupTop.name, name: "POP5", price: 230),
-    ]
-
-    override func loadView() {
-        view = cartView
-//        view = emptyCartView
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cartView.collectionView.dataSource = self
-        cartView.collectionView.delegate = self
+
+        self.view = CartViewModel.shared.orderList.isEmpty ? emptyCartView : cartView
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
         addTargets()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCartUpdate), name: .cartUpdated, object: nil)
+    }
+
+    private func updateCartView() {
+        DispatchQueue.main.async { [weak self] in
+            let shouldShowEmptyView = CartViewModel.shared.orderList.isEmpty
+            self?.view = shouldShowEmptyView ? self?.emptyCartView : self?.cartView
+            if !shouldShowEmptyView {
+                self?.cartView.collectionView.dataSource = self
+                self?.cartView.collectionView.delegate = self
+                self?.cartView.collectionView.reloadData()
+                self?.updateTotalPrice()
+            }
+        }
+    }
+
+
+    private func updateTotalPrice() {
+        let totalPriceString = "\(CartViewModel.shared.calculateTotalPrice()) с"
+        if view == cartView {
+            cartView.priceLabel.text = totalPriceString
+        }
     }
 
     private func addTargets() {
-        cartView.orderHistoryButton.addTarget(self, action: #selector(orderHistoryButtonTapped), for: .touchUpInside)
+        contentView.orderHistoryButton.addTarget(self, action: #selector(orderHistoryButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func handleCartUpdate() {
+        DispatchQueue.main.async {
+            self.contentView.collectionView.reloadData()
+            self.updateCartView()
+            self.updateTotalPrice()
+        }
     }
 
     @objc func addMoreButtonTapped() {
         print("Cart: addMoreButtonTapped")
-//        navigationController?.pushViewController(MenuViewController(), animated: true)
+        //        navigationController?.pushViewController(MenuViewController(), animated: true)
     }
 
     @objc func orderHistoryButtonTapped() {
         print("Cart: orderHistoryButtonTapped")
-        print("Navigation controller: \(String(describing: navigationController))")
-        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+        //        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
     }
 
     @objc func orderButtonTapped() {
         print("Cart: orderButtonTapped")
-        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
+        //        navigationController?.pushViewController(OrderHistoryViewController(), animated: true)
     }
 
-
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension CartViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -65,17 +88,42 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return orderedProducts.count
+        return CartViewModel.shared.orderList.count
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
-        let product = orderedProducts[indexPath.row]
-        cell.configureData(name: product.name, imageName: product.image, description: "nil", price: String(product.price))
-//        cell.hideStepper()
-        return cell
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
+        let item = CartViewModel.shared.orderList[indexPath.row]
+        cell.configureData(item: item)
+        cell.configureForCart()
+
+        let itemQuantity = CartViewModel.shared.itemQuantities[item.id] ?? 1
+        cell.stepper.currentValue = itemQuantity
+        let totalPrice = item.pricePerUnit * itemQuantity
+        cell.priceLabel.text = "\(totalPrice) с"
+
+        cell.onStepperValueChanged = { [weak self] newValue in
+            let updatedTotalPrice = item.pricePerUnit * newValue
+            cell.priceLabel.text = "\(updatedTotalPrice) с"
+            CartViewModel.shared.itemQuantities[item.id] = newValue
+            self?.updateTotalPrice()
         }
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        trailingSwipeActionsConfigurationForItemAt indexPath: IndexPath)
+                        -> UISwipeActionsConfiguration? {
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (action, view, completionHandler) in
+            guard let strongSelf = self else { return }
+
+            let itemToRemove = CartViewModel.shared.orderList[indexPath.row]
+            CartViewModel.shared.remove(item: itemToRemove)
+            strongSelf.updateCartView()
+            completionHandler(true)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+
 }

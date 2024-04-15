@@ -14,13 +14,7 @@ struct OrderDetailsModel {
 class OrderDetailsViewController: UIViewController{
     lazy var orderDetailsView = OrderDetailsView()
 
-    var orderDetails: [OrderDetailsModel] = [
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-        OrderDetailsModel(image: Asset.coffeeCupTop.name, name: "Latte", description: "coffee with milk", price: "270 "),
-    ]
+    var orderDetails: [Item] = []
 
     override func loadView() {
         view = orderDetailsView
@@ -38,7 +32,6 @@ class OrderDetailsViewController: UIViewController{
     }
 
     @objc func backButtonTapped() {
-        print("Order details: backButtonTapped")
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -54,19 +47,14 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
+        let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         let order = orderDetails[indexPath.row]
-        cell.configureData(name: order.name, imageName: order.image, description: "nil", price: String(order.price))
-//        cell.hidePlusButton()
+        cell.configureData(item: order)
         return cell
         }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as? CollectionViewSingleHeader else {
-            fatalError("Could not dequeue Header")
-        }
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: "Neocafe Dzerzhinka, August 1")
         return header
     }

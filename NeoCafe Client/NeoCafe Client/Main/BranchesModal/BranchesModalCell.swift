@@ -5,9 +5,7 @@
 
 import UIKit
 
-class BranchesModalCell: UICollectionViewCell {
-    static let identifier = "BranchesModalCell"
-
+class BranchesModalCell: BaseCollectionViewCell {
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.branchesModal.name)
@@ -64,8 +62,6 @@ class BranchesModalCell: UICollectionViewCell {
         image.contentMode = .scaleAspectFit
         return image
     }()
-
-
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,6 +133,13 @@ class BranchesModalCell: UICollectionViewCell {
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 5.0
         layer.masksToBounds = false
+    }
+
+    func hideAddressPhone() {
+        addressIcon.isHidden = true
+        addressLabel.isHidden = true
+        phoneIcon.isHidden = true
+        phoneLabel.isHidden = true
     }
 
     func configureData(_ branch: BranchModel) {

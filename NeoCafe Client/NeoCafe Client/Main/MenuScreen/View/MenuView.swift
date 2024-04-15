@@ -26,7 +26,7 @@ class MenuView: UIView, BaseContentView {
 
     lazy var branchNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .poppins(ofSize: 24, weight: .semibold)
+        label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
@@ -52,9 +52,9 @@ class MenuView: UIView, BaseContentView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
-        collectionView.register(MenuCategoryCell.self, forCellWithReuseIdentifier: MenuCategoryCell.identifier)
-        collectionView.register(MenuProductCell.self, forCellWithReuseIdentifier: MenuProductCell.identifier)
-        collectionView.register(CollectionViewSingleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSingleHeader.identifier)
+        collectionView.register(cell: MenuCategoryCell.self)
+        collectionView.register(cell: MenuProductCell.self)
+        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -95,8 +95,13 @@ class MenuView: UIView, BaseContentView {
         }
 
         headerDropDownButton.snp.makeConstraints { make in
+<<<<<<< HEAD
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(85)
+=======
             make.trailing.equalToSuperview().offset(-40)
             make.top.equalToSuperview().offset(80)
+>>>>>>> main
             make.width.equalTo(20)
             make.height.equalTo(20)
         }
@@ -185,7 +190,9 @@ extension MenuView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(207))
+//            heightDimension: .absolute(220))
+            heightDimension: .fractionalHeight(0.4))
+
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 

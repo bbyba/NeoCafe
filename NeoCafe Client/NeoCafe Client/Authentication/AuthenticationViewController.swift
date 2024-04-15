@@ -4,20 +4,12 @@
 //
 
 import UIKit
-import SwiftUI
 import Moya
 
-class AuthenticationViewController: UIViewController {
-    private lazy var baseAuthRegView = BaseAuthRegView()
-    //    private var viewModel = AuthViewModel()
-    var viewModel = AuthViewModel(provider: MoyaProvider<UserAPI>())
+class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRegView> {
 
     var timer: Timer?
     var secondsRemaining = 5
-
-    override func loadView() {
-        view = baseAuthRegView
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +17,17 @@ class AuthenticationViewController: UIViewController {
     }
 
     private func addTargets() {
-        baseAuthRegView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-        baseAuthRegView.getCodebutton.addTarget(self, action: #selector(getCodeButtonTapped), for: .touchUpInside)
-        baseAuthRegView.resendButton.addTarget(self, action: #selector(resendButtonTapped), for: .touchUpInside)
+        contentView.segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        contentView.getCodebutton.addTarget(self, action: #selector(getCodeButtonTapped), for: .touchUpInside)
+        contentView.resendButton.addTarget(self, action: #selector(resendButtonTapped), for: .touchUpInside)
     }
 
     private func getEmailString() -> String? {
         switch viewModel.currentState {
         case .signIn:
-            return baseAuthRegView.signInView.emailTextField.text
+            return contentView.signInView.emailTextField.text
         case .registration:
-            return baseAuthRegView.registrationView.emailTextFieldReg.text
+            return contentView.registrationView.emailTextFieldReg.text
         case .codeConfirmation:
             return nil
         }
@@ -51,7 +43,7 @@ class AuthenticationViewController: UIViewController {
             return
         }
         let isValid = viewModel.validateEmail(email: email)
-        baseAuthRegView.wrongEmailErrorLabel.isHidden = isValid
+        contentView.wrongEmailErrorLabel.isHidden = isValid
 
         if isValid {
             viewModel.storeEmail(email: email)
@@ -69,12 +61,11 @@ class AuthenticationViewController: UIViewController {
     }
 
     private func requestCodeButton() {
-        print("getCodeButtonTapped")
         handleCodeRequest()
     }
 
     private func getCodeString() -> String? {
-        baseAuthRegView.codeConfirmationView.otpField.getPin()
+        contentView.codeConfirmationView.otpField.getPin()
     }
 
 //    private func authenticateUserRequest() {
@@ -106,48 +97,40 @@ class AuthenticationViewController: UIViewController {
             return
         }
 
-        print("confirm button tapped")
-        print("\(storedEmail) and \(code)")
-
         viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     self?.viewModel.onMainNavigate?()
-                    print("Success: authenticateUser")
                 case .failure(let error):
                     print(error.localizedDescription)
-                    self?.baseAuthRegView.updateResendButtonAttributedTitle()
+                    self?.contentView.updateResendButtonAttributedTitle()
                 }
             }
         }
-
     }
 
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
-        baseAuthRegView.showCodeConfirmationView()
+        contentView.showCodeConfirmationView()
         startTimer()
     }
 
     @objc private func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         let newState: ViewState = sender.selectedSegmentIndex == 0 ? .signIn : .registration
         viewModel.changeViewState(to: newState)
-        baseAuthRegView.updateViewForSegmentIndex(index: newState == .signIn ? 0 : 1)
+        contentView.updateViewForSegmentIndex(index: newState == .signIn ? 0 : 1)
     }
 
     @objc private func getCodeButtonTapped() {
         switch self.viewModel.currentState {
         case .codeConfirmation:
-            print("current viewstate: \(self.viewModel.currentState)")
             authenticateUserRequest()
         default:
-            print("current viewstate: \(self.viewModel.currentState)")
             requestCodeButton()
         }
     }
 }
-
 
 extension AuthenticationViewController {
 
@@ -165,21 +148,20 @@ extension AuthenticationViewController {
     @objc func updateTimer() {
         if secondsRemaining > 0 {
             secondsRemaining -= 1
-            baseAuthRegView.timeCounter.text = timeString(time: TimeInterval(secondsRemaining))
-            baseAuthRegView.resendButton.isEnabled = false
+            contentView.timeCounter.text = timeString(time: TimeInterval(secondsRemaining))
+            contentView.resendButton.isEnabled = false
         } else {
             timer?.invalidate()
-            baseAuthRegView.timeCounter.isHidden = true
+            contentView.timeCounter.isHidden = true
             secondsRemaining = 90
-            baseAuthRegView.resendButton.isEnabled = true
-            baseAuthRegView.resetResendButton()
+            contentView.resendButton.isEnabled = true
+            contentView.resetResendButton()
         }
     }
 
     @objc func resendButtonTapped() {
-        print("resendButtonTapped")
-        if baseAuthRegView.resendButton.isEnabled {
-            baseAuthRegView.wrongEmailErrorLabel.isHidden = true
+        if contentView.resendButton.isEnabled {
+            contentView.wrongEmailErrorLabel.isHidden = true
             authenticateUserRequest()
         }
     }

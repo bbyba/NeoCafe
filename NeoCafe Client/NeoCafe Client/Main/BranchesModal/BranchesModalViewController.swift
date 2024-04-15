@@ -9,7 +9,8 @@ protocol BranchSelectionDelegate: AnyObject {
     func branchDidSelect(branchID: Int, branchName: String)
 }
 
-class BranchesModalViewController: BaseViewController<BranchesViewModel, BranchesModalView>{
+class BranchesModalViewController: BaseViewController<BranchesModalViewModel, BranchesModalView>{
+
     weak var delegate: BranchSelectionDelegate?
 
     override func viewDidLoad() {
@@ -39,7 +40,6 @@ class BranchesModalViewController: BaseViewController<BranchesViewModel, Branche
     }
 
     @objc func closeButtonTapped(_ sender: UIButton) {
-        print("branch modal: closeButtonTapped")
         dismiss(animated: true, completion: nil)
     }
 }
@@ -54,12 +54,12 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchesModalCell.identifier, for: indexPath) as? BranchesModalCell else {
-            fatalError("Could not dequeue BigProductCell") }
+        let cell: BranchesModalCell = collectionView.dequeue(for: indexPath)
         let branch = viewModel.branchesList[indexPath.row]
         cell.configureData(branch)
+        cell.hideAddressPhone()
         return cell
-        }
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]

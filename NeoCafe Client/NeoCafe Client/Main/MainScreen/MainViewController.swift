@@ -8,33 +8,31 @@ import SwiftUI
 
 class MainViewController: BaseViewController<MainViewModel, MainView>, UICollectionViewDelegate {
     var loadingIndicator: UIActivityIndicatorView?
-
-    var popularItems: [PopularItem] = [
-        PopularItem(name: "POP1", image: Asset.Menu.coffee.name),
-        PopularItem(name: "POP2", image: Asset.Menu.dessert.name),
-        PopularItem(name: "POP3", image: Asset.Menu.bakery.name),
-        PopularItem(name: "POP4", image: Asset.Menu.drink.name)]
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if loadingIndicator == nil {
-            let indicator = UIActivityIndicatorView(style: .large)
-            contentView.addSubview(indicator)
-            indicator.center = contentView.center
-            loadingIndicator = indicator
+    var selectedBranchName: String?
+    var selectedBranchID: Int? {
+        didSet {
+            getCategories()
+            getPopularItems()
         }
-
-        loadingIndicator?.startAnimating()
-        contentView.collectionView.isHidden = true
-        getCategories()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+        setTargets()
+        viewModel.onBranchesModalNavigate?()
     }
 
     override func setTargets() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-
         contentView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
+    }
+
+    func updateForSelectedBranch() {
+        getCategories()
+        getPopularItems()
     }
 
     func getCategories() {
@@ -53,9 +51,22 @@ class MainViewController: BaseViewController<MainViewModel, MainView>, UICollect
         }
     }
 
+    func getPopularItems() {
+        guard let branchID = viewModel.selectedBranchID else { return }
+        viewModel.getPopularItems(branchID: branchID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let items):
+                    self?.viewModel.popularItems = items
+                    self?.contentView.collectionView.reloadData()
+                case .failure(let error):
+                    print("Error fetching popular items: \(error)")
+                }
+            }
+        }
+    }
 
     @objc func notificationsButtonTapped() {
-        print("notificationsButtonTapped")
         viewModel.onNotificationsNavigate?()
     }
 
@@ -74,24 +85,21 @@ extension MainViewController: UICollectionViewDataSource {
         case .category:
             return viewModel.categories.count
         case .popular:
-            return 3
+            return min(viewModel.popularItems.count, 3)
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch Section.allCases[indexPath.section] {
         case .category:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
-                fatalError("Could not dequeue CategoryCell")
-            }
+            let cell: CategoryCell = collectionView.dequeue(for: indexPath)
             let category = viewModel.categories[indexPath.row]
             cell.configureData(name: category.name, imageName: category.image!)
             return cell
         case .popular:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BigProductCell.identifier, for: indexPath) as? BigProductCell else {
-                fatalError("Could not dequeue BigProductCell")
-            }
-            let popularItem = popularItems[indexPath.row]
+            let cell: BigProductCell = collectionView.dequeue(for: indexPath)
+            let popularItem = viewModel.popularItems[indexPath.row]
+            cell.configureData(item: popularItem)
             return cell
         }
     }
@@ -100,8 +108,7 @@ extension MainViewController: UICollectionViewDataSource {
         guard kind == UICollectionView.elementKindSectionHeader else {
             fatalError("Unexpected element kind")
         }
-
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewSingleHeader.identifier, for: indexPath) as! CollectionViewSingleHeader
+        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = Section(rawValue: Section.allCases[indexPath.section].rawValue) {
             switch sectionKind {

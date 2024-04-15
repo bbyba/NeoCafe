@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class CartView: UIView {
+class CartView: UIView, BaseContentView {
 
     lazy var header = CustomHeaderView()
 
@@ -45,7 +45,7 @@ class CartView: UIView {
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
-        collectionView.register(BigProductCell.self, forCellWithReuseIdentifier: BigProductCell.identifier)
+        collectionView.register(cell: BigProductCell.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -70,7 +70,7 @@ class CartView: UIView {
 
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "730"
+        label.text = "0"
         label.textAlignment = .center
         label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom
@@ -175,7 +175,7 @@ class CartView: UIView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100))
+            heightDimension: .fractionalHeight(0.37))
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

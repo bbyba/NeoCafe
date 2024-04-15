@@ -39,9 +39,9 @@ struct Item: Codable {
     let id: Int
     let name: String
     let description: String
-    let itemImage: String
+    let itemImage: String?
     let pricePerUnit: Int
-    let branch: Int
+    let branch: Int?
     let category: CategoryModel
     let ingredients: [Ingredient]?
 
@@ -72,6 +72,14 @@ struct Ingredient: Codable {
 
 
 // MARK: - Branches
+
+struct BranchesResponse: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
+    let results: [BranchModel]
+}
+
 struct BranchModel: Codable {
     let id: Int
     let branchName, address, phoneNumber: String
@@ -166,7 +174,17 @@ struct Order: Codable {
 
 // MARK: - Ito
 struct Ito: Codable {
-    let id, item, quantity: Int
+    let id, item: Int
+    let itemName: String
+    let quantity: Int
+    let totalPrice: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id, item
+        case itemName = "item_name"
+        case quantity
+        case totalPrice = "total_price"
+    }
 }
 
 // MARK: - Table

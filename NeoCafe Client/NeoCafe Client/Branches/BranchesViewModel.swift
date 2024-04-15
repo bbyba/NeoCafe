@@ -7,15 +7,14 @@ import UIKit
 import Moya
 
 protocol BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion? { get set }
+    var onBranchDetailNavigate: ((Int) -> Void)? { get set }
 //    var onSearchNavigate: EmptyCompletion? { get set }
     var branchesList: [BranchModel]  { get }
     func getBranches(completion: @escaping (Result<[BranchModel], Error>) -> Void)
 }
 
-
 class BranchesViewModel: NSObject, BranchesViewModelProtocol {
-    var onBranchesDetailNavigate: EmptyCompletion?
+    var onBranchDetailNavigate: ((Int) -> Void)?
     var branchesList: [BranchModel]
     let provider: MoyaProvider<UserAPI>
 
@@ -29,7 +28,8 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
             switch result {
             case .success(let response):
                 do {
-                    self.branchesList = try JSONDecoder().decode([BranchModel].self, from: response.data)
+                    let branchesResponse = try JSONDecoder().decode(BranchesResponse.self, from: response.data)
+                    self.branchesList = branchesResponse.results
                     completion(.success(self.branchesList))
                 } catch {
                     completion(.failure(error))
@@ -37,7 +37,6 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
                 }
             case .failure(let error):
                 completion(.failure(error))
-
             }
         }
     }

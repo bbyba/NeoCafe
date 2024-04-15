@@ -1,0 +1,51 @@
+/*
+  Localizable.strings
+  NeoCafe Staff
+*/
+
+// Authorization
+"welcome" = "Добро пожаловать в";
+"entry" = "Вход";
+"enterLogin" = "Введите логин";
+"enterPassword" = "Введите пароль";
+"wrongLogin" = "Неправильный логин";
+"getCode" = "Получить код";
+"confirm" = "Подтвердить";
+"exampleEmail" = "example@email.com";
+"OTPCodeLabel" = "Введите 4-х значный код,\n отправленный на почту \n jackie@chan.kg";
+"wrongCode" = "Код введён неверно,\n попробуйте еще раз";
+"resend" = "Отправить ещё раз";
+"resendAfter" = "Отправить ещё раз через";
+"verificationCode" = "Код подтверждения";
+"search" = "Поиск";
+"profile" = "Профиль";
+"workSchedule" = "График работы";
+"tables" = "Столы";
+"orders" = "Заказы";
+"orderNo" = "Заказ №";
+"busy" = "Занято";
+"free" = "Свободно";
+"newOrder" = "Новый заказ";
+"menu" = "Меню";
+"tableNo" = "Стол №";
+"closeOrder" = "Закрыть счёт";
+"add" = "Добавить";
+"no" = "Нет";
+"yes" = "Да";
+"deleteFromOrder" = "Удалить чизкейк из заказа?";
+"waiter" = "Официант: ";
+"orderSuccesfullyClosed" = "Заказ успешно закрыт";
+"save" = "Сохранить";
+"newOrderSuccessfullyMade" = "Заказ успешно оформлен";
+"goToOrders" = "Перейти к заказам";
+"chooseTheTable" = "Выберите стол";
+"notifications" = "Уведомления";
+"clearAll" = "Очистить всё";
+"name" = "Имя";
+"processingStatus" = "В процессе";
+"readyStatus" = "Готово";
+"doneStatus" = "Завершено";
+"cancelledStatus" = "Отменено";
+"newStatus" = "Новый";
+"all" = "Все";
+"total" = "Итого:";
