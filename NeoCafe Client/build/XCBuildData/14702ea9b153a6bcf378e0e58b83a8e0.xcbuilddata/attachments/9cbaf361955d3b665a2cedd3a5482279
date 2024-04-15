@@ -1,0 +1,5 @@
+ extern const unsigned char Pods_NeoCafe_ClientVersionString[];
+ extern const double Pods_NeoCafe_ClientVersionNumber;
+
+ const unsigned char Pods_NeoCafe_ClientVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:Pods_NeoCafe_Client  PROJECT:Pods-1" "\n";
+ const double Pods_NeoCafe_ClientVersionNumber __attribute__ ((used)) = (double)1.;

@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/build/Release-iphoneos/SnapKit/SnapKit.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/build/Pods.build/Release-iphoneos/SnapKit.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/build/Release-iphoneos/SnapKit/SnapKit.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "SnapKit-Swift.h",
+      'external-contents': "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Client/build/Pods.build/Release-iphoneos/SnapKit.build/unextended-interface-header.h",
+    }]
+    }]
+}

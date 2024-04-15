@@ -39,7 +39,7 @@ class BaseAuthRegView: UIView, BaseContentView {
 
     lazy var getCodebutton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.getCode, backgroundColor: Asset.Colors.darkBlue.color)
+        button.setProperties(title: S.getCode, backgroundColor: .darkBlueCustom)
         return button
     }()
 

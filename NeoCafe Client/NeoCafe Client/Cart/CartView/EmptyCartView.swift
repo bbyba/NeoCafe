@@ -44,7 +44,7 @@ class EmptyCartView: UIView, BaseContentView {
 
     lazy var toMenuButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.toMenu, backgroundColor: Asset.Colors.darkBlue.color)
+        button.setProperties(title: S.toMenu, backgroundColor: .darkBlueCustom)
 
         return button
     }()
