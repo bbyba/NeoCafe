@@ -14,8 +14,11 @@ internal enum S {
   internal static let addMore = S.tr("Localizable", "addMore", fallback: "Добавить ещё")
   /// Бонусы к списанию:
   internal static let availablePoints = S.tr("Localizable", "availablePoints", fallback: "Бонусы к списанию:")
-  /// У вас есть 100 бонусов, хотите использовать их?
-  internal static let availablePointsWant = S.tr("Localizable", "availablePointsWant", fallback: "У вас есть 100 бонусов, хотите использовать их?")
+  /// У вас есть %@ бонусов, хотите 
+  ///  использовать их?
+  internal static func availablePointsWant(_ p1: Any) -> String {
+    return S.tr("Localizable", "availablePointsWant", String(describing: p1), fallback: "У вас есть %@ бонусов, хотите \n использовать их?")
+  }
   /// Бонусы
   internal static let bonuses = S.tr("Localizable", "bonuses", fallback: "Бонусы")
   /// Накапливайте бонусы и совершайте 
@@ -40,6 +43,10 @@ internal enum S {
   internal static let confirm = S.tr("Localizable", "confirm", fallback: "Подтвердить")
   /// Актуальный заказ
   internal static let currentOrder = S.tr("Localizable", "currentOrder", fallback: "Актуальный заказ")
+  /// Удалить %@ из заказа?
+  internal static func deleteFromOrder(_ p1: Any) -> String {
+    return S.tr("Localizable", "deleteFromOrder", String(describing: p1), fallback: "Удалить %@ из заказа?")
+  }
   /// В заведении
   internal static let eatHere = S.tr("Localizable", "eatHere", fallback: "В заведении")
   /// Редактирование
@@ -83,8 +90,10 @@ internal enum S {
   internal static let order = S.tr("Localizable", "order", fallback: "Заказать")
   /// Ваш заказ принят, пожалуйста ожидайте
   internal static let orderAcceptedWait = S.tr("Localizable", "orderAcceptedWait", fallback: "Ваш заказ принят, пожалуйста ожидайте")
-  /// Заказ #
-  internal static let orderHash = S.tr("Localizable", "orderHash", fallback: "Заказ #")
+  /// Заказ #%@
+  internal static func orderHash(_ p1: Any) -> String {
+    return S.tr("Localizable", "orderHash", String(describing: p1), fallback: "Заказ #%@")
+  }
   /// История заказов
   internal static let orderHistory = S.tr("Localizable", "orderHistory", fallback: "История заказов")
   /// Введите 4-х значный код,
@@ -121,6 +130,10 @@ internal enum S {
   internal static let scheduleNotAvailanle = S.tr("Localizable", "scheduleNotAvailanle", fallback: "График не доступен")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
+  /// %@ с
+  internal static func som(_ p1: Any) -> String {
+    return S.tr("Localizable", "som", String(describing: p1), fallback: "%@ с")
+  }
   /// Сегодня с 
   internal static let todaySchedule = S.tr("Localizable", "todaySchedule", fallback: "Сегодня с ")
   /// Возьму с собой
@@ -129,8 +142,10 @@ internal enum S {
   internal static let toGoShort = S.tr("Localizable", "toGoShort", fallback: "С собой")
   /// В меню
   internal static let toMenu = S.tr("Localizable", "toMenu", fallback: "В меню")
-  /// Итого: 
-  internal static let total = S.tr("Localizable", "total", fallback: "Итого: ")
+  /// Итого: %@ с
+  internal static func total(_ p1: Any) -> String {
+    return S.tr("Localizable", "total", String(describing: p1), fallback: "Итого: %@ с")
+  }
   /// В корзину
   internal static let toTheBasket = S.tr("Localizable", "toTheBasket", fallback: "В корзину")
   /// Списать
@@ -151,8 +166,10 @@ internal enum S {
   internal static let wrongEmail = S.tr("Localizable", "wrongEmail", fallback: "Неправильный адрес электронной почты, попробуйте ещё раз")
   /// Да
   internal static let yes = S.tr("Localizable", "yes", fallback: "Да")
-  /// Ваши бонусы:
-  internal static let yourBonusPoints = S.tr("Localizable", "yourBonusPoints", fallback: "Ваши бонусы:")
+  /// Ваши бонусы: %@
+  internal static func yourBonusPoints(_ p1: Any) -> String {
+    return S.tr("Localizable", "yourBonusPoints", String(describing: p1), fallback: "Ваши бонусы: %@")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

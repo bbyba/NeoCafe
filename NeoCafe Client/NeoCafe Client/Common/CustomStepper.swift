@@ -7,6 +7,8 @@ import UIKit
 import SnapKit
 
 class CustomStepper: UIControl {
+    var incrementTapped: (() -> Void)?
+    var decrementTapped: (() -> Void)?
     var isDecrementing = false
 
     lazy var valueLabel: UILabel = {
@@ -47,10 +49,9 @@ class CustomStepper: UIControl {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        incrementButton.layer.cornerRadius = 20
-        decrementButton.layer.cornerRadius = 20
+        incrementButton.layer.cornerRadius = 14
+        decrementButton.layer.cornerRadius = 14
     }
-
 
     private func addSubviews() {
         addSubview(stackView)
@@ -75,6 +76,7 @@ class CustomStepper: UIControl {
             currentValue += stepValue
             sendActions(for: .valueChanged)
             isDecrementing = false
+            incrementTapped?()
         }
     }
 
@@ -83,6 +85,7 @@ class CustomStepper: UIControl {
             currentValue -= stepValue
             sendActions(for: .valueChanged)
             isDecrementing = true
+            decrementTapped?()
         }
     }
 

@@ -14,6 +14,9 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()
+        viewModel.onCodeConfirmationNavigate = { [weak self] in
+            self?.switchToCodeConfirmation()
+        }
     }
 
     private func addTargets() {
@@ -47,16 +50,7 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
 
         if isValid {
             viewModel.storeEmail(email: email)
-            viewModel.requestConfirmationCode(email: email) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        self.switchToCodeConfirmation()
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
-                }
-            }
+            viewModel.requestConfirmationCode(email: email) 
         }
     }
 
@@ -64,54 +58,18 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
         handleCodeRequest()
     }
 
-    private func getCodeString() -> String? {
-        contentView.codeConfirmationView.otpField.getPin()
-    }
-
-//    private func authenticateUserRequest() {
-//        guard let storedEmail = viewModel.storedEmail, let code = getCodeString() else {
-//            print("Email is not stored or code is nil")
-//            return
-//        }
-//
-//        print("confirm button tapped")
-//        print("\(storedEmail) and \(code)")
-//
-//        viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success:
-//                    print("Success: authenticateUser")
-//                    self.viewModel.onMainNavigate
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                    self.baseAuthRegView.updateResendButtonAttributedTitle()
-//                }
-//            }
-//        }
-//    }
-
     private func authenticateUserRequest() {
-        guard let storedEmail = viewModel.storedEmail, let code = getCodeString() else {
+        let code = contentView.codeConfirmationView.otpField.getPin()
+        guard let storedEmail = viewModel.storedEmail else {
             print("Email is not stored or code is nil")
             return
         }
 
-        viewModel.authenticateUser(email: storedEmail, confirmationCode: code) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    self?.viewModel.onMainNavigate?()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    self?.contentView.updateResendButtonAttributedTitle()
-                }
-            }
-        }
+        viewModel.authenticateUser(email: storedEmail, confirmationCode: code)
     }
 
+
     func switchToCodeConfirmation() {
-        viewModel.changeViewState(to: .codeConfirmation)
         contentView.showCodeConfirmationView()
         startTimer()
     }

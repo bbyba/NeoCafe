@@ -11,77 +11,75 @@ protocol MenuViewModelProtocol {
     var onBranchesNavigate: EmptyCompletion? { get set }
     var onAddToCartNavigate: EmptyCompletion? { get set }
     var onProductDetailNavigate: ((Int) -> Void)? { get set }
-
     var allCategories: [CategoryModel] { get }
     var menuItems: [Item] { get }
-    var selectedBranchID: Int? { get set }
-    var selectedBranchName: String? { get set }
-    func getAllCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void)
 }
 
 class MenuViewModel: NSObject, MenuViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
     var onSearchNavigate: EmptyCompletion?
     var onBranchesNavigate: EmptyCompletion?
     var onAddToCartNavigate: EmptyCompletion?
+
     var onProductDetailNavigate: ((Int) -> Void)?
+    var onCategoriesFetched: (() -> Void)?
+    var onMenuItemsFetched: (() -> Void)?
 
     var allCategories: [CategoryModel] = []
     var menuItems: [Item] = []
-    var selectedBranchID: Int?
-    var selectedBranchName: String?
-    //    var categoryID: Int
-    let provider: MoyaProvider<UserAPI>
+    var selectedBranchID: Int? = UserDefaultsService.shared.branchID
+    var selectedBranchName: String? = UserDefaultsService.shared.branchName
 
-    override init() {
-        self.provider = MoyaProvider<UserAPI>()
+
+    var filteredMenuItems: [Item] = []
+
+    func filterMenuItems(byCategory category: CategoryModel) {
+        filteredMenuItems = menuItems.filter { $0.category.id == category.id }
     }
 
-    func getAllCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void) {
-        provider.request(.getCategories) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let response):
-                    do {
-                        let categories = try JSONDecoder().decode([CategoryModel].self, from: response.data)
-                        self?.allCategories = categories
-                        completion(.success(categories))
-                    } catch {
-                        print("Error decoding categories: \(error)")
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
-                    print("Error fetching categories: \(error)")
-                    completion(.failure(error))
+    private func setupFirstCategory() {
+        if let firstCategory = allCategories.first {
+            filterMenuItems(byCategory: firstCategory)
+        }
+    }
+
+    func getCategories() {
+        networkService.sendRequest(successModelType: [CategoryModel].self,
+                                   endpoint: MultiTarget(UserAPI.getCategories))
+        { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.allCategories = response
+                    self.onCategoriesFetched?()
                 }
+            case .failure(let error):
+                print("handle error: \(error)")
             }
         }
     }
 
-    func getMenuItemsByBranchCategory(branchID: Int, completion: @escaping (Result<[Item], Error>) -> Void) {
-        provider.request(.getMenuItemsByBranchCategory(branchID: branchID)) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let response):
-                    do {
-                        let menuItems = try JSONDecoder().decode([Item].self, from: response.data)
-                        self?.menuItems = menuItems
-                        completion(.success(menuItems))
-                    } catch {
-                        print("Error decoding menuItems: \(error)")
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
-                    print("Error fetching menuItems: \(error)")
-                    completion(.failure(error))
+    func getMenuItems() {
+        networkService.sendRequest(successModelType: AllMenuItems.self,
+                                   endpoint: MultiTarget(UserAPI.getMenuItemsAll))
+        { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.menuItems = response.results.results
+                    self.onMenuItemsFetched?()
                 }
+            case .failure(let error):
+                print("Error fetching menu items: \(error)")
             }
         }
     }
 
     func addToCart(menuItem: Item) {
-        CartViewModel.shared.filterItems(newItem: menuItem)
-        NotificationCenter.default.post(name: .cartUpdated, object: nil)
+        Cart.shared.addItem(menuItem)
         onAddToCartNavigate?()
     }
 }

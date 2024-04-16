@@ -7,24 +7,67 @@ import UIKit
 
 final class CartCoordinator: BaseCoordinator {
     private var mainVC: CartViewController!
+    var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {
         let viewModel = CartViewModel()
-        viewModel.onOrderNavigate = { [weak self] in
+        viewModel.onBonusModalsNavigate = { [weak self] in
             self?.openBonusModals()
         }
+        viewModel.onMainMenuNavigate = { [weak self] in
+            self?.openMainMenu()
+        }
+        viewModel.onOrderHistoryNavigate = { [weak self] in
+            self?.openOrderHistory()
+        }
         let viewController = CartViewController(viewModel: viewModel)
-//        mainVC = viewController
         viewController.tabBarItem.title = S.cart
         viewController.tabBarItem.image = Asset.TabBar.cart.image
         viewController.tabBarItem.selectedImage = Asset.TabBar.cart.image.withTintColor(.orangeCustom)
         router.setRootModule(viewController, hideBar: false)
     }
 
-    func openBonusModals() {
-//        let viewModel = BonusModalViewModel()
-//        let bonusViewController = BonusViewController(viewModel: viewModel)
-//        bonusViewController.modalPresentationStyle = .overFullScreen
-//        router.present(bonusViewController, animated: false)
+    private func openBonusModals() {
+        let viewModel = BonusModalViewModel()
+        let viewController = BonusViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController, animated: false)
+    }
+
+    private func openProductDetails(productId: Int) {
+        let viewModel = ProductDetailViewModel()
+        viewModel.getProductDetails(productId: productId)
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        let viewController = ProductDetailViewController(viewModel: viewModel)
+        viewModel.onProductDetailUpdate = { productDetail in
+            viewController.configureProductData(productData: productDetail)
+        }
+        router.push(viewController, 
+                    animated: true,
+                    hideBottomBar: false, 
+                    hideNavBar: true,
+                    completion: nil)
+    }
+
+    private func openMainMenu() {
+        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
+        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID, 
+                                                    branchName:  UserDefaultsService.shared.branchName)
+        tabBarCoordinator.tabBarViewController.selectedIndex = 0
+    }
+
+    private func openOrderHistory() {
+        let viewModel = OrderHistoryViewModel()
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.popModule(animated: true)
+        }
+        let viewController = OrderHistoryViewController(viewModel: viewModel)
+        router.push(viewController, 
+                    animated: true,
+                    hideBottomBar: false,
+                    hideNavBar: true,
+                    completion: nil)
     }
 }

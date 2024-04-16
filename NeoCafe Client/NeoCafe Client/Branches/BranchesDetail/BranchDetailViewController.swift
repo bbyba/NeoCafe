@@ -14,24 +14,27 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
-        contentView.scheduleTableView.dataSource = self
-        contentView.scheduleTableView.delegate = self
+        setupCollectionView()
         addTargets()
         configureData()
     }
 
-    func getSuggestionItems() {
-        guard let branch = viewModel.branch else { return }
-        viewModel.getSuggestionItems(branchID: branch.id) { [weak self] result in
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+        contentView.scheduleTableView.dataSource = self
+        contentView.scheduleTableView.delegate = self
+    }
+
+    private func addTargets() {
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.goToMenuButton.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
+    }
+
+    private func setupBindings() {
+        viewModel.onPopularItemsFetched = { [weak self] in
             DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Failed to fetch suggestions: \(error)")
-                }
+                self?.contentView.collectionView.reloadData()
             }
         }
     }
@@ -42,12 +45,6 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
             contentView.branchAddressLabel.text = branch.address
             contentView.scheduleTableView.reloadData()
         }
-    }
-
-    private func addTargets() {
-        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        contentView.goToMenuButton.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
-
     }
 
     @objc func backButtonTapped() {
@@ -99,8 +96,7 @@ extension BranchDetailViewController: UITableViewDelegate, UITableViewDataSource
         }
         cell.selectionStyle = .none
         if let schedule = viewModel.branch?.schedules[indexPath.row] {
-            let scheduleString = "\(schedule.day): \(schedule.startTime.dropLast(3)) - \(schedule.endTime.dropLast(3))"
-//            let scheduleString = "\(schedule.day): \(branch.todaySchedule)"
+            let scheduleString = "\(schedule.day): \(schedule.startTime) - \(schedule.endTime)"
             cell.workingHours.text = scheduleString
         }
         return cell

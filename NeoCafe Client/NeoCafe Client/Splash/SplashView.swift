@@ -35,7 +35,7 @@ class SplashView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blueCustom
+        setProperties()
         addSubviews()
         setupConstraints()
     }
@@ -44,14 +44,21 @@ class SplashView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func addSubviews() {
+}
+
+extension SplashView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .blueCustom
+    }
+
+    func addSubviews() {
         addSubview(coffeeBeansImage)
         addSubview(coffeeCupsImage)
         addSubview(welcomeLabel)
         addSubview(logoImage)
     }
 
-    private func setupConstraints() {
+    func setupConstraints() {
         coffeeBeansImage.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.4)
@@ -69,6 +76,7 @@ class SplashView: UIView {
             make.centerX.equalToSuperview()
             make.top.equalTo(coffeeCupsImage.snp.bottom).offset(48)
         }
+        
         logoImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(welcomeLabel.snp.bottom).offset(32)

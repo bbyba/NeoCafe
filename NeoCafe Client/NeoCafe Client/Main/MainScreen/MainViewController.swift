@@ -6,62 +6,47 @@
 import UIKit
 import SwiftUI
 
-class MainViewController: BaseViewController<MainViewModel, MainView>, UICollectionViewDelegate {
+class MainViewController: BaseViewController<MainViewModel, MainView> {
     var loadingIndicator: UIActivityIndicatorView?
     var selectedBranchName: String?
     var selectedBranchID: Int? {
         didSet {
-            getCategories()
-            getPopularItems()
+            setupBindings()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
-        setTargets()
+        setupCollectionView()
+        addTargets()
         viewModel.onBranchesModalNavigate?()
     }
 
-    override func setTargets() {
+    private func setupCollectionView() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
+    }
+
+    func addTargets() {
         contentView.notificationButton.addTarget(self, action: #selector(notificationsButtonTapped), for: .touchUpInside)
     }
 
     func updateForSelectedBranch() {
-        getCategories()
-        getPopularItems()
+        setupBindings()
     }
 
-    func getCategories() {
-        viewModel.getCategories { [weak self] result in
+    private func setupBindings() {
+        viewModel.onCategoriesFetched = { [weak self] in
             DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.loadingIndicator?.stopAnimating()
-                    self?.contentView.collectionView.isHidden = false
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    self?.loadingIndicator?.stopAnimating()
-                    print("Error fetching categories: \(error)")
-                }
+                self?.loadingIndicator?.stopAnimating()
+                self?.contentView.collectionView.isHidden = false
+                self?.contentView.collectionView.reloadData()
             }
         }
-    }
 
-    func getPopularItems() {
-        guard let branchID = viewModel.selectedBranchID else { return }
-        viewModel.getPopularItems(branchID: branchID) { [weak self] result in
+        viewModel.onPopularItemsFetched = { [weak self] in
             DispatchQueue.main.async {
-                switch result {
-                case .success(let items):
-                    self?.viewModel.popularItems = items
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching popular items: \(error)")
-                }
+                self?.contentView.collectionView.reloadData()
             }
         }
     }
@@ -75,7 +60,7 @@ class MainViewController: BaseViewController<MainViewModel, MainView>, UICollect
     }
 }
 
-extension MainViewController: UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return Section.allCases.count
     }

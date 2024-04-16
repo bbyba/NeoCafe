@@ -6,6 +6,10 @@
 import Foundation
 
 // MARK: - Authentication
+struct MessageResponse: Codable {
+    let message: String
+}
+
 struct CheckEmailModel: Codable {
     let email: String
 }
@@ -17,7 +21,7 @@ struct AuthenticationModel: Codable {
 
 struct AuthResponseModel: Codable {
     let message, accessToken, refreshToken: String
-    let customerProfile: CustomerProfile?
+    let customerProfile: CustomerProfile
 
     enum CodingKeys: String, CodingKey {
         case message
@@ -32,42 +36,60 @@ struct AllMenuItems: Codable {
     let count: Int
     let next: String?
     let previous: String?
+    let results: Results
+}
+
+struct Results: Codable {
+    let count: Int
+    let next: String?
+    let previous: String?
     let results: [Item]
 }
 
-struct Item: Codable {
+struct Item: Codable, Hashable {
     let id: Int
-    let name: String
-    let description: String
+    let name, description: String
     let itemImage: String?
     let pricePerUnit: Int
     let branch: Int?
-    let category: CategoryModel
-    let ingredients: [Ingredient]?
+    let category: Category
+    let ingredients: [Ingredient]
 
     enum CodingKeys: String, CodingKey {
-        case id, name, description, branch, category, ingredients
+        case id, name, description
         case itemImage = "item_image"
         case pricePerUnit = "price_per_unit"
+        case branch, category, ingredients
     }
+}
+
+struct Category: Codable, Hashable  {
+    let id: Int
+    let name: String
+}
+
+struct Ingredient: Codable, Hashable {
+    let id: Int
+    let name: String
+    let quantity: Int
+    let measurementUnit: MeasurementUnit
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, quantity
+        case measurementUnit = "measurement_unit"
+    }
+}
+
+enum MeasurementUnit: String, Codable {
+    case гр = "гр"
+    case мл = "мл"
+    case шт = "шт"
 }
 
 struct CategoryModel: Codable {
     let id: Int
     let name: String
     let image: String?
-}
-
-struct Ingredient: Codable {
-    let id: Int
-    let name: String
-    let quantity: Int
-    let measurementUnit: String
-
-    enum CodingKeys: String, CodingKey {
-        case id, name, quantity
-        case measurementUnit = "measurement_unit"
-    }
 }
 
 
@@ -118,8 +140,8 @@ extension BranchModel {
         let todayShortString = dateFormatter.string(from: Date())
 
         if let todaySchedule = schedules.first(where: { $0.day == todayShortString }) {
-            let formattedStartTime = String(todaySchedule.startTime.dropLast(3))
-            let formattedEndTime = String(todaySchedule.endTime.dropLast(3))
+            let formattedStartTime = String(todaySchedule.startTime)
+            let formattedEndTime = String(todaySchedule.endTime)
             return "\(formattedStartTime) - \(formattedEndTime)"
         }
         return nil
@@ -130,45 +152,44 @@ extension BranchModel {
 
 // MARK: - Profile
 struct CustomerProfile: Codable {
-    let customerID: Int
+    let id: Int
+    let userID: Int
     let firstName: String
-    let bonusPoints: Int
     let email: String
-    let orders: [Order]?
+    let bonusPoints: Int
 
     enum CodingKeys: String, CodingKey {
-        case customerID = "customer_id"
+        case userID = "user_id"
         case firstName = "first_name"
         case bonusPoints = "bonus_points"
-        case email, orders
+        case id, email
     }
 }
 
 // MARK: - Order
-struct Order: Codable {
-    let id, totalPrice: Int
-    let table: Table
-    let status, createdAt: String
-    let customer: Int
-    let updatedAt, completedAt: String
+struct OrderHistoryModel: Codable {
+    let id, orderNumber: Int
+    let orderStatus, orderType, createdAt, updatedAt: String
+    let completedAt: String
     let branch: Int
-    let orderType, totalSum: String
-    let employee: Int
+    let branchName, totalSum, customerProfile: String
     let ito: [Ito]
+    let bonusPointsToSubtract: Int
 
     enum CodingKeys: String, CodingKey {
         case id
-        case totalPrice = "total_price"
-        case table, status
+        case orderNumber = "order_number"
+        case orderStatus = "order_status"
+        case orderType = "order_type"
         case createdAt = "created_at"
-        case customer
         case updatedAt = "updated_at"
         case completedAt = "completed_at"
         case branch
-        case orderType = "order_type"
+        case branchName = "branch_name"
         case totalSum = "total_sum"
-        case employee
+        case customerProfile = "customer_profile"
         case ito = "ITO"
+        case bonusPointsToSubtract = "bonus_points_to_subtract"
     }
 }
 
@@ -204,4 +225,28 @@ struct NotificationModel {
     let status: String
     let details: String
     let time: String
+}
+
+
+struct NewOrderModel: Codable {
+    let orderType: String
+    let ito: [Ito]
+
+    enum CodingKeys: String, CodingKey {
+        case orderType = "order_type"
+        case ito = "ITO"
+    }
+}
+
+struct NewOrderModelFinal: Codable {
+    let ito: [Ito]
+    let orderType: String
+    let branch, bonusPointsToSubtract: Int
+
+    enum CodingKeys: String, CodingKey {
+        case ito = "ITO"
+        case orderType = "order_type"
+        case branch
+        case bonusPointsToSubtract = "bonus_points_to_subtract"
+    }
 }

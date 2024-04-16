@@ -14,17 +14,17 @@ enum ViewState {
 
 protocol AuthViewModelProtocol {
     var onMainNavigate: EmptyCompletion? { get set }
+    var onCodeConfirmationNavigate: EmptyCompletion? { get set }
     var currentState: ViewState { get }
     func changeViewState(to newState: ViewState)
-
     func validateEmail(email: String) -> Bool
-    func requestConfirmationCode(email: String, completion: @escaping (Result<Void, Error>) -> Void)
-    func authenticateUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 class AuthViewModel: NSObject, AuthViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
     var onMainNavigate: EmptyCompletion?
-    let provider: MoyaProvider<UserAPI>
+    var onCodeConfirmationNavigate: EmptyCompletion?
     var currentState: ViewState = .signIn {
         didSet {
             if currentState == .codeConfirmation {
@@ -37,10 +37,6 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
     var storedEmail: String?
     var updateViewState: ((ViewState) -> Void)?
     var updateEmailValidationState: ((Bool) -> Void)?
-
-    init(provider: MoyaProvider<UserAPI>) {
-        self.provider = provider
-    }
 
     func changeViewState(to newState: ViewState) {
         self.currentState = newState
@@ -56,74 +52,55 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
         return emailTest.evaluate(with: email)
     }
 
-    func requestConfirmationCode(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        switch currentState {
-        case .signIn:
-            provider.request(.checkEmailLogin(email: email)) { result in
-                self.handleResult(result, completion: completion)
-            }
-        case .registration:
-            provider.request(.checkEmailRegister(email: email)) { result in
-                self.handleResult(result, completion: completion)
-            }
-        case .codeConfirmation:
-            break
-        }
-    }
+    func requestConfirmationCode(email: String) {
+        let action: UserAPI = currentState == .signIn ? .checkEmailLogin(email: email) : .checkEmailRegister(email: email)
 
-    func authenticateUser(email: String, confirmationCode: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard currentState == .codeConfirmation, let prevState = previousState else {
-            completion(.failure(NSError(domain: "neocafe.client", code: 0, userInfo: [NSLocalizedDescriptionKey: "Authentication can only be done in codeConfirmation state with a valid previous state."])))
-            return
-        }
-
-        let action: UserAPI = prevState == .signIn ? .loginUser(email: email, confirmationCode: confirmationCode) : .registerUser(email: email, confirmationCode: confirmationCode)
-        provider.request(action) { result in
-            self.handleResult(result, completion: completion)
-        }
-    }
-
-        private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
+        networkService.sendRequest(successModelType: MessageResponse.self,
+                                   endpoint: MultiTarget(action))
+        { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let response):
-                if (200...299).contains(response.statusCode) {
-                    completion(.success(()))
-                } else {
-                    let errorResponse = NSError(domain: "neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
-                    completion(.failure(errorResponse))
+                DispatchQueue.main.async {
+                    self.changeViewState(to: .codeConfirmation)
+                    self.onCodeConfirmationNavigate?()
                 }
+                print(response)
             case .failure(let error):
-                completion(.failure(error))
+                print("handle error: \(error)")
             }
-}
+        }
+    }
 
-//    private func handleResult(_ result: Result<Response, MoyaError>, completion: @escaping (Result<Void, Error>) -> Void) {
-//        switch result {
-//        case .success(let response):
-//            if (200...299).contains(response.statusCode) {
-//                print("Request succeeded with status code: \(response.statusCode)")
-//                if let responseString = String(data: response.data, encoding: .utf8) {
-//                    print("Response data: \(responseString)")
-//                }
-//                completion(.success(()))
-//            } else {
-//                print("Request completed with error status code: \(response.statusCode)")
-//                if let responseString = String(data: response.data, encoding: .utf8) {
-//                    print("Error response data: \(responseString)")
-//                }
-//                let errorResponse = NSError(domain: "com.neocafe.client.error", code: response.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP status code: \(response.statusCode)"])
-//                completion(.failure(errorResponse))
-//            }
-//
-//        case .failure(let error):
-//            print("Networking request failed with error: \(error.localizedDescription)")
-//            if let response = error.response {
-//                print("Error status code: \(response.statusCode)")
-//                if let errorResponseString = String(data: response.data, encoding: .utf8) {
-//                    print("Error response data: \(errorResponseString)")
-//                }
-//            }
-//            completion(.failure(error))
-//        }
-//    }
+
+    func authenticateUser(email: String, confirmationCode: String) {
+        guard currentState == .codeConfirmation, let prevState = previousState else {
+            print("Authentication can only be done in codeConfirmation state with a valid previous state.")
+            return
+        }
+        
+        let action: UserAPI = prevState == .signIn ? .loginUser(email: email,
+                                                                confirmationCode: confirmationCode) :
+                                                    .registerUser(email: email,
+                                                                  confirmationCode: confirmationCode)
+
+        networkService.sendRequest(successModelType: AuthResponseModel.self,
+                                   endpoint: MultiTarget(action))
+        { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                     UserDefaultsService.shared.saveTokens(response: response)
+                    UserDefaultsService.shared.saveCustomerProfile(profile: response.customerProfile)
+                    print("\( String(describing: UserDefaultsService.shared.customerProfile))")
+                    self.onMainNavigate?()
+                }
+                print(response)
+            case .failure(let error):
+                print("handle error: \(error)")
+            }
+        }
+    }
+
 }

@@ -10,25 +10,20 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+        setupBindings()
+        viewModel.getBranches()
+    }
+
+    private func setupCollectionView() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
-        addTargets()
-        getBranches()
     }
 
-    private func addTargets() {
-        //        branchesModalView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-    }
-
-    func getBranches() {
-        viewModel.getBranches { [weak self] result in
+    private func setupBindings() {
+        viewModel.onBranchesFetched = { [weak self] in
             DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    self?.contentView.collectionView.reloadData()
-                case .failure(let error):
-                    print("Error fetching branches: \(error)")
-                }
+                self?.contentView.collectionView.reloadData()
             }
         }
     }

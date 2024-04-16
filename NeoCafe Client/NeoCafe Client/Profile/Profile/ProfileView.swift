@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProfileView: UIView, BaseContentView {
+class ProfileView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -19,19 +19,6 @@ class ProfileView: UIView, BaseContentView {
         return label
     }()
 
-    lazy var logoutButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Buttons.logoutButton.image, for: .normal)
-        return button
-    }()
-
-    lazy var nameFieldView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .greyCustom
-        view.layer.cornerRadius = 40
-        return view
-    }()
-
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Jane"
@@ -39,22 +26,6 @@ class ProfileView: UIView, BaseContentView {
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
         return label
-    }()
-
-    lazy var editButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "pencil"), for: .normal)
-        button.tintColor = .darkBlueCustom
-        return button
-    }()
-
-    lazy var bonusImageView: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: Asset.bonusImage.name)
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 16
-        image.layer.masksToBounds = true
-        return image
     }()
 
     lazy var bonusHeaderTitle: UILabel = {
@@ -73,6 +44,35 @@ class ProfileView: UIView, BaseContentView {
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
         return label
+    }()
+
+    lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Buttons.logoutButton.image, for: .normal)
+        return button
+    }()
+
+    lazy var editButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "pencil"), for: .normal)
+        button.tintColor = .darkBlueCustom
+        return button
+    }()
+
+    lazy var nameFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .greyCustom
+        view.layer.cornerRadius = 40
+        return view
+    }()
+
+    lazy var bonusImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: Asset.bonusImage.name)
+        image.contentMode = .scaleAspectFill
+        image.layer.cornerRadius = 16
+        image.layer.masksToBounds = true
+        return image
     }()
 
     lazy var bonusPointsStack: UIStackView = {
@@ -94,9 +94,51 @@ class ProfileView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(110))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        return UICollectionViewCompositionalLayout(section: section)
+
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProfileView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -112,7 +154,6 @@ class ProfileView: UIView, BaseContentView {
         bonusPointsStack.addArrangedSubview(totalBonusPointsNumber)
         addSubview(collectionView)
     }
-
 
     func setupConstraints() {
         header.snp.makeConstraints { make in
@@ -164,41 +205,5 @@ class ProfileView: UIView, BaseContentView {
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
-    }
-
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
-
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        return UICollectionViewCompositionalLayout(section: section)
-
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

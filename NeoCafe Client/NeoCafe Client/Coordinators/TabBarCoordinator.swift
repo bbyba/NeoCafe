@@ -11,8 +11,9 @@ final class TabBarCoordinator: BaseCoordinator {
     var cartCoordinator: CartCoordinator?
     var branchesCoordinator: BranchesCoordinator?
     var profileCoordinator: ProfileCoordinator?
+    private var tabBarShadow: UIView?
 
-    private lazy var tabBarViewController = configure(CustomTabBarController()) { tabBarController in
+    lazy var tabBarViewController = configure(CustomTabBarController()) { tabBarController in
         configureAppearance(for: tabBarController)
 
         let mainCoordinator = makeMainCoordinator
@@ -53,19 +54,17 @@ final class TabBarCoordinator: BaseCoordinator {
 
     private var makeCartCoordinator: CartCoordinator {
         let cartCoordinator = CartCoordinator(router: RouterImpl())
+        cartCoordinator.tabBarCoordinator = self
         return cartCoordinator
     }
 
     private var makeBranchesCoordinator: BranchesCoordinator {
         let branchesCoordinator = BranchesCoordinator(router: RouterImpl())
-//        branchesCoordinator.onCourses = fromLessons
         return branchesCoordinator
     }
 
     private var makeProfileCoordinator: ProfileCoordinator {
         let profileCoordinator = ProfileCoordinator(router: RouterImpl())
-//        profileCoordinator.onComplete = onComplete
-//        profileCoordinator.onCourses = fromLessons
         return profileCoordinator
     }
 
@@ -74,11 +73,9 @@ final class TabBarCoordinator: BaseCoordinator {
     }
 
     override init(router: Router) {
-        super.init(router: router)    }
-
-    deinit {
-//        reachability?.stopNotifier()
+        super.init(router: router)
     }
+
 
     private func configureAppearance(for tabBarController: UITabBarController) {
         let tabBarAppearance = UITabBarAppearance()
@@ -87,7 +84,6 @@ final class TabBarCoordinator: BaseCoordinator {
         navigationBarAppearance.backgroundColor = .whiteCustom
         navigationBarAppearance.shadowColor = .clear
         tabBarController.tabBar.tintColor = .orangeCustom
-//        tabBarController.tabBar.unselectedItemTintColor = Colors.inputText.color
         tabBarController.tabBar.layer.cornerRadius = 0
         tabBarController.tabBar.layer.masksToBounds = true
         if #available(iOS 15.0, *) {
@@ -97,6 +93,28 @@ final class TabBarCoordinator: BaseCoordinator {
 
             tabBarController.tabBar.standardAppearance = appearance
             tabBarController.tabBar.scrollEdgeAppearance = tabBarController.tabBar.standardAppearance
+        }
+        configureShadow(for: tabBarController)
+    }
+
+    private func configureShadow(for tabBarController: UITabBarController) {
+        tabBarShadow?.removeFromSuperview()
+        tabBarShadow = UIView(frame: CGRect(x: 0, 
+                                            y: 0,
+                                            width: tabBarController.tabBar.bounds.width,
+                                            height: tabBarController.tabBar.bounds.height))
+        tabBarShadow!.backgroundColor = .white
+        tabBarShadow!.layer.cornerRadius = 20
+        tabBarShadow!.layer.masksToBounds = false
+        tabBarShadow!.layer.shadowColor = UIColor.black.cgColor
+        tabBarShadow!.layer.shadowOffset = CGSize(width: 0, height: -1)
+        tabBarShadow!.layer.shadowOpacity = 0.1
+        tabBarShadow!.layer.shadowRadius = 5
+
+        tabBarController.tabBar.insertSubview(tabBarShadow!, at: 0)
+        tabBarShadow!.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(tabBarController.tabBar)
+            make.height.equalTo(tabBarController.tabBar.snp.height)
         }
     }
 }

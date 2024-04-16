@@ -1,5 +1,5 @@
 //
-//  ProductView.swift
+//  ProductDetailsView.swift
 //  NeoCafe Client
 //
 
@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class ProductView: UIView, BaseContentView {
+class ProductDetailsView: UIView {
     
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -80,11 +80,61 @@ class ProductView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+extension ProductDetailsView {
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(110))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
+
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        header.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        return UICollectionViewCompositionalLayout(section: section)
+
+    }
+}
+
+
+extension ProductDetailsView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .white
+    }
+    
     func addSubviews() {
         addSubview(image)
         addSubview(backButton)
@@ -125,11 +175,9 @@ class ProductView: UIView, BaseContentView {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(priceLabel.snp.top).offset(16)
-            //                        make.height.equalTo(320)
         }
 
         priceLabel.snp.makeConstraints { make in
-            //            make.top.equalTo(collectionView.snp.bottom).offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalTo(addToCartButton.snp.top).offset(-7)
             make.height.equalTo(24)
@@ -142,54 +190,11 @@ class ProductView: UIView, BaseContentView {
         }
 
         stepper.snp.makeConstraints { make in
-            make.width.lessThanOrEqualTo(120)
+            make.width.equalTo(120)
         }
 
         addToCartButton.snp.makeConstraints { make in
             make.width.equalTo(220)
         }
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-extension ProductView {
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
-
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
-
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 8)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        return UICollectionViewCompositionalLayout(section: section)
-
     }
 }

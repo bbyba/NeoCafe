@@ -6,7 +6,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class BranchDetailView: UIView, BaseContentView {
+class BranchDetailView: UIView {
 
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -120,9 +120,59 @@ class BranchDetailView: UIView, BaseContentView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+extension BranchDetailView {
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.4),
+            heightDimension: .absolute(207))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 8)
+
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        header.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        return UICollectionViewCompositionalLayout(section: section)
+
+    }
+}
+
+extension BranchDetailView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -162,13 +212,11 @@ class BranchDetailView: UIView, BaseContentView {
         branchAddressLabel.snp.makeConstraints { make in
             make.top.equalTo(branchNameLabel.snp.bottom).offset(12)
             make.centerX.equalToSuperview()
-            //            make.height.width.equalTo(40)
         }
 
         buttonStack.snp.makeConstraints { make in
             make.top.equalTo(branchAddressLabel.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
-//            make.height.equalTo(46)
         }
 
         phoneButton.snp.makeConstraints { make in
@@ -184,7 +232,6 @@ class BranchDetailView: UIView, BaseContentView {
         scheduleLabelStack.snp.makeConstraints { make in
             make.top.equalTo(buttonStack.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
-//            make.height.equalTo(24)
         }
 
         scheduleLabel.snp.makeConstraints { make in
@@ -205,7 +252,6 @@ class BranchDetailView: UIView, BaseContentView {
             make.top.equalTo(scheduleTableView.snp.bottom).offset(15)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(goToMenuButton.snp.top).offset(-16)
-            //                        make.height.equalTo(320)
         }
 
         goToMenuButton.snp.makeConstraints { make in
@@ -213,51 +259,5 @@ class BranchDetailView: UIView, BaseContentView {
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(16)
             make.height.equalTo(48)
         }
-
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-
-extension BranchDetailView {
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.4),
-//            widthDimension: .absolute(141),
-            heightDimension: .absolute(207))
-
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 8)
-
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 8)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        return UICollectionViewCompositionalLayout(section: section)
-
     }
 }

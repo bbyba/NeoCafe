@@ -12,7 +12,7 @@ enum MenuSection: String, CaseIterable {
     case productItem
 }
 
-class MenuView: UIView, BaseContentView {
+class MenuView: UIView {
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -68,6 +68,8 @@ class MenuView: UIView, BaseContentView {
         setupConstraints()
     }
 
+<<<<<<< HEAD
+=======
     func setProperties() {
         backgroundColor = .white
     }
@@ -118,6 +120,7 @@ class MenuView: UIView, BaseContentView {
         }
     }
 
+>>>>>>> dev
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -190,7 +193,6 @@ extension MenuView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-//            heightDimension: .absolute(220))
             heightDimension: .fractionalHeight(0.4))
 
 
@@ -201,5 +203,52 @@ extension MenuView {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
         return section
+    }
+}
+
+extension MenuView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .white
+    }
+
+    func addSubviews() {
+        addSubview(header)
+        header.addSubview(headerStack)
+        headerStack.addArrangedSubview(headerLabel)
+        headerStack.addArrangedSubview(branchNameLabel)
+        addSubview(headerDropDownButton)
+        addSubview(searchBar)
+        addSubview(collectionView)
+    }
+
+
+    func setupConstraints() {
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(140)
+        }
+
+        headerStack.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(70)
+        }
+
+        headerDropDownButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(85)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+
+        searchBar.snp.makeConstraints { make in
+            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.bottom.width.equalToSuperview()
+        }
     }
 }

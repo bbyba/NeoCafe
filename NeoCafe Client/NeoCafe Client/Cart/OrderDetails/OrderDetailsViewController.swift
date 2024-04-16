@@ -4,35 +4,48 @@
 //
 
 import UIKit
-struct OrderDetailsModel {
-    let image: String
-    let name: String
-    let description: String
-    let price: String
-}
 
-class OrderDetailsViewController: UIViewController{
-    lazy var orderDetailsView = OrderDetailsView()
+class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, OrderDetailsView> {
 
     var orderDetails: [Item] = []
 
-    override func loadView() {
-        view = orderDetailsView
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        orderDetailsView.collectionView.dataSource = self
-        orderDetailsView.collectionView.delegate = self
+        configureUI()
+        setupCollectionView()
         addTargets()
+        viewModel.fetchProductDetails {
+            DispatchQueue.main.async {
+                self.contentView.collectionView.reloadData()
+            }
+        }
+    }
+
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+    }
+
+    private func configureUI() {
+        contentView.headerLabel.text = S.orderHash(viewModel.orderDetails.orderNumber)
     }
 
     private func addTargets() {
-        orderDetailsView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        contentView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
+
     }
 
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func orderButtonTapped() {
+        Cart.shared.removeAllItems()
+        for item in viewModel.itemDetails {
+                Cart.shared.addItem(item)
+        }
+        viewModel.onCartNavigate?()
     }
 }
 
@@ -42,16 +55,19 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return orderDetails.count
+        return viewModel.itemDetails.count
     }
-
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
-        let order = orderDetails[indexPath.row]
-        cell.configureData(item: order)
-        return cell
+        cell.stepper.decrementButton.isUserInteractionEnabled = false
+        cell.stepper.incrementButton.isUserInteractionEnabled = false
+        let order = viewModel.itemDetails[indexPath.row]
+        if let ito = viewModel.orderDetails.ito.first(where: { $0.item == order.id }) {
+            cell.configureData(item: order, quantity: ito.quantity)
         }
+        return cell
+    }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)

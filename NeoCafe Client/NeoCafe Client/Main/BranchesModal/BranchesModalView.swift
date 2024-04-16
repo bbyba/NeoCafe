@@ -7,7 +7,7 @@ import UIKit
 import SnapKit
 import SwiftUI
 
-class BranchesModalView: UIView, BaseContentView {
+class BranchesModalView: UIView {
 
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
@@ -77,6 +77,13 @@ class BranchesModalView: UIView, BaseContentView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension BranchesModalView: BaseContentView {
+
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
@@ -111,8 +118,5 @@ class BranchesModalView: UIView, BaseContentView {
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
+

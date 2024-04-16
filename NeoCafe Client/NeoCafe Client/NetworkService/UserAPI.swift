@@ -18,8 +18,11 @@ enum UserAPI {
     case getAllCategories
     case getProductDetails(productId: Int)
 //    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
-        case getMenuItemsByBranchCategory(branchID: Int)
+//        case getMenuItemsByBranchCategory(branchID: Int)
+    case getMenuItemsAll
 
+    // Cart
+    case makeOrder(order: NewOrderModelFinal)
 
     // Branch
     case getBranches
@@ -54,10 +57,16 @@ extension UserAPI: TargetType {
             return "/branch/\(branchID)/top-selling-menu-items/"
         case .getAllCategories:
             return "/menu/item/all/"
-        case .getMenuItemsByBranchCategory(let branchID):
-            return "/branch-menu/\(branchID)/"
+//        case .getMenuItemsByBranchCategory(let branchID):
+//            return "/branch-menu/\(branchID)/"
+        case .getMenuItemsAll:
+            return "/menu/item/all/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
+
+        // Cart
+        case .makeOrder:
+            return "/orders-online/add/"
 
         // Branches
         case .getBranches:
@@ -80,7 +89,8 @@ extension UserAPI: TargetType {
                 .checkEmailLogin(_):
             return .post
         case .registerUser(_, _),
-                .loginUser(_, _):
+                .loginUser(_, _),
+                .makeOrder:
             return .post
         case .getCategories,
                 .getAllCategories,
@@ -88,7 +98,8 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory,
+//                .getMenuItemsByBranchCategory,
+                .getMenuItemsAll,
                 .getPopularItems:
             return .get
         case .patchProfile:
@@ -110,9 +121,12 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-                .getMenuItemsByBranchCategory,
+//                .getMenuItemsByBranchCategory,
+                .getMenuItemsAll,
                 .getPopularItems:
             return .requestPlain
+        case .makeOrder(let order):
+            return .requestJSONEncodable(order)
         case .patchProfile(_, let firstName):
             let parameters = ["first_name": firstName]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)

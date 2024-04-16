@@ -2,40 +2,45 @@
 //  ProfileViewModel.swift
 //  NeoCafe Client
 //
+
 import UIKit
 import Moya
 
 protocol ProfileViewModelProtocol {
     var onEditProfileNavigate: EmptyCompletion? { get set }
     var personalData: CustomerProfile?  { get }
-    var orders: [Order]?  { get }
-    func getPersonalData(completion: @escaping (Result<CustomerProfile, Error>) -> Void)
+    var orders: [OrderHistoryModel]?  { get }
 }
 
 class ProfileViewModel: NSObject, ProfileViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
     var onEditProfileNavigate: EmptyCompletion?
+    var onPersonalDataFetched: ((CustomerProfile) -> Void)?
     var personalData: CustomerProfile?
-    var orders: [Order]?
-    let provider: MoyaProvider<UserAPI>
+    var orders: [OrderHistoryModel]?
 
     override init() {
-        self.provider = MoyaProvider<UserAPI>()
         self.personalData = nil
     }
 
-    func getPersonalData(completion: @escaping (Result<CustomerProfile, Error>) -> Void) {
-        provider.request(.getProfile(userID: 13)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    self.personalData = try JSONDecoder().decode(CustomerProfile.self, from: response.data)
-                    completion(.success(self.personalData!))
-                } catch {
-                    completion(.failure(error))
-                    print("Error decoding: \(error)")
+    func getPersonalData() {
+        guard let userID = UserDefaultsService.shared.customerProfile?.userID else {
+            let error = NSError(domain: "ProfileViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID is nil"])
+            return
+        }
+
+        networkService.sendRequest(successModelType: CustomerProfile.self,
+                                   endpoint: MultiTarget(UserAPI.getProfile(userID: userID))) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self.personalData = response
+                    self.onPersonalDataFetched?(response)
+                case .failure(let error):
+                    print("handle error: \(error)")
                 }
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
     }

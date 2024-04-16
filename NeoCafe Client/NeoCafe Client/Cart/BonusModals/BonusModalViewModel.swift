@@ -1,34 +1,43 @@
-////
-////  BonusModalViewModel.swift
-////  NeoCafe Client
-////
 //
-//import Foundation
+//  BonusModalViewModel.swift
+//  NeoCafe Client
 //
-//protocol BonusModalViewModelProtocol {
-//    var onBonusModalsNavigate: EmptyCompletion? { get set }
-//    //    var onSearchNavigate: EmptyCompletion? { get set }
-//    //    var onMenuNavigate: EmptyCompletion? { get set }
-//    //    var categories: [CategoryModel]  { get }
-//    //    func getCategories(completion: @escaping (Result<[CategoryModel], Error>) -> Void)
-//    func didRequestNextState()
-//    func didRequestPreviousState()
-//    func didRequestDismissal()
-//}
-//
-//class BonusModalViewModel: NSObject, BonusModalViewModelProtocol {
-//    var onBonusModalsNavigate: EmptyCompletion?
-//
-//    func didRequestNextState() {
-//        <#code#>
-//    }
-//
-//    func didRequestPreviousState() {
-//        <#code#>
-//    }
-//
-//    func didRequestDismissal() {
-//        <#code#>
-//    }
-//
-//}
+
+import Foundation
+
+protocol BonusModalViewModelProtocol {
+    var onBonusModalsNavigate: EmptyCompletion? { get set }
+}
+
+class BonusModalViewModel: NSObject, BonusModalViewModelProtocol {
+    @InjectionInjected(\.networkService) var networkService
+
+    var onBonusModalsNavigate: EmptyCompletion?
+    var orderMadeSuccessfully: EmptyCompletion?
+
+    func makeOrder() {
+        let orderModel = createOrderList()
+
+        networkService.sendRequest(successModelType: String.self,
+                                   endpoint: MultiTarget(UserAPI.makeOrder(order: orderModel))) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                print("Request Successful")
+                print("\(orderModel)")
+                self.orderMadeSuccessfully?()
+            case .failure(let error):
+                print("Handle error: \(error)")
+            }
+        }
+    }
+
+    func createOrderList() -> NewOrderModelFinal {
+        let itoArray: [Ito] = Cart.shared.createOrderListForSubmission()
+        let branch = UserDefaultsService.BranchData.branchID.hashValue
+        let orderType = "Takeaway"
+        let bonusPointsToSubtract = 0
+        let orderModel = NewOrderModelFinal(ito: itoArray, orderType: orderType, branch: branch, bonusPointsToSubtract: bonusPointsToSubtract)
+        return orderModel
+    }
+}

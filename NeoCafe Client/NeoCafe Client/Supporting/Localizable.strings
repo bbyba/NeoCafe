@@ -51,8 +51,8 @@
 "order" = "Заказать";
 "orderHistory" = "История заказов";
 "useBonusPoints" = "Списание бонусов";
-"availablePointsWant" = "У вас есть 100 бонусов, хотите использовать их?";
-"yourBonusPoints" = "Ваши бонусы:";
+"availablePointsWant" = "У вас есть %@ бонусов, хотите \n использовать их?";
+"yourBonusPoints" = "Ваши бонусы: %@";
 "enterBonusPoints" = "Введите количество бонусов,\n которое хотите списать";
 "no" = "Нет";
 "yes" = "Да";
@@ -64,11 +64,12 @@
 "openOrder" = "Открытый заказ";
 "finished" = "Завершенные";
 "toMenu" = "В меню";
-"orderHash" = "Заказ #";
-"total" = "Итого: ";
+"orderHash" = "Заказ #%@";
+"total" = "Итого: %@ с";
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
 "popularMenu" = "Популярные блюда";
+"deleteFromOrder" = "Удалить %@ из заказа?";
 
 // Branches
 "schedule" = "График работы: ";
@@ -85,4 +86,5 @@
 "notifications" = "Уведомления";
 "clearAll" = "Очистить всё";
 "enterYourName" = "Введите своё имя";
+"som" = "%@ с";
 

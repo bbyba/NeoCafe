@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class CartView: UIView, BaseContentView {
+class CartView: UIView {
 
     lazy var header = CustomHeaderView()
 
@@ -18,20 +18,6 @@ class CartView: UIView, BaseContentView {
         label.textColor = .ivoryCustom
         label.textAlignment = .left
         return label
-    }()
-
-    lazy var orderHistoryButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
-        button.isUserInteractionEnabled = true
-        return button
-    }()
-
-    lazy var nameFieldView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .orangeCustom
-        view.layer.cornerRadius = 24
-        return view
     }()
 
     lazy var takeOutLabel: UILabel = {
@@ -52,36 +38,34 @@ class CartView: UIView, BaseContentView {
         return collectionView
     }()
 
-    lazy var addMoreButton: CustomButton = {
-        let button = CustomButton()
-        button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
-        button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
-        return button
-    }()
-
-    lazy var totalLabel: UILabel = {
+    lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
-        label.text = S.total
         label.textAlignment = .center
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
         return label
     }()
 
-    lazy var priceLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0"
-        label.textAlignment = .center
-        label.font = .poppins(ofSize: 20, weight: .semibold)
-        label.textColor = .orangeCustom
-        return label
+    lazy var nameFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orangeCustom
+        view.layer.cornerRadius = 24
+        return view
     }()
 
-    lazy var totalPriceLabel: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 2
-        return stack
+    lazy var orderHistoryButton: UIButton = {
+        let button = UIButton()
+        button.setImage(Asset.Buttons.orderHistory.image, for: .normal)
+        button.isUserInteractionEnabled = true
+        return button
+    }()
+
+    lazy var addMoreButton: CustomButton = {
+        let button = CustomButton()
+        button.setProperties(title: S.addMore, backgroundColor: .clear, titleColor: .orangeCustom, showBorder: true)
+        button.titleLabel?.font = .poppins(ofSize: 16, weight: .medium)
+        button.isUserInteractionEnabled = true
+        return button
     }()
 
     lazy var orderButton: CustomButton = {
@@ -90,11 +74,74 @@ class CartView: UIView, BaseContentView {
         return button
     }()
 
+    lazy var emptyCartLabel: UILabel = {
+        let label = UILabel()
+        label.text = S.emptyCart
+        label.textAlignment = .center
+        label.font = .poppins(ofSize: 20, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var emptyCartImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: Asset.emptyCartImage.name)
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+
+    lazy var toMenuButton: CustomButton = {
+        let button = CustomButton()
+        button.setProperties(title: S.toMenu, backgroundColor: Asset.Colors.darkBlue.color)
+
+        return button
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .whiteCustom
+        setProperties()
         addSubviews()
         setupConstraints()
+    }
+
+    func switchCartViews(cartEmpty: Bool) {
+        emptyCartLabel.isHidden = !cartEmpty
+        emptyCartImage.isHidden = !cartEmpty
+        toMenuButton.isHidden = !cartEmpty
+        nameFieldView.isHidden = cartEmpty
+        collectionView.isHidden = cartEmpty
+        addMoreButton.isHidden = cartEmpty
+        totalPriceLabel.isHidden = cartEmpty
+        orderButton.isHidden = cartEmpty
+    }
+
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.37))
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension CartView: BaseContentView {
+    func setProperties() {
+        backgroundColor = .whiteCustom
     }
 
     func addSubviews() {
@@ -106,10 +153,10 @@ class CartView: UIView, BaseContentView {
         addSubview(collectionView)
         addSubview(addMoreButton)
         addSubview(totalPriceLabel)
-        totalPriceLabel.addArrangedSubview(totalLabel)
-        totalPriceLabel.addArrangedSubview(priceLabel)
-
         addSubview(orderButton)
+        addSubview(emptyCartLabel)
+        addSubview(emptyCartImage)
+        addSubview(toMenuButton)
     }
 
     func setupConstraints() {
@@ -158,34 +205,32 @@ class CartView: UIView, BaseContentView {
         }
 
         orderButton.snp.makeConstraints { make in
-//            make.top.equalTo(textFieldStackView.snp.bottom).offset(56)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.centerX.equalToSuperview()
             make.height.equalTo(54)
         }
-    }
 
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+        emptyCartLabel.snp.makeConstraints { make in
+            make.top.equalTo(header.snp.bottom).offset(48)
+            make.centerX.equalToSuperview()
+        }
 
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        emptyCartImage.snp.makeConstraints { make in
+            make.top.equalTo(emptyCartLabel.snp.bottom).offset(64)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.bottom.equalTo(toMenuButton.snp.top).offset(-108)
+        }
 
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.37))
+        toMenuButton.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-16)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(54)
+        }
 
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
-
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        emptyCartLabel.isHidden = true
+        emptyCartImage.isHidden = true
+        toMenuButton.isHidden = true
     }
 }
