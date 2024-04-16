@@ -34,6 +34,7 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
     }
 
     @objc private func orderButtonTapped() {
+        dismissPopup()
         viewModel.onOrderNavigate?()
     }
 }

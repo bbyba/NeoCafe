@@ -39,7 +39,7 @@ class SuccessfulOrderView: UIView {
 
     lazy var goToOrderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.toOrder, backgroundColor: .orangeCustom, titleColor: .whiteCustom)
+        button.setProperties(title: S.toOrder, backgroundColor: .blueCustom, titleColor: .whiteCustom)
         return button
     }()
 

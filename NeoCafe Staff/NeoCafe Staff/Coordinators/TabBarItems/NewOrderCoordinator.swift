@@ -93,5 +93,7 @@ final class NewOrderCoordinator: BaseCoordinator {
     func openOrderHistory() {
         guard let tabBarCoordinator = self.tabBarCoordinator else { return }
         tabBarCoordinator.orderCoordinator?.start()
+        tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
+    
 }
