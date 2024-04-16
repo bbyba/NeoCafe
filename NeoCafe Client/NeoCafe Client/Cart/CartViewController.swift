@@ -41,7 +41,7 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
 
     private func updateTotalPriceLabel() {
         let totalPrice = Cart.shared.getTotalPrice()
-        contentView.totalPriceLabel.text = S.total(totalPrice)
+        contentView.priceLabel.text = S.som(totalPrice)
     }
 
     @objc func cartUpdated() {

@@ -4,16 +4,20 @@
 //
 
 import Foundation
+import UIKit
 
 protocol BonusModalViewModelProtocol {
     var onBonusModalsNavigate: EmptyCompletion? { get set }
 }
 
-class BonusModalViewModel: NSObject, BonusModalViewModelProtocol {
+class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDelegate {
+
     @InjectionInjected(\.networkService) var networkService
 
     var onBonusModalsNavigate: EmptyCompletion?
     var orderMadeSuccessfully: EmptyCompletion?
+    weak var errorPresenter: UIViewController?
+    var bonusPointsToSubtract: Int = 0
 
     func makeOrder() {
         let orderModel = createOrderList()
@@ -26,18 +30,32 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol {
                 print("Request Successful")
                 print("\(orderModel)")
                 self.orderMadeSuccessfully?()
+                Cart.shared.removeAllItems()
             case .failure(let error):
                 print("Handle error: \(error)")
+//                showErrorScreen()
+
             }
         }
     }
 
     func createOrderList() -> NewOrderModelFinal {
         let itoArray: [Ito] = Cart.shared.createOrderListForSubmission()
-        let branch = UserDefaultsService.BranchData.branchID.hashValue
+        let branch = UserDefaultsService.shared.branchID
         let orderType = "Takeaway"
-        let bonusPointsToSubtract = 0
         let orderModel = NewOrderModelFinal(ito: itoArray, orderType: orderType, branch: branch, bonusPointsToSubtract: bonusPointsToSubtract)
         return orderModel
+    }
+
+    func showErrorScreen() {
+        let errorViewModel = ErrorViewModel()
+        let errorViewController = ErrorViewController(viewModel: errorViewModel)
+        errorViewController.delegate = self
+        errorViewController.modalPresentationStyle = .fullScreen
+        errorPresenter?.present(errorViewController, animated: true)
+    }
+
+    func reloadLastRequest() {
+        makeOrder()
     }
 }

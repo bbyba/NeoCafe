@@ -45,6 +45,7 @@ class OrderDetailsView: UIView {
 
     lazy var totalLabel: UILabel = {
         let label = UILabel()
+        label.text = S.total
         label.textAlignment = .center
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
@@ -53,7 +54,7 @@ class OrderDetailsView: UIView {
 
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "730"
+        label.text = "400 c"
         label.textAlignment = .center
         label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom

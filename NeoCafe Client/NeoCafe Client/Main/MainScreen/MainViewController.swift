@@ -20,6 +20,8 @@ class MainViewController: BaseViewController<MainViewModel, MainView> {
         setupCollectionView()
         addTargets()
         viewModel.onBranchesModalNavigate?()
+//        viewModel.getCategories()
+        viewModel.getPopularItems()
     }
 
     private func setupCollectionView() {
