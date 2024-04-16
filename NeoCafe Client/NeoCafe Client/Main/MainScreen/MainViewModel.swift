@@ -30,32 +30,39 @@ class MainViewModel: NSObject, MainViewModelProtocol {
     var onPopularItemsFetched: EmptyCompletion?
     var selectedBranchID: Int? = UserDefaultsService.shared.branchID
     var selectedBranchName: String? = UserDefaultsService.shared.branchName
-    var categories: [CategoryModel] = []
+//    var categories: [CategoryModel] = []
+    var categories: [CategoryModel] = [
+        CategoryModel(id: 1, name: "Выпечка", image: Asset.Menu.bakery.name),
+        CategoryModel(id: 2, name: "Чай", image: Asset.Menu.tea.name),
+        CategoryModel(id: 3, name: "Десерты", image: Asset.Menu.dessert.name),
+        CategoryModel(id: 4, name: "Кофе", image: Asset.Menu.coffee.name),
+        CategoryModel(id: 5, name: "Напитки", image: Asset.Menu.drink.name)]
     var popularItems: [Item] = []
 
     override init() {
         super.init()
-        self.categories = []
+//        self.categories = []
         self.popularItems = []
     }
 
 
-    func getCategories() {
-        networkService.sendRequest(successModelType: [CategoryModel].self,
-                                   endpoint: MultiTarget(UserAPI.getCategories))
-        { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let response):
-                DispatchQueue.main.async {
-                    self.categories = response.prefix(5).map { $0 }
-                    self.onCategoriesFetched?()
-                }
-            case .failure(let error):
-                print("handle error: \(error)")
-            }
-        }
-    }
+//    func getCategories() {
+//        networkService.sendRequest(successModelType: [CategoryModel].self,
+//                                   endpoint: MultiTarget(UserAPI.getCategories))
+//        { [weak self] result in
+//            guard let self else { return }
+//            switch result {
+//            case .success(let response):
+//                DispatchQueue.main.async {
+//                    self.categories = response.prefix(5).map { $0 }
+//                    print("\(self.categories)")
+//                    self.onCategoriesFetched?()
+//                }
+//            case .failure(let error):
+//                print("handle error: \(error)")
+//            }
+//        }
+//    }
 
     func getPopularItems() {
         networkService.sendRequest(successModelType: [Item].self,
@@ -66,6 +73,7 @@ class MainViewModel: NSObject, MainViewModelProtocol {
             case .success(let response):
                 DispatchQueue.main.async {
                     self.popularItems = response
+                    print("\(self.popularItems)")
                     self.onPopularItemsFetched?()
                 }
             case .failure(let error):

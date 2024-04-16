@@ -38,11 +38,28 @@ class CartView: UIView {
         return collectionView
     }()
 
-    lazy var totalPriceLabel: UILabel = {
+//    lazy var totalPriceLabel: UILabel = {
+//        let label = UILabel()
+//        label.textAlignment = .center
+//        label.font = .poppins(ofSize: 14, weight: .semibold)
+//        label.textColor = .darkBlueCustom
+//        return label
+//    }()
+
+    lazy var totalLabel: UILabel = {
         let label = UILabel()
+        label.text = S.total
         label.textAlignment = .center
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .poppins(ofSize: 20, weight: .semibold)
+        label.textColor = .orangeCustom
         return label
     }()
 
@@ -111,7 +128,9 @@ class CartView: UIView {
         nameFieldView.isHidden = cartEmpty
         collectionView.isHidden = cartEmpty
         addMoreButton.isHidden = cartEmpty
-        totalPriceLabel.isHidden = cartEmpty
+//        totalPriceLabel.isHidden = cartEmpty
+        totalLabel.isHidden = cartEmpty
+        priceLabel.isHidden = cartEmpty
         orderButton.isHidden = cartEmpty
     }
 
@@ -152,7 +171,10 @@ extension CartView: BaseContentView {
         nameFieldView.addSubview(takeOutLabel)
         addSubview(collectionView)
         addSubview(addMoreButton)
-        addSubview(totalPriceLabel)
+//        addSubview(totalPriceLabel)
+        addSubview(totalLabel)
+        addSubview(priceLabel)
+
         addSubview(orderButton)
         addSubview(emptyCartLabel)
         addSubview(emptyCartImage)
@@ -193,14 +215,20 @@ extension CartView: BaseContentView {
         }
 
         addMoreButton.snp.makeConstraints { make in
-            make.bottom.equalTo(totalPriceLabel.snp.top).offset(-41)
+            make.bottom.equalTo(totalLabel.snp.top).offset(-41)
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(48)
         }
 
-        totalPriceLabel.snp.makeConstraints { make in
+        totalLabel.snp.makeConstraints { make in
             make.bottom.equalTo(orderButton.snp.top).offset(-12)
             make.leading.equalToSuperview().inset(16)
+            make.height.equalTo(24)
+        }
+
+        priceLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(orderButton.snp.top).offset(-12)
+            make.leading.equalTo(totalLabel.snp.trailing).offset(5)
             make.height.equalTo(24)
         }
 

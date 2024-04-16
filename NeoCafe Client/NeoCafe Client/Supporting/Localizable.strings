@@ -65,7 +65,7 @@
 "finished" = "Завершенные";
 "toMenu" = "В меню";
 "orderHash" = "Заказ #%@";
-"total" = "Итого: %@ с";
+"total" = "Итого: ";
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
 "popularMenu" = "Популярные блюда";

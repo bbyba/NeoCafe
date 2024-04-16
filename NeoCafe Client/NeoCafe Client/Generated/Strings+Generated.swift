@@ -142,10 +142,8 @@ internal enum S {
   internal static let toGoShort = S.tr("Localizable", "toGoShort", fallback: "С собой")
   /// В меню
   internal static let toMenu = S.tr("Localizable", "toMenu", fallback: "В меню")
-  /// Итого: %@ с
-  internal static func total(_ p1: Any) -> String {
-    return S.tr("Localizable", "total", String(describing: p1), fallback: "Итого: %@ с")
-  }
+  /// Итого: 
+  internal static let total = S.tr("Localizable", "total", fallback: "Итого: ")
   /// В корзину
   internal static let toTheBasket = S.tr("Localizable", "toTheBasket", fallback: "В корзину")
   /// Списать
