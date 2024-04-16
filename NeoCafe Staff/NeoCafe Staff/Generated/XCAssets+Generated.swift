@@ -44,6 +44,7 @@ internal enum Asset {
     internal static let arrowBack = ImageAsset(name: "arrowBack")
     internal static let bell = ImageAsset(name: "bell")
     internal static let exit = ImageAsset(name: "exit")
+    internal static let greenCheckMark = ImageAsset(name: "greenCheckMark")
     internal static let lock = ImageAsset(name: "lock")
     internal static let logout = ImageAsset(name: "logout")
     internal static let person = ImageAsset(name: "person")
