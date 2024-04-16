@@ -10,7 +10,8 @@ protocol MenuViewModelProtocol {
 
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
-
+    var onMakeNewOrderPopupNavigate: EmptyCompletion? { get set }
+    var onBackNavigate: EmptyCompletion? { get set }
 
     var onTableNavigate: EmptyCompletion? { get set }
     var onSearchNavigate: EmptyCompletion? { get set }
@@ -21,7 +22,6 @@ protocol MenuViewModelProtocol {
     var menuItems: [Item] { get }
 
     func getCategories()
-
     func getMenuItems()
 }
 
@@ -30,6 +30,7 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
+    var onMakeNewOrderPopupNavigate: EmptyCompletion?
     var onBackNavigate: EmptyCompletion?
 
     var onTableNavigate: EmptyCompletion?
@@ -47,11 +48,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
     func filterMenuItems(byCategory category: CategoryModel) {
         filteredMenuItems = menuItems.filter { $0.category.id == category.id }
-    }
-
-    override init() {
-        super.init()
-//        setupFirstCategory()
     }
 
     private func setupFirstCategory() {
@@ -87,7 +83,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
                     self.menuItems = response.results.results
                     self.onMenuItemsFetched?()
                 }
-                print(response)
             case .failure(let error):
                 print("Error fetching menu items: \(error)")
             }

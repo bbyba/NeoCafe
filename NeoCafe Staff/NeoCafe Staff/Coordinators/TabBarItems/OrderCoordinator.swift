@@ -14,9 +14,9 @@ final class OrderCoordinator: BaseCoordinator {
         viewModel.onNotificationsNavigate = { [ weak self ] in
             self?.openNotifications()
         }
-        viewModel.onOrderDetailsNavigate = { [ weak self ] in
-            self?.openOrderDetails()
-        }
+        viewModel.onOrderDetailsNavigate = { [weak self] selectedOrder in
+            self?.openOrderDetails(singleOrder: selectedOrder)
+        }        
         let viewController = OrderViewController(viewModel: viewModel)
         presentViewController(viewController)
     }
@@ -49,8 +49,8 @@ final class OrderCoordinator: BaseCoordinator {
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    func openOrderDetails() {
-        let viewModel = TableOrderDetailsViewModel()
+    func openOrderDetails(singleOrder: OrderDetailsModel) {
+        let viewModel = TableOrderDetailsViewModel(singleOrder: singleOrder)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }

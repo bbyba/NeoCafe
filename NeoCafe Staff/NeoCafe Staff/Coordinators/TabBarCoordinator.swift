@@ -13,7 +13,7 @@ final class TabBarCoordinator: BaseCoordinator {
     var menuCoordinator: MenuCoordinator?
     private var tabBarShadow: UIView?
 
-    private lazy var tabBarViewController = configure(CustomTabBarController()) { tabBarController in
+    lazy var tabBarViewController = configure(CustomTabBarController()) { tabBarController in
         configureAppearance(for: tabBarController)
 
         let orderCoordinator = makeOrderCoordinator

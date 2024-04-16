@@ -64,12 +64,23 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         //        updateCellAppearanceByStatus(status: String)
     }
 
-    func configureData(orderData: OrderModel) {
-        tableNumber.text = "Стол №\(orderData.tableNumber)"
+    func configureData(orderData: OrderDetailsModel) {
+        tableNumber.text = "Стол №\(orderData.table?.tableNumber)"
         orderNumber.text = "№\(orderData.orderNumber)"
-        timeLabel.text = orderData.time
-        updateCellAppearanceByStatus(status: orderData.status)
+        updateTimeByStatus(orderData: orderData)
+        updateCellAppearanceByStatus(status: orderData.orderStatus)
     }
+
+    func updateTimeByStatus(orderData: OrderDetailsModel) {
+            switch orderData.orderStatus {
+            case "Новый":
+                timeLabel.text = orderData.createdAt
+            case "Завершено":
+                timeLabel.text = orderData.completedAt
+            default:
+                timeLabel.text = orderData.updatedAt
+            }
+        }
 
     func updateCellAppearanceByStatus(status: String) {
         switch status {

@@ -132,37 +132,47 @@ struct CategoryModel: Codable {
 
 
 // MARK: - OrderDetails
-struct OrderDetailsModel: Codable {
-    let id, orderNumber: Int
-    let orderStatus, createdAt, updatedAt, completedAt: String
-    let branch: Int
-    let orderType, totalSum: String
-    let customer: Int
-    let bonusPoints: String
-    let ito: [Ito]
 
-    enum CodingKeys: String, CodingKey {
-        case id
+struct OrderDetailsModel: Codable {
+    let id: Int
+    let orderNumber: Int
+    let table: TableModel?
+    let orderStatus: String
+    let createdAt: String?
+    let updatedAt: String?
+    let completedAt: String?
+    let branch: Int
+    let orderType: String
+    let totalSum: Int
+    let employeeProfile: EmployeeProfile?
+    let ito: [ITO]
+
+    private enum CodingKeys: String, CodingKey {
+        case id, table, branch
         case orderNumber = "order_number"
         case orderStatus = "order_status"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case completedAt = "completed_at"
-        case branch
         case orderType = "order_type"
         case totalSum = "total_sum"
-        case customer
-        case bonusPoints = "bonus_points"
+        case employeeProfile = "employee_profile"
         case ito = "ITO"
     }
 }
 
+struct EmployeeProfile: Codable {
+    let id: Int
+    let username: String
+    let password: String
+}
+
 // MARK: - Ito
-struct Ito: Codable {
+struct ITO: Codable {
     let id, item: Int
     let itemName: String
     var quantity: Int
-    let totalPrice: String
+    let totalPrice: Int
 
     enum CodingKeys: String, CodingKey {
         case id, item
@@ -174,15 +184,15 @@ struct Ito: Codable {
 
 // MARK: - Tables
 struct TableModel: Codable, Hashable {
-    let id, tableNumber: Int
+    let id: Int
+    let tableNumber: Int
     let isAvailable: Bool
     let branch: Int
 
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id
         case tableNumber = "table_number"
         case isAvailable = "is_available"
         case branch
     }
 }
-

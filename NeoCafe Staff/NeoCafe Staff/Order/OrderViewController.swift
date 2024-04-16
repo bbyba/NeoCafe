@@ -6,12 +6,15 @@
 import UIKit
 
 class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
+    var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         addTargets()
         getTables()
+        viewModel.getAllOrders()
+        viewModel.filterOrders(byStatus: S.all)
     }
 
     private func setupViews() {
@@ -74,15 +77,14 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         if collectionView == contentView.tablesCollectionView {
-//            return viewModel.tables.count
             return TableService.shared.tables.count
 
         } else if collectionView == contentView.ordersByStatusCollectionView {
             switch OrderStatus.allCases[section] {
             case .statusCategory:
-                return viewModel.categories.count
+                return viewModel.statusList.count
             case .statusOrder:
-                return viewModel.ordersList.count
+                return viewModel.filteredOrders.count
             }
         }
         return 0
@@ -91,7 +93,6 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == contentView.tablesCollectionView {
             let cell: TablesCollectionViewCell = collectionView.dequeue(for: indexPath)
-//            let table = viewModel.tables[indexPath.row]
             let table = TableService.shared.tables[indexPath.row]
             cell.configureData(tableModel: table)
             contentView.tablesCollectionView.reloadData()
@@ -100,13 +101,15 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
             switch OrderStatus.allCases[indexPath.section] {
             case .statusCategory:
                 let cell: CategoryCell = collectionView.dequeue(for: indexPath)
-                let category = viewModel.categories[indexPath.row]
+                let category = viewModel.statusList[indexPath.row]
+                cell.isCategorySelected = (indexPath.row == selectedCategoryIndex)
                 cell.configureData(name: category)
                 return cell
             case .statusOrder:
                 let cell: OrdersCollectionViewCell = collectionView.dequeue(for: indexPath)
-                let order = viewModel.ordersList[indexPath.row]
+                let order = viewModel.filteredOrders[indexPath.row]
                 cell.configureData(orderData: order)
+                //                collectionView.reloadData()
                 return cell
             }
         }
@@ -114,27 +117,20 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
         if collectionView == contentView.tablesCollectionView {
-//            let table = viewModel.tables[indexPath.row]
             let table = TableService.shared.tables[indexPath.row]
-            viewModel.onOrderDetailsNavigate?()
+//            viewModel.onOrderDetailsNavigate?()
         } else if collectionView == contentView.ordersByStatusCollectionView {
-            print("Item selected at section: \(indexPath.section), row: \(indexPath.row)")
             switch OrderStatus.allCases[indexPath.section] {
             case .statusCategory:
-                guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
-                for visibleCell in collectionView.visibleCells {
-                    if let categoryCell = visibleCell as? CategoryCell {
-                        categoryCell.isCategorySelected = false
-                    }
-                }
-                cell.isCategorySelected = true
+                let status = viewModel.statusList[indexPath.row]
+                selectedCategoryIndex = indexPath.row
+                viewModel.filterOrders(byStatus: status)
+                collectionView.reloadData()
             case .statusOrder:
-                let singleOrder = viewModel.ordersList[indexPath.row]
-                viewModel.onOrderDetailsNavigate?()
+                let selectedOrder = viewModel.filteredOrders[indexPath.row]
+                viewModel.onOrderDetailsNavigate?(selectedOrder)
             }
         }
     }
-
 }

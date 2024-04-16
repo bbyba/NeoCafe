@@ -23,7 +23,7 @@ class MakeNewOrderPopup: UIView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = S.deleteFromOrder
+        label.text = S.orderNo
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .whiteCustom
         label.textAlignment = .center
@@ -57,7 +57,7 @@ class MakeNewOrderPopup: UIView {
 
     lazy var orderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.orders, backgroundColor: .orangeCustom, titleColor: .whiteCustom)
+        button.setProperties(title: S.toOrder, backgroundColor: .orangeCustom, titleColor: .whiteCustom)
         return button
     }()
 

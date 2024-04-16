@@ -46,8 +46,6 @@ class UserDefaultsService {
         self.userID = response.userID
     }
 
-
-
     var ItemToOrderList: [Item] = []
 
 }

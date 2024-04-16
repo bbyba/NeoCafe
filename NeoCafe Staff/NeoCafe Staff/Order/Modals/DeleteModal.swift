@@ -7,6 +7,7 @@ import UIKit
 import SnapKit
 
 class DeleteModalView: UIView {
+    var itemName: String
 
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
@@ -24,10 +25,11 @@ class DeleteModalView: UIView {
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = S.deleteFromOrder
+        label.text = S.deleteFromOrder(itemName.lowercased())
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .center
+        label.numberOfLines = 0
         return label
     }()
 
@@ -44,12 +46,25 @@ class DeleteModalView: UIView {
     }()
 
     lazy var buttonStack: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [noButton, yesButton])
+        let stackView = UIStackView(arrangedSubviews: [yesButton, noButton])
         stackView.axis = .horizontal
-        stackView.spacing = 13
-        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
         return stackView
     }()
+
+
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        addSubviews()
+//        setupConstraints()
+//    }
+    init(frame: CGRect, itemName: String) {
+            self.itemName = itemName
+            super.init(frame: frame)
+            addSubviews()
+            setupConstraints()
+        }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -72,19 +87,20 @@ extension DeleteModalView: BaseContentView {
         }
 
         contentView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(40)
+            make.height.equalTo(192)
             make.leading.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
 
         headerLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(24)
+            make.leading.trailing.equalToSuperview().inset(20)
             make.centerX.equalToSuperview()
         }
 
         buttonStack.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-24)
-            make.centerX.equalToSuperview()
+            make.height.equalTo(54)
+            make.leading.trailing.bottom.equalToSuperview().inset(24)
         }
     }
-
 }

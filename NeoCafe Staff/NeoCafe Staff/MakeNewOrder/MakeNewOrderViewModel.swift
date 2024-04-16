@@ -13,11 +13,9 @@ protocol MakeNewOrderViewModelProtocol {
 class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
     var onBackNavigate: EmptyCompletion?
     var onOrderNavigate: EmptyCompletion?
-    var cart: Cart
-    var table: TableModel
+    var table: TableModel?
 
-    init(cart: Cart, table: TableModel) {
-        self.cart = cart
+    init(table: TableModel?) {
         self.table = table
         super.init()
     }

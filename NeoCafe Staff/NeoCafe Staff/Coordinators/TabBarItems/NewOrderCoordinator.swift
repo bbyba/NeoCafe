@@ -7,6 +7,7 @@ import UIKit
 
 final class NewOrderCoordinator: BaseCoordinator {
     private var mainVC: NewOrderViewController!
+    var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {
         let viewModel = NewOrderViewModel()
@@ -57,20 +58,42 @@ final class NewOrderCoordinator: BaseCoordinator {
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        viewModel.onMakeNewOrderPopupNavigate = { [weak self] cart, table in
-            self?.openMakeNewOrderPopup(cart: cart, table: table)
+        viewModel.onMakeNewOrderPopupNavigate = { [weak self] table in
+            self?.openMakeNewOrderPopup(table: table)
         }
         let viewController = NewOrderMenuViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
 
-    func openMakeNewOrderPopup(cart: Cart, table: TableModel) {
-        let viewModel = MakeNewOrderViewModel(cart: cart, table: table)
+    func openMakeNewOrderPopup(table: TableModel) {
+        let viewModel = MakeNewOrderViewModel(table: table)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.dismissModule(animated: true, completion: nil)
+        }
+        viewModel.onOrderNavigate = { [weak self] in
+            self?.openSuccesfulOrder()
         }
         let viewController = MakeNewOrderViewController(viewModel: viewModel)
         viewController.modalPresentationStyle = .overFullScreen
         router.present(viewController)
     }
+
+    func openSuccesfulOrder() {
+        let viewModel = SuccessfulOrderViewModel()
+        viewModel.onBackNavigate = { [weak self] in
+            self?.router.dismissModule(animated: true, completion: nil)
+        }
+        viewModel.ongoToOrderNavigate = { [weak self] in
+            self?.openOrderHistory()
+        }
+        let viewController = SuccessfulOrderViewcontroller(viewModel: viewModel)
+        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
+
+    func openOrderHistory() {
+        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
+        tabBarCoordinator.orderCoordinator?.start()
+        tabBarCoordinator.tabBarViewController.selectedIndex = 0
+    }
+    
 }

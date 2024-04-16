@@ -11,6 +11,11 @@
 		DD2567A32BBBA2E90071432E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A22BBBA2E90071432E /* Loader.swift */; };
 		DD2567A52BBBCFB90071432E /* TableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A42BBBCFB90071432E /* TableService.swift */; };
 		DD2567AB2BBEBC5E0071432E /* SharedCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567AA2BBEBC5E0071432E /* SharedCart.swift */; };
+		DD2567AD2BC471460071432E /* DeleteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567AC2BC471460071432E /* DeleteModalViewController.swift */; };
+		DD284CF22BCE83D500AA6EF3 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DD284CF12BCE83D500AA6EF3 /* Factory */; };
+		DD284CF52BCE88CF00AA6EF3 /* SuccessfulOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */; };
+		DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */; };
+		DD284CF92BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */; };
 		DD5313412BB881D90017D73A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313402BB881D90017D73A /* MenuView.swift */; };
 		DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313422BB881E20017D73A /* MenuViewModel.swift */; };
 		DD5313452BB881F20017D73A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313442BB881F20017D73A /* MenuViewController.swift */; };
@@ -25,7 +30,6 @@
 		DD8089DE2BB9C46500474F1B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089DD2BB9C46500474F1B /* NetworkService.swift */; };
 		DD8089E02BB9C4CD00474F1B /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089DF2BB9C4CD00474F1B /* UserAPI.swift */; };
 		DD8089E22BB9CD5C00474F1B /* InjectionDefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E12BB9CD5C00474F1B /* InjectionDefaultContainer.swift */; };
-		DD8089E52BB9D1AE00474F1B /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DD8089E42BB9D1AE00474F1B /* Factory */; };
 		DD8089E72BB9D35D00474F1B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E62BB9D35D00474F1B /* Models.swift */; };
 		DD8089E92BBA71D700474F1B /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8089E82BBA71D700474F1B /* UserDefaults.swift */; };
 		DD9052112BB2BBEC009599CE /* TableOrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9052102BB2BBEC009599CE /* TableOrderDetailsView.swift */; };
@@ -114,6 +118,10 @@
 		DD2567A22BBBA2E90071432E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		DD2567A42BBBCFB90071432E /* TableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableService.swift; sourceTree = "<group>"; };
 		DD2567AA2BBEBC5E0071432E /* SharedCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCart.swift; sourceTree = "<group>"; };
+		DD2567AC2BC471460071432E /* DeleteModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalViewController.swift; sourceTree = "<group>"; };
+		DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrder.swift; sourceTree = "<group>"; };
+		DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrderViewcontroller.swift; sourceTree = "<group>"; };
+		DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrderViewModel.swift; sourceTree = "<group>"; };
 		DD5313402BB881D90017D73A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		DD5313422BB881E20017D73A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		DD5313442BB881F20017D73A /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -220,7 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E7A6B0D64465F4E55B6D964 /* Pods_NeoCafe_Staff.framework in Frameworks */,
-				DD8089E52BB9D1AE00474F1B /* Factory in Frameworks */,
+				DD284CF22BCE83D500AA6EF3 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,11 +252,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DD284CF32BCE88C000AA6EF3 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		DD5313462BB88A8E0017D73A /* Modals */ = {
 			isa = PBXGroup;
 			children = (
 				DDE375F52BB935FB00210347 /* CoffeeAdditionModal */,
 				DD5313472BB88A9B0017D73A /* DeleteModal.swift */,
+				DD2567AC2BC471460071432E /* DeleteModalViewController.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -256,9 +272,13 @@
 		DD8089D52BB9473600474F1B /* MakeNewOrder */ = {
 			isa = PBXGroup;
 			children = (
+				DD284CF32BCE88C000AA6EF3 /* New Group */,
 				DD8089D62BB9476500474F1B /* MakeNewOrderPopup.swift */,
 				DD8089D82BB9490800474F1B /* MakeNewOrderViewController.swift */,
 				DD8089DA2BB9492E00474F1B /* MakeNewOrderViewModel.swift */,
+				DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */,
+				DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */,
+				DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */,
 			);
 			path = MakeNewOrder;
 			sourceTree = "<group>";
@@ -588,7 +608,7 @@
 			);
 			name = "NeoCafe Staff";
 			packageProductDependencies = (
-				DD8089E42BB9D1AE00474F1B /* Factory */,
+				DD284CF12BCE83D500AA6EF3 /* Factory */,
 			);
 			productName = "NeoCafe Staff";
 			productReference = DDF8B5AA2B70ED5D005FE06A /* NeoCafe Staff.app */;
@@ -619,7 +639,7 @@
 			);
 			mainGroup = DDF8B5A12B70ED5D005FE06A;
 			packageReferences = (
-				DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */,
+				DD284CF02BCE83D500AA6EF3 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = DDF8B5AB2B70ED5D005FE06A /* Products */;
 			projectDirPath = "";
@@ -717,6 +737,7 @@
 				DDA250B32BAF5B6700C73F62 /* AuthenticationViewModel.swift in Sources */,
 				DD5313412BB881D90017D73A /* MenuView.swift in Sources */,
 				DD8089DB2BB9492E00474F1B /* MakeNewOrderViewModel.swift in Sources */,
+				DD284CF92BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift in Sources */,
 				DDC4A4F82BB179BA00F9E6BC /* BaseCollectionViewCell.swift in Sources */,
 				DDA2507E2BAF5A1D00C73F62 /* CustomHeaderView.swift in Sources */,
 				DDA2508F2BAF5AB400C73F62 /* MenuCoordinator.swift in Sources */,
@@ -754,6 +775,7 @@
 				DD8089E02BB9C4CD00474F1B /* UserAPI.swift in Sources */,
 				DDA250742BAF5A1D00C73F62 /* BaseContentView.swift in Sources */,
 				DDE375F72BB9362000210347 /* CoffeeDetailsViewController.swift in Sources */,
+				DD284CF52BCE88CF00AA6EF3 /* SuccessfulOrder.swift in Sources */,
 				DDA250AD2BAF5B6700C73F62 /* AuthenticationView.swift in Sources */,
 				DDA250922BAF5AB400C73F62 /* AuthenticationCoordinator.swift in Sources */,
 				DDA250992BAF5B1600C73F62 /* SplashView.swift in Sources */,
@@ -761,7 +783,9 @@
 				DD79D7842BB1C75800F20E94 /* CustomRoundButton.swift in Sources */,
 				DDF8B5B22B70ED5D005FE06A /* ViewController.swift in Sources */,
 				DD9052172BB2BEAD009599CE /* CollectionViewHeader.swift in Sources */,
+				DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift in Sources */,
 				DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */,
+				DD2567AD2BC471460071432E /* DeleteModalViewController.swift in Sources */,
 				DDA2507A2BAF5A1D00C73F62 /* Extension+UIColor.swift in Sources */,
 				DDA250D72BB010D300C73F62 /* CodeConfirmationViewModel.swift in Sources */,
 				DDF8B5AE2B70ED5D005FE06A /* AppDelegate.swift in Sources */,
@@ -1018,7 +1042,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */ = {
+		DD284CF02BCE83D500AA6EF3 /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
 			requirement = {
@@ -1029,9 +1053,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DD8089E42BB9D1AE00474F1B /* Factory */ = {
+		DD284CF12BCE83D500AA6EF3 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD8089E32BB9D1AE00474F1B /* XCRemoteSwiftPackageReference "Factory" */;
+			package = DD284CF02BCE83D500AA6EF3 /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
 		};
 /* End XCSwiftPackageProductDependency section */
