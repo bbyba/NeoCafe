@@ -7,13 +7,14 @@ import UIKit
 import Moya
 
 final class AuthenticationCoordinator: BaseCoordinator {
-
+    var emailReceived: String?
     var onMainNavigate: EmptyCompletion?
 
     lazy var startController: UIViewController = {
-        //        let provider = MoyaProvider<UserAPI>()
-        //        let viewModel = AuthenticationViewModel(provider: provider)
         let viewModel = AuthenticationViewModel()
+        viewModel.emailReceived = { [weak self] email in
+            self?.emailReceived = email
+        }
         viewModel.onCodeConfirmationNavigate = { [ weak self ] in
             self?.openCodeConfirmation()
         }
@@ -28,6 +29,7 @@ final class AuthenticationCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         viewModel.onMainNavigate = onMainNavigate
+        viewModel.waiterEmail = emailReceived
         let viewController = CodeConfirmationViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }

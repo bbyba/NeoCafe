@@ -23,8 +23,10 @@ class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewMod
     }
 
     @objc func confirmButtonTapped() {
-        viewModel.onMainNavigate?()
+        let confirmationCode = contentView.otpField.getPin()
+        if confirmationCode.isEmpty {
+            return
+        }
+        viewModel.authenticate(confirmation_code: confirmationCode)
     }
 }
-
-

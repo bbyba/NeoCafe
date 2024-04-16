@@ -17,11 +17,12 @@ class AuthenticationView: UIView {
         return label
     }()
 
-    lazy var loginTextField = CustomTextField(iconName: Asset.Images.person.image, 
+    lazy var loginTextField = CustomTextField(iconName: Asset.Images.person.image,
                                               customPlaceholder: S.enterLogin)
 
     lazy var passwordTextField = CustomTextField(iconName: Asset.Images.lock.image,
-                                                 customPlaceholder: S.enterPassword)
+                                                 customPlaceholder: S.enterPassword,
+                                                 isPasswordField: true)
 
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView()

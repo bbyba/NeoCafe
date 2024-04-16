@@ -30,13 +30,15 @@ extension TableOrderDetailsViewController: UICollectionViewDataSource, UICollect
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.orderedItems.count
+//        return Cart.shared.items.count
+        return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: CustomBigCell = collectionView.dequeue(for: indexPath)
-        let orderedItem = viewModel.orderedItems[indexPath.row]
-        cell.configureData(item: orderedItem)
+//        let orderedItem = viewModel.orderedItems[indexPath.row]
+//        let orderedItem = Cart.shared.items[indexPath.row]
+//        cell.configureData(item: orderedItem)
         return cell
         }
 }

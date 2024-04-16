@@ -1,0 +1,18 @@
+Target dependency graph (8 targets)
+Target 'Pods-NeoCafe Client' in project 'Pods'
+➜ Explicit dependency on target 'Alamofire' in project 'Pods'
+➜ Explicit dependency on target 'Moya' in project 'Pods'
+➜ Explicit dependency on target 'RxSwift' in project 'Pods'
+➜ Explicit dependency on target 'SVPinView' in project 'Pods'
+➜ Explicit dependency on target 'SnapKit' in project 'Pods'
+➜ Explicit dependency on target 'SwiftGen' in project 'Pods'
+➜ Explicit dependency on target 'SwiftLint' in project 'Pods'
+Target 'SwiftLint' in project 'Pods' (no dependencies)
+Target 'SwiftGen' in project 'Pods' (no dependencies)
+Target 'SnapKit' in project 'Pods' (no dependencies)
+Target 'SVPinView' in project 'Pods' (no dependencies)
+Target 'Moya' in project 'Pods'
+➜ Explicit dependency on target 'Alamofire' in project 'Pods'
+➜ Explicit dependency on target 'RxSwift' in project 'Pods'
+Target 'RxSwift' in project 'Pods' (no dependencies)
+Target 'Alamofire' in project 'Pods' (no dependencies)

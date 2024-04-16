@@ -57,23 +57,11 @@ class NewOrderView: UIView, BaseContentView {
         return view
     }()
 
-    lazy var profileButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Images.account.image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .lightBlueCustom
-        button.clipsToBounds = true
-        return button
-    }()
+    lazy var profileButton = CustomRoundButton(withImage: Asset.Images.account.image,
+                                               backgroundColor: .lightBlueCustom)
 
-    lazy var notificationsButton: UIButton = {
-        let button = UIButton()
-        button.setImage(Asset.Images.bell.image, for: .normal)
-        button.layer.cornerRadius = 20
-        button.backgroundColor = .lightBlueCustom
-        button.clipsToBounds = true
-        return button
-    }()
+    lazy var notificationsButton = CustomRoundButton(withImage: Asset.Images.bell.image,
+                                                     backgroundColor: .lightBlueCustom)
 
     lazy var busyStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [grayCircle, busyLabel])

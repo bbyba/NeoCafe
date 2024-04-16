@@ -75,7 +75,10 @@ class TableOrderDetailsView: UIView {
 
     lazy var closeOrderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.closeOrder, backgroundColor: .whiteCustom, titleColor: .blueCustom, showBorder: true)
+        button.setProperties(title: S.closeOrder, 
+                             backgroundColor: .whiteCustom,
+                             titleColor: .blueCustom, 
+                             showBorder: true)
         return button
     }()
 
@@ -123,7 +126,10 @@ class TableOrderDetailsView: UIView {
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, 
+                                                      leading: 16,
+                                                      bottom: 8,
+                                                      trailing: 16)
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -134,7 +140,10 @@ class TableOrderDetailsView: UIView {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 0)
+        header.contentInsets = NSDirectionalEdgeInsets(top: 0, 
+                                                       leading: 16,
+                                                       bottom: 0,
+                                                       trailing: 0)
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]

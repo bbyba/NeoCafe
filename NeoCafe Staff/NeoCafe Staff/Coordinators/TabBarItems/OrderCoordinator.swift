@@ -33,9 +33,9 @@ final class OrderCoordinator: BaseCoordinator {
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        //        viewModel.onLogoutNavigate = { [weak self] in
-        //            self?.router.popModule(animated: true)
-        //        }
+//                viewModel.onLogoutNavigate = { [weak self] in
+//                    self?.router.popModule(animated: true)
+//                }
         let viewController = ProfileViewController(viewModel: viewModel)
         router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
     }
