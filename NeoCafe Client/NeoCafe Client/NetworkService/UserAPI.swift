@@ -40,7 +40,7 @@ extension UserAPI: TargetType {
 
     var path: String {
         switch self {
-        // Auth
+            // Auth
         case .checkEmailRegister(_):
             return "/customer/check-email-register/"
         case .checkEmailLogin(_):
@@ -50,29 +50,29 @@ extension UserAPI: TargetType {
         case .loginUser(_, _):
             return "/customer/login/"
 
-        // Main & Menu
+            // Main & Menu
         case .getCategories:
             return "/menu/category/all/"
         case .getPopularItems(let branchID):
             return "/branch/\(branchID)/top-selling-menu-items/"
         case .getAllCategories:
             return "/menu/item/all/"
-//        case .getMenuItemsByBranchCategory(let branchID):
-//            return "/branch-menu/\(branchID)/"
+            //        case .getMenuItemsByBranchCategory(let branchID):
+            //            return "/branch-menu/\(branchID)/"
         case .getMenuItemsAll:
             return "/menu/item/all/"
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
 
-        // Cart
+            // Cart
         case .makeOrder:
             return "/orders-online/add/"
 
-        // Branches
+            // Branches
         case .getBranches:
             return "/branch/all/"
 
-        // Profile
+            // Profile
         case .getProfile(let userID):
             return "/profile/customer/\(userID)/"
         case .getProfileEdit(let userID):
@@ -98,7 +98,7 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-//                .getMenuItemsByBranchCategory,
+            //                .getMenuItemsByBranchCategory,
                 .getMenuItemsAll,
                 .getPopularItems:
             return .get
@@ -121,7 +121,7 @@ extension UserAPI: TargetType {
                 .getBranches,
                 .getProfile,
                 .getProfileEdit,
-//                .getMenuItemsByBranchCategory,
+            //                .getMenuItemsByBranchCategory,
                 .getMenuItemsAll,
                 .getPopularItems:
             return .requestPlain
@@ -134,7 +134,20 @@ extension UserAPI: TargetType {
         }
     }
 
-    var headers: [String : String]? {
-        return ["Content-Type": "application/json"]
+    //    var headers: [String : String]? {
+    //        return ["Content-Type": "application/json"]
+    //    }
+    var headers: [String: String]? {
+        switch self {
+        case .makeOrder:
+            if let accessToken = UserDefaultsService.shared.accessToken {
+                return ["Authorization": "Bearer \(accessToken)", 
+                        "Content-Type": "application/json"]
+            } else {
+                return nil
+            }
+        default:
+            return ["Content-Type": "application/json"]
+        }
     }
 }

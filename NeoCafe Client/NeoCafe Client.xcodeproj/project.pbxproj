@@ -30,6 +30,9 @@
 		DD73F3092BA38D6800C33E21 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */; };
 		DD73F30B2BA630BE00C33E21 /* SwitchingStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */; };
 		DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DD84CBAF2B7B414E00580D4A /* swiftgen.yml */; };
+		DD882BDB2BCE691C00280716 /* ErrorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD882BDA2BCE691C00280716 /* ErrorScreen.swift */; };
+		DD882BDE2BCE6CF400280716 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD882BDD2BCE6CF400280716 /* ErrorViewController.swift */; };
+		DD882BE02BCE71DD00280716 /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD882BDF2BCE71DD00280716 /* ErrorViewModel.swift */; };
 		DD92BCE12B98D50900E0825E /* BranchesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE02B98D50900E0825E /* BranchesView.swift */; };
 		DD92BCE32B98D53A00E0825E /* BranchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */; };
 		DD92BCE62B99827600E0825E /* BranchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD92BCE52B99827600E0825E /* BranchDetailViewController.swift */; };
@@ -149,6 +152,9 @@
 		DD73F3082BA38D6800C33E21 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchingStepper.swift; sourceTree = "<group>"; };
 		DD84CBAF2B7B414E00580D4A /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		DD882BDA2BCE691C00280716 /* ErrorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorScreen.swift; sourceTree = "<group>"; };
+		DD882BDD2BCE6CF400280716 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		DD882BDF2BCE71DD00280716 /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 		DD92BCE02B98D50900E0825E /* BranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesView.swift; sourceTree = "<group>"; };
 		DD92BCE22B98D53A00E0825E /* BranchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesViewController.swift; sourceTree = "<group>"; };
 		DD92BCE52B99827600E0825E /* BranchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchDetailViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +335,16 @@
 				DD9D08422B7BF71000BAB6CD /* Strings+Generated.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		DD882BDC2BCE6CE000280716 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				DD882BDA2BCE691C00280716 /* ErrorScreen.swift */,
+				DD882BDD2BCE6CF400280716 /* ErrorViewController.swift */,
+				DD882BDF2BCE71DD00280716 /* ErrorViewModel.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		DD92BCE42B9981E100E0825E /* BranchesDetail */ = {
@@ -647,6 +663,7 @@
 				DD9556162B7A00E400FB65AF /* NetworkService */,
 				DD84CBA82B7B372B00580D4A /* Generated */,
 				DD73F30A2BA630BE00C33E21 /* SwitchingStepper.swift */,
+				DD882BDC2BCE6CE000280716 /* Error */,
 			);
 			path = "NeoCafe Client";
 			sourceTree = "<group>";
@@ -858,6 +875,7 @@
 				DD9DD1152B95FF3A00C489F6 /* NotificationsViewController.swift in Sources */,
 				DD9DD10B2B95E74900C489F6 /* ProfileViewController.swift in Sources */,
 				DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */,
+				DD882BE02BCE71DD00280716 /* ErrorViewModel.swift in Sources */,
 				DDCB6B832B9EF55400407089 /* NetworkService.swift in Sources */,
 				DD73F30B2BA630BE00C33E21 /* SwitchingStepper.swift in Sources */,
 				DDF8B5CA2B70F21D005FE06A /* AuthenticationViewModel.swift in Sources */,
@@ -922,6 +940,7 @@
 				DD73F2F72BA0129800C33E21 /* BonusModalView.swift in Sources */,
 				DD93C1992B838BC100339287 /* Extension+UIColor.swift in Sources */,
 				DDCB6B782B9B7B4100407089 /* TabBarCoordinator.swift in Sources */,
+				DD882BDB2BCE691C00280716 /* ErrorScreen.swift in Sources */,
 				DD93C1942B82CBEE00339287 /* CustomSearchBar.swift in Sources */,
 				DD9D08432B7BF71000BAB6CD /* Strings+Generated.swift in Sources */,
 				DD9DD1132B95FF2D00C489F6 /* NotificationView.swift in Sources */,
@@ -941,6 +960,7 @@
 				DD9DD0B82B8FD60700C489F6 /* MenuProductCell.swift in Sources */,
 				DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */,
 				DD9DD0E82B91491200C489F6 /* OrderHistoryViewController.swift in Sources */,
+				DD882BDE2BCE6CF400280716 /* ErrorViewController.swift in Sources */,
 				DD9DD0F62B94795C00C489F6 /* Presentable.swift in Sources */,
 				DD73F3052BA386E900C33E21 /* ProfileViewModel.swift in Sources */,
 				DDC4A4FC2BB17CD800F9E6BC /* BaseCollectionViewCell.swift in Sources */,

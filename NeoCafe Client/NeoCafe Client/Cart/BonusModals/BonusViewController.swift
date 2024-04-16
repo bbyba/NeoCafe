@@ -9,6 +9,7 @@ class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.errorPresenter = self
         addTargets()
     }
 
@@ -24,14 +25,30 @@ class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalVie
         contentView.changeStateToNext()
     }
 
+    //    @objc private func useButtonTapped() {
+    //        viewModel.makeOrder()
+    //        viewModel.orderMadeSuccessfully = {
+    //            self.contentView.changeStateToNext()
+    //        }
+    //    }
+
+    @objc private func dismissView(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+
     @objc private func useButtonTapped() {
+        if let bonusPointsText = contentView.textfield.text, let bonusPoints = Int(bonusPointsText) {
+            viewModel.bonusPointsToSubtract = bonusPoints
+        }
         viewModel.makeOrder()
         viewModel.orderMadeSuccessfully = {
             self.contentView.changeStateToNext()
         }
     }
+}
 
-    @objc private func dismissView(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+extension BonusViewController: ErrorViewDelegate {
+    func reloadLastRequest() {
+        viewModel.makeOrder()
     }
 }
