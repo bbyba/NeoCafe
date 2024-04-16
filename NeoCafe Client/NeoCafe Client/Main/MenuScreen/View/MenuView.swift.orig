@@ -68,6 +68,59 @@ class MenuView: UIView {
         setupConstraints()
     }
 
+<<<<<<< HEAD
+=======
+    func setProperties() {
+        backgroundColor = .white
+    }
+
+    func addSubviews() {
+        addSubview(header)
+        header.addSubview(headerStack)
+        headerStack.addArrangedSubview(headerLabel)
+        headerStack.addArrangedSubview(branchNameLabel)
+        addSubview(headerDropDownButton)
+        addSubview(searchBar)
+        addSubview(collectionView)
+    }
+
+
+    func setupConstraints() {
+        header.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(140)
+        }
+
+        headerStack.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(70)
+        }
+
+        headerDropDownButton.snp.makeConstraints { make in
+<<<<<<< HEAD
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(85)
+=======
+            make.trailing.equalToSuperview().offset(-40)
+            make.top.equalToSuperview().offset(80)
+>>>>>>> main
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+
+        searchBar.snp.makeConstraints { make in
+            make.centerY.equalTo(header.snp.bottom).offset(24)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.bottom.width.equalToSuperview()
+        }
+    }
+
+>>>>>>> dev
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
