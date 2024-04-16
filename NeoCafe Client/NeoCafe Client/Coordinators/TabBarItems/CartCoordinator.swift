@@ -53,7 +53,8 @@ final class CartCoordinator: BaseCoordinator {
 
     private func openMainMenu() {
         guard let tabBarCoordinator = self.tabBarCoordinator else { return }
-        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID, branchName:  UserDefaultsService.shared.branchName)
+        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID, 
+                                                    branchName:  UserDefaultsService.shared.branchName)
         tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
 

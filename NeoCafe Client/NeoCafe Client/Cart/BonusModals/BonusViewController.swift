@@ -25,7 +25,10 @@ class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalVie
     }
 
     @objc private func useButtonTapped() {
-        contentView.changeStateToNext()
+        viewModel.makeOrder()
+        viewModel.orderMadeSuccessfully = {
+            self.contentView.changeStateToNext()
+        }
     }
 
     @objc private func dismissView(_ sender: UIButton) {

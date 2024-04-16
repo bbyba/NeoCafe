@@ -21,6 +21,8 @@ enum UserAPI {
 //        case getMenuItemsByBranchCategory(branchID: Int)
     case getMenuItemsAll
 
+    // Cart
+    case makeOrder(order: NewOrderModelFinal)
 
     // Branch
     case getBranches
@@ -62,6 +64,10 @@ extension UserAPI: TargetType {
         case .getProductDetails(let productId):
             return "/menu/item/\(productId)/"
 
+        // Cart
+        case .makeOrder:
+            return "/orders-online/add/"
+
         // Branches
         case .getBranches:
             return "/branch/all/"
@@ -83,7 +89,8 @@ extension UserAPI: TargetType {
                 .checkEmailLogin(_):
             return .post
         case .registerUser(_, _),
-                .loginUser(_, _):
+                .loginUser(_, _),
+                .makeOrder:
             return .post
         case .getCategories,
                 .getAllCategories,
@@ -118,6 +125,8 @@ extension UserAPI: TargetType {
                 .getMenuItemsAll,
                 .getPopularItems:
             return .requestPlain
+        case .makeOrder(let order):
+            return .requestJSONEncodable(order)
         case .patchProfile(_, let firstName):
             let parameters = ["first_name": firstName]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)

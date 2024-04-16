@@ -226,3 +226,27 @@ struct NotificationModel {
     let details: String
     let time: String
 }
+
+
+struct NewOrderModel: Codable {
+    let orderType: String
+    let ito: [Ito]
+
+    enum CodingKeys: String, CodingKey {
+        case orderType = "order_type"
+        case ito = "ITO"
+    }
+}
+
+struct NewOrderModelFinal: Codable {
+    let ito: [Ito]
+    let orderType: String
+    let branch, bonusPointsToSubtract: Int
+
+    enum CodingKeys: String, CodingKey {
+        case ito = "ITO"
+        case orderType = "order_type"
+        case branch
+        case bonusPointsToSubtract = "bonus_points_to_subtract"
+    }
+}
