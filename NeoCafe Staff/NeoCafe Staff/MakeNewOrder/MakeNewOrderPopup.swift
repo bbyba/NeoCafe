@@ -23,7 +23,6 @@ class MakeNewOrderPopup: UIView {
 
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = S.orderNo
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .whiteCustom
         label.textAlignment = .center

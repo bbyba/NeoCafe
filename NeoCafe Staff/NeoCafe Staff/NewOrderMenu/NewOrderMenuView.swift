@@ -76,13 +76,13 @@ class NewOrderMenuView: UIView {
         setupConstraints()
     }
 
-    func updateOrderNoInfo(orderNumber: Int) {
-        orderLabel.text = "\(S.orderNo)\(orderNumber)"
-      }
-
-    func updateAmountInfo(orderAmount: Int) {
-        amountLabel.text = "\(orderAmount) сом"
-      }
+    func checkForTableAvailability(tableIsAvailable: Bool, orderInfo: OrderDetailsModel?) {
+        orderInfoButton.isHidden = tableIsAvailable
+        if !tableIsAvailable, let orderInfo = orderInfo {
+            orderLabel.text = S.orderNo(orderInfo.orderNumber)
+            amountLabel.text = S.som(orderInfo.totalSum)
+        }
+    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -232,8 +232,6 @@ extension NewOrderMenuView: BaseContentView {
         orderInfoButton.snp.makeConstraints { make in
             make.bottom.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(54)
-//            orderInfoButton.isHidden = Cart.shared.items.isEmpty
-
         }
 
         orderLabel.snp.makeConstraints { make in
@@ -245,7 +243,5 @@ extension NewOrderMenuView: BaseContentView {
             make.trailing.equalToSuperview().offset(-16)
             make.centerY.equalToSuperview()
         }
-
-        orderInfoButton.isHidden = true
     }
 }

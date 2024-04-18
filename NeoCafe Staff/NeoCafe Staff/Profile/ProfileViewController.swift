@@ -28,7 +28,7 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
 
     private func updateProfileViews() {
         if let profileData = viewModel.profileData {
-            contentView.nameTextField.text = profileData.user.firstName
+            contentView.nameTextField.text = profileData.user.user.firstName
         }
     }
 

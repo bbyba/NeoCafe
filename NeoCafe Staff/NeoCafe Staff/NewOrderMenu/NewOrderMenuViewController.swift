@@ -12,6 +12,8 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         setupViews()
         addTargets()
         Cart.shared.delegate = self
+        contentView.checkForTableAvailability(tableIsAvailable: viewModel.selectedTable.isAvailable,
+                                              orderInfo: viewModel.existingOrder)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -20,17 +22,6 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         setupBindings()
         viewModel.getCategories()
         viewModel.getMenuItems()
-        contentView.updateOrderNoInfo(orderNumber: 1)
-    }
-
-    func cartDidUpdate() {
-        print("Cart did update in NewOrderMenuViewController")
-        updateUI()
-    }
-
-    func updateUI() {
-        contentView.amountLabel.text = "\(Cart.shared.getTotalPrice()) сом"
-        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
     }
 
     private func setupViews() {
@@ -72,6 +63,16 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         contentView.orderInfoButton.addTarget(self, action: #selector(orderInfoButtonTapped), for: .touchUpInside)
     }
 
+    func cartDidUpdate() {
+        updateUI()
+    }
+
+    func updateUI() {
+        contentView.orderLabel.text = S.toOrder
+        contentView.amountLabel.text = "\(Cart.shared.getTotalPrice()) сом"
+        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
+    }
+
     private func addToCart(menuItem: Item) {
         Cart.shared.addItem(menuItem)
         updateUI()
@@ -82,13 +83,14 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     }
 
     @objc private func orderInfoButtonTapped() {
-        guard let selectedTable = viewModel.selectedTable else {
-            print("Selected table is nil")
-            return
+        if let existingOrder = viewModel.existingOrder {
+            let selectedTable = viewModel.selectedTable
+            viewModel.onMakeNewOrderPopupNavigate?(selectedTable, existingOrder)
+        } else {
+            let selectedTable = viewModel.selectedTable
+            viewModel.onMakeNewOrderPopupNavigate?(selectedTable, nil)
         }
-        viewModel.onMakeNewOrderPopupNavigate?(selectedTable)
     }
-
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
@@ -137,7 +139,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
             switch sectionKind {
             case .category:
-                header.configureTitle(title: "\(viewModel.tableInfo())")
+                header.configureTitle(title: S.tableNo(viewModel.selectedTable.tableNumber))
             case .productItem:
                 break
             }

@@ -60,10 +60,14 @@ internal enum S {
   internal static let no = S.tr("Localizable", "no", fallback: "Нет")
   /// Уведомления
   internal static let notifications = S.tr("Localizable", "notifications", fallback: "Уведомления")
-  /// №
-  internal static let numberSymbol = S.tr("Localizable", "numberSymbol", fallback: "№")
-  /// Заказ №
-  internal static let orderNo = S.tr("Localizable", "orderNo", fallback: "Заказ №")
+  /// №%@
+  internal static func numberSymbol(_ p1: Any) -> String {
+    return S.tr("Localizable", "numberSymbol", String(describing: p1), fallback: "№%@")
+  }
+  /// Заказ №%@
+  internal static func orderNo(_ p1: Any) -> String {
+    return S.tr("Localizable", "orderNo", String(describing: p1), fallback: "Заказ №%@")
+  }
   /// Заказы
   internal static let orders = S.tr("Localizable", "orders", fallback: "Заказы")
   /// Заказ успешно закрыт
@@ -72,6 +76,10 @@ internal enum S {
   ///  отправленный на почту 
   ///  jackie@chan.kg
   internal static let otpCodeLabel = S.tr("Localizable", "OTPCodeLabel", fallback: "Введите 4-х значный код,\n отправленный на почту \n jackie@chan.kg")
+  /// (%@ с за шт)
+  internal static func pricePerItem(_ p1: Any) -> String {
+    return S.tr("Localizable", "pricePerItem", String(describing: p1), fallback: "(%@ с за шт)")
+  }
   /// В процессе
   internal static let processingStatus = S.tr("Localizable", "processingStatus", fallback: "В процессе")
   /// Профиль
@@ -86,8 +94,14 @@ internal enum S {
   internal static let save = S.tr("Localizable", "save", fallback: "Сохранить")
   /// Поиск
   internal static let search = S.tr("Localizable", "search", fallback: "Поиск")
-  /// Стол №
-  internal static let tableNo = S.tr("Localizable", "tableNo", fallback: "Стол №")
+  /// %@ с
+  internal static func som(_ p1: Any) -> String {
+    return S.tr("Localizable", "som", String(describing: p1), fallback: "%@ с")
+  }
+  /// Стол №%@
+  internal static func tableNo(_ p1: Any) -> String {
+    return S.tr("Localizable", "tableNo", String(describing: p1), fallback: "Стол №%@")
+  }
   /// Столы
   internal static let tables = S.tr("Localizable", "tables", fallback: "Столы")
   /// Заказать
@@ -96,8 +110,10 @@ internal enum S {
   internal static let total = S.tr("Localizable", "total", fallback: "Итого:")
   /// Код подтверждения
   internal static let verificationCode = S.tr("Localizable", "verificationCode", fallback: "Код подтверждения")
-  /// Официант: 
-  internal static let waiter = S.tr("Localizable", "waiter", fallback: "Официант: ")
+  /// Официант: %@
+  internal static func waiter(_ p1: Any) -> String {
+    return S.tr("Localizable", "waiter", String(describing: p1), fallback: "Официант: %@")
+  }
   /// Localizable.strings
   ///   NeoCafe Staff
   internal static let welcome = S.tr("Localizable", "welcome", fallback: "Добро пожаловать в")

@@ -13,7 +13,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
         setupViews()
         addTargets()
         getTables()
-        viewModel.getAllOrders()
+//        viewModel.getAllOrders()
         viewModel.filterOrders(byStatus: S.all)
     }
 
@@ -117,10 +117,7 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == contentView.tablesCollectionView {
-            let table = TableService.shared.tables[indexPath.row]
-//            viewModel.onOrderDetailsNavigate?()
-        } else if collectionView == contentView.ordersByStatusCollectionView {
+        if collectionView == contentView.ordersByStatusCollectionView {
             switch OrderStatus.allCases[indexPath.section] {
             case .statusCategory:
                 let status = viewModel.statusList[indexPath.row]

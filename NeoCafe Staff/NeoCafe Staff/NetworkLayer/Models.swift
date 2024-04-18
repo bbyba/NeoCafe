@@ -34,6 +34,11 @@ struct AuthenticationResponse: Codable {
 
 struct ProfileResponse: Codable {
     let id: Int
+    let user: EmployeeProfile
+}
+
+struct EmployeeProfile: Codable {
+    let id: Int
     let user: User
 }
 
@@ -136,7 +141,7 @@ struct CategoryModel: Codable {
 struct OrderDetailsModel: Codable {
     let id: Int
     let orderNumber: Int
-    let table: TableModel?
+    let table: TableModel
     let orderStatus: String
     let createdAt: String?
     let updatedAt: String?
@@ -144,7 +149,7 @@ struct OrderDetailsModel: Codable {
     let branch: Int
     let orderType: String
     let totalSum: Int
-    let employeeProfile: EmployeeProfile?
+    let employeeProfile: EmployeeProfile
     let ito: [ITO]
 
     private enum CodingKeys: String, CodingKey {
@@ -159,12 +164,6 @@ struct OrderDetailsModel: Codable {
         case employeeProfile = "employee_profile"
         case ito = "ITO"
     }
-}
-
-struct EmployeeProfile: Codable {
-    let id: Int
-    let username: String
-    let password: String
 }
 
 // MARK: - Ito
@@ -196,3 +195,17 @@ struct TableModel: Codable, Hashable {
         case branch
     }
 }
+
+struct MakeNewOrderModel: Codable {
+    let table: TableModel
+    let branch: Int
+    let orderType: String
+    let ito: [ITO]
+
+    enum CodingKeys: String, CodingKey {
+        case table, branch
+        case orderType = "order_type"
+        case ito = "ITO"
+    }
+}
+

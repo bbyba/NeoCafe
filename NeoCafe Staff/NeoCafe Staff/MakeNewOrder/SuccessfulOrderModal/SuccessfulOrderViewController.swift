@@ -1,11 +1,11 @@
 //
-//  SuccessfulOrderViewcontroller.swift
+//  SuccessfulOrderViewController.swift
 //  NeoCafe Staff
 //
 
 import UIKit
 
-class SuccessfulOrderViewcontroller: UIViewController {
+class SuccessfulOrderViewController: UIViewController {
     private lazy var successfulOrderView = SuccessfulOrderView()
     private var successfulOrderViewModel: SuccessfulOrderViewModel
 
@@ -20,7 +20,7 @@ class SuccessfulOrderViewcontroller: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        successfulOrderView.goToOrderButton.addTarget(self, action: #selector(gotoorderButtonTapped), for: .touchUpInside)
+        successfulOrderView.goToOrderButton.addTarget(self, action: #selector(goToOrderButtonTapped), for: .touchUpInside)
         successfulOrderView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
 
@@ -28,7 +28,7 @@ class SuccessfulOrderViewcontroller: UIViewController {
         successfulOrderViewModel.onBackNavigate?()
     }
 
-    @objc func gotoorderButtonTapped() {
+    @objc func goToOrderButtonTapped() {
         successfulOrderViewModel.ongoToOrderNavigate?()
     }
 

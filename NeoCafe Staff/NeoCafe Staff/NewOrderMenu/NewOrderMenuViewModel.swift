@@ -40,27 +40,24 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     var onCategoriesFetched: (() -> Void)?
     var onMenuItemsFetched: (() -> Void)?
 
-    var onMakeNewOrderPopupNavigate: ((TableModel) -> Void)?
+    var onMakeNewOrderPopupNavigate: ((TableModel, OrderDetailsModel?) -> Void)?
 
     var filteredMenuItems: [Item] = []
 
     var separateCartsForTables: [TableModel: Cart] = [:]
     var cartsForTables: [TableModel: Cart] = [:]
-    var selectedTable: TableModel?
+    var selectedTable: TableModel
     var tables: [TableModel] = []
+    var existingOrder: OrderDetailsModel?
 
-    init(selectedTable: TableModel) {
-        self.selectedTable = selectedTable
-        super.init()
-    }
+    init(selectedTable: TableModel, existingOrder: OrderDetailsModel?) {
+            self.selectedTable = selectedTable
+            self.existingOrder = existingOrder
+            super.init()
+        }
 
     func filterMenuItems(byCategory category: CategoryModel) {
         filteredMenuItems = menuItems.filter { $0.category.id == category.id }
-    }
-
-    func tableInfo() -> String {
-        guard let table = selectedTable else { return "" }
-        return "\(S.tableNo) \(table.tableNumber)"
     }
 
     private func setupFirstCategory() {

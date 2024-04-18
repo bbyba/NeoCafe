@@ -14,7 +14,7 @@
 		DD2567AD2BC471460071432E /* DeleteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567AC2BC471460071432E /* DeleteModalViewController.swift */; };
 		DD284CF22BCE83D500AA6EF3 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = DD284CF12BCE83D500AA6EF3 /* Factory */; };
 		DD284CF52BCE88CF00AA6EF3 /* SuccessfulOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */; };
-		DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */; };
+		DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift */; };
 		DD284CF92BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */; };
 		DD5313412BB881D90017D73A /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313402BB881D90017D73A /* MenuView.swift */; };
 		DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5313422BB881E20017D73A /* MenuViewModel.swift */; };
@@ -120,7 +120,7 @@
 		DD2567AA2BBEBC5E0071432E /* SharedCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCart.swift; sourceTree = "<group>"; };
 		DD2567AC2BC471460071432E /* DeleteModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalViewController.swift; sourceTree = "<group>"; };
 		DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrder.swift; sourceTree = "<group>"; };
-		DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrderViewcontroller.swift; sourceTree = "<group>"; };
+		DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrderViewController.swift; sourceTree = "<group>"; };
 		DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessfulOrderViewModel.swift; sourceTree = "<group>"; };
 		DD5313402BB881D90017D73A /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		DD5313422BB881E20017D73A /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -252,11 +252,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DD284CF32BCE88C000AA6EF3 /* New Group */ = {
+		DD284CF32BCE88C000AA6EF3 /* SuccessfulOrderModal */ = {
 			isa = PBXGroup;
 			children = (
+				DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */,
+				DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift */,
+				DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */,
 			);
-			path = "New Group";
+			path = SuccessfulOrderModal;
 			sourceTree = "<group>";
 		};
 		DD5313462BB88A8E0017D73A /* Modals */ = {
@@ -272,13 +275,10 @@
 		DD8089D52BB9473600474F1B /* MakeNewOrder */ = {
 			isa = PBXGroup;
 			children = (
-				DD284CF32BCE88C000AA6EF3 /* New Group */,
+				DD284CF32BCE88C000AA6EF3 /* SuccessfulOrderModal */,
 				DD8089D62BB9476500474F1B /* MakeNewOrderPopup.swift */,
 				DD8089D82BB9490800474F1B /* MakeNewOrderViewController.swift */,
 				DD8089DA2BB9492E00474F1B /* MakeNewOrderViewModel.swift */,
-				DD284CF42BCE88CF00AA6EF3 /* SuccessfulOrder.swift */,
-				DD284CF62BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift */,
-				DD284CF82BCE8BA500AA6EF3 /* SuccessfulOrderViewModel.swift */,
 			);
 			path = MakeNewOrder;
 			sourceTree = "<group>";
@@ -783,7 +783,7 @@
 				DD79D7842BB1C75800F20E94 /* CustomRoundButton.swift in Sources */,
 				DDF8B5B22B70ED5D005FE06A /* ViewController.swift in Sources */,
 				DD9052172BB2BEAD009599CE /* CollectionViewHeader.swift in Sources */,
-				DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewcontroller.swift in Sources */,
+				DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift in Sources */,
 				DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */,
 				DD2567AD2BC471460071432E /* DeleteModalViewController.swift in Sources */,
 				DDA2507A2BAF5A1D00C73F62 /* Extension+UIColor.swift in Sources */,

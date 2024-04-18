@@ -14,7 +14,6 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     lazy var tableNumber: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 20, weight: .semibold)
-        label.text = S.tableNo
         label.textColor = .darkBlueCustom
         return label
     }()
@@ -29,7 +28,6 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     lazy var orderNumber: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .regular)
-        label.text = "№"
         label.textColor = .darkBlueCustom
         return label
     }()
@@ -65,8 +63,8 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     }
 
     func configureData(orderData: OrderDetailsModel) {
-        tableNumber.text = "Стол №\(orderData.table?.tableNumber)"
-        orderNumber.text = "№\(orderData.orderNumber)"
+        tableNumber.text = S.tableNo(orderData.table.tableNumber)
+        orderNumber.text = S.numberSymbol(orderData.orderNumber)
         updateTimeByStatus(orderData: orderData)
         updateCellAppearanceByStatus(status: orderData.orderStatus)
     }
@@ -96,9 +94,6 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         case "Завершено":
             statusCircle.backgroundColor = .greyCustom
             statusLabel.text = S.doneStatus
-//        case "Отменено":
-//            statusCircle.backgroundColor = .darkGreyCustom
-//            statusLabel.text = S.cancelledStatus
         default:
             statusCircle.backgroundColor = .darkGreyCustom
             statusLabel.text = S.cancelledStatus

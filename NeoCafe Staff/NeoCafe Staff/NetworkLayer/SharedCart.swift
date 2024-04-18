@@ -17,14 +17,20 @@ class Cart {
 
     init() {}
 
-    func addItem(_ item: Item) {
-        if let quantity = items[item] {
-            items[item] = quantity + 1
+    func addItem(_ item: Item, quantity: Int? = 1) {
+        if let existingQuantity = items[item] {
+            if let quantity = quantity {
+                items[item] = existingQuantity + quantity
+            } else {
+                items[item] = existingQuantity + 1
+            }
         } else {
-            items[item] = 1
+            items[item] = quantity ?? 1
         }
         delegate?.cartDidUpdate()
     }
+
+
 
     func removeItem(_ item: Item) {
         items.removeValue(forKey: item)
@@ -44,7 +50,7 @@ class Cart {
         return items.reduce(0) { $0 + Int($1.key.pricePerUnit * $1.value) }
     }
 
-    func convertToIto() -> [ITO] {
+    func createOrderListForSubmission() -> [ITO] {
         return items.map { (item, quantity) in
             let totalPrice = item.pricePerUnit * quantity
             return ITO(id: item.id, item: item.id, itemName: item.name, quantity: quantity, totalPrice: totalPrice)

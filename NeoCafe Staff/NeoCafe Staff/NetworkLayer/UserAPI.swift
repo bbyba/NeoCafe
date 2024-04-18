@@ -14,6 +14,7 @@ enum UserAPI  {
     case getMenuItems
     case getTablesByBranch(branchID: Int)
     case getOrdersAll(branchID: Int)
+    case makeOrder(order: MakeNewOrderModel)
 }
 
 extension UserAPI: TargetType {
@@ -39,13 +40,16 @@ extension UserAPI: TargetType {
             "/tables/branch/\(branchID)/"
         case .getOrdersAll(let branchID):
             "/orders/all/\(branchID)/"
+        case .makeOrder:
+            "/orders/add/"
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .requestConfirmationCode,
-                .login:
+                .login,
+                .makeOrder:
             return .post
         case .getProfile,
                 .getCategories,
@@ -67,7 +71,8 @@ extension UserAPI: TargetType {
             return .requestParameters(parameters: ["email": email,
                                                    "confirmation_code": confirmation_code],
                                       encoding: JSONEncoding.default)
-
+        case .makeOrder(let order):
+            return .requestJSONEncodable(order)
         case .getProfile,
                 .getCategories,
                 .getMenuItems,
@@ -79,19 +84,16 @@ extension UserAPI: TargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .requestConfirmationCode,
-                .login,
-                .getProfile,
-                .getCategories,
-                .getMenuItems,
-                .getTablesByBranch:
+        case .getOrdersAll,
+                .makeOrder:
+            if let accessToken = UserDefaultsService.shared.accessToken {
+                return ["Authorization": "Bearer \(accessToken)",
+                        "Content-Type": "application/json"]
+            } else {
+                return nil
+            }
+        default:
             return ["Content-Type": "application/json"]
-        case .getOrdersAll:
-                if let accessToken = UserDefaultsService.shared.accessToken {
-                    return ["Authorization": "Bearer \(accessToken)", "Content-Type": "application/json"]
-                } else {
-                    return nil
-                }
         }
     }
 }

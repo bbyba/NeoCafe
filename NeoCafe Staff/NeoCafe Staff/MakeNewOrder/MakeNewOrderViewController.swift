@@ -11,7 +11,6 @@ protocol MakeNewOrderDelegate: AnyObject {
 
 class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, MakeNewOrderPopup> {
     weak var delegate: MakeNewOrderDelegate?
-
     var selectedTable: TableModel?
 
     override func viewDidLoad() {
@@ -35,6 +34,7 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
 
     @objc private func orderButtonTapped() {
         dismissPopup()
+//        viewModel.makeOrder()
         viewModel.onOrderNavigate?()
     }
 }
@@ -92,6 +92,8 @@ extension MakeNewOrderViewController: CartUpdateDelegate {
     }
 
     func updateUI() {
+//        contentView.titleLabel.text = S.orderNo(<#T##p1: Any##Any#>)
+        contentView.titleLabel.text = "S.orderNo"
         contentView.priceLabel.text = "\(Cart.shared.getTotalPrice())"
     }
 }

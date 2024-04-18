@@ -41,18 +41,20 @@ final class TabBarCoordinator: BaseCoordinator {
 
     private var makeOrderCoordinator: OrderCoordinator {
         let orderCoordinator = OrderCoordinator(router: RouterImpl())
+        orderCoordinator.tabBarCoordinator = self
         self.orderCoordinator = orderCoordinator
         return orderCoordinator
     }
 
     private var makeNewOrderCoordinator: NewOrderCoordinator {
         let newOrderCoordinator = NewOrderCoordinator(router: RouterImpl())
+        newOrderCoordinator.tabBarCoordinator = self
+        self.newOrderCoordinator = newOrderCoordinator
         return newOrderCoordinator
     }
 
     private var makeMenuCoordinator: MenuCoordinator {
         let menuCoordinator = MenuCoordinator(router: RouterImpl())
-        //        branchesCoordinator.onCourses = fromLessons
         return menuCoordinator
     }
 
@@ -61,10 +63,7 @@ final class TabBarCoordinator: BaseCoordinator {
     }
 
     override init(router: Router) {
-        super.init(router: router)    }
-
-    deinit {
-        //        reachability?.stopNotifier()
+        super.init(router: router)
     }
 
     private func configureAppearance(for tabBarController: UITabBarController) {
@@ -72,12 +71,10 @@ final class TabBarCoordinator: BaseCoordinator {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.backgroundColor = .white
-
             appearance.stackedLayoutAppearance.normal.iconColor = .darkGreyCustom
             appearance.stackedLayoutAppearance.selected.iconColor = .blueCustom
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.darkGreyCustom]
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.blueCustom]
-
             appearance.backgroundEffect = UIBlurEffect(style: .light)
             appearance.shadowColor = .clear
             tabBarController.tabBar.standardAppearance = appearance
@@ -91,7 +88,10 @@ final class TabBarCoordinator: BaseCoordinator {
 
     private func configureShadow(for tabBarController: UITabBarController) {
         tabBarShadow?.removeFromSuperview()
-        tabBarShadow = UIView(frame: CGRect(x: 0, y: 0, width: tabBarController.tabBar.bounds.width, height: tabBarController.tabBar.bounds.height))
+        tabBarShadow = UIView(frame: CGRect(x: 0, 
+                                            y: 0,
+                                            width: tabBarController.tabBar.bounds.width,
+                                            height: tabBarController.tabBar.bounds.height))
         tabBarShadow!.backgroundColor = .white
         tabBarShadow!.layer.cornerRadius = 20
         tabBarShadow!.layer.masksToBounds = false

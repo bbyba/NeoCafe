@@ -2,8 +2,7 @@
 //  SuccessfulOrder.swift
 //  NeoCafe Staff
 //
-//  Created by Burte Bayaraa on 2024.04.16.
-//
+
 import UIKit
 import SnapKit
 
@@ -39,7 +38,7 @@ class SuccessfulOrderView: UIView {
 
     lazy var goToOrderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.toOrder, backgroundColor: .blueCustom, titleColor: .whiteCustom)
+        button.setProperties(title: S.toOrder, backgroundColor: .lightBlueCustom, titleColor: .whiteCustom)
         return button
     }()
 
