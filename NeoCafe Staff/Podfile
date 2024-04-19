@@ -10,5 +10,6 @@ pod 'SnapKit'
 pod 'SVPinView', '~> 1.0'
 pod 'Moya/RxSwift', '~> 15.0'
 pod 'SwiftGen'
+pod 'RealmSwift'
 
 end

@@ -10,14 +10,14 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         getTables()
 //        viewModel.getAllOrders()
         viewModel.filterOrders(byStatus: S.all)
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.tablesCollectionView.dataSource = self
         contentView.tablesCollectionView.delegate = self
         contentView.ordersByStatusCollectionView.dataSource = self

@@ -8,12 +8,12 @@ import UIKit
 class NewOrderViewController: BaseViewController<NewOrderViewModel, NewOrderView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         getTables()
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }

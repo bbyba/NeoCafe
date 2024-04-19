@@ -4,16 +4,14 @@
 //
 import UIKit
 
-class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView>, CartUpdateDelegate {
+class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
     var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         Cart.shared.delegate = self
-        contentView.checkForTableAvailability(tableIsAvailable: viewModel.selectedTable.isAvailable,
-                                              orderInfo: viewModel.existingOrder)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -22,9 +20,12 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         setupBindings()
         viewModel.getCategories()
         viewModel.getMenuItems()
+        viewModel.findItemsAndAdd()
+        contentView.checkForTableAvailability(tableIsAvailable: viewModel.selectedTable.isAvailable,
+                                              orderInfo: viewModel.existingOrder)
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
@@ -63,22 +64,8 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         contentView.orderInfoButton.addTarget(self, action: #selector(orderInfoButtonTapped), for: .touchUpInside)
     }
 
-    func cartDidUpdate() {
-        updateUI()
-    }
-
-    func updateUI() {
-        contentView.orderLabel.text = S.toOrder
-        contentView.amountLabel.text = "\(Cart.shared.getTotalPrice()) сом"
-        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
-    }
-
-    private func addToCart(menuItem: Item) {
-        Cart.shared.addItem(menuItem)
-        updateUI()
-    }
-
     @objc private func backButtonTapped() {
+        Cart.shared.removeAllItems()
         viewModel.onBackNavigate?()
     }
 
@@ -126,9 +113,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
             let cell: MenuCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
             cell.configureData(menuItem: menuItem, newOrderView: true)
-            cell.onAddToCart = { [weak self] in
-                self?.addToCart(menuItem: menuItem)
-            }
+            cell.onAddToCart = { Cart.shared.addItem(menuItem) }
             return cell
         }
     }
@@ -157,7 +142,7 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
 
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
-            if menuItem.category.name == "Кофе" {
+            if menuItem.category?.name == "Кофе" {
                 openCoffeeModal(for: menuItem)
             }
         }
@@ -172,9 +157,20 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
 }
 
 
-extension NewOrderMenuViewController: MakeNewOrderDelegate {
-    func didUpdateCartInPopup() {
-        print("Cart did update in NewOrderMenuViewController")
+extension NewOrderMenuViewController: CartUpdateDelegate, MakeNewOrderDelegate {
+
+    func cartDidUpdate() {
         updateUI()
+    }
+
+    func cartDidUpdateInMakeNewOrder() {
+        updateUI()
+    }
+
+    func updateUI() {
+        contentView.orderLabel.text = S.toOrder
+        contentView.amountLabel.text = S.som(Cart.shared.getItems())
+        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
+        contentView.collectionView.reloadData()
     }
 }

@@ -30,8 +30,6 @@ class Cart {
         delegate?.cartDidUpdate()
     }
 
-
-
     func removeItem(_ item: Item) {
         items.removeValue(forKey: item)
         delegate?.cartDidUpdate()

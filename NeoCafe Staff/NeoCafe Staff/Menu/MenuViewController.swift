@@ -4,22 +4,22 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
-        //        contentView.collectionView.reloadData()
         Loader.shared.showLoader(view: self.view)
         viewModel.getCategories()
         viewModel.getMenuItems()
         setupBindings()
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
@@ -110,17 +110,11 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch MenuSection.allCases[indexPath.section] {
-        case .category:
+        if case .category = MenuSection.allCases[indexPath.section] {
             let category = viewModel.allCategories[indexPath.row]
             viewModel.filterMenuItems(byCategory: category)
             selectedCategoryIndex = indexPath.row
             collectionView.reloadData()
-
-        case .productItem:
-            let menuItem = viewModel.menuItems[indexPath.row]
-            //            viewModel.onAddItemNavigate?(menuItem.id)
         }
     }
 }
- 

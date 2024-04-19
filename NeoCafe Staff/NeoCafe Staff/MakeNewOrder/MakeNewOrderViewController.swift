@@ -6,7 +6,7 @@
 import UIKit
 
 protocol MakeNewOrderDelegate: AnyObject {
-    func didUpdateCartInPopup()
+    func cartDidUpdateInMakeNewOrder()
 }
 
 class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, MakeNewOrderPopup> {
@@ -15,11 +15,15 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegatesAndDataSource()
+        addTargets()
+        updateUI()
+    }
+
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.delegate = self
         contentView.collectionView.dataSource = self
         Cart.shared.delegate = self
-        addTargets()
-        updateUI()
     }
 
     private func addTargets() {
@@ -28,13 +32,13 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
         contentView.blurredBackgroundView.addGestureRecognizer(tapGesture)
     }
 
-    @objc func dismissPopup() {
+    @objc private func dismissPopup() {
         viewModel.onBackNavigate?()
     }
 
     @objc private func orderButtonTapped() {
         dismissPopup()
-//        viewModel.makeOrder()
+//        viewModel.handleOrder()
         viewModel.onOrderNavigate?()
     }
 }
@@ -87,13 +91,20 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
 
 extension MakeNewOrderViewController: CartUpdateDelegate {
     func cartDidUpdate() {
-        updateUI()
-        delegate?.didUpdateCartInPopup()
+            updateUI()
+            delegate?.cartDidUpdateInMakeNewOrder()
+        }
+
+    private func updateUI() {
+        updateTitleLabel()
+        contentView.priceLabel.text = S.som(Cart.shared.getTotalPrice())
     }
 
-    func updateUI() {
-//        contentView.titleLabel.text = S.orderNo(<#T##p1: Any##Any#>)
-        contentView.titleLabel.text = "S.orderNo"
-        contentView.priceLabel.text = "\(Cart.shared.getTotalPrice())"
+    private func updateTitleLabel() {
+        if let orderNumber = viewModel.existingOrder?.orderNumber {
+            contentView.titleLabel.text = S.orderNo(orderNumber)
+        } else {
+            contentView.titleLabel.text = S.newOrder
+        }
     }
 }

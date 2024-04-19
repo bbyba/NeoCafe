@@ -22,9 +22,10 @@ class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
         self.selectedTable = table
         self.existingOrder = existingOrder
         super.init()
-        if let existingOrder = existingOrder {
-            addItemsOfExistingOrderToCart(existingOrderItems: existingOrder)
-        }
+    }
+    
+    func handleOrder() {
+        existingOrder != nil ? patchOrder() : makeOrder()
     }
 
     func makeOrder() {
@@ -47,28 +48,35 @@ class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
         }
     }
 
+    func patchOrder() {
+        guard var existingOrder = existingOrder else {
+            print("No existing order found.")
+            return
+        }
+
+        let itoArray: [ITO] = Cart.shared.createOrderListForSubmission()
+        existingOrder.ito = itoArray
+
+        networkService.sendRequest(successModelType: String.self,
+                                   endpoint: MultiTarget(UserAPI.patchOrder(order: existingOrder)))
+        { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(_):
+                print("Request Successful")
+                self.onOrderNavigate?()
+                Cart.shared.removeAllItems()
+            case .failure(let error):
+                print("Handle error: \(error)")
+            }
+        }
+    }
+
     private func createOrderList() -> MakeNewOrderModel {
         let branch = UserDefaultsService.shared.branchID
-        let orderType = "In Venue"
+        let orderType = "В заведении"
         let itoArray: [ITO] = Cart.shared.createOrderListForSubmission()
         let orderModel = MakeNewOrderModel(table: selectedTable, branch: branch, orderType: orderType, ito: itoArray)
         return orderModel
-    }
-
-    private func addItemsOfExistingOrderToCart(existingOrderItems: OrderDetailsModel) {
-        for itoItem in existingOrderItems.ito {
-            if let menuItem = findMenuItem(for: itoItem) {
-                Cart.shared.addItem(menuItem, quantity: itoItem.quantity)
-            }
-        }
-    }
-
-    private func findMenuItem(for itoItem: ITO) -> Item? {
-        for item in menuItems {
-            if item.id == itoItem.item {
-                return item
-            }
-        }
-        return nil
     }
 }

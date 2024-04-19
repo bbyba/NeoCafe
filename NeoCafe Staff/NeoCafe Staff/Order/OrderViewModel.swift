@@ -58,7 +58,7 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
             completedAt: nil,
             branch: 1,
             orderType: "In Venue",
-            totalSum: 440,
+            totalSum: 360,
             employeeProfile: EmployeeProfile(
                 id: 1,
                 user: User(
@@ -84,11 +84,11 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
             ),
             ito: [
                 ITO(
-                    id: 40,
-                    item: 1,
-                    itemName: "Шоколадный круассан",
+                    id: 32,
+                    item: 32,
+                    itemName: "Суп",
                     quantity: 2,
-                    totalPrice: 440
+                    totalPrice: 180
                 )
             ]
         )

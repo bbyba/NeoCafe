@@ -6,7 +6,9 @@
 import UIKit
 
 final class NewOrderCoordinator: BaseCoordinator {
-    private var mainViewController: NewOrderViewController!
+    var mainViewController: NewOrderViewController!
+    var makeNewOrderViewController: MakeNewOrderViewController!
+
     var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {
@@ -70,7 +72,7 @@ final class NewOrderCoordinator: BaseCoordinator {
             self?.openMakeNewOrderPopup(table: table, existingOrder: existingOrder)
         }
         let viewController = NewOrderMenuViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,

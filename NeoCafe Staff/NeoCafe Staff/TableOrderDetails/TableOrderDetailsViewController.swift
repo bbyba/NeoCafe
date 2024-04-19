@@ -8,19 +8,20 @@ class TableOrderDetailsViewController: BaseViewController<TableOrderDetailsViewM
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectionView()
+        setDelegatesAndDataSource()
         addTargets()
         configureUI()
     }
 
     init(viewModel: TableOrderDetailsViewModel) {
-            super.init(viewModel: viewModel)
-        }
+        super.init(viewModel: viewModel)
+    }
 
-    private func setupCollectionView() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
+
     private func configureUI() {
         contentView.configureUI(orderDetail: viewModel.orderDetails)
     }

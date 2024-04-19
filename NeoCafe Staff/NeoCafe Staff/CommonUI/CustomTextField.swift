@@ -42,12 +42,12 @@ class CustomTextField: UITextField {
         backgroundColor = .greyCustom
         textColor = .darkBlueCustom
         font = .sFProDisplayFont(ofSize: 16)
-        attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "", attributes: [NSAttributedString.Key.font: font])
+        attributedPlaceholder = NSAttributedString(string: customPlaceholder ?? "", attributes: [NSAttributedString.Key.font: font as Any])
         layer.cornerRadius = 18
         iconImageView.isHidden = iconName == nil
         iconImageView.image = iconName
 
-        if let iconName = iconName {
+        if iconName != nil {
             let leftViewContainer = UIView()
             leftViewContainer.addSubview(iconImageView)
             leftView = leftViewContainer

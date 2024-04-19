@@ -91,12 +91,13 @@ struct Results: Codable {
 
 struct Item: Codable, Hashable {
     let id: Int
-    let name, description: String
+    let name: String
+    let description: String?
     let itemImage: String?
     let pricePerUnit: Int
     let branch: Int?
-    let category: Category
-    let ingredients: [Ingredient]
+    let category: Category?
+    let ingredients: [Ingredient]?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -150,7 +151,7 @@ struct OrderDetailsModel: Codable {
     let orderType: String
     let totalSum: Int
     let employeeProfile: EmployeeProfile
-    let ito: [ITO]
+    var ito: [ITO]
 
     private enum CodingKeys: String, CodingKey {
         case id, table, branch
