@@ -21,7 +21,7 @@ class CodeConfirmationView: UIStackView {
     lazy var otpField: SVPinView = {
         let pinView = SVPinView()
         pinView.pinLength = 4
-        pinView.interSpace = 8
+//        pinView.interSpace = 8
         pinView.textColor = .darkBlueCustom
         pinView.font = .poppins(ofSize: 20, weight: .regular)
         pinView.keyboardType = .numberPad

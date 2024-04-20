@@ -6,7 +6,7 @@
 import UIKit
 
 final class CartCoordinator: BaseCoordinator {
-    private var mainVC: CartViewController!
+    private var mainViewController: CartViewController!
     var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {

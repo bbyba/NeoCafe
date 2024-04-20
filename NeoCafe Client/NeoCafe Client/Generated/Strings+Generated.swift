@@ -25,6 +25,8 @@ internal enum S {
   ///  выгодные для Вас заказы! 
   ///  1 бонус = 1 сом
   internal static let bonusMessageProfile = S.tr("Localizable", "bonusMessageProfile", fallback: "Накапливайте бонусы и совершайте \n выгодные для Вас заказы! \n 1 бонус = 1 сом")
+  /// Использованные бонусы: 
+  internal static let bonusPointsUsed = S.tr("Localizable", "bonusPointsUsed", fallback: "Использованные бонусы: ")
   /// Филиалы
   internal static let branches = S.tr("Localizable", "branches", fallback: "Филиалы")
   /// Отмена

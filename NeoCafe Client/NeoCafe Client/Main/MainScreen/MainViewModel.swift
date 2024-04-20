@@ -37,12 +37,38 @@ class MainViewModel: NSObject, MainViewModelProtocol {
         CategoryModel(id: 3, name: "Десерты", image: Asset.Menu.dessert.name),
         CategoryModel(id: 4, name: "Кофе", image: Asset.Menu.coffee.name),
         CategoryModel(id: 5, name: "Напитки", image: Asset.Menu.drink.name)]
-    var popularItems: [Item] = []
+    var popularItems: [Item] = [
+        Item( id: 31,
+              name: "Пирожок с капустой",
+              description: "Традиционное блюдо",
+              itemImage: nil,
+              pricePerUnit: 120,
+              branch: nil,
+              category: Category(id: 1, name: "Выпечка"),
+              ingredients: nil),
+        Item( id: 27,
+              name: "Смузи с ягодами",
+              description: "Освежающий напиток",
+              itemImage: nil,
+              pricePerUnit: 160,
+              branch: nil,
+              category: Category(id: 5, name: "Напитки"),
+              ingredients: nil),
+        Item( id: 32,
+              name: "Суп грибной",
+              description: "Ароматный и сытный",
+              itemImage: nil,
+              pricePerUnit: 180,
+              branch: nil,
+              category: Category(id: 7, name: "Супы"),
+              ingredients: nil)]
+
+
 
     override init() {
         super.init()
 //        self.categories = []
-        self.popularItems = []
+//        self.popularItems = []
     }
 
 
@@ -72,7 +98,6 @@ class MainViewModel: NSObject, MainViewModelProtocol {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    self.popularItems = response
                     print("\(self.popularItems)")
                     self.onPopularItemsFetched?()
                 }
@@ -80,5 +105,10 @@ class MainViewModel: NSObject, MainViewModelProtocol {
                 print("Error fetching menu items: \(error)")
             }
         }
+    }
+
+    func addToCart(menuItem: Item) {
+        Cart.shared.addItem(menuItem)
+//        onAddToCartNavigate?()
     }
 }

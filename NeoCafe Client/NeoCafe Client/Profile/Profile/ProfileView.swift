@@ -21,7 +21,7 @@ class ProfileView: UIView {
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jane"
+        label.text = "Имя"
         label.font = .poppins(ofSize: 24, weight: .medium)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
@@ -39,7 +39,7 @@ class ProfileView: UIView {
 
     lazy var totalBonusPointsNumber: UILabel = {
         let label = UILabel()
-        label.text = "10"
+        label.text = "0"
         label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left

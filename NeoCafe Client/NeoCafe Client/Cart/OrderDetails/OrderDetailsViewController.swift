@@ -28,6 +28,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, Orde
 
     private func configureUI() {
         contentView.headerLabel.text = S.orderHash(viewModel.orderDetails.orderNumber)
+        contentView.branchLabel.text = "\(viewModel.orderDetails.branchName), "
+        contentView.dateLabel.text = viewModel.orderDetails.createdAt
+        contentView.totalAvailablePoints.text = String(viewModel.orderDetails.bonusPointsToSubtract)
+        contentView.priceLabel.text = String(viewModel.orderDetails.totalSum)
     }
 
     private func addTargets() {
@@ -67,11 +71,5 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
             cell.configureData(item: order, quantity: ito.quantity)
         }
         return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
-        header.configureTitle(title: "Neocafe Dzerzhinka, August 1")
-        return header
     }
 }

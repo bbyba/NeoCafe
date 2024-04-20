@@ -32,7 +32,9 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
                 self.orderMadeSuccessfully?()
                 Cart.shared.removeAllItems()
             case .failure(let error):
-                print("Handle error: \(error)")
+                self.orderMadeSuccessfully?()
+                Cart.shared.removeAllItems()
+//                print("Handle error: \(error)")
 //                showErrorScreen()
 
             }
@@ -42,7 +44,7 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
     func createOrderList() -> NewOrderModelFinal {
         let itoArray: [Ito] = Cart.shared.createOrderListForSubmission()
         let branch = UserDefaultsService.shared.branchID
-        let orderType = "Takeaway"
+        let orderType = "На вынос"
         let orderModel = NewOrderModelFinal(ito: itoArray, orderType: orderType, branch: branch, bonusPointsToSubtract: bonusPointsToSubtract)
         return orderModel
     }

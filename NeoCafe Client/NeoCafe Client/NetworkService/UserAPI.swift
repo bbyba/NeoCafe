@@ -7,22 +7,22 @@ import Moya
 
 enum UserAPI {
     // Auth
-    case registerUser(email: String, confirmationCode: String) // Register customer by adding to the database after providing email and confirmation code.
-    case loginUser(email: String, confirmationCode: String)    // Authenticate customer after providing email and confirmation code.
-    case checkEmailRegister(email: String)  // Check if customer's email is in the database and send a verification code.
-    case checkEmailLogin(email: String) // Check if customer's email is in the database and send a new verification code.
+    case registerUser(email: String, confirmationCode: String)
+    case loginUser(email: String, confirmationCode: String)
+    case checkEmailRegister(email: String)
+    case checkEmailLogin(email: String)
 
     // Main & Menu
     case getCategories
     case getPopularItems(branchID: Int)
     case getAllCategories
     case getProductDetails(productId: Int)
-//    case getMenuItemsByBranchCategory(branchID: Int, categoryID: Int)
-//        case getMenuItemsByBranchCategory(branchID: Int)
     case getMenuItemsAll
 
     // Cart
     case makeOrder(order: NewOrderModelFinal)
+    case getOrderHistoryNow
+    case getOrderHistoryPast
 
     // Branch
     case getBranches
@@ -67,6 +67,10 @@ extension UserAPI: TargetType {
             // Cart
         case .makeOrder:
             return "/orders-online/add/"
+        case .getOrderHistoryNow:
+            return "/customer/orders/now/"
+        case .getOrderHistoryPast:
+            return "/customer/orders/past/"
 
             // Branches
         case .getBranches:
@@ -85,23 +89,25 @@ extension UserAPI: TargetType {
 
     var method: Moya.Method {
         switch self {
-        case .checkEmailRegister(_),
-                .checkEmailLogin(_):
+        case .checkEmailRegister,
+                .checkEmailLogin,
+             .registerUser,
+             .loginUser,
+             .makeOrder:
             return .post
-        case .registerUser(_, _),
-                .loginUser(_, _),
-                .makeOrder:
-            return .post
+
         case .getCategories,
                 .getAllCategories,
-                .getProductDetails,
-                .getBranches,
-                .getProfile,
-                .getProfileEdit,
-            //                .getMenuItemsByBranchCategory,
-                .getMenuItemsAll,
-                .getPopularItems:
+             .getProductDetails,
+             .getBranches,
+             .getProfile, 
+             .getProfileEdit,
+             .getMenuItemsAll, 
+             .getPopularItems,
+             .getOrderHistoryNow,
+             .getOrderHistoryPast:
             return .get
+
         case .patchProfile:
             return .patch
         }
@@ -115,31 +121,21 @@ extension UserAPI: TargetType {
         case .registerUser(let email, let confirmationCode),
                 .loginUser(let email, let confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
-        case .getCategories,
-                .getAllCategories,
-                .getProductDetails,
-                .getBranches,
-                .getProfile,
-                .getProfileEdit,
-            //                .getMenuItemsByBranchCategory,
-                .getMenuItemsAll,
-                .getPopularItems:
-            return .requestPlain
         case .makeOrder(let order):
             return .requestJSONEncodable(order)
         case .patchProfile(_, let firstName):
             let parameters = ["first_name": firstName]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-
+        default:
+            return .requestPlain
         }
     }
 
-    //    var headers: [String : String]? {
-    //        return ["Content-Type": "application/json"]
-    //    }
     var headers: [String: String]? {
         switch self {
-        case .makeOrder:
+        case .makeOrder,
+                .getOrderHistoryNow,
+                .getOrderHistoryPast:
             if let accessToken = UserDefaultsService.shared.accessToken {
                 return ["Authorization": "Bearer \(accessToken)", 
                         "Content-Type": "application/json"]

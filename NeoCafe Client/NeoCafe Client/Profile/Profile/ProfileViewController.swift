@@ -21,6 +21,7 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
+        Loader.shared.showLoader(view: view)
         viewModel.getPersonalData()
     }
 
@@ -28,6 +29,7 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
         super.viewWillAppear(animated)
         viewModel.onPersonalDataFetched = { [weak self] personalData in
             self?.configureUserData(personalData)
+            Loader.shared.hideLoader(view: self?.view ?? UIView())
         }
     }
 

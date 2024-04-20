@@ -88,6 +88,7 @@
 		DD9DD1112B95FBAA00C489F6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */; };
 		DD9DD1132B95FF2D00C489F6 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1122B95FF2D00C489F6 /* NotificationView.swift */; };
 		DD9DD1152B95FF3A00C489F6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9DD1142B95FF3A00C489F6 /* NotificationsViewController.swift */; };
+		DDAC014B2BD37F3A00C47BAD /* CustomRoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC014A2BD37F3A00C47BAD /* CustomRoundButton.swift */; };
 		DDAD65D32B8CB04F00F72345 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */; };
 		DDAD65D52B8CB09B00F72345 /* BigProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */; };
 		DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAD65D62B8CB21400F72345 /* CategoryCell.swift */; };
@@ -210,6 +211,7 @@
 		DD9DD1102B95FBAA00C489F6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DD9DD1122B95FF2D00C489F6 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		DD9DD1142B95FF3A00C489F6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		DDAC014A2BD37F3A00C47BAD /* CustomRoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRoundButton.swift; sourceTree = "<group>"; };
 		DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
 		DDAD65D42B8CB09B00F72345 /* BigProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigProductCell.swift; sourceTree = "<group>"; };
 		DDAD65D62B8CB21400F72345 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				DDF8B5D02B70F288005FE06A /* CustomSegmentedControl.swift */,
 				DDAD65D22B8CB04F00F72345 /* CustomStepper.swift */,
 				DDAD65DE2B8CB3B100F72345 /* CustomHeaderView.swift */,
+				DDAC014A2BD37F3A00C47BAD /* CustomRoundButton.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -605,8 +608,8 @@
 		DDCA37112B8B748600451066 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DDAD65DC2B8CB29700F72345 /* MainView.swift */,
 				DDCA37102B8B747A00451066 /* CustomCells */,
+				DDAD65DC2B8CB29700F72345 /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				DD9DD0ED2B94586B00C489F6 /* OrderDetailsViewController.swift in Sources */,
 				DD9DD0BA2B8FD63C00C489F6 /* MenuCategoryCell.swift in Sources */,
 				DDCAE7452BC6DE4C00D94046 /* InjectionDefaultContainer.swift in Sources */,
+				DDAC014B2BD37F3A00C47BAD /* CustomRoundButton.swift in Sources */,
 				DD9DD0C02B8FD68400C489F6 /* MenuViewController.swift in Sources */,
 				DD73F2FD2BA04E9000C33E21 /* CartViewModel.swift in Sources */,
 				DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */,

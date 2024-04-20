@@ -44,9 +44,16 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
         contentView.priceLabel.text = S.som(totalPrice)
     }
 
+    func reloadCollectionView() {
+            contentView.collectionView.reloadData()
+            updateViewBasedOnCartState()
+            updateTotalPriceLabel()
+        }
+
     @objc func cartUpdated() {
-        updateTotalPriceLabel()
         contentView.collectionView.reloadData()
+        updateTotalPriceLabel()
+
     }
 
     @objc func orderHistoryButtonTapped() {
@@ -102,7 +109,6 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
                 updateTotalPriceLabel()
             }
         }
-
         return cell
     }
 
@@ -116,6 +122,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     private func showDeleteConfirmationModal(at indexPath: IndexPath) {
         let modalViewController = DeleteModalViewController()
+        modalViewController.modalPresentationStyle = .overFullScreen
         modalViewController.indexPathToDelete = indexPath
         let itemToRemove = Cart.shared.getItems()[indexPath.row].item
         modalViewController.itemName = itemToRemove.name
@@ -127,7 +134,10 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     private func deleteItem(itemToRemove: Item, at indexPath: IndexPath) {
         Cart.shared.removeItem(itemToRemove)
+//        contentView.collectionView.deleteItems(at: [indexPath])
+        contentView.collectionView.reloadData()
         updateViewBasedOnCartState()
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
     }
+
 }

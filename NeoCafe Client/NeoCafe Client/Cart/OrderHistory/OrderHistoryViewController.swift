@@ -16,11 +16,14 @@ class OrderHistoryViewController: BaseViewController<OrderHistoryViewModel, Orde
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
-        viewModel.setupCompleteOrdersList()
-        viewModel.setupCurrentOrdersList()
-        contentView.collectionView.reloadData()
+        Loader.shared.showLoader(view: self.view)
+                viewModel.fetchOrderHistory()
+                viewModel.onOrdersFetched = {
+                    self.contentView.collectionView.reloadData()
+                    Loader.shared.hideLoader(view: self.view)
+                }
     }
-
+    
     private func setupCollectionView() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
@@ -55,11 +58,14 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = viewModel.currentOrdersList[indexPath.row]
-            cell.configureForOrderHistory(item: currentOrder, isOrderHistoryCell: true)
+            cell.configureForOrderHistory(item: currentOrder, isOrderHistoryCell: true, inCurrent: true)
+            cell.descriptionLabel.text = viewModel.makeITONameList(orderIto: currentOrder.ito)
+
             return cell
         case .completed:
             let completedOrder = viewModel.completeOrdersList[indexPath.row]
-            cell.configureForOrderHistory(item: completedOrder, isOrderHistoryCell: true)
+            cell.configureForOrderHistory(item: completedOrder, isOrderHistoryCell: true, inCurrent: false)
+            cell.descriptionLabel.text = viewModel.makeITONameList(orderIto: completedOrder.ito)
             return cell
         }
     }

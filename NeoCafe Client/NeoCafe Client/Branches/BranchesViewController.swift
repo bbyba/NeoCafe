@@ -12,6 +12,7 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
         super.viewDidLoad()
         setupCollectionView()
         setupBindings()
+        Loader.shared.showLoader(view: view)
         viewModel.getBranches()
     }
 
@@ -24,6 +25,7 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
         viewModel.onBranchesFetched = { [weak self] in
             DispatchQueue.main.async {
                 self?.contentView.collectionView.reloadData()
+                Loader.shared.hideLoader(view: self?.view ?? UIView())
             }
         }
     }

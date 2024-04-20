@@ -87,6 +87,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             let cell: BigProductCell = collectionView.dequeue(for: indexPath)
             let popularItem = viewModel.popularItems[indexPath.row]
             cell.configureData(item: popularItem)
+            cell.plusButton.isHidden = false
+            cell.plusButton.isUserInteractionEnabled = true
+            cell.onAddToCart = { [weak self] popularItem in
+                self?.viewModel.addToCart(menuItem: popularItem)
+            }
             return cell
         }
     }

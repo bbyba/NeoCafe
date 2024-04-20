@@ -80,6 +80,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
     func addToCart(menuItem: Item) {
         Cart.shared.addItem(menuItem)
-        onAddToCartNavigate?()
+//        onAddToCartNavigate?()
     }
 }

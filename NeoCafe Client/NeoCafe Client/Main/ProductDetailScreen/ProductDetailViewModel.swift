@@ -15,7 +15,32 @@ class ProductDetailViewModel: NSObject, ProductDetailViewModelProtocol {
     var onAddToCartNavigate: EmptyCompletion?
     var onProductDetailUpdate: ((Item) -> Void)?
     var productDetail: Item?
-    var suggestions: [Item] = []
+//    var suggestions: [Item] = []
+    var suggestions: [Item] = [
+        Item( id: 31,
+              name: "Пирожок с капустой",
+              description: "Традиционное блюдо",
+              itemImage: nil,
+              pricePerUnit: 120,
+              branch: nil,
+              category: Category(id: 1, name: "Выпечка"),
+              ingredients: nil),
+        Item( id: 27,
+              name: "Смузи с ягодами",
+              description: "Освежающий напиток",
+              itemImage: nil,
+              pricePerUnit: 160,
+              branch: nil,
+              category: Category(id: 5, name: "Напитки"),
+              ingredients: nil),
+        Item( id: 32,
+              name: "Суп грибной",
+              description: "Ароматный и сытный",
+              itemImage: nil,
+              pricePerUnit: 180,
+              branch: nil,
+              category: Category(id: 7, name: "Супы"),
+              ingredients: nil)]
     var productQuantity: Int = 1
 
     func getProductDetails(productId: Int) {

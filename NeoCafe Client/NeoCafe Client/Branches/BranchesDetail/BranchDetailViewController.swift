@@ -29,6 +29,8 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.goToMenuButton.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
+        contentView.dropDownButton.addTarget(self, action: #selector(dropDownButtonTapped), for: .touchUpInside)
+
     }
 
     private func setupBindings() {
@@ -54,6 +56,10 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
     @objc func goToMenuButtonTapped() {
         viewModel.onMenuNavigate?()
     }
+
+    @objc func dropDownButtonTapped() {
+        contentView.toggleScheduleTableView(hidden: !contentView.scheduleTableView.isHidden)
+    }
 }
 
 extension BranchDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -69,6 +75,9 @@ extension BranchDetailViewController: UICollectionViewDataSource, UICollectionVi
         let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
         let suggestionItem = viewModel.suggestionItems[indexPath.row]
         cell.configureData(item: suggestionItem)
+        cell.onAddToCart = { [weak self] item in
+            self?.viewModel.addToCart(menuItem: item)
+        }
         return cell
         }
 

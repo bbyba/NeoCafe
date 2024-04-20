@@ -41,7 +41,7 @@ class MenuView: UIView {
 
     lazy var headerDropDownButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.Buttons.dropDown.image, for: .normal)
+        button.setImage(Asset.dropDownIcon.image, for: .normal)
         return button
     }()
 

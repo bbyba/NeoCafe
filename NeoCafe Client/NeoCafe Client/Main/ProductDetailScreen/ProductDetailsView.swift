@@ -191,6 +191,7 @@ extension ProductDetailsView: BaseContentView {
 
         stepper.snp.makeConstraints { make in
             make.width.equalTo(120)
+            make.height.equalTo(40)
         }
 
         addToCartButton.snp.makeConstraints { make in

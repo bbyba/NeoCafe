@@ -5,12 +5,6 @@
 import UIKit
 
 class ProductDetailViewController: BaseViewController<ProductDetailViewModel, ProductDetailsView> {
-    
-    var suggestions: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230)
-    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +54,8 @@ extension ProductDetailViewController: UICollectionViewDataSource, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
-        let suggestion = suggestions[indexPath.row]
-//        let suggestion = viewModel.suggestions[indexPath.row]
-//        cell.configureData(item: suggestion)
+        let suggestion = viewModel.suggestions[indexPath.row]
+        cell.configureData(item: suggestion)
         return cell
         }
 

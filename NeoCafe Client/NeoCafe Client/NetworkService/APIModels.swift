@@ -53,7 +53,7 @@ struct Item: Codable, Hashable {
     let pricePerUnit: Int
     let branch: Int?
     let category: Category
-    let ingredients: [Ingredient]
+    let ingredients: [Ingredient]?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -170,9 +170,11 @@ struct CustomerProfile: Codable {
 struct OrderHistoryModel: Codable {
     let id, orderNumber: Int
     let orderStatus, orderType, createdAt, updatedAt: String
-    let completedAt: String
+    let completedAt: String?
     let branch: Int
-    let branchName, totalSum, customerProfile: String
+    let branchName: String
+    let totalSum: Int
+    let customerProfile: String?
     let ito: [Ito]
     let bonusPointsToSubtract: Int
 
