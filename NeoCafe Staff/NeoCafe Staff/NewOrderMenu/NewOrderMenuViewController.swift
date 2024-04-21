@@ -16,7 +16,7 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         setupBindings()
         viewModel.getCategories()
         viewModel.getMenuItems()
@@ -33,7 +33,7 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     private func setupBindings() {
         viewModel.onCategoriesFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false{
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -81,17 +81,17 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
-            Loader.shared.hideLoader(view: self.view)
+            Loader.shared.hideLoader(view: view)
         }
     }
 }
 
 extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return MenuSection.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch MenuSection.allCases[section] {
         case .category:
             return viewModel.allCategories.count
@@ -118,7 +118,10 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind _: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView
+    {
         let header: CollectionViewHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
@@ -149,16 +152,14 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     // Temporary
-    private func openCoffeeModal(for item: Item) {
+    private func openCoffeeModal(for _: Item) {
         let coffeeModalVC = CoffeeDetailsViewController(viewModel: CoffeeDetailsViewModel())
         coffeeModalVC.modalPresentationStyle = .overFullScreen
         present(coffeeModalVC, animated: true, completion: nil)
     }
 }
 
-
 extension NewOrderMenuViewController: CartUpdateDelegate, MakeNewOrderDelegate {
-
     func cartDidUpdate() {
         updateUI()
     }

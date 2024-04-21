@@ -3,8 +3,8 @@ import UIKit
 public typealias BaseViewController = BaseContentViewModelController
 
 open class BaseContentViewModelController<ViewModel: NSObject,
-                                          ContentView: BaseContentView>: BaseContentViewController<ContentView> {
-
+    ContentView: BaseContentView>: BaseContentViewController<ContentView>
+{
     public let viewModel: ViewModel
 
     public init(viewModel: ViewModel, contentView: ContentView = .init()) {

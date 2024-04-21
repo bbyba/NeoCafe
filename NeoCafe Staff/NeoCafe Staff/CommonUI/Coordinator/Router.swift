@@ -2,11 +2,10 @@
 //  Router.swift
 //
 
-import UIKit
 import Combine
+import UIKit
 
 protocol Router: AnyObject, Presentable {
-
     var navigationController: UINavigationController { get }
     var rootViewController: UIViewController? { get }
 
@@ -32,13 +31,12 @@ protocol Router: AnyObject, Presentable {
 }
 
 final class RouterImpl: NSObject, Router, UINavigationControllerDelegate, UIAdaptivePresentationControllerDelegate {
-
     var navigationController: UINavigationController
     var completions: [UIViewController: EmptyCompletion]
 
     init(navigationController: UINavigationController = UINavigationController()) {
         self.navigationController = navigationController
-        self.completions = [:]
+        completions = [:]
         super.init()
         self.navigationController.delegate = self
     }
@@ -64,7 +62,8 @@ final class RouterImpl: NSObject, Router, UINavigationControllerDelegate, UIAdap
     }
 
     func push(_ module: Presentable, animated: Bool, hideBottomBar: Bool, hideNavBar: Bool = false,
-              completion: EmptyCompletion?) {
+              completion: EmptyCompletion?)
+    {
         let controller = module.toPresent
         controller.hidesBottomBarWhenPushed = hideBottomBar
 
@@ -128,16 +127,18 @@ final class RouterImpl: NSObject, Router, UINavigationControllerDelegate, UIAdap
 
     public func navigationController(
         _ navigationController: UINavigationController,
-        didShow viewController: UIViewController,
-        animated: Bool) {
+        didShow _: UIViewController,
+        animated _: Bool
+    ) {
         guard let poppedViewController = navigationController.transitionCoordinator?.viewController(forKey: .from),
-              !navigationController.viewControllers.contains(poppedViewController) else {
+              !navigationController.viewControllers.contains(poppedViewController)
+        else {
             return
         }
         runCompletion(for: poppedViewController)
     }
 
-    func showAlert(withTitle title: String, message: String, buttonName: String) {
+    func showAlert(withTitle _: String, message _: String, buttonName _: String) {
 //        navigationController.showAlert(withTitle: title, message: message, buttonName: buttonName)
     }
 }

@@ -125,9 +125,9 @@ struct Ingredient: Codable, Hashable {
 }
 
 enum MeasurementUnit: String, Codable {
-    case гр = "гр"
-    case мл = "мл"
-    case шт = "шт"
+    case гр
+    case мл
+    case шт
 }
 
 struct CategoryModel: Codable {
@@ -135,7 +135,6 @@ struct CategoryModel: Codable {
     let name: String
     let image: String?
 }
-
 
 // MARK: - OrderDetails
 
@@ -168,6 +167,7 @@ struct OrderDetailsModel: Codable {
 }
 
 // MARK: - Ito
+
 struct ITO: Codable {
     let id, item: Int
     let itemName: String
@@ -183,6 +183,7 @@ struct ITO: Codable {
 }
 
 // MARK: - Tables
+
 struct TableModel: Codable, Hashable {
     let id: Int
     let tableNumber: Int
@@ -209,4 +210,3 @@ struct MakeNewOrderModel: Codable {
         case ito = "ITO"
     }
 }
-

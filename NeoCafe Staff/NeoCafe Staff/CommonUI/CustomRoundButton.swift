@@ -5,7 +5,6 @@
 import UIKit
 
 class CustomRoundButton: UIButton {
-
     init(withImage image: UIImage?, backgroundColor: UIColor) {
         super.init(frame: .zero)
         configureButton(image: image, backgroundColor: backgroundColor)
@@ -22,7 +21,8 @@ class CustomRoundButton: UIButton {
         self.backgroundColor = backgroundColor
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

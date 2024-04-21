@@ -3,12 +3,11 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
 import RealmSwift
+import UIKit
 
 protocol NewOrderMenuViewModelProtocol {
-
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
     var onBackNavigate: EmptyCompletion? { get set }
@@ -19,9 +18,6 @@ protocol NewOrderMenuViewModelProtocol {
 
     var allCategories: [CategoryModel] { get }
     var menuItems: [Item] { get }
-
-//    func getCategories()
-//    func getMenuItems()
 }
 
 class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
@@ -68,15 +64,16 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     func getCategories() {
         networkService.sendRequest(successModelType: [CategoryModel].self,
                                    endpoint: MultiTarget(UserAPI.getCategories))
-        { [weak self] result in
+        {
+            [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.allCategories = response
                     self.onCategoriesFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
@@ -88,12 +85,12 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.menuItems = response.results.results
                     self.onMenuItemsFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }
@@ -102,8 +99,8 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     func findItemsAndAdd() {
         guard let existingOrder = existingOrder else {
             print("existingOrder is nil")
-            return }
-
+            return
+        }
 
         for ito in existingOrder.ito {
             if let item = findItemFromMenuItems(itemId: ito.id) {
@@ -122,7 +119,6 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
         }
         return nil
     }
-
 
     private func convertToItemType(itemRealm: ItemRealmModel) -> Item {
         let item = Item(id: itemRealm.id,

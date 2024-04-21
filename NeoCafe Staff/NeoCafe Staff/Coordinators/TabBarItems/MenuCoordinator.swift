@@ -3,18 +3,18 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
+import UIKit
 
 final class MenuCoordinator: BaseCoordinator {
     private var mainViewController: MenuViewController!
 
     override func start() {
         let viewModel = MenuViewModel()
-        viewModel.onProfileNavigate = { [ weak self ] in
+        viewModel.onProfileNavigate = { [weak self] in
             self?.openProfile()
         }
-        viewModel.onNotificationsNavigate = { [ weak self ] in
+        viewModel.onNotificationsNavigate = { [weak self] in
             self?.openNotifications()
         }
         let viewController = MenuViewController(viewModel: viewModel)

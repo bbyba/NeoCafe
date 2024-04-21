@@ -6,7 +6,6 @@
 import UIKit
 
 class NotificationsViewController: BaseViewController<NotificationsViewModel, NotificationView> {
-
     override func setTargets() {
         contentView.collectionView.delegate = self
         contentView.collectionView.dataSource = self
@@ -25,20 +24,20 @@ class NotificationsViewController: BaseViewController<NotificationsViewModel, No
 }
 
 extension NotificationsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return viewModel.notificationsList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: NotificationsCell = collectionView.dequeue(for: indexPath)
         let notification = viewModel.notificationsList[indexPath.row]
-        cell.configureData(status: notification.status, 
+        cell.configureData(status: notification.status,
                            details: notification.details,
                            time: notification.time)
         return cell
-        }
+    }
 }

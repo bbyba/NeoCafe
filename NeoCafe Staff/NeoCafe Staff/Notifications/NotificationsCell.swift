@@ -6,7 +6,6 @@
 import UIKit
 
 class NotificationsCell: BaseCollectionViewCell {
-
     lazy var orderStatusLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
@@ -42,7 +41,8 @@ class NotificationsCell: BaseCollectionViewCell {
         timeLabel.text = time
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -52,7 +52,7 @@ extension NotificationsCell: BaseContentView {
         backgroundColor = .whiteCustom
         layer.cornerRadius = 14
     }
-    
+
     func setBorder() {
         layer.borderWidth = 1
         layer.borderColor = UIColor.darkBlueCustom.cgColor
@@ -74,7 +74,6 @@ extension NotificationsCell: BaseContentView {
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(30)
             make.bottom.equalToSuperview().inset(16)
-
         }
 
         timeLabel.snp.makeConstraints { make in

@@ -11,7 +11,7 @@ protocol OrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion? { get set }
 
     var tables: [TableModel] { get set }
-    var ordersList: [OrderDetailsModel] {  get set }
+    var ordersList: [OrderDetailsModel] { get set }
 }
 
 class OrderViewModel: NSObject, OrderViewModelProtocol {
@@ -25,14 +25,13 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
 
     var filteredOrders: [OrderDetailsModel] = []
 //    var ordersList: [OrderDetailsModel] = []
-    var tables: [TableModel]  = []
+    var tables: [TableModel] = []
     var statusList: [String] = [S.all,
                                 S.newStatus,
                                 S.processingStatus,
-                                S.readyStatus, 
+                                S.readyStatus,
                                 S.doneStatus,
                                 S.cancelledStatus]
-
 
     func filterOrders(byStatus status: String) {
         if status == S.all {
@@ -78,7 +77,7 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
                         EmployeeSchedule(day: "Чт", startTime: "08:00", endTime: "18:00"),
                         EmployeeSchedule(day: "Пт", startTime: "08:00", endTime: "17:00"),
                         EmployeeSchedule(day: "Сб", startTime: "09:00", endTime: "18:00"),
-                        EmployeeSchedule(day: "Вс", startTime: "10:00", endTime: "19:00")
+                        EmployeeSchedule(day: "Вс", startTime: "10:00", endTime: "19:00"),
                     ]
                 )
             ),
@@ -89,11 +88,10 @@ class OrderViewModel: NSObject, OrderViewModelProtocol {
                     itemName: "Суп",
                     quantity: 2,
                     totalPrice: 180
-                )
+                ),
             ]
-        )
+        ),
     ]
-
 
 //    func getAllOrders() {
 //        networkService.sendRequest(

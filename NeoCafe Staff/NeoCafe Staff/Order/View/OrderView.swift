@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 enum OrderStatus: String, CaseIterable {
     case statusCategory
@@ -54,10 +54,10 @@ class OrderView: UIView {
         return view
     }()
 
-    lazy var profileButton = CustomRoundButton(withImage: Asset.Images.account.image, 
+    lazy var profileButton = CustomRoundButton(withImage: Asset.Images.account.image,
                                                backgroundColor: .lightBlueCustom)
 
-    lazy var notificationsButton = CustomRoundButton(withImage: Asset.Images.bell.image, 
+    lazy var notificationsButton = CustomRoundButton(withImage: Asset.Images.bell.image,
                                                      backgroundColor: .lightBlueCustom)
 
     lazy var busyStackView: UIStackView = {
@@ -118,19 +118,20 @@ class OrderView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension OrderView {
-
     // MARK: - Tables
 
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0 / 3.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
@@ -138,7 +139,8 @@ extension OrderView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -149,17 +151,19 @@ extension OrderView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-
     // MARK: - Orders
 
     private func createOrdersLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
+                                                            _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 
-            let sectionLayoutKind = OrderStatus.allCases[sectionIndex]
-            switch (sectionLayoutKind) {
-            case .statusCategory: return self.generateCategoryItemsLayout()
-            case .statusOrder: return self.generateOrdersByStatusLayout()
-            }
+                let sectionLayoutKind = OrderStatus.allCases[sectionIndex]
+                switch sectionLayoutKind {
+                case .statusCategory:
+                    return self.generateCategoryItemsLayout()
+                case .statusOrder:
+                    return self.generateOrdersByStatusLayout()
+                }
         }
         return layout
     }
@@ -167,7 +171,8 @@ extension OrderView {
     private func generateCategoryItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(90),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil,
@@ -177,9 +182,10 @@ extension OrderView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .estimated(90),
-            heightDimension: .absolute(34))
+            heightDimension: .absolute(34)
+        )
 
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, 
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,
                                                        subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
@@ -190,29 +196,30 @@ extension OrderView {
                                                         trailing: 16)
         section.interGroupSpacing = 8
         return section
-
-}
+    }
 
     private func generateOrdersByStatusLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, 
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8,
                                                       leading: 16,
                                                       bottom: 8,
                                                       trailing: 16)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, 
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                         leading: 0,
                                                         bottom: 0,
                                                         trailing: 0)
@@ -224,6 +231,7 @@ extension OrderView: BaseContentView {
     func setProperties() {
         backgroundColor = .whiteCustom
     }
+
     func addSubviews() {
         addSubview(header)
         header.addSubview(profileButton)

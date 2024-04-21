@@ -19,13 +19,15 @@ class CustomTextField: UITextField {
         super.init(frame: .zero)
         isPasswordField ? setupSecureTextField() : setupTextField()
     }
-    required init?(coder aDecoder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        if let leftView = self.leftView {
+        if let leftView = leftView {
             leftView.frame = CGRect(x: 0, y: 0, width: 40, height: bounds.height)
             iconImageView.frame = CGRect(x: 10, y: 0, width: 20, height: bounds.height)
         }

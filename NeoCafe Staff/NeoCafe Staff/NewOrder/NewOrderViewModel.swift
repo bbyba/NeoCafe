@@ -9,7 +9,6 @@ protocol NewOrderViewModelProtocol {
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
     var onMakeNewOrderNavigate: ((TableModel) -> Void)? { get set }
-
 }
 
 class NewOrderViewModel: NSObject, NewOrderViewModelProtocol {

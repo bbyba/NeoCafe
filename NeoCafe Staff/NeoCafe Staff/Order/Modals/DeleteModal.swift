@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class DeleteModalView: UIView {
     var itemName: String
@@ -39,7 +39,7 @@ class DeleteModalView: UIView {
         return button
     }()
 
-    lazy var yesButton : CustomButton = {
+    lazy var yesButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.yes, backgroundColor: .clear, titleColor: .lightBlueCustom, showBorder: true)
         return button
@@ -53,31 +53,24 @@ class DeleteModalView: UIView {
         return stackView
     }()
 
-
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        addSubviews()
-//        setupConstraints()
-//    }
     init(frame: CGRect, itemName: String) {
-            self.itemName = itemName
-            super.init(frame: frame)
-            addSubviews()
-            setupConstraints()
-        }
+        self.itemName = itemName
+        super.init(frame: frame)
+        addSubviews()
+        setupConstraints()
+    }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension DeleteModalView: BaseContentView {
-
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
-        contentView.addSubview((headerLabel))
+        contentView.addSubview(headerLabel)
         contentView.addSubview(buttonStack)
     }
 

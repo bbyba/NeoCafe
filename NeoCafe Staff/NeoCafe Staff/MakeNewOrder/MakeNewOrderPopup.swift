@@ -2,11 +2,10 @@
 //  MakeNewOrderPopup.swift
 //  NeoCafe Staff
 //
-import UIKit
 import SnapKit
+import UIKit
 
 class MakeNewOrderPopup: UIView {
-
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -75,14 +74,13 @@ class MakeNewOrderPopup: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension MakeNewOrderPopup: BaseContentView {
-
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
@@ -128,13 +126,15 @@ extension MakeNewOrderPopup: BaseContentView {
     func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0 / 3))
+            heightDimension: .fractionalHeight(1.0 / 3)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 

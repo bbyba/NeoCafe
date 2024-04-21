@@ -1,6 +1,6 @@
 //
 //  Menurealm.swift
-//  
+//
 import Foundation
 import RealmSwift
 
@@ -17,16 +17,17 @@ class ItemRealmModel: Object {
 
     convenience init(from item: Item) {
         self.init()
-        self.id = item.id
-        self.name = item.name
-        self.itemImage = item.itemImage
-        self.pricePerUnit = item.pricePerUnit
-        self.branch = item.branch ?? 0
+        id = item.id
+        name = item.name
+        itemImage = item.itemImage
+        pricePerUnit = item.pricePerUnit
+        branch = item.branch ?? 0
     }
 }
+
 //
 //
-//class ItemRealmModel: Object {
+// class ItemRealmModel: Object {
 //    @objc dynamic var id: Int = 0
 //    @objc dynamic var name: String = ""
 //    @objc dynamic var itemImage: String?
@@ -56,9 +57,9 @@ class ItemRealmModel: Object {
 //        }
 //        self.ingredients = ingredientRealmList
 //    }
-//}
+// }
 //
-//class IngredientRealm: Object {
+// class IngredientRealm: Object {
 //    @objc dynamic var id: Int = 0
 //    @objc dynamic var name: String = ""
 //    @objc dynamic var quantity: Int = 0
@@ -67,13 +68,13 @@ class ItemRealmModel: Object {
 //    override static func primaryKey() -> String? {
 //        return "id"
 //    }
-//}
+// }
 //
-//class CategoryRealm: Object {
+// class CategoryRealm: Object {
 //    @objc dynamic var id: Int = 0
 //    @objc dynamic var name: String = ""
 //
 //    override static func primaryKey() -> String? {
 //        return "id"
 //    }
-//}
+// }

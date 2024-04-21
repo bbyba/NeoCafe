@@ -10,7 +10,7 @@ class SuccessfulOrderViewController: UIViewController {
     private var successfulOrderViewModel: SuccessfulOrderViewModel
 
     init(viewModel: SuccessfulOrderViewModel) {
-        self.successfulOrderViewModel = viewModel
+        successfulOrderViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,7 +32,8 @@ class SuccessfulOrderViewController: UIViewController {
         successfulOrderViewModel.ongoToOrderNavigate?()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

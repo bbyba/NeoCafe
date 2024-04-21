@@ -2,8 +2,8 @@
 //  OptionView.swift
 //  NeoCafe Staff
 //
-import UIKit
 import SnapKit
+import UIKit
 
 class OptionView: UIView {
     lazy var checkbox = UIView()
@@ -26,7 +26,7 @@ class OptionView: UIView {
 
     init(title: String, milkOption: Bool) {
         super.init(frame: .zero)
-        self.titleLabel.text = title
+        titleLabel.text = title
         setUpCheckbox(milkOption: milkOption)
         addSubviews()
         setupConstraints()
@@ -50,7 +50,8 @@ class OptionView: UIView {
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

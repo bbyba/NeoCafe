@@ -10,7 +10,6 @@ enum TableStatus {
 }
 
 class OrdersCollectionViewCell: BaseCollectionViewCell {
-
     lazy var tableNumber: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 20, weight: .semibold)
@@ -70,15 +69,15 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     }
 
     func updateTimeByStatus(orderData: OrderDetailsModel) {
-            switch orderData.orderStatus {
-            case "Новый":
-                timeLabel.text = orderData.createdAt
-            case "Завершено":
-                timeLabel.text = orderData.completedAt
-            default:
-                timeLabel.text = orderData.updatedAt
-            }
+        switch orderData.orderStatus {
+        case "Новый":
+            timeLabel.text = orderData.createdAt
+        case "Завершено":
+            timeLabel.text = orderData.completedAt
+        default:
+            timeLabel.text = orderData.updatedAt
         }
+    }
 
     func updateCellAppearanceByStatus(status: String) {
         switch status {
@@ -100,7 +99,8 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

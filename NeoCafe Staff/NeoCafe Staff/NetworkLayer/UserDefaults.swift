@@ -5,7 +5,6 @@
 import UIKit
 
 class UserDefaultsService {
-
     static let shared = UserDefaultsService()
     private init() {}
 
@@ -15,8 +14,8 @@ class UserDefaultsService {
     }
 
     enum UserIDData: String {
-        case branchID = "branchID"
-        case userID = "userID"
+        case branchID
+        case userID
     }
 
     var accessToken: String? {
@@ -35,17 +34,16 @@ class UserDefaultsService {
     }
 
     var userID: Int {
-        get { UserDefaults.standard.integer(forKey:  UserIDData.userID.rawValue) }
-        set { UserDefaults.standard.set(newValue, forKey:  UserIDData.userID.rawValue) }
+        get { UserDefaults.standard.integer(forKey: UserIDData.userID.rawValue) }
+        set { UserDefaults.standard.set(newValue, forKey: UserIDData.userID.rawValue) }
     }
 
     func saveTokensAndIDs(response: AuthenticationResponse) {
-        self.accessToken = response.accessToken
-        self.refreshToken = response.refreshToken
-        self.branchID = response.branchID
-        self.userID = response.userID
+        accessToken = response.accessToken
+        refreshToken = response.refreshToken
+        branchID = response.branchID
+        userID = response.userID
     }
 
-    var ItemToOrderList: [Item] = []
-
+    var itemToOrderList: [Item] = []
 }

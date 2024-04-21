@@ -3,15 +3,14 @@
 //
 import UIKit
 
-typealias EmptyCompletion = (() -> Void)
-typealias BoolCompletion = ((Bool) -> Void)
+typealias EmptyCompletion = () -> Void
+typealias BoolCompletion = (Bool) -> Void
 
 protocol Coordinator: AnyObject, Presentable {
     func start()
 }
 
 class BaseCoordinator: Coordinator {
-
     var onComplete: EmptyCompletion?
 
     let router: Router
@@ -39,8 +38,8 @@ class BaseCoordinator: Coordinator {
 
         if let coordinator = coordinator as? BaseCoordinator, !coordinator.childCoordinators.isEmpty {
             coordinator.childCoordinators
-                .filter({ $0 !== coordinator })
-                .forEach({ coordinator.removeChild($0) })
+                .filter { $0 !== coordinator }
+                .forEach { coordinator.removeChild($0) }
         }
         for (index, element) in childCoordinators.enumerated() where element === coordinator {
             childCoordinators.remove(at: index)

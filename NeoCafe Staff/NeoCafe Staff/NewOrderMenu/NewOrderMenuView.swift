@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 enum MenuSection: String, CaseIterable {
     case category
@@ -43,7 +43,7 @@ class NewOrderMenuView: UIView {
         return label
     }()
 
-    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, 
+    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image,
                                             backgroundColor: .lightBlueCustom)
 
     lazy var orderInfoButton: UIButton = {
@@ -84,22 +84,22 @@ class NewOrderMenuView: UIView {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension NewOrderMenuView {
     private func generateLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, 
-                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
+                                                            _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 
-            let sectionLayoutKind = MenuSection.allCases[sectionIndex]
-            switch (sectionLayoutKind) {
-            case .category: return self.generateCategoryItemsLayout()
-            case .productItem: return self.generateMenuItemsLayout()
-            }
+                let sectionLayoutKind = MenuSection.allCases[sectionIndex]
+                switch sectionLayoutKind {
+                case .category: return self.generateCategoryItemsLayout()
+                case .productItem: return self.generateMenuItemsLayout()
+                }
         }
         return layout
     }
@@ -107,21 +107,25 @@ extension NewOrderMenuView {
     private func generateCategoryItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(90),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: nil, top: nil, trailing: .fixed(8), bottom: nil)
+            leading: nil, top: nil, trailing: .fixed(8), bottom: nil
+        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .estimated(90),
-            heightDimension: .absolute(34))
+            heightDimension: .absolute(34)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44))
+            heightDimension: .absolute(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -143,13 +147,13 @@ extension NewOrderMenuView {
                                                         trailing: 16)
         section.interGroupSpacing = 8
         return section
-
-}
+    }
 
     private func generateMenuItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
@@ -160,19 +164,19 @@ extension NewOrderMenuView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight( 1.0 / 7.5 ))
-
+            heightDimension: .fractionalHeight(1.0 / 7.5)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, 
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                       leading: 16,
                                                       bottom: 12,
                                                       trailing: 16)
 
         let section = NSCollectionLayoutSection(group: group)
 
-        section.contentInsets = NSDirectionalEdgeInsets(top:16,
+        section.contentInsets = NSDirectionalEdgeInsets(top: 16,
                                                         leading: 0,
                                                         bottom: 0,
                                                         trailing: 0)
@@ -180,9 +184,7 @@ extension NewOrderMenuView {
     }
 }
 
-
 extension NewOrderMenuView: BaseContentView {
-
     func setProperties() {
         backgroundColor = .white
     }

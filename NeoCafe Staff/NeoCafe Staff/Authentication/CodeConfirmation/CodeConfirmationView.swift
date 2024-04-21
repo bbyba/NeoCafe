@@ -3,9 +3,9 @@
 // NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
 import SVPinView
+import UIKit
 
 class CodeConfirmationView: UIView {
     lazy var header = CustomHeaderView()
@@ -62,7 +62,7 @@ class CodeConfirmationView: UIView {
     lazy var timeCounter = {
         let label = UILabel()
         label.text = ""
-        label.font =  .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .bold)
         label.textColor = .darkGreyCustom
         return label
     }()
@@ -89,7 +89,8 @@ class CodeConfirmationView: UIView {
         timeCounter.text = ""
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

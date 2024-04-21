@@ -44,11 +44,11 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
 }
 
 extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return Cart.shared.items.count
     }
 
@@ -63,7 +63,7 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let customCell = cell as? CustomBigCell {
             customCell.onSwipeToDelete = { [weak self] indexPath in
                 self?.showDeleteConfirmationModal(at: indexPath)
@@ -91,9 +91,9 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
 
 extension MakeNewOrderViewController: CartUpdateDelegate {
     func cartDidUpdate() {
-            updateUI()
-            delegate?.cartDidUpdateInMakeNewOrder()
-        }
+        updateUI()
+        delegate?.cartDidUpdateInMakeNewOrder()
+    }
 
     private func updateUI() {
         updateTitleLabel()

@@ -5,7 +5,6 @@
 import UIKit
 
 class TableOrderDetailsViewController: BaseViewController<TableOrderDetailsViewModel, TableOrderDetailsView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegatesAndDataSource()
@@ -29,7 +28,6 @@ class TableOrderDetailsViewController: BaseViewController<TableOrderDetailsViewM
     func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
-
     }
 
     @objc func backButtonTapped() {
@@ -42,11 +40,11 @@ class TableOrderDetailsViewController: BaseViewController<TableOrderDetailsViewM
 }
 
 extension TableOrderDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return viewModel.orderDetails.ito.count
     }
 

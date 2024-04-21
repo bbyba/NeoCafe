@@ -26,12 +26,11 @@ final class CircularCheckbox: UIView {
 
         addSubviews()
         setupConstraints()
-
     }
 
     func toggle() {
-        self.isChecked = !isChecked
-        orangeCircle.isHidden = !self.isChecked
+        isChecked = !isChecked
+        orangeCircle.isHidden = !isChecked
     }
 
     func addSubviews() {
@@ -45,14 +44,15 @@ final class CircularCheckbox: UIView {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 //
-//contentView.checkBox.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(circularCheckboxTapped)))
+// contentView.checkBox.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(circularCheckboxTapped)))
 //
-//@objc private func circularCheckboxTapped() {
-//contentView.checkBox.toggle()
-//}
+// @objc private func circularCheckboxTapped() {
+// contentView.checkBox.toggle()
+// }

@@ -3,11 +3,10 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 final class TabBarCoordinator: BaseCoordinator {
-
     var orderCoordinator: OrderCoordinator?
     var newOrderCoordinator: NewOrderCoordinator?
     var menuCoordinator: MenuCoordinator?
@@ -31,7 +30,7 @@ final class TabBarCoordinator: BaseCoordinator {
         tabBarController.viewControllers = [
             orderCoordinator.toPresent,
             newOrderCoordinator.toPresent,
-            menuCoordinator.toPresent
+            menuCoordinator.toPresent,
         ]
 
         orderCoordinator.start()
@@ -88,7 +87,7 @@ final class TabBarCoordinator: BaseCoordinator {
 
     private func configureShadow(for tabBarController: UITabBarController) {
         tabBarShadow?.removeFromSuperview()
-        tabBarShadow = UIView(frame: CGRect(x: 0, 
+        tabBarShadow = UIView(frame: CGRect(x: 0,
                                             y: 0,
                                             width: tabBarController.tabBar.bounds.width,
                                             height: tabBarController.tabBar.bounds.height))
@@ -111,12 +110,12 @@ final class TabBarCoordinator: BaseCoordinator {
 final class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {
@@ -124,8 +123,9 @@ final class CustomTabBarController: UITabBarController, UITabBarControllerDelega
         delegate = self
     }
 
-    func tabBarController(_ tabBarController: UITabBarController,
-                          shouldSelect viewController: UIViewController) -> Bool {
+    func tabBarController(_: UITabBarController,
+                          shouldSelect _: UIViewController) -> Bool
+    {
         return true
     }
 }

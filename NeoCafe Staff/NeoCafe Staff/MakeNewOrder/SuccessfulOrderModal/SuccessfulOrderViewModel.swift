@@ -3,7 +3,6 @@
 //  NeoCafe Staff
 //
 
-
 import Foundation
 
 protocol SuccessfulOrderViewModelProtocol {

@@ -49,7 +49,7 @@ class Cart {
     }
 
     func createOrderListForSubmission() -> [ITO] {
-        return items.map { (item, quantity) in
+        return items.map { item, quantity in
             let totalPrice = item.pricePerUnit * quantity
             return ITO(id: item.id, item: item.id, itemName: item.name, quantity: quantity, totalPrice: totalPrice)
         }

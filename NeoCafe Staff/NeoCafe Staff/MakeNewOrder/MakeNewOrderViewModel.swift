@@ -19,11 +19,11 @@ class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
     var existingOrder: OrderDetailsModel?
 
     init(table: TableModel, existingOrder: OrderDetailsModel?) {
-        self.selectedTable = table
+        selectedTable = table
         self.existingOrder = existingOrder
         super.init()
     }
-    
+
     func handleOrder() {
         existingOrder != nil ? patchOrder() : makeOrder()
     }
@@ -36,12 +36,12 @@ class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
+            case .success:
                 print("Request Successful")
                 print("\(orderModel)")
                 self.onOrderNavigate?()
                 Cart.shared.removeAllItems()
-            case .failure(let error):
+            case let .failure(error):
                 print("Handle error: \(error)")
                 //                showErrorScreen()
             }
@@ -62,11 +62,11 @@ class MakeNewOrderViewModel: NSObject, MakeNewOrderViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
+            case .success:
                 print("Request Successful")
                 self.onOrderNavigate?()
                 Cart.shared.removeAllItems()
-            case .failure(let error):
+            case let .failure(error):
                 print("Handle error: \(error)")
             }
         }

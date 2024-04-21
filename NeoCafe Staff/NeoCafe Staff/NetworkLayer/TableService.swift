@@ -15,15 +15,16 @@ class TableService {
 
     func getTables(completion: (() -> Void)? = nil) {
         networkService.sendRequest(successModelType: [TableModel].self,
-                                   endpoint: MultiTarget(UserAPI.getTablesByBranch(branchID: UserDefaultsService.shared.branchID))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.getTablesByBranch(branchID: UserDefaultsService.shared.branchID)))
+        { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
-                case .success(let response):
+                case let .success(response):
                     self.tables = response
                     self.notifyListeners()
                     completion?()
-                case .failure(let error):
+                case let .failure(error):
                     print("handle error: \(error)")
                 }
             }
@@ -35,8 +36,8 @@ class TableService {
     }
 
     private func notifyListeners() {
-        tables.forEach { table in
-            listeners.forEach { listener in
+        for table in tables {
+            for listener in listeners {
                 listener(table)
             }
         }

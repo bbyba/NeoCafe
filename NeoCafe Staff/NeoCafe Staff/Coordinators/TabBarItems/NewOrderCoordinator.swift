@@ -13,10 +13,10 @@ final class NewOrderCoordinator: BaseCoordinator {
 
     override func start() {
         let viewModel = NewOrderViewModel()
-        viewModel.onProfileNavigate = { [ weak self ] in
+        viewModel.onProfileNavigate = { [weak self] in
             self?.openProfile()
         }
-        viewModel.onNotificationsNavigate = { [ weak self ] in
+        viewModel.onNotificationsNavigate = { [weak self] in
             self?.openNotifications()
         }
         viewModel.onMakeNewOrderNavigate = { [weak self] table in
@@ -43,7 +43,7 @@ final class NewOrderCoordinator: BaseCoordinator {
         //            self?.router.popModule(animated: true)
         //        }
         let viewController = ProfileViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
@@ -56,10 +56,10 @@ final class NewOrderCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = NotificationsViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
-                    hideNavBar:true,
+                    hideNavBar: true,
                     completion: nil)
     }
 
@@ -101,7 +101,7 @@ final class NewOrderCoordinator: BaseCoordinator {
             self?.openOrderView()
         }
         let viewController = SuccessfulOrderViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
@@ -109,11 +109,10 @@ final class NewOrderCoordinator: BaseCoordinator {
     }
 
     func openOrderView() {
-        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
+        guard let tabBarCoordinator = tabBarCoordinator else { return }
         tabBarCoordinator.removeChild(self)
         let orderCoordinator = OrderCoordinator(router: RouterImpl())
         tabBarCoordinator.addChild(orderCoordinator)
         tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
-
 }

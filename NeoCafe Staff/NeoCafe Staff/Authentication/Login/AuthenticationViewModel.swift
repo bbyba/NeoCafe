@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol AuthenticationViewModelProtocol {
     var onCodeConfirmationNavigate: EmptyCompletion? { get set }
@@ -12,7 +12,6 @@ protocol AuthenticationViewModelProtocol {
 }
 
 class AuthenticationViewModel: NSObject, AuthenticationViewModelProtocol {
-
     @InjectionInjected(\.networkService) var networkService
 
     var onCodeConfirmationNavigate: EmptyCompletion?
@@ -22,16 +21,17 @@ class AuthenticationViewModel: NSObject, AuthenticationViewModelProtocol {
         networkService.sendRequest(successModelType: ConfirmationResponse.self,
                                    endpoint: MultiTarget(UserAPI.requestConfirmationCode(username: username,
                                                                                          password: password)))
-        { [weak self] result in
+        {
+            [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.emailReceived?(response.waiterEmail)
                     self.onCodeConfirmationNavigate?()
                 }
                 print(response)
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }

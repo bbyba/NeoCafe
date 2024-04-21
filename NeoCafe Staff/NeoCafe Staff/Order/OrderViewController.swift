@@ -25,7 +25,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     }
 
     private func getTables() {
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         TableService.shared.getTables {
             DispatchQueue.main.async {
                 Loader.shared.hideLoader(view: self.view)
@@ -43,6 +43,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     @objc private func profileButtonTapped() {
         viewModel.onProfileNavigate?()
     }
+
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
     }
@@ -64,7 +65,6 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
 }
 
 extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == contentView.tablesCollectionView {
             return 1
@@ -75,7 +75,6 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         if collectionView == contentView.tablesCollectionView {
             return TableService.shared.tables.count
 

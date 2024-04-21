@@ -65,9 +65,10 @@ class CustomBigCell: BaseCollectionViewCell {
         addGestureRecognizer(swipeGesture)
     }
 
-    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+    @objc private func handleSwipeToDelete(_: UISwipeGestureRecognizer) {
         guard let collectionView = superview as? UICollectionView,
-              let indexPath = collectionView.indexPath(for: self) else {
+              let indexPath = collectionView.indexPath(for: self)
+        else {
             return
         }
         onSwipeToDelete?(indexPath)
@@ -77,11 +78,11 @@ class CustomBigCell: BaseCollectionViewCell {
         onStepperValueChanged?(sender.currentValue)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension CustomBigCell: BaseContentView {
     func setProperties() {

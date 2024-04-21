@@ -9,10 +9,10 @@ final class OrderCoordinator: BaseCoordinator {
 
     override func start() {
         let viewModel = OrderViewModel()
-        viewModel.onProfileNavigate = { [ weak self ] in
+        viewModel.onProfileNavigate = { [weak self] in
             self?.openProfile()
         }
-        viewModel.onNotificationsNavigate = { [ weak self ] in
+        viewModel.onNotificationsNavigate = { [weak self] in
             self?.openNotifications()
         }
         viewModel.onOrderDetailsNavigate = { [weak self] selectedOrder in
@@ -26,7 +26,7 @@ final class OrderCoordinator: BaseCoordinator {
         viewController.tabBarItem.title = S.orders
         viewController.tabBarItem.image = UIImage(systemName: "pencil.circle")
         viewController.tabBarItem.selectedImage = UIImage(systemName: "pencil.circle.fill")
-        router.setRootModule(viewController, 
+        router.setRootModule(viewController,
                              hideBar: false)
     }
 
@@ -39,7 +39,7 @@ final class OrderCoordinator: BaseCoordinator {
         //                    self?.router.popModule(animated: true)
         //                }
         let viewController = ProfileViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
@@ -52,7 +52,7 @@ final class OrderCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = NotificationsViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
@@ -68,7 +68,7 @@ final class OrderCoordinator: BaseCoordinator {
             self?.openMenuToPatchExistingOrder(existingOrder: singleOrder)
         }
         let viewController = TableOrderDetailsViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
@@ -76,11 +76,11 @@ final class OrderCoordinator: BaseCoordinator {
     }
 
     func openMenuToPatchExistingOrder(existingOrder: OrderDetailsModel) {
-        guard let tabBarCoordinator = self.tabBarCoordinator else {
-                print("Error: tabBarCoordinator is nil.")
-                return
-            }
-        tabBarCoordinator.newOrderCoordinator?.openMakeNewOrder(table: existingOrder.table, 
+        guard let tabBarCoordinator = tabBarCoordinator else {
+            print("Error: tabBarCoordinator is nil.")
+            return
+        }
+        tabBarCoordinator.newOrderCoordinator?.openMakeNewOrder(table: existingOrder.table,
                                                                 existingOrder: existingOrder)
         tabBarCoordinator.tabBarViewController.selectedIndex = 1
     }

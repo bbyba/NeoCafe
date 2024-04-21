@@ -108,7 +108,6 @@
 		DDE375FB2BB93F4500210347 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE375FA2BB93F4500210347 /* OptionView.swift */; };
 		DDF8B5AE2B70ED5D005FE06A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5AD2B70ED5D005FE06A /* AppDelegate.swift */; };
 		DDF8B5B02B70ED5D005FE06A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5AF2B70ED5D005FE06A /* SceneDelegate.swift */; };
-		DDF8B5B22B70ED5D005FE06A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5B12B70ED5D005FE06A /* ViewController.swift */; };
 		DDF8B5B72B70ED5E005FE06A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5B62B70ED5E005FE06A /* Assets.xcassets */; };
 		DDF8B5BA2B70ED5E005FE06A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF8B5B82B70ED5E005FE06A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -210,6 +209,7 @@
 		DDAC01482BD2A07900C47BAD /* MenuRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuRealmModel.swift; path = "/Users/burtebayraa/Desktop/NeoCafe/NeoCafe Staff/NeoCafe Staff/MenuRealmModel.swift"; sourceTree = "<absolute>"; };
 		DDC4A4F72BB179BA00F9E6BC /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDC4A4F92BB179D400F9E6BC /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		DDCF9E922BD4F5A7004F4D94 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		DDE375EF2BB897DF00210347 /* SquareCheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareCheckbox.swift; sourceTree = "<group>"; };
 		DDE375F62BB9362000210347 /* CoffeeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailsViewController.swift; sourceTree = "<group>"; };
 		DDE375F82BB9365700210347 /* CoffeeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -217,7 +217,6 @@
 		DDF8B5AA2B70ED5D005FE06A /* NeoCafe Staff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NeoCafe Staff.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF8B5AD2B70ED5D005FE06A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDF8B5AF2B70ED5D005FE06A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DDF8B5B12B70ED5D005FE06A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DDF8B5B62B70ED5E005FE06A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDF8B5B92B70ED5E005FE06A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDF8B5BB2B70ED5E005FE06A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -548,6 +547,7 @@
 		DDF8B5A12B70ED5D005FE06A = {
 			isa = PBXGroup;
 			children = (
+				DDCF9E922BD4F5A7004F4D94 /* .swiftformat */,
 				DDA250C82BAFF07400C73F62 /* swiftgen.yml */,
 				DDF8B5AC2B70ED5D005FE06A /* NeoCafe Staff */,
 				DDF8B5AB2B70ED5D005FE06A /* Products */,
@@ -570,7 +570,6 @@
 				DDF8B5BB2B70ED5E005FE06A /* Info.plist */,
 				DDF8B5AD2B70ED5D005FE06A /* AppDelegate.swift */,
 				DDF8B5AF2B70ED5D005FE06A /* SceneDelegate.swift */,
-				DDF8B5B12B70ED5D005FE06A /* ViewController.swift */,
 				DDA2508C2BAF5AB400C73F62 /* Coordinators */,
 				DDA250982BAF5B1600C73F62 /* Splash */,
 				DDA250AC2BAF5B6700C73F62 /* Authentication */,
@@ -604,6 +603,8 @@
 				DDF8B5A72B70ED5D005FE06A /* Frameworks */,
 				DDF8B5A82B70ED5D005FE06A /* Resources */,
 				2453B56BB1D2E521533C637D /* [CP] Embed Pods Frameworks */,
+				DDCF9E902BD4F12E004F4D94 /* SwiftLint */,
+				DDCF9E912BD4F55C004F4D94 /* SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -729,6 +730,42 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then \n\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\n\nelse \n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\" \nfi \n\n";
 		};
+		DDCF9E902BD4F12E004F4D94 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		DDCF9E912BD4F55C004F4D94 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftformat > /dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -784,7 +821,6 @@
 				DDA250992BAF5B1600C73F62 /* SplashView.swift in Sources */,
 				DDA250E32BB0552200C73F62 /* OrderView.swift in Sources */,
 				DD79D7842BB1C75800F20E94 /* CustomRoundButton.swift in Sources */,
-				DDF8B5B22B70ED5D005FE06A /* ViewController.swift in Sources */,
 				DD9052172BB2BEAD009599CE /* CollectionViewHeader.swift in Sources */,
 				DD284CF72BCE8B5900AA6EF3 /* SuccessfulOrderViewController.swift in Sources */,
 				DD5313432BB881E20017D73A /* MenuViewModel.swift in Sources */,
