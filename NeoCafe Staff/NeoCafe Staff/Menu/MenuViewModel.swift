@@ -3,11 +3,11 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
+import RealmSwift
+import UIKit
 
 protocol MenuViewModelProtocol {
-
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
     var onMakeNewOrderPopupNavigate: EmptyCompletion? { get set }
@@ -27,6 +27,7 @@ protocol MenuViewModelProtocol {
 
 class MenuViewModel: NSObject, MenuViewModelProtocol {
     @InjectionInjected(\.networkService) var networkService
+    let realm = try! Realm()
 
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
@@ -46,10 +47,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
 
     var filteredMenuItems: [Item] = []
 
-    func filterMenuItems(byCategory category: CategoryModel) {
-        filteredMenuItems = menuItems.filter { $0.category.id == category.id }
-    }
-
     private func setupFirstCategory() {
         if let firstCategory = allCategories.first {
             filterMenuItems(byCategory: firstCategory)
@@ -62,11 +59,11 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
         { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.allCategories = response
                     self.onCategoriesFetched?()
-                }            case .failure(let error):
+                } case let .failure(error):
                 print("handle error: \(error)")
             }
         }
@@ -78,15 +75,48 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.menuItems = response.results.results
+                    self.saveMenuItemsToRealm()
                     self.onMenuItemsFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }
     }
+
+    private func saveMenuItemsToRealm() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                for menuItem in menuItems {
+                    if realm.object(ofType: ItemRealmModel.self, forPrimaryKey: menuItem.id) == nil {
+                        let itemRealm = ItemRealmModel(from: menuItem)
+                        realm.add(itemRealm)
+                    }
+                }
+            }
+        } catch {
+            print("Error saving menu items to Realm: \(error)")
+        }
+    }
+
+    func itemsExistInRealm() -> Bool {
+        do {
+            let realm = try Realm()
+            let items = realm.objects(ItemRealmModel.self)
+            return !items.isEmpty
+        } catch {
+            print("Error checking if items exist in Realm: \(error)")
+            return false
+        }
+    }
 }
 
+extension MenuViewModel {
+    func filterMenuItems(byCategory category: CategoryModel) {
+        filteredMenuItems = menuItems.filter { $0.category?.id == category.id }
+    }
+}

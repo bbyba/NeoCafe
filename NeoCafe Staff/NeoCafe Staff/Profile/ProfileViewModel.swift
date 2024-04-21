@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol ProfileViewModelProtocol {
     var onLogoutNavigate: EmptyCompletion? { get set }
@@ -26,14 +26,14 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
         { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.profileData = response
                     self.onProfileDataFetched?()
                     print(response)
                 }
                 print(response)
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }

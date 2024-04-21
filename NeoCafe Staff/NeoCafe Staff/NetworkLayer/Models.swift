@@ -34,6 +34,11 @@ struct AuthenticationResponse: Codable {
 
 struct ProfileResponse: Codable {
     let id: Int
+    let user: EmployeeProfile
+}
+
+struct EmployeeProfile: Codable {
+    let id: Int
     let user: User
 }
 
@@ -86,12 +91,13 @@ struct Results: Codable {
 
 struct Item: Codable, Hashable {
     let id: Int
-    let name, description: String
+    let name: String
+    let description: String?
     let itemImage: String?
     let pricePerUnit: Int
     let branch: Int?
-    let category: Category
-    let ingredients: [Ingredient]
+    let category: Category?
+    let ingredients: [Ingredient]?
 
     enum CodingKeys: String, CodingKey {
         case id, name, description
@@ -119,9 +125,9 @@ struct Ingredient: Codable, Hashable {
 }
 
 enum MeasurementUnit: String, Codable {
-    case гр = "гр"
-    case мл = "мл"
-    case шт = "шт"
+    case гр
+    case мл
+    case шт
 }
 
 struct CategoryModel: Codable {
@@ -130,13 +136,12 @@ struct CategoryModel: Codable {
     let image: String?
 }
 
-
 // MARK: - OrderDetails
 
 struct OrderDetailsModel: Codable {
     let id: Int
     let orderNumber: Int
-    let table: TableModel?
+    let table: TableModel
     let orderStatus: String
     let createdAt: String?
     let updatedAt: String?
@@ -144,8 +149,8 @@ struct OrderDetailsModel: Codable {
     let branch: Int
     let orderType: String
     let totalSum: Int
-    let employeeProfile: EmployeeProfile?
-    let ito: [ITO]
+    let employeeProfile: EmployeeProfile
+    var ito: [ITO]
 
     private enum CodingKeys: String, CodingKey {
         case id, table, branch
@@ -161,13 +166,8 @@ struct OrderDetailsModel: Codable {
     }
 }
 
-struct EmployeeProfile: Codable {
-    let id: Int
-    let username: String
-    let password: String
-}
-
 // MARK: - Ito
+
 struct ITO: Codable {
     let id, item: Int
     let itemName: String
@@ -183,6 +183,7 @@ struct ITO: Codable {
 }
 
 // MARK: - Tables
+
 struct TableModel: Codable, Hashable {
     let id: Int
     let tableNumber: Int
@@ -194,5 +195,18 @@ struct TableModel: Codable, Hashable {
         case tableNumber = "table_number"
         case isAvailable = "is_available"
         case branch
+    }
+}
+
+struct MakeNewOrderModel: Codable {
+    let table: TableModel
+    let branch: Int
+    let orderType: String
+    let ito: [ITO]
+
+    enum CodingKeys: String, CodingKey {
+        case table, branch
+        case orderType = "order_type"
+        case ito = "ITO"
     }
 }

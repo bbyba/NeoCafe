@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class NewOrderView: UIView, BaseContentView {
     lazy var header = CustomHeaderView()
@@ -164,7 +164,8 @@ class NewOrderView: UIView, BaseContentView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0 / 3.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
@@ -172,7 +173,8 @@ class NewOrderView: UIView, BaseContentView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -183,7 +185,8 @@ class NewOrderView: UIView, BaseContentView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

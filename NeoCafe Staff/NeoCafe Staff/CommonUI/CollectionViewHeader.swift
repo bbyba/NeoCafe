@@ -2,8 +2,8 @@
 //  CollectionViewHeader.swift
 //  NeoCafe Staff
 //
-import UIKit
 import SnapKit
+import UIKit
 
 class CollectionViewHeader: BaseCollectionViewCell {
     lazy var titleLabel: UILabel = {
@@ -54,7 +54,8 @@ class CollectionViewHeader: BaseCollectionViewCell {
         titleLabel.isHidden = true
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -76,5 +77,4 @@ extension CollectionViewHeader: BaseContentView {
             make.centerY.equalToSuperview()
         }
     }
-
 }

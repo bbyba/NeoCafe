@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class AuthenticationView: UIView {
     lazy var header = CustomHeaderView()
@@ -44,7 +44,8 @@ class AuthenticationView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -88,5 +89,4 @@ extension AuthenticationView: BaseContentView {
             make.leading.trailing.equalToSuperview().inset(16)
         }
     }
-
 }

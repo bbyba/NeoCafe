@@ -10,14 +10,14 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         getTables()
-        viewModel.getAllOrders()
+//        viewModel.getAllOrders()
         viewModel.filterOrders(byStatus: S.all)
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.tablesCollectionView.dataSource = self
         contentView.tablesCollectionView.delegate = self
         contentView.ordersByStatusCollectionView.dataSource = self
@@ -25,7 +25,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     }
 
     private func getTables() {
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         TableService.shared.getTables {
             DispatchQueue.main.async {
                 Loader.shared.hideLoader(view: self.view)
@@ -43,6 +43,7 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
     @objc private func profileButtonTapped() {
         viewModel.onProfileNavigate?()
     }
+
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
     }
@@ -64,7 +65,6 @@ class OrderViewController: BaseViewController<OrderViewModel, OrderView> {
 }
 
 extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == contentView.tablesCollectionView {
             return 1
@@ -75,7 +75,6 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         if collectionView == contentView.tablesCollectionView {
             return TableService.shared.tables.count
 
@@ -117,10 +116,7 @@ extension OrderViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == contentView.tablesCollectionView {
-            let table = TableService.shared.tables[indexPath.row]
-//            viewModel.onOrderDetailsNavigate?()
-        } else if collectionView == contentView.ordersByStatusCollectionView {
+        if collectionView == contentView.ordersByStatusCollectionView {
             switch OrderStatus.allCases[indexPath.section] {
             case .statusCategory:
                 let status = viewModel.statusList[indexPath.row]

@@ -1,7 +1,7 @@
 import UIKit
 
 open class BaseCollectionViewCell: UICollectionViewCell {
-    static public var reuseIdentifier: String {
+    public static var reuseIdentifier: String {
         return String(describing: self)
     }
 
@@ -10,7 +10,7 @@ open class BaseCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }

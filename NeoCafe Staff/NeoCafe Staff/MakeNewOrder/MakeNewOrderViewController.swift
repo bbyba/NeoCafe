@@ -6,21 +6,24 @@
 import UIKit
 
 protocol MakeNewOrderDelegate: AnyObject {
-    func didUpdateCartInPopup()
+    func cartDidUpdateInMakeNewOrder()
 }
 
 class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, MakeNewOrderPopup> {
     weak var delegate: MakeNewOrderDelegate?
-
     var selectedTable: TableModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDelegatesAndDataSource()
+        addTargets()
+        updateUI()
+    }
+
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.delegate = self
         contentView.collectionView.dataSource = self
         Cart.shared.delegate = self
-        addTargets()
-        updateUI()
     }
 
     private func addTargets() {
@@ -29,22 +32,23 @@ class MakeNewOrderViewController: BaseViewController<MakeNewOrderViewModel, Make
         contentView.blurredBackgroundView.addGestureRecognizer(tapGesture)
     }
 
-    @objc func dismissPopup() {
+    @objc private func dismissPopup() {
         viewModel.onBackNavigate?()
     }
 
     @objc private func orderButtonTapped() {
         dismissPopup()
+//        viewModel.handleOrder()
         viewModel.onOrderNavigate?()
     }
 }
 
 extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return Cart.shared.items.count
     }
 
@@ -59,7 +63,7 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let customCell = cell as? CustomBigCell {
             customCell.onSwipeToDelete = { [weak self] indexPath in
                 self?.showDeleteConfirmationModal(at: indexPath)
@@ -88,10 +92,19 @@ extension MakeNewOrderViewController: UICollectionViewDataSource, UICollectionVi
 extension MakeNewOrderViewController: CartUpdateDelegate {
     func cartDidUpdate() {
         updateUI()
-        delegate?.didUpdateCartInPopup()
+        delegate?.cartDidUpdateInMakeNewOrder()
     }
 
-    func updateUI() {
-        contentView.priceLabel.text = "\(Cart.shared.getTotalPrice())"
+    private func updateUI() {
+        updateTitleLabel()
+        contentView.priceLabel.text = S.som(Cart.shared.getTotalPrice())
+    }
+
+    private func updateTitleLabel() {
+        if let orderNumber = viewModel.existingOrder?.orderNumber {
+            contentView.titleLabel.text = S.orderNo(orderNumber)
+        } else {
+            contentView.titleLabel.text = S.newOrder
+        }
     }
 }

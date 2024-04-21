@@ -3,6 +3,7 @@
 //  NeoCafe Staff
 //
 
+import RealmSwift
 import UIKit
 
 class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
@@ -10,16 +11,15 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
-        //        contentView.collectionView.reloadData()
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         viewModel.getCategories()
         viewModel.getMenuItems()
         setupBindings()
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
@@ -27,7 +27,7 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     private func setupBindings() {
         viewModel.onCategoriesFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty  == false  {
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -37,7 +37,7 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
 
         viewModel.onMenuItemsFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.menuItems.isEmpty  == false  && self?.viewModel.allCategories.isEmpty  == false  {
+                if self?.viewModel.menuItems.isEmpty == false && self?.viewModel.allCategories.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -46,14 +46,12 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
         }
     }
 
-
     private func selectFirstCategory() {
         guard let firstCategory = viewModel.allCategories.first else { return }
         viewModel.filterMenuItems(byCategory: firstCategory)
         selectedCategoryIndex = 0
         contentView.collectionView.reloadData()
     }
-
 
     private func addTargets() {
         contentView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
@@ -70,17 +68,17 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
-            Loader.shared.hideLoader(view: self.view)
+            Loader.shared.hideLoader(view: view)
         }
     }
 }
 
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return MenuSection.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch MenuSection.allCases[section] {
         case .category:
             return viewModel.allCategories.count
@@ -110,17 +108,11 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch MenuSection.allCases[indexPath.section] {
-        case .category:
+        if case .category = MenuSection.allCases[indexPath.section] {
             let category = viewModel.allCategories[indexPath.row]
             viewModel.filterMenuItems(byCategory: category)
             selectedCategoryIndex = indexPath.row
             collectionView.reloadData()
-
-        case .productItem:
-            let menuItem = viewModel.menuItems[indexPath.row]
-            //            viewModel.onAddItemNavigate?(menuItem.id)
         }
     }
 }
- 

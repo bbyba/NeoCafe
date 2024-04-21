@@ -29,11 +29,10 @@ class CustomSegmentedControl: UISegmentedControl {
         layer.masksToBounds = true
         let fontAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.poppins(ofSize: 16, weight: .bold),
-            .foregroundColor: UIColor.darkBlueCustom
+            .foregroundColor: UIColor.darkBlueCustom,
         ]
         setTitleTextAttributes(fontAttributes, for: .normal)
         setTitleTextAttributes([.foregroundColor: Asset.Colors.white.color], for: .selected)
-
 
         let selectedImageViewIndex = numberOfSegments
         if let selectedImageView = subviews[selectedImageViewIndex] as? UIImageView {
@@ -46,7 +45,8 @@ class CustomSegmentedControl: UISegmentedControl {
         }
     }
 
-    required init(coder: NSCoder) {
+    @available(*, unavailable)
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

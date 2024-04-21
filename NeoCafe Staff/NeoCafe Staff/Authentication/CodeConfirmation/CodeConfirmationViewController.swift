@@ -6,7 +6,6 @@
 import UIKit
 
 class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewModel, CodeConfirmationView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()
@@ -15,7 +14,6 @@ class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewMod
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
-
     }
 
     @objc func backButtonTapped() {
@@ -27,6 +25,6 @@ class CodeConfirmationViewController: BaseViewController<CodeConfirmationViewMod
         if confirmationCode.isEmpty {
             return
         }
-        viewModel.authenticate(confirmation_code: confirmationCode)
+        viewModel.authenticate(confirmationCode: confirmationCode)
     }
 }

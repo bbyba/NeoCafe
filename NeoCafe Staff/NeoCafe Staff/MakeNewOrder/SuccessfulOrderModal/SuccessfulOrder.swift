@@ -2,10 +2,9 @@
 //  SuccessfulOrder.swift
 //  NeoCafe Staff
 //
-//  Created by Burte Bayaraa on 2024.04.16.
-//
-import UIKit
+
 import SnapKit
+import UIKit
 
 class SuccessfulOrderView: UIView {
     lazy var header = CustomHeaderView()
@@ -18,7 +17,6 @@ class SuccessfulOrderView: UIView {
         label.textAlignment = .left
         return label
     }()
-
 
     lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image,
                                             backgroundColor: .lightBlueCustom)
@@ -39,7 +37,7 @@ class SuccessfulOrderView: UIView {
 
     lazy var goToOrderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.toOrder, backgroundColor: .blueCustom, titleColor: .whiteCustom)
+        button.setProperties(title: S.toOrder, backgroundColor: .lightBlueCustom, titleColor: .whiteCustom)
         return button
     }()
 
@@ -50,13 +48,13 @@ class SuccessfulOrderView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension SuccessfulOrderView: BaseContentView {
-
     func setProperties() {
         backgroundColor = .white
     }

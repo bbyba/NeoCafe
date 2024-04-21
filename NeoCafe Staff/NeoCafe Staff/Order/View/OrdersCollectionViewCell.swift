@@ -10,11 +10,9 @@ enum TableStatus {
 }
 
 class OrdersCollectionViewCell: BaseCollectionViewCell {
-
     lazy var tableNumber: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 20, weight: .semibold)
-        label.text = S.tableNo
         label.textColor = .darkBlueCustom
         return label
     }()
@@ -29,7 +27,6 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     lazy var orderNumber: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .regular)
-        label.text = "№"
         label.textColor = .darkBlueCustom
         return label
     }()
@@ -65,22 +62,22 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
     }
 
     func configureData(orderData: OrderDetailsModel) {
-        tableNumber.text = "Стол №\(orderData.table?.tableNumber)"
-        orderNumber.text = "№\(orderData.orderNumber)"
+        tableNumber.text = S.tableNo(orderData.table.tableNumber)
+        orderNumber.text = S.numberSymbol(orderData.orderNumber)
         updateTimeByStatus(orderData: orderData)
         updateCellAppearanceByStatus(status: orderData.orderStatus)
     }
 
     func updateTimeByStatus(orderData: OrderDetailsModel) {
-            switch orderData.orderStatus {
-            case "Новый":
-                timeLabel.text = orderData.createdAt
-            case "Завершено":
-                timeLabel.text = orderData.completedAt
-            default:
-                timeLabel.text = orderData.updatedAt
-            }
+        switch orderData.orderStatus {
+        case "Новый":
+            timeLabel.text = orderData.createdAt
+        case "Завершено":
+            timeLabel.text = orderData.completedAt
+        default:
+            timeLabel.text = orderData.updatedAt
         }
+    }
 
     func updateCellAppearanceByStatus(status: String) {
         switch status {
@@ -96,16 +93,14 @@ class OrdersCollectionViewCell: BaseCollectionViewCell {
         case "Завершено":
             statusCircle.backgroundColor = .greyCustom
             statusLabel.text = S.doneStatus
-//        case "Отменено":
-//            statusCircle.backgroundColor = .darkGreyCustom
-//            statusLabel.text = S.cancelledStatus
         default:
             statusCircle.backgroundColor = .darkGreyCustom
             statusLabel.text = S.cancelledStatus
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

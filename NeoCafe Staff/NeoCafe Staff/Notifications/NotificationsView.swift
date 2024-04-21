@@ -3,11 +3,10 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class NotificationView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -27,7 +26,7 @@ class NotificationView: UIView {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.poppins(ofSize: 16, weight: .semibold),
             .foregroundColor: UIColor.lightBlueCustom,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
         ]
         let attributedTitle = NSAttributedString(string: S.clearAll, attributes: attributes)
         button.setAttributedTitle(attributedTitle, for: .normal)
@@ -53,13 +52,15 @@ class NotificationView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100))
+            heightDimension: .absolute(100)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -69,7 +70,8 @@ class NotificationView: UIView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -78,7 +80,7 @@ extension NotificationView: BaseContentView {
     func setProperties() {
         backgroundColor = .whiteCustom
     }
-    
+
     func addSubviews() {
         addSubview(header)
         header.addSubview(backButton)

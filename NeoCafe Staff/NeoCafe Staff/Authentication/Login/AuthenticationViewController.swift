@@ -3,9 +3,9 @@
 //  NeoCafe Staff
 //
 
-import UIKit
-import SwiftUI
 import Moya
+import SwiftUI
+import UIKit
 
 class AuthenticationViewController: BaseViewController<AuthenticationViewModel, AuthenticationView> {
     override func viewDidLoad() {
@@ -19,7 +19,8 @@ class AuthenticationViewController: BaseViewController<AuthenticationViewModel, 
 
     @objc private func getCodeButtonTapped() {
         guard let username = contentView.loginTextField.text, !username.isEmpty,
-              let password = contentView.passwordTextField.text, !password.isEmpty else {
+              let password = contentView.passwordTextField.text, !password.isEmpty
+        else {
             return
         }
 

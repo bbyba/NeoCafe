@@ -3,11 +3,11 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import Moya
+import RealmSwift
+import UIKit
 
 protocol NewOrderMenuViewModelProtocol {
-
     var onProfileNavigate: EmptyCompletion? { get set }
     var onNotificationsNavigate: EmptyCompletion? { get set }
     var onBackNavigate: EmptyCompletion? { get set }
@@ -18,13 +18,11 @@ protocol NewOrderMenuViewModelProtocol {
 
     var allCategories: [CategoryModel] { get }
     var menuItems: [Item] { get }
-
-    func getCategories()
-    func getMenuItems()
 }
 
 class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     @InjectionInjected(\.networkService) var networkService
+    let realm = try! Realm()
 
     var onProfileNavigate: EmptyCompletion?
     var onNotificationsNavigate: EmptyCompletion?
@@ -40,27 +38,21 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     var onCategoriesFetched: (() -> Void)?
     var onMenuItemsFetched: (() -> Void)?
 
-    var onMakeNewOrderPopupNavigate: ((TableModel) -> Void)?
+    var onMakeNewOrderPopupNavigate: ((TableModel, OrderDetailsModel?) -> Void)?
 
     var filteredMenuItems: [Item] = []
 
     var separateCartsForTables: [TableModel: Cart] = [:]
     var cartsForTables: [TableModel: Cart] = [:]
-    var selectedTable: TableModel?
+    var selectedTable: TableModel
     var tables: [TableModel] = []
+    var existingOrder: OrderDetailsModel?
 
-    init(selectedTable: TableModel) {
+    init(selectedTable: TableModel, existingOrder: OrderDetailsModel?) {
         self.selectedTable = selectedTable
+        self.existingOrder = existingOrder
         super.init()
-    }
-
-    func filterMenuItems(byCategory category: CategoryModel) {
-        filteredMenuItems = menuItems.filter { $0.category.id == category.id }
-    }
-
-    func tableInfo() -> String {
-        guard let table = selectedTable else { return "" }
-        return "\(S.tableNo) \(table.tableNumber)"
+//        findItemsAndAdd()
     }
 
     private func setupFirstCategory() {
@@ -72,15 +64,16 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
     func getCategories() {
         networkService.sendRequest(successModelType: [CategoryModel].self,
                                    endpoint: MultiTarget(UserAPI.getCategories))
-        { [weak self] result in
+        {
+            [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.allCategories = response
                     self.onCategoriesFetched?()
-                }            
-            case .failure(let error):
+                }
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
@@ -92,14 +85,55 @@ class NewOrderMenuViewModel: NSObject, NewOrderMenuViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.menuItems = response.results.results
                     self.onMenuItemsFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }
+    }
+
+    func findItemsAndAdd() {
+        guard let existingOrder = existingOrder else {
+            print("existingOrder is nil")
+            return
+        }
+
+        for ito in existingOrder.ito {
+            if let item = findItemFromMenuItems(itemId: ito.id) {
+                Cart.shared.addItem(item, quantity: ito.quantity)
+            }
+        }
+    }
+
+    private func findItemFromMenuItems(itemId: Int) -> Item? {
+        let itemsInRealms = realm.objects(ItemRealmModel.self)
+        for item in itemsInRealms {
+            if item.id == itemId {
+                let itemOfItemType = convertToItemType(itemRealm: item)
+                return itemOfItemType
+            }
+        }
+        return nil
+    }
+
+    private func convertToItemType(itemRealm: ItemRealmModel) -> Item {
+        let item = Item(id: itemRealm.id,
+                        name: itemRealm.name,
+                        description: itemRealm.description,
+                        itemImage: nil,
+                        pricePerUnit: itemRealm.pricePerUnit,
+                        branch: nil,
+                        category: nil, ingredients: nil)
+        return item
+    }
+}
+
+extension NewOrderMenuViewModel {
+    func filterMenuItems(byCategory category: CategoryModel) {
+        filteredMenuItems = menuItems.filter { $0.category?.id == category.id }
     }
 }

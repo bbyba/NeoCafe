@@ -3,8 +3,8 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class ProfileView: UIView {
     lazy var header = CustomHeaderView()
@@ -33,13 +33,13 @@ class ProfileView: UIView {
         return label
     }()
 
-    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image, 
+    lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image,
                                             backgroundColor: .lightBlueCustom)
 
-    lazy var logoutButton = CustomRoundButton(withImage: Asset.Images.logout.image, 
+    lazy var logoutButton = CustomRoundButton(withImage: Asset.Images.logout.image,
                                               backgroundColor: .lightBlueCustom)
 
-    lazy var nameTextField = CustomTextField(iconName: Asset.Images.profile.image, 
+    lazy var nameTextField = CustomTextField(iconName: Asset.Images.profile.image,
                                              customPlaceholder: "Alex")
 
     override init(frame: CGRect) {
@@ -49,7 +49,8 @@ class ProfileView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 final class AuthenticationCoordinator: BaseCoordinator {
     var emailReceived: String?
@@ -15,7 +15,7 @@ final class AuthenticationCoordinator: BaseCoordinator {
         viewModel.emailReceived = { [weak self] email in
             self?.emailReceived = email
         }
-        viewModel.onCodeConfirmationNavigate = { [ weak self ] in
+        viewModel.onCodeConfirmationNavigate = { [weak self] in
             self?.openCodeConfirmation()
         }
         let viewController = AuthenticationViewController(viewModel: viewModel)

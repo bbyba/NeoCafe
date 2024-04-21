@@ -1,5 +1,5 @@
 //
-//  ApplicationCoordinator.swift
+//  AppCoordinator.swift
 //  NeoCafe Staff
 //
 
@@ -8,7 +8,6 @@ import UIKit
 typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
 final class ApplicationCoordinator: BaseCoordinator {
-
     private let window: UIWindow
 
     init(window: UIWindow, router: Router = RouterImpl()) {

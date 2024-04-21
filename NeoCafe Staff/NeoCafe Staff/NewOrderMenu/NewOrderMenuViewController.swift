@@ -4,36 +4,28 @@
 //
 import UIKit
 
-class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView>, CartUpdateDelegate {
+class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewOrderMenuView> {
     var selectedCategoryIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         Cart.shared.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         setupBindings()
         viewModel.getCategories()
         viewModel.getMenuItems()
-        contentView.updateOrderNoInfo(orderNumber: 1)
+        viewModel.findItemsAndAdd()
+        contentView.checkForTableAvailability(tableIsAvailable: viewModel.selectedTable.isAvailable,
+                                              orderInfo: viewModel.existingOrder)
     }
 
-    func cartDidUpdate() {
-        print("Cart did update in NewOrderMenuViewController")
-        updateUI()
-    }
-
-    func updateUI() {
-        contentView.amountLabel.text = "\(Cart.shared.getTotalPrice()) сом"
-        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
-    }
-
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
@@ -41,7 +33,7 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
     private func setupBindings() {
         viewModel.onCategoriesFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false{
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -72,37 +64,34 @@ class NewOrderMenuViewController: BaseViewController<NewOrderMenuViewModel, NewO
         contentView.orderInfoButton.addTarget(self, action: #selector(orderInfoButtonTapped), for: .touchUpInside)
     }
 
-    private func addToCart(menuItem: Item) {
-        Cart.shared.addItem(menuItem)
-        updateUI()
-    }
-
     @objc private func backButtonTapped() {
+        Cart.shared.removeAllItems()
         viewModel.onBackNavigate?()
     }
 
     @objc private func orderInfoButtonTapped() {
-        guard let selectedTable = viewModel.selectedTable else {
-            print("Selected table is nil")
-            return
+        if let existingOrder = viewModel.existingOrder {
+            let selectedTable = viewModel.selectedTable
+            viewModel.onMakeNewOrderPopupNavigate?(selectedTable, existingOrder)
+        } else {
+            let selectedTable = viewModel.selectedTable
+            viewModel.onMakeNewOrderPopupNavigate?(selectedTable, nil)
         }
-        viewModel.onMakeNewOrderPopupNavigate?(selectedTable)
     }
-
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
-            Loader.shared.hideLoader(view: self.view)
+            Loader.shared.hideLoader(view: view)
         }
     }
 }
 
 extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return MenuSection.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch MenuSection.allCases[section] {
         case .category:
             return viewModel.allCategories.count
@@ -124,20 +113,21 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
             let cell: MenuCell = collectionView.dequeue(for: indexPath)
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
             cell.configureData(menuItem: menuItem, newOrderView: true)
-            cell.onAddToCart = { [weak self] in
-                self?.addToCart(menuItem: menuItem)
-            }
+            cell.onAddToCart = { Cart.shared.addItem(menuItem) }
             return cell
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind _: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView
+    {
         let header: CollectionViewHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
             switch sectionKind {
             case .category:
-                header.configureTitle(title: "\(viewModel.tableInfo())")
+                header.configureTitle(title: S.tableNo(viewModel.selectedTable.tableNumber))
             case .productItem:
                 break
             }
@@ -155,24 +145,33 @@ extension NewOrderMenuViewController: UICollectionViewDataSource, UICollectionVi
 
         case .productItem:
             let menuItem = viewModel.menuItems[indexPath.row]
-            if menuItem.category.name == "Кофе" {
+            if menuItem.category?.name == "Кофе" {
                 openCoffeeModal(for: menuItem)
             }
         }
     }
 
     // Temporary
-    private func openCoffeeModal(for item: Item) {
+    private func openCoffeeModal(for _: Item) {
         let coffeeModalVC = CoffeeDetailsViewController(viewModel: CoffeeDetailsViewModel())
         coffeeModalVC.modalPresentationStyle = .overFullScreen
         present(coffeeModalVC, animated: true, completion: nil)
     }
 }
 
-
-extension NewOrderMenuViewController: MakeNewOrderDelegate {
-    func didUpdateCartInPopup() {
-        print("Cart did update in NewOrderMenuViewController")
+extension NewOrderMenuViewController: CartUpdateDelegate, MakeNewOrderDelegate {
+    func cartDidUpdate() {
         updateUI()
+    }
+
+    func cartDidUpdateInMakeNewOrder() {
+        updateUI()
+    }
+
+    func updateUI() {
+        contentView.orderLabel.text = S.toOrder
+        contentView.amountLabel.text = S.som(Cart.shared.getItems())
+        contentView.orderInfoButton.isHidden = Cart.shared.items.isEmpty
+        contentView.collectionView.reloadData()
     }
 }

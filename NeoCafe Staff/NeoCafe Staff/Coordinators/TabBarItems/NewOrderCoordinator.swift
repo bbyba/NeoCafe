@@ -6,22 +6,24 @@
 import UIKit
 
 final class NewOrderCoordinator: BaseCoordinator {
-    private var mainVC: NewOrderViewController!
+    var mainViewController: NewOrderViewController!
+    var makeNewOrderViewController: MakeNewOrderViewController!
+
     var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {
         let viewModel = NewOrderViewModel()
-        viewModel.onProfileNavigate = { [ weak self ] in
+        viewModel.onProfileNavigate = { [weak self] in
             self?.openProfile()
         }
-        viewModel.onNotificationsNavigate = { [ weak self ] in
+        viewModel.onNotificationsNavigate = { [weak self] in
             self?.openNotifications()
         }
         viewModel.onMakeNewOrderNavigate = { [weak self] table in
             self?.openMakeNewOrder(table: table)
         }
         let viewController = NewOrderViewController(viewModel: viewModel)
-        mainVC = viewController
+        mainViewController = viewController
         presentViewController(viewController)
     }
 
@@ -41,7 +43,11 @@ final class NewOrderCoordinator: BaseCoordinator {
         //            self?.router.popModule(animated: true)
         //        }
         let viewController = ProfileViewController(viewModel: viewModel)
-        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        router.push(viewController,
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
     func openNotifications() {
@@ -50,23 +56,31 @@ final class NewOrderCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = NotificationsViewController(viewModel: viewModel)
-        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        router.push(viewController,
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
-    func openMakeNewOrder(table: TableModel) {
-        let viewModel = NewOrderMenuViewModel(selectedTable: table)
+    func openMakeNewOrder(table: TableModel, existingOrder: OrderDetailsModel? = nil) {
+        let viewModel = NewOrderMenuViewModel(selectedTable: table, existingOrder: existingOrder)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
-        viewModel.onMakeNewOrderPopupNavigate = { [weak self] table in
-            self?.openMakeNewOrderPopup(table: table)
+        viewModel.onMakeNewOrderPopupNavigate = { [weak self] table, existingOrder in
+            self?.openMakeNewOrderPopup(table: table, existingOrder: existingOrder)
         }
         let viewController = NewOrderMenuViewController(viewModel: viewModel)
-        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        router.push(viewController,
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
-    func openMakeNewOrderPopup(table: TableModel) {
-        let viewModel = MakeNewOrderViewModel(table: table)
+    func openMakeNewOrderPopup(table: TableModel, existingOrder: OrderDetailsModel?) {
+        let viewModel = MakeNewOrderViewModel(table: table, existingOrder: existingOrder)
         viewModel.onBackNavigate = { [weak self] in
             self?.router.dismissModule(animated: true, completion: nil)
         }
@@ -81,19 +95,24 @@ final class NewOrderCoordinator: BaseCoordinator {
     func openSuccesfulOrder() {
         let viewModel = SuccessfulOrderViewModel()
         viewModel.onBackNavigate = { [weak self] in
-            self?.router.dismissModule(animated: true, completion: nil)
+            self?.router.popModule(animated: true)
         }
         viewModel.ongoToOrderNavigate = { [weak self] in
-            self?.openOrderHistory()
+            self?.openOrderView()
         }
-        let viewController = SuccessfulOrderViewcontroller(viewModel: viewModel)
-        router.push(viewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+        let viewController = SuccessfulOrderViewController(viewModel: viewModel)
+        router.push(viewController,
+                    animated: true,
+                    hideBottomBar: true,
+                    hideNavBar: true,
+                    completion: nil)
     }
 
-    func openOrderHistory() {
-        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
-        tabBarCoordinator.orderCoordinator?.start()
+    func openOrderView() {
+        guard let tabBarCoordinator = tabBarCoordinator else { return }
+        tabBarCoordinator.removeChild(self)
+        let orderCoordinator = OrderCoordinator(router: RouterImpl())
+        tabBarCoordinator.addChild(orderCoordinator)
         tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
-    
 }

@@ -17,7 +17,7 @@ class Loader {
             view.addSubview(self.spinnerView)
             NSLayoutConstraint.activate([
                 self.spinnerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                self.spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+                self.spinnerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             ])
             self.spinnerView.startAnimating()
             view.isUserInteractionEnabled = false

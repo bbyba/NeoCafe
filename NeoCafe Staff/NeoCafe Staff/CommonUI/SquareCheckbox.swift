@@ -23,12 +23,11 @@ final class SquareCheckbox: UIView {
 
         addSubviews()
         setupConstraints()
-
     }
 
     func toggle() {
-        self.isChecked = !isChecked
-        orangeCheck.isHidden = !self.isChecked
+        isChecked = !isChecked
+        orangeCheck.isHidden = !isChecked
     }
 
     func addSubviews() {
@@ -41,14 +40,15 @@ final class SquareCheckbox: UIView {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 //
-//contentView.squareCheckbox.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(squareCheckboxTapped)))
+// contentView.squareCheckbox.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(squareCheckboxTapped)))
 //
-//@objc private func squareCheckboxTapped() {
-//contentView.squareCheckbox.toggle()
-//}
+// @objc private func squareCheckboxTapped() {
+// contentView.squareCheckbox.toggle()
+// }

@@ -12,7 +12,7 @@ class CustomButton: UIButton {
         super.init(frame: frame)
         configure()
     }
-    
+
     private func configure() {
         layer.cornerRadius = 18
         titleLabel?.font = .poppins(ofSize: 16, weight: .bold)
@@ -32,7 +32,8 @@ class CustomButton: UIButton {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -3,15 +3,14 @@
 //  NeoCafe Staff
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
-enum CoffeeDetailsSection: String, CaseIterable  {
-    case Milk, Syrup
+enum CoffeeDetailsSection: String, CaseIterable {
+    case milk, syrup
 }
 
 class CoffeeDetailsModal: UIView {
-
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -44,7 +43,7 @@ class CoffeeDetailsModal: UIView {
         return label
     }()
 
-    lazy var SsyrupLabel: UILabel = {
+    lazy var syrupLabel: UILabel = {
         let label = UILabel()
         label.text = "Syrup"
         label.font = .poppins(ofSize: 20, weight: .semibold)
@@ -58,14 +57,6 @@ class CoffeeDetailsModal: UIView {
         button.setProperties(title: S.save, backgroundColor: .lightBlueCustom, titleColor: .whiteCustom)
         return button
     }()
-
-    //    lazy var collectionView: UICollectionView = {
-    //        let collectionView = UICollectionView()
-    //        collectionView.register(cell: MilkSyrupCell.self)
-    //        collectionView.backgroundColor = .clear
-    //        return collectionView
-    //    }()
-
 
     lazy var milkOption1 = OptionView(title: "Коровье молоко", milkOption: true)
     lazy var milkOption2 = OptionView(title: "Овсяное молоко", milkOption: true)
@@ -94,21 +85,20 @@ class CoffeeDetailsModal: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension CoffeeDetailsModal: BaseContentView {
-
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(milkLabel)
         contentView.addSubview(milkStackView)
-        contentView.addSubview(SsyrupLabel)
+        contentView.addSubview(syrupLabel)
         contentView.addSubview(syrupStackView)
         contentView.addSubview(saveButton)
     }
@@ -139,13 +129,13 @@ extension CoffeeDetailsModal: BaseContentView {
             make.leading.equalToSuperview().inset(16)
         }
 
-        SsyrupLabel.snp.makeConstraints { make in
+        syrupLabel.snp.makeConstraints { make in
             make.top.equalTo(milkStackView.snp.bottom).offset(24)
             make.leading.equalToSuperview().inset(16)
         }
 
         syrupStackView.snp.makeConstraints { make in
-            make.top.equalTo(SsyrupLabel.snp.bottom).offset(16)
+            make.top.equalTo(syrupLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().inset(16)
         }
 
@@ -154,5 +144,4 @@ extension CoffeeDetailsModal: BaseContentView {
             make.leading.trailing.bottom.equalToSuperview().inset(16)
         }
     }
-
 }

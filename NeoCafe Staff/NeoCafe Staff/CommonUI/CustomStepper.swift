@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CustomStepper: UIControl {
     var isDecrementing = false
@@ -35,6 +35,7 @@ class CustomStepper: UIControl {
             sendActions(for: .valueChanged)
         }
     }
+
     var stepValue: Int = 1
 
     override init(frame: CGRect) {
@@ -50,7 +51,6 @@ class CustomStepper: UIControl {
         incrementButton.layer.cornerRadius = 18
         decrementButton.layer.cornerRadius = 18
     }
-
 
     private func addSubviews() {
         addSubview(stackView)
@@ -104,7 +104,8 @@ class CustomStepper: UIControl {
         return button
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

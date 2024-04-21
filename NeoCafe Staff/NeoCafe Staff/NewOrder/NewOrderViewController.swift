@@ -8,18 +8,18 @@ import UIKit
 class NewOrderViewController: BaseViewController<NewOrderViewModel, NewOrderView> {
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
+        setDelegatesAndDataSource()
         addTargets()
         getTables()
     }
 
-    private func setupViews() {
+    private func setDelegatesAndDataSource() {
         contentView.collectionView.dataSource = self
         contentView.collectionView.delegate = self
     }
 
     private func getTables() {
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         TableService.shared.getTables {
             DispatchQueue.main.async {
                 Loader.shared.hideLoader(view: self.view)
@@ -36,18 +36,18 @@ class NewOrderViewController: BaseViewController<NewOrderViewModel, NewOrderView
     @objc private func profileButtonTapped() {
         viewModel.onProfileNavigate?()
     }
-    
+
     @objc private func notificationsButtonTapped() {
         viewModel.onNotificationsNavigate?()
     }
 }
 
 extension NewOrderViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in _: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return TableService.shared.tables.count
     }
 
@@ -56,12 +56,15 @@ extension NewOrderViewController: UICollectionViewDataSource, UICollectionViewDe
         let table = TableService.shared.tables[indexPath.row]
         cell.configureData(tableModel: table)
         return cell
-
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let table = TableService.shared.tables[indexPath.row]
-        viewModel.selectedTable = table
-        viewModel.onMakeNewOrderNavigate?(table)
+
+        if table.isAvailable {
+            viewModel.onMakeNewOrderNavigate?(table)
+        } else {
+            print("Selected table is not available.")
+        }
     }
 }

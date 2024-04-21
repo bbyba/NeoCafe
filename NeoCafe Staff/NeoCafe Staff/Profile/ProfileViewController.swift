@@ -6,14 +6,13 @@
 import UIKit
 
 class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.nameTextField.isUserInteractionEnabled = false
         addTargets()
         setupBindings()
 
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         viewModel.getProfile()
     }
 
@@ -28,7 +27,7 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
 
     private func updateProfileViews() {
         if let profileData = viewModel.profileData {
-            contentView.nameTextField.text = profileData.user.firstName
+            contentView.nameTextField.text = profileData.user.user.firstName
         }
     }
 
@@ -45,5 +44,3 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
         viewModel.onLogoutNavigate?()
     }
 }
-
-

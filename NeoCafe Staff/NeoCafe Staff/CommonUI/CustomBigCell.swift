@@ -9,7 +9,6 @@ class CustomBigCell: BaseCollectionViewCell {
     var onStepperValueChanged: ((_ newValue: Int) -> Void)?
     var onSwipeToDelete: ((IndexPath) -> Void)?
 
-
     lazy var titleLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
@@ -48,15 +47,15 @@ class CustomBigCell: BaseCollectionViewCell {
 
     func configureData(item: Item, quantity: Int) {
         titleLabel.text = item.name
-        descriptionLabel.text = item.description
-        priceLabel.text = "(\(item.pricePerUnit) с за шт)"
+//        descriptionLabel.text = item.description
+        priceLabel.text = S.pricePerItem(item.pricePerUnit)
         stepper.currentValue = quantity
     }
 
     func configureDataOrderScreen(item: ITO) {
         titleLabel.text = item.itemName
 //        descriptionLabel.text = item.description
-        priceLabel.text = "(\(item.totalPrice) с за шт)"
+        priceLabel.text = S.pricePerItem(item.totalPrice)
         stepper.currentValue = item.quantity
     }
 
@@ -66,9 +65,10 @@ class CustomBigCell: BaseCollectionViewCell {
         addGestureRecognizer(swipeGesture)
     }
 
-    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+    @objc private func handleSwipeToDelete(_: UISwipeGestureRecognizer) {
         guard let collectionView = superview as? UICollectionView,
-              let indexPath = collectionView.indexPath(for: self) else {
+              let indexPath = collectionView.indexPath(for: self)
+        else {
             return
         }
         onSwipeToDelete?(indexPath)
@@ -78,11 +78,11 @@ class CustomBigCell: BaseCollectionViewCell {
         onStepperValueChanged?(sender.currentValue)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension CustomBigCell: BaseContentView {
     func setProperties() {

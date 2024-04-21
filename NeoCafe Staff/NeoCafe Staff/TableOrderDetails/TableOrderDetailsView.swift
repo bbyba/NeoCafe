@@ -2,16 +2,14 @@
 //  TableOrderDetailsView.swift
 //  NeoCafe Staff
 //
-import UIKit
 import SnapKit
+import UIKit
 
 class TableOrderDetailsView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = S.tableNo
         label.font = .poppins(ofSize: 24, weight: .bold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .center
@@ -21,7 +19,6 @@ class TableOrderDetailsView: UIView {
     lazy var orderNumberLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .regular)
-        label.text = S.tableNo
         label.textColor = .darkBlueCustom
         label.textAlignment = .center
         return label
@@ -30,7 +27,6 @@ class TableOrderDetailsView: UIView {
     lazy var statusAndTimeLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .regular)
-        label.text = "Открыт в 18:02"
         label.textColor = .darkBlueCustom
         label.textAlignment = .center
         return label
@@ -39,7 +35,6 @@ class TableOrderDetailsView: UIView {
     lazy var waiterNameLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
-        label.text = S.waiter
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
         return label
@@ -56,7 +51,6 @@ class TableOrderDetailsView: UIView {
 
     lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "0"
         label.textAlignment = .center
         label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom
@@ -70,14 +64,35 @@ class TableOrderDetailsView: UIView {
         return stack
     }()
 
+    lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .poppins(ofSize: 16, weight: .regular)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var statusCircle: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        return view
+    }()
+
+    lazy var statusStack: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [statusCircle, statusLabel])
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        return stackView
+    }()
+
     lazy var backButton = CustomRoundButton(withImage: Asset.Images.arrowBack.image,
                                             backgroundColor: .lightBlueCustom)
 
     lazy var closeOrderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.closeOrder, 
+        button.setProperties(title: S.closeOrder,
                              backgroundColor: .whiteCustom,
-                             titleColor: .blueCustom, 
+                             titleColor: .blueCustom,
                              showBorder: true)
         return button
     }()
@@ -113,46 +128,65 @@ class TableOrderDetailsView: UIView {
         setupConstraints()
     }
 
+    func configureUI(orderDetail: OrderDetailsModel) {
+        headerLabel.text = S.tableNo(orderDetail.table.tableNumber)
+        orderNumberLabel.text = S.numberSymbol(orderDetail.orderNumber)
+        statusAndTimeLabel.text = "Time: \(String(describing: orderDetail.createdAt))"
+        waiterNameLabel.text = S.waiter(orderDetail.employeeProfile.user.firstName)
+        updateUI(status: orderDetail.orderStatus)
+    }
+
+    func updateUI(status: String) {
+        switch status {
+        case "Новый":
+            statusCircle.backgroundColor = .skyBlueCustom
+            statusLabel.text = S.newStatus
+            buttonStack.isHidden = false
+        case "В процессе":
+            statusCircle.backgroundColor = .yellowCustom
+            statusLabel.text = S.processingStatus
+            buttonStack.isHidden = false
+        case "Готово":
+            statusCircle.backgroundColor = .systemGreen
+            statusLabel.text = S.readyStatus
+            addButton.isHidden = true
+        case "Завершено":
+            statusCircle.backgroundColor = .greyCustom
+            statusLabel.text = S.doneStatus
+            addButton.isHidden = true
+        default:
+            statusCircle.backgroundColor = .darkGreyCustom
+            statusLabel.text = S.cancelledStatus
+            buttonStack.isHidden = true
+        }
+    }
+
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100))
+            heightDimension: .absolute(100)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, 
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8,
                                                       leading: 16,
                                                       bottom: 8,
                                                       trailing: 16)
 
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.contentInsets = NSDirectionalEdgeInsets(top: 0, 
-                                                       leading: 16,
-                                                       bottom: 0,
-                                                       trailing: 0)
-
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
-//        let section = NSCollectionLayoutSection(group: group)
-//        return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -169,8 +203,8 @@ extension TableOrderDetailsView: BaseContentView {
         addSubview(orderNumberLabel)
         addSubview(statusAndTimeLabel)
         addSubview(waiterNameLabel)
+        addSubview(statusStack)
         addSubview(collectionView)
-//        addSubview(buttonStack)
         addSubview(totalPriceLabel)
         addSubview(buttonStack)
     }
@@ -196,7 +230,7 @@ extension TableOrderDetailsView: BaseContentView {
         orderNumberLabel.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(40)
             make.height.equalTo(19)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalToSuperview().offset(16)
         }
 
         statusAndTimeLabel.snp.makeConstraints { make in
@@ -205,8 +239,18 @@ extension TableOrderDetailsView: BaseContentView {
             make.trailing.equalToSuperview().offset(-24)
         }
 
+        waiterNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(orderNumberLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+        }
+
+        statusStack.snp.makeConstraints { make in
+            make.top.equalTo(waiterNameLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().offset(16)
+        }
+
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(headerLabel.snp.bottom).offset(60)
+            make.top.equalTo(statusStack.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(buttonStack.snp.top).offset(-50)
         }
@@ -221,6 +265,10 @@ extension TableOrderDetailsView: BaseContentView {
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().offset(-16)
             make.height.equalTo(54)
+        }
+
+        statusCircle.snp.makeConstraints { make in
+            make.width.height.equalTo(16)
         }
     }
 }
