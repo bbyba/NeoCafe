@@ -18,19 +18,17 @@ class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalVie
         contentView.noButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         contentView.useButton.addTarget(self, action: #selector(useButtonTapped), for: .touchUpInside)
         contentView.cancelButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
-        contentView.goodButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        contentView.goodButton.addTarget(self, action: #selector(goodButtonTapped), for: .touchUpInside)
     }
 
     @objc private func yesButtonTapped() {
         contentView.changeStateToNext()
     }
 
-    //    @objc private func useButtonTapped() {
-    //        viewModel.makeOrder()
-    //        viewModel.orderMadeSuccessfully = {
-    //            self.contentView.changeStateToNext()
-    //        }
-    //    }
+    @objc private func goodButtonTapped() {
+        dismiss(animated: true, completion: nil)
+        viewModel.onMainScreenNavigate?()
+    }
 
     @objc private func dismissView(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

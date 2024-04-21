@@ -26,7 +26,6 @@ class ProductDetailsView: UIView {
 
     lazy var productNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Латте"
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .black
         label.textAlignment = .left
@@ -36,7 +35,6 @@ class ProductDetailsView: UIView {
 
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Латте — шоколадное пирожное коричневого цвета, прямоугольные куски нарезанного шоколадного пирога."
         label.font = .poppins(ofSize: 15, weight: .regular)
         label.textColor = .blueCustom
         label.textAlignment = .left
@@ -59,7 +57,6 @@ class ProductDetailsView: UIView {
         let label = UILabel()
         label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom
-        label.text = "270 T"
         return label
     }()
 

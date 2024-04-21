@@ -15,7 +15,9 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
     @InjectionInjected(\.networkService) var networkService
 
     var onBonusModalsNavigate: EmptyCompletion?
+    var onLogoutNavigate: EmptyCompletion?
     var orderMadeSuccessfully: EmptyCompletion?
+    var onMainScreenNavigate: EmptyCompletion?
     weak var errorPresenter: UIViewController?
     var bonusPointsToSubtract: Int = 0
 

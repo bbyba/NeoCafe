@@ -6,6 +6,7 @@ import UIKit
 
 final class BranchesCoordinator: BaseCoordinator {
     private var mainViewController: BranchesViewController!
+    var tabBarCoordinator: TabBarCoordinator?
 
     override func start() {
         let viewModel = BranchesViewModel()
@@ -28,7 +29,17 @@ final class BranchesCoordinator: BaseCoordinator {
         viewModel.onBackNavigate = { [weak self] in
             self?.router.popModule(animated: true)
         }
+        viewModel.onMenuNavigate = { [weak self] in
+            self?.openMainMenu()
+        }
         let branchDetailViewController = BranchDetailViewController(viewModel: viewModel)
         router.push(branchDetailViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
+    }
+
+    private func openMainMenu() {
+        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
+        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID,
+                                                    branchName:  UserDefaultsService.shared.branchName)
+        tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
 }

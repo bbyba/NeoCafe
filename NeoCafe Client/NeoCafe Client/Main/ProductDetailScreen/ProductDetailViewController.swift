@@ -10,6 +10,7 @@ class ProductDetailViewController: BaseViewController<ProductDetailViewModel, Pr
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
+        Loader.shared.showLoader(view: self.view)
     }
 
     private func setupCollectionView() {
@@ -22,6 +23,7 @@ class ProductDetailViewController: BaseViewController<ProductDetailViewModel, Pr
         contentView.descriptionLabel.text = productData.description
         contentView.priceLabel.text = "\(productData.pricePerUnit) с"
         contentView.image.image = UIImage(named: productData.itemImage ?? Asset.coffeeCupFront.name)
+        Loader.shared.hideLoader(view: self.view)
     }
 
     private func addTargets() {

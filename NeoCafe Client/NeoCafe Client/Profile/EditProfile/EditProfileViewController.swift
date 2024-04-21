@@ -50,7 +50,7 @@ class EditProfileViewController: BaseViewController<EditProfileViewModel, EditPr
                     self?.viewModel.personalDataEdit = updatedProfile
                     self?.configureData(updatedProfile)
 //                    router.showAlert(withTitle: "Profile Update", message: "Successfully updated profile.")
-                    self?.showAlert(withTitle: "Profile Update", message: "Successfully updated profile.") {
+                    self?.showAlert(withTitle: "Редактирование", message: "Редактирование прошло успешно.") {
                         self?.viewModel.onEditCompleted?()
                     }
                 case .failure(let error):

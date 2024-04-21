@@ -14,8 +14,10 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, Orde
         configureUI()
         setupCollectionView()
         addTargets()
+        Loader.shared.showLoader(view: self.view)
         viewModel.fetchProductDetails {
             DispatchQueue.main.async {
+                Loader.shared.hideLoader(view: self.view)
                 self.contentView.collectionView.reloadData()
             }
         }

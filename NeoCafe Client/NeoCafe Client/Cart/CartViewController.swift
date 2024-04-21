@@ -88,25 +88,23 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         let selectedItem = item.item
         cell.configureData(item: selectedItem, quantity: item.quantity)
 
-        cell.onStepperValueChanged = { [weak self, weak cell] newValue in
-            guard let self = self, let cell = cell else { return }
+        cell.onStepperValueChanged = { [weak self] newValue in
+            Cart.shared.orderList[item.item] = newValue
             cell.updatePriceLabel(newValue: newValue, item: selectedItem)
-            updateTotalPriceLabel()
+            self?.updateTotalPriceLabel()
         }
 
-        cell.stepper.incrementTapped = { [weak self, weak cell] in
-            guard let self = self, let cell = cell else { return }
-            Cart.shared.orderList[selectedItem, default: 0] += 1
-            cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
-            updateTotalPriceLabel()
+        cell.stepper.incrementTapped = { [weak self] in
+//            Cart.shared.orderList[selectedItem, default: 0] += 1
+//            cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
+            self?.updateTotalPriceLabel()
         }
 
-        cell.stepper.decrementTapped = { [weak self, weak cell] in
-            guard let self = self, let cell = cell else { return }
+        cell.stepper.decrementTapped = { [weak self] in
             if let currentQuantity = Cart.shared.orderList[selectedItem], currentQuantity > 0 {
-                Cart.shared.orderList[selectedItem] = currentQuantity - 1
-                cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
-                updateTotalPriceLabel()
+//                Cart.shared.orderList[selectedItem] = currentQuantity - 1
+//                cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
+                self?.updateTotalPriceLabel()
             }
         }
         return cell
@@ -135,6 +133,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
     private func deleteItem(itemToRemove: Item, at indexPath: IndexPath) {
         Cart.shared.removeItem(itemToRemove)
 //        contentView.collectionView.deleteItems(at: [indexPath])
+        updateTotalPriceLabel()
         contentView.collectionView.reloadData()
         updateViewBasedOnCartState()
         NotificationCenter.default.post(name: .cartUpdated, object: nil)

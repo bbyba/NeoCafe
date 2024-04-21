@@ -29,6 +29,9 @@ final class CartCoordinator: BaseCoordinator {
 
     private func openBonusModals() {
         let viewModel = BonusModalViewModel()
+        viewModel.onMainScreenNavigate = { [weak self] in
+            self?.openMainMenu()
+        }
         let viewController = BonusViewController(viewModel: viewModel)
         viewController.modalPresentationStyle = .overFullScreen
         router.present(viewController, animated: false)

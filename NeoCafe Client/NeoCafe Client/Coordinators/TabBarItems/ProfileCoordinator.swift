@@ -12,6 +12,9 @@ final class ProfileCoordinator: BaseCoordinator {
         viewModel.onEditProfileNavigate = { [weak self] in
             self?.openEditProfile()
         }
+        viewModel.onLogoutButtonTapped = { [weak self] in
+            self?.openExitModal()
+        }
         let viewController = ProfileViewController(viewModel: viewModel)
         viewController.coordinator = self
         presentViewController(viewController)
@@ -45,5 +48,12 @@ final class ProfileCoordinator: BaseCoordinator {
                 }
             }
         }
+    }
+
+    private func openExitModal() {
+        let viewModel = BonusModalViewModel()
+        let viewController = ExitViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController, animated: false)
     }
 }

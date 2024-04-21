@@ -74,6 +74,10 @@ internal enum S {
   internal static let getCode = S.tr("Localizable", "getCode", fallback: "Получить код")
   /// Доброе утро!
   internal static let goodMorning = S.tr("Localizable", "goodMorning", fallback: "Доброе утро!")
+  /// Выход
+  internal static let logout = S.tr("Localizable", "logout", fallback: "Выход")
+  /// Вы действительно хотите выйти?
+  internal static let logoutConfirmation = S.tr("Localizable", "logoutConfirmation", fallback: "Вы действительно хотите выйти?")
   /// Главная
   internal static let main = S.tr("Localizable", "main", fallback: "Главная")
   /// Меню: 

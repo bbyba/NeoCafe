@@ -89,4 +89,5 @@
 "clearAll" = "Очистить всё";
 "enterYourName" = "Введите своё имя";
 "som" = "%@ с";
-
+"logout" = "Выход";
+"logoutConfirmation" = "Вы действительно хотите выйти?";

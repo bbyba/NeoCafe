@@ -98,7 +98,6 @@ class MainViewModel: NSObject, MainViewModelProtocol {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                    print("\(self.popularItems)")
                     self.onPopularItemsFetched?()
                 }
             case .failure(let error):

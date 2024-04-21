@@ -176,6 +176,7 @@ extension BigProductCell: BaseContentView {
             make.top.equalTo(titleLabel.snp.bottom).offset(6)
             make.leading.equalTo(image.snp.trailing).offset(12)
             make.width.equalTo(150)
+            make.height.equalTo(12)
         }
 
         priceLabel.snp.makeConstraints { make in

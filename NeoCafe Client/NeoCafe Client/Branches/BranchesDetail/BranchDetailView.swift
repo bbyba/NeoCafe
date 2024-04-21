@@ -133,7 +133,7 @@ class BranchDetailView: UIView {
         let topConstraint = hidden ? scheduleLabelStack.snp.bottom : scheduleTableView.snp.bottom
 
         collectionView.snp.remakeConstraints { make in
-            make.top.equalTo(topConstraint).offset(24)
+            make.top.equalTo(topConstraint).offset(15)
             make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(goToMenuButton.snp.top).offset(-16)
         }

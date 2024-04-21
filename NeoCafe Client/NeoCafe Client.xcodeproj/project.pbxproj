@@ -115,6 +115,7 @@
 		DDCB6B852B9F0F4F00407089 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B842B9F0F4E00407089 /* MenuViewModel.swift */; };
 		DDCB6B872B9FBDF000407089 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B862B9FBDF000407089 /* NotificationsViewModel.swift */; };
 		DDCB6B892B9FC53600407089 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B882B9FC53600407089 /* NotificationsCell.swift */; };
+		DDCF9E8C2BD3C29B004F4D94 /* Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF9E8B2BD3C29B004F4D94 /* Exit.swift */; };
 		DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */; };
 		DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */; };
 		DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5912B70ED3C005FE06A /* MainViewController.swift */; };
@@ -237,6 +238,7 @@
 		DDCB6B842B9F0F4E00407089 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		DDCB6B862B9FBDF000407089 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		DDCB6B882B9FC53600407089 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
+		DDCF9E8B2BD3C29B004F4D94 /* Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exit.swift; sourceTree = "<group>"; };
 		DDF8B58A2B70ED3C005FE06A /* NeoCafe Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NeoCafe Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				DD9DD1082B95E23000C489F6 /* ProfileView.swift */,
 				DD73F3042BA386E900C33E21 /* ProfileViewModel.swift */,
 				DD9DD10A2B95E74900C489F6 /* ProfileViewController.swift */,
+				DDCF9E8B2BD3C29B004F4D94 /* Exit.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -973,6 +976,7 @@
 				DD73F2FB2BA04AC000C33E21 /* BonusModalViewModel.swift in Sources */,
 				DDCAE74C2BC6EF5300D94046 /* SharedCart.swift in Sources */,
 				DD9DD0D22B90B45E00C489F6 /* ModalSheet.swift in Sources */,
+				DDCF9E8C2BD3C29B004F4D94 /* Exit.swift in Sources */,
 				DD93C1972B83869700339287 /* Extension+UIFont.swift in Sources */,
 				DDC1D84C2B7602A20068598D /* SignInView.swift in Sources */,
 			);

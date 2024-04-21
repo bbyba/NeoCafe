@@ -78,11 +78,11 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
             print("Authentication can only be done in codeConfirmation state with a valid previous state.")
             return
         }
-        
+
         let action: UserAPI = prevState == .signIn ? .loginUser(email: email,
                                                                 confirmationCode: confirmationCode) :
-                                                    .registerUser(email: email,
-                                                                  confirmationCode: confirmationCode)
+                                                        .registerUser(email: email,
+                                                                        confirmationCode: confirmationCode)
 
         networkService.sendRequest(successModelType: AuthResponseModel.self,
                                    endpoint: MultiTarget(action))
@@ -91,9 +91,8 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
-                     UserDefaultsService.shared.saveTokens(response: response)
+                    UserDefaultsService.shared.saveTokens(response: response)
                     UserDefaultsService.shared.saveCustomerProfile(profile: response.customerProfile)
-                    print("\( String(describing: UserDefaultsService.shared.customerProfile))")
                     self.onMainNavigate?()
                 }
                 print(response)
@@ -102,5 +101,4 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
             }
         }
     }
-
 }
