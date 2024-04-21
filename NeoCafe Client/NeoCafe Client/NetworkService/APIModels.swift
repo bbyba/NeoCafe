@@ -6,6 +6,7 @@
 import Foundation
 
 // MARK: - Authentication
+
 struct MessageResponse: Codable {
     let message: String
 }
@@ -32,6 +33,7 @@ struct AuthResponseModel: Codable {
 }
 
 // MARK: - Main
+
 struct AllMenuItems: Codable {
     let count: Int
     let next: String?
@@ -63,7 +65,7 @@ struct Item: Codable, Hashable {
     }
 }
 
-struct Category: Codable, Hashable  {
+struct Category: Codable, Hashable {
     let id: Int
     let name: String
 }
@@ -81,9 +83,9 @@ struct Ingredient: Codable, Hashable {
 }
 
 enum MeasurementUnit: String, Codable {
-    case гр = "гр"
-    case мл = "мл"
-    case шт = "шт"
+    case гр
+    case мл
+    case шт
 }
 
 struct CategoryModel: Codable {
@@ -91,7 +93,6 @@ struct CategoryModel: Codable {
     let name: String
     let image: String?
 }
-
 
 // MARK: - Branches
 
@@ -148,9 +149,8 @@ extension BranchModel {
     }
 }
 
-
-
 // MARK: - Profile
+
 struct CustomerProfile: Codable {
     let id: Int
     let userID: Int
@@ -167,6 +167,7 @@ struct CustomerProfile: Codable {
 }
 
 // MARK: - Order
+
 struct OrderHistoryModel: Codable {
     let id, orderNumber: Int
     let orderStatus, orderType, createdAt, updatedAt: String
@@ -196,6 +197,7 @@ struct OrderHistoryModel: Codable {
 }
 
 // MARK: - Ito
+
 struct Ito: Codable {
     let id, item: Int
     let itemName: String
@@ -211,6 +213,7 @@ struct Ito: Codable {
 }
 
 // MARK: - Table
+
 struct Table: Codable {
     let tableNumber: Int
     let status: String
@@ -228,7 +231,6 @@ struct NotificationModel {
     let details: String
     let time: String
 }
-
 
 struct NewOrderModel: Codable {
     let orderType: String

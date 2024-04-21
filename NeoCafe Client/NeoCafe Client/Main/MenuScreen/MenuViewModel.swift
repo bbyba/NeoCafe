@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol MenuViewModelProtocol {
     var onSearchNavigate: EmptyCompletion? { get set }
@@ -31,7 +31,6 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
     var selectedBranchID: Int? = UserDefaultsService.shared.branchID
     var selectedBranchName: String? = UserDefaultsService.shared.branchName
 
-
     var filteredMenuItems: [Item] = []
 
     func filterMenuItems(byCategory category: CategoryModel) {
@@ -50,12 +49,12 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
         { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.allCategories = response
                     self.onCategoriesFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
@@ -67,12 +66,12 @@ class MenuViewModel: NSObject, MenuViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.menuItems = response.results.results
                     self.onMenuItemsFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }

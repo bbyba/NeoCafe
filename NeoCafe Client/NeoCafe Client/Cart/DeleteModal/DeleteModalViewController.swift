@@ -21,7 +21,7 @@ class DeleteModalViewController: UIViewController {
         addTargets()
     }
 
-    func addTargets(){
+    func addTargets() {
         deleteModalView.yesButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
         deleteModalView.noButton.addTarget(self, action: #selector(noButtonTapped), for: .touchUpInside)
     }
@@ -30,6 +30,7 @@ class DeleteModalViewController: UIViewController {
         performDeletion?()
         dismiss(animated: true, completion: nil)
     }
+
     @objc func noButtonTapped() {
         dismiss(animated: true, completion: nil)
     }

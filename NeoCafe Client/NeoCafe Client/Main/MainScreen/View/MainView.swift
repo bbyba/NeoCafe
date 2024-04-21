@@ -3,14 +3,13 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 enum Section: String, CaseIterable {
     case category = "Наше меню"
     case popular = "Популярное"
-
 }
 
 class MainView: UIView {
@@ -64,18 +63,18 @@ class MainView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension MainView {
     private func generateLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 
             let sectionLayoutKind = Section.allCases[sectionIndex]
-            switch (sectionLayoutKind) {
+            switch sectionLayoutKind {
             case .category: return self.generateCategoryItemsLayout()
             case .popular: return self.generatePopularItemsLayout()
             }
@@ -86,7 +85,8 @@ extension MainView {
     func generateHeaderLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(1),
-            heightDimension: .absolute(1))
+            heightDimension: .absolute(1)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
@@ -97,7 +97,8 @@ extension MainView {
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize,
             repeatingSubitem: item,
-            count: 1)
+            count: 1
+        )
 
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16)
 
@@ -122,7 +123,8 @@ extension MainView {
     private func generateCategoryItemsLayout() -> NSCollectionLayoutSection {
         let doubleItemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let doubleItem = NSCollectionLayoutItem(layoutSize: doubleItemSize)
 
@@ -130,79 +132,54 @@ extension MainView {
             top: 8,
             leading: 8,
             bottom: 8,
-            trailing: 8)
+            trailing: 8
+        )
 
         let doubleGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.5))
+            heightDimension: .fractionalHeight(0.5)
+        )
 
         let doubleGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: doubleGroupSize,
             repeatingSubitem: doubleItem,
-            count: 2)
+            count: 2
+        )
 
         let tripletItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0 / 3.0),
-                heightDimension: .fractionalHeight(1.0)))
+                heightDimension: .fractionalHeight(1.0)
+            ))
 
         tripletItem.contentInsets = NSDirectionalEdgeInsets(
             top: 8,
             leading: 8,
             bottom: 8,
-            trailing: 8)
+            trailing: 8
+        )
 
         let tripletGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.5)),
+                heightDimension: .fractionalHeight(0.5)
+            ),
             repeatingSubitem: tripletItem,
-            count: 3)
+            count: 3
+        )
 
         let nestedGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.4)),
-            subitems: [doubleGroup, tripletGroup])
+                heightDimension: .fractionalHeight(0.4)
+            ),
+            subitems: [doubleGroup, tripletGroup]
+        )
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top)
-        header.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 8)
-
-        let section = NSCollectionLayoutSection(group: nestedGroup)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-
-    private func generatePopularItemsLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
-
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
-
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
-
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -213,7 +190,48 @@ extension MainView {
             top: 0,
             leading: 8,
             bottom: 0,
-            trailing: 8)
+            trailing: 8
+        )
+
+        let section = NSCollectionLayoutSection(group: nestedGroup)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+        section.boundarySupplementaryItems = [header]
+        return section
+    }
+
+    private func generatePopularItemsLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(110)
+        )
+
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44)
+        )
+
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        header.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 8,
+            bottom: 0,
+            trailing: 8
+        )
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
@@ -223,7 +241,6 @@ extension MainView {
 }
 
 extension MainView: BaseContentView {
-
     func setProperties() {
         backgroundColor = .white
     }
@@ -236,7 +253,6 @@ extension MainView: BaseContentView {
         addSubview(collectionView)
         addSubview(goToMenuButton)
     }
-
 
     func setupConstraints() {
         header.snp.makeConstraints { make in

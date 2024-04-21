@@ -3,11 +3,10 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRegView> {
-
     var timer: Timer?
     var secondsRemaining = 5
 
@@ -40,7 +39,7 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
         guard let email = email else { return false }
         return viewModel.validateEmail(email: email)
     }
-    
+
     private func handleCodeRequest() {
         guard let email = getEmailString() else {
             return
@@ -50,7 +49,7 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
 
         if isValid {
             viewModel.storeEmail(email: email)
-            viewModel.requestConfirmationCode(email: email) 
+            viewModel.requestConfirmationCode(email: email)
         }
     }
 
@@ -68,7 +67,6 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
         viewModel.authenticateUser(email: storedEmail, confirmationCode: code)
     }
 
-
     func switchToCodeConfirmation() {
         contentView.showCodeConfirmationView()
         startTimer()
@@ -81,7 +79,7 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
     }
 
     @objc private func getCodeButtonTapped() {
-        switch self.viewModel.currentState {
+        switch viewModel.currentState {
         case .codeConfirmation:
             authenticateUserRequest()
         default:
@@ -91,8 +89,8 @@ class AuthenticationViewController: BaseViewController<AuthViewModel, BaseAuthRe
 }
 
 extension AuthenticationViewController {
+    // MARK: - Timer logic
 
-    // MARK:- Timer logic
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
@@ -124,4 +122,3 @@ extension AuthenticationViewController {
         }
     }
 }
-

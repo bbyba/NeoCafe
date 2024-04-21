@@ -2,11 +2,11 @@
 //  BranchesModalViewModel.swift
 //  NeoCafe Client
 
-import UIKit
 import Moya
+import UIKit
 
 protocol BranchesModalViewModelProtocol {
-    var branchesList: [BranchModel]  { get }
+    var branchesList: [BranchModel] { get }
     func branchDidSelect(branchID: Int, branchName: String)
 }
 
@@ -18,21 +18,21 @@ class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
     var branchesList: [BranchModel]
 
     override init() {
-        self.branchesList = []
+        branchesList = []
     }
-    
+
     func getBranches() {
         networkService.sendRequest(successModelType: BranchesResponse.self,
                                    endpoint: MultiTarget(UserAPI.getBranches))
         { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.branchesList = response.results
                     self.onBranchesFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
@@ -44,4 +44,3 @@ class BranchesModalViewModel: NSObject, BranchesModalViewModelProtocol {
         onBranchSelectedNavigate?(branchID, branchName)
     }
 }
-

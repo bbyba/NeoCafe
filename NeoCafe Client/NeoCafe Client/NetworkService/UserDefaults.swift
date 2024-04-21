@@ -1,7 +1,6 @@
 import Foundation
 
 class UserDefaultsService {
-
     static let shared = UserDefaultsService()
     private init() {}
 
@@ -39,7 +38,8 @@ class UserDefaultsService {
                   let userID = UserDefaults.standard.object(forKey: ProfileData.userID.rawValue) as? Int?,
                   let firstName = UserDefaults.standard.string(forKey: ProfileData.firstName.rawValue),
                   let email = UserDefaults.standard.string(forKey: ProfileData.email.rawValue),
-                  let bonusPoints = UserDefaults.standard.object(forKey: ProfileData.bonusPoints.rawValue) as? Int? else {
+                  let bonusPoints = UserDefaults.standard.object(forKey: ProfileData.bonusPoints.rawValue) as? Int?
+            else {
                 return nil
             }
             return CustomerProfile(id: customerID ?? 0, userID: userID ?? 0, firstName: firstName, email: email, bonusPoints: bonusPoints ?? 0)
@@ -64,16 +64,16 @@ class UserDefaultsService {
     }
 
     func saveTokens(response: AuthResponseModel) {
-        self.accessToken = response.accessToken
-        self.refreshToken = response.refreshToken
+        accessToken = response.accessToken
+        refreshToken = response.refreshToken
     }
 
     func saveCustomerProfile(profile: CustomerProfile) {
-        self.customerProfile = profile
+        customerProfile = profile
     }
 
     func saveBranchData(response: BranchModel) {
-        self.branchName = response.branchName
-        self.branchID = response.id
+        branchName = response.branchName
+        branchID = response.id
     }
 }

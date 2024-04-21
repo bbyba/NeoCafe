@@ -2,12 +2,11 @@
 //  BranchDetailView.swift
 //  NeoCafe Client
 //
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 class BranchDetailView: UIView {
-
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.branchesDetail.name)
@@ -87,7 +86,7 @@ class BranchDetailView: UIView {
         return button
     }()
 
-    lazy var scheduleTableView:  UITableView = {
+    lazy var scheduleTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: "ScheduleTableViewCell")
         tableView.backgroundColor = .clear
@@ -139,34 +138,37 @@ class BranchDetailView: UIView {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BranchDetailView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.4),
-            heightDimension: .absolute(207))
+            heightDimension: .absolute(207)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, 
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8,
                                                       leading: 0,
                                                       bottom: 8,
                                                       trailing: 8)
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -183,7 +185,6 @@ extension BranchDetailView {
         section.boundarySupplementaryItems = [header]
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 }
 

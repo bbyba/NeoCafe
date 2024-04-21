@@ -76,13 +76,12 @@ class BigProductCell: BaseCollectionViewCell {
         stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
     }
 
-
     func configureData(item: Item, quantity: Int? = nil) {
         currentItem = item
         image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
         titleLabel.text = item.name
         descriptionLabel.text = item.description
-        priceLabel.text = S.som(item.pricePerUnit*(quantity ?? 1))
+        priceLabel.text = S.som(item.pricePerUnit * (quantity ?? 1))
 
         if let quantity = quantity {
             plusButton.isHidden = true
@@ -120,14 +119,15 @@ class BigProductCell: BaseCollectionViewCell {
         addGestureRecognizer(swipeGesture)
     }
 
-    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+    @objc private func handleSwipeToDelete(_: UISwipeGestureRecognizer) {
         guard let collectionView = superview as? UICollectionView,
-              let indexPath = collectionView.indexPath(for: self) else {
+              let indexPath = collectionView.indexPath(for: self)
+        else {
             return
         }
         onSwipeToDelete?(indexPath)
     }
-    
+
     @objc private func addToCartButtonTapped() {
         if let currentItem = currentItem {
             onAddToCart?(currentItem)
@@ -138,11 +138,11 @@ class BigProductCell: BaseCollectionViewCell {
         onStepperValueChanged?(sender.currentValue)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BigProductCell: BaseContentView {
     func setProperties() {

@@ -3,12 +3,10 @@
 //  NeoCafe Client
 //
 
-import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class EditProfileView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var backButton: UIButton = {
@@ -52,7 +50,8 @@ class EditProfileView: UIView {
         emailTextField.isUserInteractionEnabled = false
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -61,7 +60,7 @@ extension EditProfileView: BaseContentView {
     func setProperties() {
         backgroundColor = .whiteCustom
     }
-    
+
     func addSubviews() {
         addSubview(header)
         header.addSubview(backButton)
@@ -88,7 +87,6 @@ extension EditProfileView: BaseContentView {
             make.top.equalToSuperview().offset(70)
             make.height.equalTo(29)
             make.centerX.equalToSuperview()
-            //            make.centerY.equalToSuperview()
         }
 
         personalInfoStack.snp.makeConstraints { make in

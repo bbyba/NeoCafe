@@ -2,11 +2,10 @@
 //  ProfileViewController.swift
 //  NeoCafe Client
 //
-//  
+//
 
-import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
     var coordinator: ProfileCoordinator?
@@ -18,7 +17,6 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
         Loader.shared.showLoader(view: view)
         viewModel.getPersonalData()
         viewModel.fetchOrderHistory()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,11 +58,11 @@ class ProfileViewController: BaseViewController<ProfileViewModel, ProfileView> {
 }
 
 extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+    func numberOfSections(in _: UICollectionView) -> Int {
+        2
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch OrderHistorySection.allCases[section] {
         case .current:
             return viewModel.currentOrdersList.count
@@ -90,7 +88,7 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader else {fatalError("Unexpected element kind") }
+        guard kind == UICollectionView.elementKindSectionHeader else { fatalError("Unexpected element kind") }
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = OrderHistorySection(rawValue: OrderHistorySection.allCases[indexPath.section].rawValue) {
@@ -104,4 +102,3 @@ extension ProfileViewController: UICollectionViewDataSource, UICollectionViewDel
         return header
     }
 }
-

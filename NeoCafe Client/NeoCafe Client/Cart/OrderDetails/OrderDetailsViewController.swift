@@ -6,26 +6,27 @@
 import UIKit
 
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, OrderDetailsView> {
-
-    var orderDetails: [Item] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         setupCollectionView()
         addTargets()
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
+        configureUI()
+        setupBindings()
+    }
+
+    private func setupCollectionView() {
+        contentView.collectionView.dataSource = self
+        contentView.collectionView.delegate = self
+    }
+
+    private func setupBindings() {
         viewModel.fetchProductDetails {
             DispatchQueue.main.async {
                 Loader.shared.hideLoader(view: self.view)
                 self.contentView.collectionView.reloadData()
             }
         }
-    }
-
-    private func setupCollectionView() {
-        contentView.collectionView.dataSource = self
-        contentView.collectionView.delegate = self
     }
 
     private func configureUI() {
@@ -39,29 +40,28 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, Orde
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-
     }
 
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc func orderButtonTapped() {
         Cart.shared.removeAllItems()
         for item in viewModel.itemDetails {
-                Cart.shared.addItem(item)
+            Cart.shared.addItem(item)
         }
         viewModel.onCartNavigate?()
     }
 }
 
 extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemDetails.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        viewModel.itemDetails.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

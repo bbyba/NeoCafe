@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CustomStepper: UIControl {
     var incrementTapped: (() -> Void)?
@@ -37,6 +37,7 @@ class CustomStepper: UIControl {
             sendActions(for: .valueChanged)
         }
     }
+
     var stepValue: Int = 1
 
     override init(frame: CGRect) {
@@ -107,7 +108,8 @@ class CustomStepper: UIControl {
         return button
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

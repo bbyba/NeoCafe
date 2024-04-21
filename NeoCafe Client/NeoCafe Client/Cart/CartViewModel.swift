@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol CartViewModelProtocol {
     var onMainMenuNavigate: EmptyCompletion? { get set }

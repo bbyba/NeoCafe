@@ -37,9 +37,9 @@ final class BranchesCoordinator: BaseCoordinator {
     }
 
     private func openMainMenu() {
-        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
-        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID,
-                                                    branchName:  UserDefaultsService.shared.branchName)
+        guard let tabBarCoordinator = tabBarCoordinator else { return }
+        tabBarCoordinator.mainCoordinator?.openMenu(branchID: UserDefaultsService.shared.branchID,
+                                                    branchName: UserDefaultsService.shared.branchName)
         tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
 }

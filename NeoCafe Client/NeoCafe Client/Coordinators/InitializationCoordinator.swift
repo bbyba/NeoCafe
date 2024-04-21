@@ -1,12 +1,11 @@
 //
-//  OnboardingCoordinator.swift
+//  InitializationCoordinator.swift
 //  NeoCafe Client
 //
 
 import UIKit
 
 final class InitializationCoordinator: BaseCoordinator {
-
     var onLoginNavigate: EmptyCompletion?
 
     lazy var startController: UIViewController = {

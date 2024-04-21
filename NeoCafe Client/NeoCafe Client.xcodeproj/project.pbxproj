@@ -11,7 +11,6 @@
 		DD03C7022B8571FB002D8977 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7012B8571FB002D8977 /* SplashView.swift */; };
 		DD03C7042B85721A002D8977 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD03C7032B85721A002D8977 /* SplashViewController.swift */; };
 		DD2567A92BBC26DC0071432E /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2567A82BBC26DC0071432E /* Loader.swift */; };
-		DD3FA30D2B8D0BB500B89DDB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */; };
 		DD5AFB0E2BC7AE7800C34B12 /* DeleteModalVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5AFB0D2BC7AE7800C34B12 /* DeleteModalVIew.swift */; };
 		DD5AFB102BC7AE9400C34B12 /* DeleteModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5AFB0F2BC7AE9400C34B12 /* DeleteModalViewController.swift */; };
 		DD5AFB122BC975CF00C34B12 /* OrderHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5AFB112BC975CF00C34B12 /* OrderHistoryViewModel.swift */; };
@@ -116,6 +115,7 @@
 		DDCB6B872B9FBDF000407089 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B862B9FBDF000407089 /* NotificationsViewModel.swift */; };
 		DDCB6B892B9FC53600407089 /* NotificationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCB6B882B9FC53600407089 /* NotificationsCell.swift */; };
 		DDCF9E8C2BD3C29B004F4D94 /* Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCF9E8B2BD3C29B004F4D94 /* Exit.swift */; };
+		DDCF9E8F2BD4E566004F4D94 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = DDCF9E8E2BD4E566004F4D94 /* .swiftformat */; };
 		DDF8B58E2B70ED3C005FE06A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */; };
 		DDF8B5902B70ED3C005FE06A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */; };
 		DDF8B5922B70ED3C005FE06A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8B5912B70ED3C005FE06A /* MainViewController.swift */; };
@@ -135,7 +135,6 @@
 		DD03C7012B8571FB002D8977 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		DD03C7032B85721A002D8977 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		DD2567A82BBC26DC0071432E /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		DD5AFB0D2BC7AE7800C34B12 /* DeleteModalVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalVIew.swift; sourceTree = "<group>"; };
 		DD5AFB0F2BC7AE9400C34B12 /* DeleteModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModalViewController.swift; sourceTree = "<group>"; };
 		DD5AFB112BC975CF00C34B12 /* OrderHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryViewModel.swift; sourceTree = "<group>"; };
@@ -239,6 +238,7 @@
 		DDCB6B862B9FBDF000407089 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		DDCB6B882B9FC53600407089 /* NotificationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCell.swift; sourceTree = "<group>"; };
 		DDCF9E8B2BD3C29B004F4D94 /* Exit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exit.swift; sourceTree = "<group>"; };
+		DDCF9E8E2BD4E566004F4D94 /* .swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
 		DDF8B58A2B70ED3C005FE06A /* NeoCafe Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NeoCafe Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -631,6 +631,7 @@
 		DDF8B5812B70ED3C005FE06A = {
 			isa = PBXGroup;
 			children = (
+				DDCF9E8E2BD4E566004F4D94 /* .swiftformat */,
 				DD84CBAF2B7B414E00580D4A /* swiftgen.yml */,
 				DDC1D8432B75B77C0068598D /* .swiftlint.yml */,
 				DDF8B58C2B70ED3C005FE06A /* NeoCafe Client */,
@@ -655,7 +656,6 @@
 				DDF8B59B2B70ED3E005FE06A /* Info.plist */,
 				DDF8B58D2B70ED3C005FE06A /* AppDelegate.swift */,
 				DDF8B58F2B70ED3C005FE06A /* SceneDelegate.swift */,
-				DD3FA30C2B8D0BB500B89DDB /* TabBarViewController.swift */,
 				DD9DD0F72B94797B00C489F6 /* Coordinators */,
 				DD03C7002B857178002D8977 /* Splash */,
 				DDF8B5C12B70F19A005FE06A /* Authentication */,
@@ -715,11 +715,12 @@
 			buildPhases = (
 				FDFF9AFB6452C8E5E9332C74 /* [CP] Check Pods Manifest.lock */,
 				DD84CBAB2B7B37D300580D4A /* SwiftGen */,
+				DDCF9E8D2BD4E51A004F4D94 /* SwiftFormat */,
+				DDC1D8452B75B7EC0068598D /* SwiftLint */,
 				DDF8B5862B70ED3C005FE06A /* Sources */,
 				DDF8B5872B70ED3C005FE06A /* Frameworks */,
 				DDF8B5882B70ED3C005FE06A /* Resources */,
 				8B1C9FBE46BFB0555F2F86AC /* [CP] Embed Pods Frameworks */,
-				DDC1D8452B75B7EC0068598D /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -781,6 +782,7 @@
 				DD9D08412B7BF53300BAB6CD /* Localizable.strings in Resources */,
 				DD9DD0DB2B90EBD600C489F6 /* Poppins-SemiBold.ttf in Resources */,
 				DD9D08372B7BF18100BAB6CD /* Poppins-Bold.ttf in Resources */,
+				DDCF9E8F2BD4E566004F4D94 /* .swiftformat in Resources */,
 				DD9D08392B7BF19000BAB6CD /* Poppins-Medium.ttf in Resources */,
 				DDF8B5972B70ED3E005FE06A /* Assets.xcassets in Resources */,
 				DD84CBB02B7B414E00580D4A /* swiftgen.yml in Resources */,
@@ -841,7 +843,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#\"${PODS_ROOT}/SwiftLint/swiftlint\"\n#\"${PODS_ROOT}/SwiftLint/swiftlint\" || true\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" || true\n";
+		};
+		DDCF9E8D2BD4E51A004F4D94 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftformat > /dev/null; then\n  swiftformat .\nelse\n  echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		FDFF9AFB6452C8E5E9332C74 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -918,7 +938,6 @@
 				DD9DD0D02B8FF4A700C489F6 /* ProductDetailViewModel.swift in Sources */,
 				DD9DD10D2B95F73900C489F6 /* EditProfileView.swift in Sources */,
 				DDAD65D72B8CB21400F72345 /* CategoryCell.swift in Sources */,
-				DD3FA30D2B8D0BB500B89DDB /* TabBarViewController.swift in Sources */,
 				DDCB6B7C2B9B7DE600407089 /* Extension+UICollectionViewCell+Register.swift in Sources */,
 				DDF8B5D12B70F288005FE06A /* CustomSegmentedControl.swift in Sources */,
 				DD9DD1092B95E23000C489F6 /* ProfileView.swift in Sources */,

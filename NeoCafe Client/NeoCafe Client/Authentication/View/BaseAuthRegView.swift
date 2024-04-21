@@ -4,8 +4,8 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class BaseAuthRegView: UIView {
     lazy var registrationView = RegistrationView()
@@ -29,7 +29,6 @@ class BaseAuthRegView: UIView {
         return segmentedControl
     }()
 
-//    lazy var textFieldStackView = UIStackView()
     lazy var textFieldStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -54,18 +53,6 @@ class BaseAuthRegView: UIView {
         return label
     }()
 
-//    lazy var resendButton: UIButton = {
-//        let button = UIButton()
-//        let attributes: [NSAttributedString.Key: Any] = [
-//            .font: UIFont.poppins(ofSize: 16, weight: .semibold),
-//            .foregroundColor: UIColor.orangeCustom,
-//            .underlineStyle: NSUnderlineStyle.single.rawValue
-//        ]
-//        let attributedTitle = NSAttributedString(string: S.resend, attributes: attributes)
-//        button.setAttributedTitle(attributedTitle, for: .normal)
-//        return button
-//    }()
-
     lazy var resendButton: UIButton = {
         let button = UIButton()
         button.setTitle(S.resendAfter, for: .normal)
@@ -77,7 +64,7 @@ class BaseAuthRegView: UIView {
     lazy var timeCounter = {
         let label = UILabel()
         label.text = ""
-        label.font =  .poppins(ofSize: 14, weight: .bold)
+        label.font = .poppins(ofSize: 14, weight: .bold)
         label.textColor = .darkGreyCustom
         return label
     }()
@@ -100,7 +87,7 @@ class BaseAuthRegView: UIView {
 
     func updateViewForSegmentIndex(index: Int) {
         let currentViews = textFieldStackView.arrangedSubviews
-        currentViews.forEach { view in
+        for view in currentViews {
             if view !== wrongEmailErrorLabel {
                 textFieldStackView.removeArrangedSubview(view)
                 view.removeFromSuperview()
@@ -123,9 +110,9 @@ class BaseAuthRegView: UIView {
 
     func showCodeConfirmationView() {
         getCodebutton.setTitle(S.confirm, for: .normal)
-        textFieldStackView.arrangedSubviews.forEach {
-            textFieldStackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
+        for arrangedSubview in textFieldStackView.arrangedSubviews {
+            textFieldStackView.removeArrangedSubview(arrangedSubview)
+            arrangedSubview.removeFromSuperview()
         }
 
         textFieldStackView.addArrangedSubview(codeConfirmationView)
@@ -137,7 +124,7 @@ class BaseAuthRegView: UIView {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.poppins(ofSize: 16, weight: .semibold),
             .foregroundColor: UIColor.orangeCustom,
-            .underlineStyle: NSUnderlineStyle.single.rawValue
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
         ]
         let attributedTitle = NSAttributedString(string: S.resend, attributes: attributes)
         resendButton.setAttributedTitle(attributedTitle, for: .normal)
@@ -149,16 +136,13 @@ class BaseAuthRegView: UIView {
         resendButton.isEnabled = true
         timeCounter.isHidden = true
         timeCounter.text = ""
-
-        // Remove attributed title if it was set during error state
-//        baseAuthRegView.resendButton.setAttributedTitle(nil, for: .normal)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BaseAuthRegView: BaseContentView {
     func addSubviews() {

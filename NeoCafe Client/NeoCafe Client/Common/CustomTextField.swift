@@ -19,26 +19,27 @@ class CustomTextField: UITextField {
     }()
 
     init(iconName: UIImage?, customPlaceholder: String) {
-            self.iconName = iconName
-            self.customPlaceholder = customPlaceholder
-            super.init(frame: .zero)
-            setupTextField()
-        }
+        self.iconName = iconName
+        self.customPlaceholder = customPlaceholder
+        super.init(frame: .zero)
+        setupTextField()
+    }
 
-    required init?(coder aDecoder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        if let leftView = self.leftView {
+        if let leftView = leftView {
             leftView.frame = CGRect(x: 0, y: 0, width: 40, height: bounds.height)
             iconImageView.frame = CGRect(x: 10, y: 0, width: 20, height: bounds.height)
         }
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 48)
+        CGSize(width: UIView.noIntrinsicMetric, height: 48)
     }
 
     private func setupTextField() {

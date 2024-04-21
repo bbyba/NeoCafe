@@ -1,14 +1,13 @@
 //
-//  EmptyCartView.swift
+//  EmptyCartView_BACKUP_17354.swift
 //  NeoCafe Client
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class EmptyCartView: UIView, BaseContentView {
-
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -102,8 +101,8 @@ class EmptyCartView: UIView, BaseContentView {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

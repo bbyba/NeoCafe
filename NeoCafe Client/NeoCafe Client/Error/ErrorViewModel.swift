@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol ErrorViewModelProtocol {
     var onPreviousViewNavigate: EmptyCompletion? { get set }

@@ -3,13 +3,13 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol ProfileViewModelProtocol {
     var onEditProfileNavigate: EmptyCompletion? { get set }
-    var personalData: CustomerProfile?  { get }
-    var orders: [OrderHistoryModel]?  { get }
+    var personalData: CustomerProfile? { get }
+    var orders: [OrderHistoryModel]? { get }
 }
 
 class ProfileViewModel: NSObject, ProfileViewModelProtocol {
@@ -26,24 +26,27 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
     var currentOrdersList: [OrderHistoryModel] = []
 
     override init() {
-        self.personalData = nil
+        personalData = nil
     }
 
     func getPersonalData() {
         guard let userID = UserDefaultsService.shared.customerProfile?.userID else {
-            let error = NSError(domain: "ProfileViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "User ID is nil"])
+            let error = NSError(domain: "ProfileViewModel", 
+                                code: 0,
+                                userInfo: [NSLocalizedDescriptionKey: "User ID is nil"])
             return
         }
 
         networkService.sendRequest(successModelType: CustomerProfile.self,
-                                   endpoint: MultiTarget(UserAPI.getProfile(userID: userID))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.getProfile(userID: userID)))
+        { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
-                case .success(let response):
+                case let .success(response):
                     self.personalData = response
                     self.onPersonalDataFetched?(response)
-                case .failure(let error):
+                case let .failure(error):
                     print("handle error: \(error)")
                 }
             }
@@ -51,7 +54,6 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
     }
 
     func fetchOrderHistory() {
-        print("fetchOrderHistory() called")
         let group = DispatchGroup()
 
         group.enter()
@@ -75,13 +77,12 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.currentOrdersList = response
-                    print("getOrderHistoryNow: SUCCESSFUL)")
                     completion()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching current orders: \(error)")
                 completion()
             }
@@ -94,13 +95,12 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.completeOrdersList = response
-                    print("getOrderHistoryPast: SUCCESSFUL")
                     completion()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching past orders: \(error)")
                 completion()
             }
@@ -118,6 +118,3 @@ class ProfileViewModel: NSObject, ProfileViewModelProtocol {
         return itemNameList
     }
 }
-
-
-

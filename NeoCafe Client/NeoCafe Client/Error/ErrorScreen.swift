@@ -4,11 +4,12 @@
 //
 
 import UIKit
-//protocol ErrorViewDelegate: AnyObject {
+
+// protocol ErrorViewDelegate: AnyObject {
 //    func reloadLastRequest()
-//}
+// }
 //
-//class ErrorView: UIView {
+// class ErrorView: UIView {
 //
 //    lazy var errorImage: UIImageView = {
 //        let imageView = UIImageView()
@@ -36,18 +37,17 @@ import UIKit
 //        addSubviews()
 //        setupConstraints()
 //    }
-//    
+//
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
-//}
+// }
 
 protocol ErrorViewDelegate: AnyObject {
     func reloadLastRequest()
 }
 
 class ErrorView: UIView {
-
     weak var delegate: ErrorViewDelegate?
 
     lazy var errorImage: UIImageView = {
@@ -78,7 +78,8 @@ class ErrorView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -86,7 +87,6 @@ class ErrorView: UIView {
         delegate?.reloadLastRequest()
     }
 }
-
 
 extension ErrorView: BaseContentView {
     func setProperties() {

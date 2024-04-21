@@ -6,7 +6,6 @@
 import UIKit
 
 class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.errorPresenter = self
@@ -30,7 +29,7 @@ class BonusViewController: BaseViewController<BonusModalViewModel, BonusModalVie
         viewModel.onMainScreenNavigate?()
     }
 
-    @objc private func dismissView(_ sender: UIButton) {
+    @objc private func dismissView(_: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 

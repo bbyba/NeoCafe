@@ -3,9 +3,9 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 enum MenuSection: String, CaseIterable {
     case category
@@ -68,18 +68,18 @@ class MenuView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-
 extension MenuView {
     private func generateLayout() -> UICollectionViewCompositionalLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
 
             let sectionLayoutKind = MenuSection.allCases[sectionIndex]
-            switch (sectionLayoutKind) {
+            switch sectionLayoutKind {
             case .category: return self.generateCategoryItemsLayout()
             case .productItem: return self.generateMenuItemsLayout()
             }
@@ -90,21 +90,25 @@ extension MenuView {
     private func generateCategoryItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(90),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: nil, top: nil, trailing: .fixed(8), bottom: nil)
+            leading: nil, top: nil, trailing: .fixed(8), bottom: nil
+        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .estimated(90),
-            heightDimension: .absolute(34))
+            heightDimension: .absolute(34)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(44))
+            heightDimension: .absolute(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -113,35 +117,38 @@ extension MenuView {
         )
         header.zIndex = 2
         header.contentInsets = NSDirectionalEdgeInsets(
-                top: 0,
-                leading: 16,
-                bottom: 0,
-                trailing: 12)
+            top: 0,
+            leading: 16,
+            bottom: 0,
+            trailing: 12
+        )
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [header]
         section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0, leading: 16, bottom: 0, trailing: 16)
+            top: 0, leading: 16, bottom: 0, trailing: 16
+        )
         section.interGroupSpacing = 8
         return section
-
-}
+    }
 
     private func generateMenuItemsLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0 / 2.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         item.contentInsets = NSDirectionalEdgeInsets(
-            top: 12, leading: 0, bottom: 0, trailing: 11)
+            top: 12, leading: 0, bottom: 0, trailing: 11
+        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.4))
-
+            heightDimension: .fractionalHeight(0.4)
+        )
 
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
@@ -167,7 +174,6 @@ extension MenuView: BaseContentView {
         addSubview(searchBar)
         addSubview(collectionView)
     }
-
 
     func setupConstraints() {
         header.snp.makeConstraints { make in

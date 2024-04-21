@@ -4,11 +4,10 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class OrderDetailsView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var backButton: UIButton = {
@@ -117,7 +116,7 @@ class OrderDetailsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setProperties()        
+        setProperties()
         addSubviews()
         setupConstraints()
     }
@@ -125,13 +124,15 @@ class OrderDetailsView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -139,7 +140,6 @@ class OrderDetailsView: UIView {
 
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
     func hideElementsByStatus() {
@@ -148,7 +148,8 @@ class OrderDetailsView: UIView {
 //        totalPriceLabel.isHidden = true
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

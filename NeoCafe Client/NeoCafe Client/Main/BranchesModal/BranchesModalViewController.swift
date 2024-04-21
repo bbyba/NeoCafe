@@ -33,18 +33,18 @@ class BranchesModalViewController: BaseViewController<BranchesModalViewModel, Br
         contentView.closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
 
-    @objc func closeButtonTapped(_ sender: UIButton) {
+    @objc func closeButtonTapped(_: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 }
 
 extension BranchesModalViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.branchesList.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        viewModel.branchesList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -55,7 +55,7 @@ extension BranchesModalViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]
         viewModel.branchDidSelect(branchID: selectedBranch.id, branchName: selectedBranch.branchName)
         delegate?.didSelectBranch(branchName: selectedBranch.branchName)

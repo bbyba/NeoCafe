@@ -3,12 +3,11 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 class BranchesModalView: UIView {
-
     lazy var blurredBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -22,7 +21,6 @@ class BranchesModalView: UIView {
         view.layer.cornerRadius = 16
         return view
     }()
-
 
     lazy var closeButton: UIButton = {
         let button = UIButton()
@@ -61,13 +59,15 @@ class BranchesModalView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.32))
+            heightDimension: .fractionalHeight(0.32)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -77,13 +77,13 @@ class BranchesModalView: UIView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension BranchesModalView: BaseContentView {
-
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
@@ -119,4 +119,3 @@ extension BranchesModalView: BaseContentView {
         }
     }
 }
-

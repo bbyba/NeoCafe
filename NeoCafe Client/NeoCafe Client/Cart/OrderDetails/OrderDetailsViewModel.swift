@@ -14,7 +14,6 @@ class OrderDetailsViewModel: NSObject, OrderDetailsViewModelProtocol {
 
     var onBackNavigate: EmptyCompletion?
     var onCartNavigate: EmptyCompletion?
-
     var orderDetails: OrderHistoryModel
     var itemDetails: [Item] = []
 
@@ -38,14 +37,15 @@ class OrderDetailsViewModel: NSObject, OrderDetailsViewModelProtocol {
 
     func getProductDetails(productId: Int, completion: @escaping () -> Void) {
         networkService.sendRequest(successModelType: Item.self,
-                                   endpoint: MultiTarget(UserAPI.getProductDetails(productId: productId))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.getProductDetails(productId: productId)))
+        { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
-                case .success(let response):
+                case let .success(response):
                     self.itemDetails.append(response)
                     completion()
-                case .failure(let error):
+                case let .failure(error):
                     print("handle error: \(error)")
                     completion()
                 }

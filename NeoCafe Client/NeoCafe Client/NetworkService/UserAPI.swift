@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  UserAPI.swift
 //  NeoCafe Client
 
 import Foundation
@@ -35,36 +35,34 @@ enum UserAPI {
 
 extension UserAPI: TargetType {
     var baseURL: URL {
-        return URL(string: "https://tokyo-backender.org.kg")!
+        URL(string: "https://tokyo-backender.org.kg")!
     }
 
     var path: String {
         switch self {
-            // Auth
-        case .checkEmailRegister(_):
+        // Auth
+        case .checkEmailRegister:
             return "/customer/check-email-register/"
-        case .checkEmailLogin(_):
+        case .checkEmailLogin:
             return "/customer/check-email-login/"
-        case .registerUser(_, _):
+        case .registerUser:
             return "/customer/register/"
-        case .loginUser(_, _):
+        case .loginUser:
             return "/customer/login/"
 
-            // Main & Menu
+        // Main & Menu
         case .getCategories:
             return "/menu/category/all/"
-        case .getPopularItems(let branchID):
+        case let .getPopularItems(branchID):
             return "/branch/\(branchID)/top-selling-menu-items/"
         case .getAllCategories:
             return "/menu/item/all/"
-            //        case .getMenuItemsByBranchCategory(let branchID):
-            //            return "/branch-menu/\(branchID)/"
         case .getMenuItemsAll:
             return "/menu/item/all/"
-        case .getProductDetails(let productId):
+        case let .getProductDetails(productId):
             return "/menu/item/\(productId)/"
 
-            // Cart
+        // Cart
         case .makeOrder:
             return "/orders-online/add/"
         case .getOrderHistoryNow:
@@ -72,37 +70,36 @@ extension UserAPI: TargetType {
         case .getOrderHistoryPast:
             return "/customer/orders/past/"
 
-            // Branches
+        // Branches
         case .getBranches:
             return "/branch/all/"
 
-            // Profile
-        case .getProfile(let userID):
+        // Profile
+        case let .getProfile(userID):
             return "/profile/customer/\(userID)/"
-        case .getProfileEdit(let userID):
+        case let .getProfileEdit(userID):
             return "/profile/customer/\(userID)/edit/"
-        case .patchProfile(let userId, _):
+        case let .patchProfile(userId, _):
             return "/profile/customer/\(userId)/edit/"
         }
     }
 
-
     var method: Moya.Method {
         switch self {
         case .checkEmailRegister,
-                .checkEmailLogin,
+             .checkEmailLogin,
              .registerUser,
              .loginUser,
              .makeOrder:
             return .post
 
         case .getCategories,
-                .getAllCategories,
+             .getAllCategories,
              .getProductDetails,
              .getBranches,
-             .getProfile, 
+             .getProfile,
              .getProfileEdit,
-             .getMenuItemsAll, 
+             .getMenuItemsAll,
              .getPopularItems,
              .getOrderHistoryNow,
              .getOrderHistoryPast:
@@ -115,15 +112,15 @@ extension UserAPI: TargetType {
 
     var task: Task {
         switch self {
-        case .checkEmailRegister(let email),
-                .checkEmailLogin(let email):
+        case let .checkEmailRegister(email),
+             let .checkEmailLogin(email):
             return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
-        case .registerUser(let email, let confirmationCode),
-                .loginUser(let email, let confirmationCode):
+        case let .registerUser(email, confirmationCode),
+             let .loginUser(email, confirmationCode):
             return .requestParameters(parameters: ["email": email, "confirmation_code": confirmationCode], encoding: JSONEncoding.default)
-        case .makeOrder(let order):
+        case let .makeOrder(order):
             return .requestJSONEncodable(order)
-        case .patchProfile(_, let firstName):
+        case let .patchProfile(_, firstName):
             let parameters = ["first_name": firstName]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
@@ -134,10 +131,10 @@ extension UserAPI: TargetType {
     var headers: [String: String]? {
         switch self {
         case .makeOrder,
-                .getOrderHistoryNow,
-                .getOrderHistoryPast:
+             .getOrderHistoryNow,
+             .getOrderHistoryPast:
             if let accessToken = UserDefaultsService.shared.accessToken {
-                return ["Authorization": "Bearer \(accessToken)", 
+                return ["Authorization": "Bearer \(accessToken)",
                         "Content-Type": "application/json"]
             } else {
                 return nil

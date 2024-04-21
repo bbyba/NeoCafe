@@ -5,8 +5,8 @@
 
 import UIKit
 
-extension UIFont {
-    public static func poppins(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+public extension UIFont {
+    static func poppins(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
         switch weight {
         case .bold:
             return FontFamily.Poppins.bold.font(size: size)
@@ -21,7 +21,7 @@ extension UIFont {
         }
     }
 
-    public static func sFProDisplayFont(ofSize size: CGFloat) -> UIFont {
-        return FontFamily.SFProDisplay.regular.font(size: size)
+    static func sFProDisplayFont(ofSize size: CGFloat) -> UIFont {
+        FontFamily.SFProDisplay.regular.font(size: size)
     }
 }

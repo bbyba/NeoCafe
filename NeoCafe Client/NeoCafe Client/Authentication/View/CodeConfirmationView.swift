@@ -3,7 +3,7 @@
 // NeoCafe Client
 //
 
-import Foundation
+import UIKit
 import SnapKit
 import SVPinView
 
@@ -21,7 +21,7 @@ class CodeConfirmationView: UIStackView {
     lazy var otpField: SVPinView = {
         let pinView = SVPinView()
         pinView.pinLength = 4
-//        pinView.interSpace = 8
+        pinView.interSpace = 8
         pinView.textColor = .darkBlueCustom
         pinView.font = .poppins(ofSize: 20, weight: .regular)
         pinView.keyboardType = .numberPad
@@ -43,17 +43,17 @@ class CodeConfirmationView: UIStackView {
     private func addSubviews() {
         addArrangedSubview(enterCodeMessageLabel)
         addArrangedSubview(otpField)
-        self.alignment = .center
+        alignment = .center
 
         otpField.snp.makeConstraints { make in
             make.top.equalTo(enterCodeMessageLabel.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
         }
-        
     }
 
-    required init(coder: NSCoder) {
+    @available(*, unavailable)
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

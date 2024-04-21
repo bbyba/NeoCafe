@@ -5,13 +5,11 @@
 import UIKit
 
 class ScheduleTableViewCell: UITableViewCell {
-//    static let identifier = "ScheduleTableViewCell"
 
     lazy var workingHours = {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
-        label.text = "00:00 - 02:00"
         return label
     }()
 
@@ -19,7 +17,6 @@ class ScheduleTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 12, weight: .regular)
         label.textColor = .darkBlueCustom
-        label.text = "Espresso with Milk"
         return label
     }()
 
@@ -41,18 +38,8 @@ class ScheduleTableViewCell: UITableViewCell {
         }
     }
 
-//    func configureData(_ branch: BranchModel) {
-//
-//        if let todayScheduleText = branch.todaySchedule,
-//           let weekDay = branch.todaySchedule
-//        {
-//            titleLabel.text = "\(weekDay): \(todayScheduleText)"
-//        } else {
-//            titleLabel.text = S.scheduleNotAvailanle
-//        }
-//    }
-
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

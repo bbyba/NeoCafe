@@ -1,5 +1,5 @@
 //
-//  ApplicationCoordinator.swift
+//  AppCoordinator.swift
 //  NeoCafe Client
 //
 
@@ -8,7 +8,6 @@ import UIKit
 typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
 
 final class ApplicationCoordinator: BaseCoordinator {
-
     private let window: UIWindow
 
     init(window: UIWindow, router: Router = RouterImpl()) {
@@ -33,7 +32,7 @@ final class ApplicationCoordinator: BaseCoordinator {
         }
         router.setRootModule(coordinator, hideBar: true)
     }
-    
+
     func performLoginFlow() {
         let coordinator = AuthenticationCoordinator(router: router)
         coordinator.onMainNavigate = { [weak self, weak coordinator] in

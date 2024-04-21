@@ -1,14 +1,14 @@
 //
 //  Presentable.swift
-// 
+//
 import UIKit
 
 protocol Presentable {
-	var toPresent: UIViewController { get }
+    var toPresent: UIViewController { get }
 }
 
 extension UIViewController: Presentable {
-	var toPresent: UIViewController {
-		self
-	}
+    var toPresent: UIViewController {
+        self
+    }
 }

@@ -47,17 +47,17 @@ final class CartCoordinator: BaseCoordinator {
         viewModel.onProductDetailUpdate = { productDetail in
             viewController.configureProductData(productData: productDetail)
         }
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
-                    hideBottomBar: false, 
+                    hideBottomBar: false,
                     hideNavBar: true,
                     completion: nil)
     }
 
     private func openMainMenu() {
-        guard let tabBarCoordinator = self.tabBarCoordinator else { return }
-        tabBarCoordinator.mainCoordinator?.openMenu(branchID:  UserDefaultsService.shared.branchID, 
-                                                    branchName:  UserDefaultsService.shared.branchName)
+        guard let tabBarCoordinator = tabBarCoordinator else { return }
+        tabBarCoordinator.mainCoordinator?.openMenu(branchID: UserDefaultsService.shared.branchID,
+                                                    branchName: UserDefaultsService.shared.branchName)
         tabBarCoordinator.tabBarViewController.selectedIndex = 0
     }
 
@@ -67,7 +67,7 @@ final class CartCoordinator: BaseCoordinator {
             self?.router.popModule(animated: true)
         }
         let viewController = OrderHistoryViewController(viewModel: viewModel)
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: false,
                     hideNavBar: true,

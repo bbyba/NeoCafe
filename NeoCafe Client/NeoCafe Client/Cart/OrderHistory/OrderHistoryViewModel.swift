@@ -43,13 +43,13 @@ class OrderHistoryViewModel: NSObject, OrderHistoryViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.currentOrdersList = response
                     print("getOrderHistoryNow: SUCCESSFUL \(self.currentOrdersList)")
                     completion()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching current orders: \(error)")
                 completion()
             }
@@ -62,13 +62,13 @@ class OrderHistoryViewModel: NSObject, OrderHistoryViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.completeOrdersList = response
                     print("getOrderHistoryPast: SUCCESSFUL")
                     completion()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching past orders: \(error)")
                 completion()
             }

@@ -2,12 +2,10 @@
 //  Exit.swift
 //  NeoCafe Client
 //
-import UIKit
 import SnapKit
-
+import UIKit
 
 class ExitModalView: UIView {
-
     var currentState: BonusModalState = .initialState
 
     lazy var blurredBackgroundView: UIView = {
@@ -49,7 +47,7 @@ class ExitModalView: UIView {
         return button
     }()
 
-    lazy var noButton : CustomButton = {
+    lazy var noButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.no, backgroundColor: .clear, titleColor: .darkBlueCustom, showBorder: true)
         return button
@@ -69,7 +67,8 @@ class ExitModalView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -78,7 +77,7 @@ extension ExitModalView: BaseContentView {
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
-        contentView.addSubview((headerLabel))
+        contentView.addSubview(headerLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(yesNoButtonStack)
     }
@@ -129,7 +128,7 @@ class ExitViewController: BaseViewController<BonusModalViewModel, ExitModalView>
         exit(0)
     }
 
-    @objc private func dismissView(_ sender: UIButton) {
+    @objc private func dismissView(_: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 }

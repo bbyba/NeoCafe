@@ -3,12 +3,11 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class RegistrationView: UIStackView {
     lazy var emailTextFieldReg = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.exampleEmail)
-
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,11 +20,8 @@ class RegistrationView: UIStackView {
         addArrangedSubview(emailTextFieldReg)
     }
 
-//    func resetView() {
-//        emailTextField.text = ""
-//    }
-
-    required init(coder: NSCoder) {
+    @available(*, unavailable)
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

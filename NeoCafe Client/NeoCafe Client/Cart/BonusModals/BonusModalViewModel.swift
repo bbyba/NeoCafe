@@ -11,7 +11,6 @@ protocol BonusModalViewModelProtocol {
 }
 
 class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDelegate {
-
     @InjectionInjected(\.networkService) var networkService
 
     var onBonusModalsNavigate: EmptyCompletion?
@@ -25,20 +24,20 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
         let orderModel = createOrderList()
 
         networkService.sendRequest(successModelType: String.self,
-                                   endpoint: MultiTarget(UserAPI.makeOrder(order: orderModel))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.makeOrder(order: orderModel)))
+        { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
+            case .success:
                 print("Request Successful")
                 print("\(orderModel)")
                 self.orderMadeSuccessfully?()
                 Cart.shared.removeAllItems()
-            case .failure(let error):
+            case let .failure(error):
                 self.orderMadeSuccessfully?()
                 Cart.shared.removeAllItems()
 //                print("Handle error: \(error)")
 //                showErrorScreen()
-
             }
         }
     }

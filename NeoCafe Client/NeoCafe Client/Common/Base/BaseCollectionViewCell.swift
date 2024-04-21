@@ -6,8 +6,8 @@
 import UIKit
 
 open class BaseCollectionViewCell: UICollectionViewCell {
-    static public var reuseIdentifier: String {
-        return String(describing: self)
+    public static var reuseIdentifier: String {
+        String(describing: self)
     }
 
     override public init(frame: CGRect) {
@@ -15,7 +15,7 @@ open class BaseCollectionViewCell: UICollectionViewCell {
         setupUI()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupUI()
     }

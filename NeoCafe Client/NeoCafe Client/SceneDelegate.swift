@@ -8,11 +8,10 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
     var applicationCoordinator: ApplicationCoordinator?
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene, willConnectTo _: UISceneSession, options _: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
@@ -22,21 +21,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         applicationCoordinator.start()
     }
-
-//class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-//
-//    var window: UIWindow?
-//    var applicationCoordinator: TabBarCoordinator?
-//
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = scene as? UIWindowScene else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        self.window = window
-//        let router = RouterImpl(navigationController: UINavigationController())
-//        let applicationCoordinator = TabBarCoordinator(router: router)
-//        self.applicationCoordinator = applicationCoordinator
-//        applicationCoordinator.start()
-//        window.rootViewController = applicationCoordinator.toPresent
-//        window.makeKeyAndVisible()
-//    }
 }

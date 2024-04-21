@@ -3,11 +3,11 @@
 ////  NeoCafe Client
 ////
 //
-//import UIKit
-//import SnapKit
-//import SwiftUI
+// import UIKit
+// import SnapKit
+// import SwiftUI
 //
-//class ProductView: UIView {
+// class ProductView: UIView {
 ////    lazy var header = CustomHeaderView()
 //    lazy var image: UIImageView = {
 //        let image = UIImageView()
@@ -144,4 +144,4 @@
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
-//}
+// }

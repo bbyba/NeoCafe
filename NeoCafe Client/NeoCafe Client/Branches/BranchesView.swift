@@ -7,7 +7,6 @@ import SwiftUI
 import UIKit
 
 class BranchesView: UIView {
-    
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -38,13 +37,15 @@ class BranchesView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(264))
+            heightDimension: .absolute(264)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -54,7 +55,8 @@ class BranchesView: UIView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

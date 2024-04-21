@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  NeoCafe Client
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class MainViewController: BaseViewController<MainViewModel, MainView> {
     var loadingIndicator: UIActivityIndicatorView?
@@ -63,11 +63,11 @@ class MainViewController: BaseViewController<MainViewModel, MainView> {
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Section.allCases.count
+    func numberOfSections(in _: UICollectionView) -> Int {
+        Section.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.allCases[section] {
         case .category:
             return viewModel.categories.count
