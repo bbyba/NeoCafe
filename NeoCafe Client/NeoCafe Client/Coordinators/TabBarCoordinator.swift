@@ -6,7 +6,6 @@
 import UIKit
 
 final class TabBarCoordinator: BaseCoordinator {
-
     var mainCoordinator: MainCoordinator?
     var cartCoordinator: CartCoordinator?
     var branchesCoordinator: BranchesCoordinator?
@@ -36,7 +35,7 @@ final class TabBarCoordinator: BaseCoordinator {
             mainCoordinator.toPresent,
             cartCoordinator.toPresent,
             branchesCoordinator.toPresent,
-            profileCoordinator.toPresent
+            profileCoordinator.toPresent,
         ]
 
         mainCoordinator.start()
@@ -76,7 +75,6 @@ final class TabBarCoordinator: BaseCoordinator {
         super.init(router: router)
     }
 
-
     private func configureAppearance(for tabBarController: UITabBarController) {
         let tabBarAppearance = UITabBarAppearance()
         tabBarAppearance.backgroundColor = .clear
@@ -99,7 +97,7 @@ final class TabBarCoordinator: BaseCoordinator {
 
     private func configureShadow(for tabBarController: UITabBarController) {
         tabBarShadow?.removeFromSuperview()
-        tabBarShadow = UIView(frame: CGRect(x: 0, 
+        tabBarShadow = UIView(frame: CGRect(x: 0,
                                             y: 0,
                                             width: tabBarController.tabBar.bounds.width,
                                             height: tabBarController.tabBar.bounds.height))
@@ -122,12 +120,12 @@ final class TabBarCoordinator: BaseCoordinator {
 final class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {
@@ -135,8 +133,9 @@ final class CustomTabBarController: UITabBarController, UITabBarControllerDelega
         delegate = self
     }
 
-    func tabBarController(_ tabBarController: UITabBarController,
-                          shouldSelect viewController: UIViewController) -> Bool {
-        return true
+    func tabBarController(_: UITabBarController,
+                          shouldSelect _: UIViewController) -> Bool
+    {
+        true
     }
 }

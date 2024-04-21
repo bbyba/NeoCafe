@@ -1,10 +1,10 @@
 //
-//  RegisterVC.swift
+//  RegistrationViewController.swift
 //  NeoCafe Client
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class RegistrationViewController: UIViewController {
     private lazy var baseAuthRegView = BaseAuthRegView()
@@ -31,12 +31,12 @@ class RegistrationViewController: UIViewController {
     }
 
     @objc private func getCodeButtonTapped() {
-        switch self.viewModel.currentState {
+        switch viewModel.currentState {
         case .codeConfirmation:
-            print("current viewstate: \(self.viewModel.currentState)")
+            print("current viewstate: \(viewModel.currentState)")
             registerLoginUserRequest()
         default:
-            print("current viewstate: \(self.viewModel.currentState)")
+            print("current viewstate: \(viewModel.currentState)")
             requestCodeButton()
         }
     }
@@ -63,7 +63,6 @@ class RegistrationViewController: UIViewController {
         }
     }
 
-
     private func getCodeString() -> String? {
         baseAuthRegView.codeConfirmationView.otpField.getPin()
     }
@@ -81,7 +80,7 @@ class RegistrationViewController: UIViewController {
                     switch result {
                     case .success:
                         self.switchToCodeConfirmation()
-                    case .failure(let error):
+                    case let .failure(error):
                         print(error.localizedDescription)
                     }
                 }
@@ -106,13 +105,12 @@ class RegistrationViewController: UIViewController {
                 switch result {
                 case .success:
                     print("Success: registerLoginUser")
-                case .failure(let error):
+                case let .failure(error):
                     print(error.localizedDescription)
                 }
             }
         }
     }
-
 
     func switchToCodeConfirmation() {
         viewModel.changeViewState(to: .codeConfirmation)
@@ -120,12 +118,12 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-//#if DEBUG
+// #if DEBUG
 //
-//@available(iOS 13.0, *)
-//struct RegisterVCPreview: PreviewProvider {
+// @available(iOS 13.0, *)
+// struct RegisterVCPreview: PreviewProvider {
 //    static var previews: some View {
 //        RegistrationViewController().showPreview()
 //    }
-//}
-//#endif
+// }
+// #endif

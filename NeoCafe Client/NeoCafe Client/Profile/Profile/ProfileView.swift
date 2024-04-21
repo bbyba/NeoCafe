@@ -3,9 +3,9 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 class ProfileView: UIView {
     lazy var header = CustomHeaderView()
@@ -21,7 +21,7 @@ class ProfileView: UIView {
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jane"
+        label.text = "Имя"
         label.font = .poppins(ofSize: 24, weight: .medium)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
@@ -39,7 +39,7 @@ class ProfileView: UIView {
 
     lazy var totalBonusPointsNumber: UILabel = {
         let label = UILabel()
-        label.text = "10"
+        label.text = "0"
         label.font = .poppins(ofSize: 32, weight: .semibold)
         label.textColor = .darkBlueCustom
         label.textAlignment = .left
@@ -102,13 +102,15 @@ class ProfileView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -116,7 +118,8 @@ class ProfileView: UIView {
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -128,10 +131,10 @@ class ProfileView: UIView {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -5,13 +5,11 @@
 
 import UIKit
 
-
 class NotificationsCell: BaseCollectionViewCell {
     lazy var orderStatusLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
         label.textColor = .darkBlueCustom
-//        label.text = "Ваш заказ готов"
         return label
     }()
 
@@ -54,14 +52,12 @@ class NotificationsCell: BaseCollectionViewCell {
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(30)
             make.bottom.equalToSuperview().inset(16)
-
         }
 
         timeLabel.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(16)
         }
     }
-
 
     func configureData(status: String, details: String, time: String) {
         orderStatusLabel.text = status
@@ -74,7 +70,8 @@ class NotificationsCell: BaseCollectionViewCell {
         layer.borderColor = UIColor.darkBlueCustom.cgColor
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

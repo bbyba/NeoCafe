@@ -1,10 +1,10 @@
 //
-//  RegisterViewModel.swift
+//  AuthenticationViewModel.swift
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 enum ViewState {
     case signIn
@@ -30,16 +30,17 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
             if currentState == .codeConfirmation {
                 previousState = oldValue
             }
-            self.updateViewState?(currentState)
+            updateViewState?(currentState)
         }
     }
+
     var previousState: ViewState?
     var storedEmail: String?
     var updateViewState: ((ViewState) -> Void)?
     var updateEmailValidationState: ((Bool) -> Void)?
 
     func changeViewState(to newState: ViewState) {
-        self.currentState = newState
+        currentState = newState
     }
 
     func storeEmail(email: String) {
@@ -60,47 +61,44 @@ class AuthViewModel: NSObject, AuthViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.changeViewState(to: .codeConfirmation)
                     self.onCodeConfirmationNavigate?()
                 }
                 print(response)
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
     }
-
 
     func authenticateUser(email: String, confirmationCode: String) {
         guard currentState == .codeConfirmation, let prevState = previousState else {
             print("Authentication can only be done in codeConfirmation state with a valid previous state.")
             return
         }
-        
+
         let action: UserAPI = prevState == .signIn ? .loginUser(email: email,
                                                                 confirmationCode: confirmationCode) :
-                                                    .registerUser(email: email,
-                                                                  confirmationCode: confirmationCode)
+            .registerUser(email: email,
+                          confirmationCode: confirmationCode)
 
         networkService.sendRequest(successModelType: AuthResponseModel.self,
                                    endpoint: MultiTarget(action))
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
-                     UserDefaultsService.shared.saveTokens(response: response)
+                    UserDefaultsService.shared.saveTokens(response: response)
                     UserDefaultsService.shared.saveCustomerProfile(profile: response.customerProfile)
-                    print("\( String(describing: UserDefaultsService.shared.customerProfile))")
                     self.onMainNavigate?()
                 }
                 print(response)
-            case .failure(let error):
+            case let .failure(error):
                 print("handle error: \(error)")
             }
         }
     }
-
 }

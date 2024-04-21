@@ -6,11 +6,13 @@
 import UIKit
 
 final class ProfileCoordinator: BaseCoordinator {
-
     override func start() {
         let viewModel = ProfileViewModel()
         viewModel.onEditProfileNavigate = { [weak self] in
             self?.openEditProfile()
+        }
+        viewModel.onLogoutButtonTapped = { [weak self] in
+            self?.openExitModal()
         }
         let viewController = ProfileViewController(viewModel: viewModel)
         viewController.coordinator = self
@@ -35,15 +37,22 @@ final class ProfileCoordinator: BaseCoordinator {
         viewModel.getPersonalDataEdit { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let userData):
+                case let .success(userData):
                     let editProfileViewController = EditProfileViewController(viewModel: viewModel)
                     viewModel.personalDataEdit = userData
                     editProfileViewController.configureData(userData)
                     self?.router.push(editProfileViewController, animated: true, hideBottomBar: true, hideNavBar: true, completion: nil)
-                case .failure(let error):
+                case let .failure(error):
                     print("Error fetching user edit data: \(error)")
                 }
             }
         }
+    }
+
+    private func openExitModal() {
+        let viewModel = BonusModalViewModel()
+        let viewController = ExitViewController(viewModel: viewModel)
+        viewController.modalPresentationStyle = .overFullScreen
+        router.present(viewController, animated: false)
     }
 }

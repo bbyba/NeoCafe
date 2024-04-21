@@ -3,11 +3,10 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 final class AuthenticationCoordinator: BaseCoordinator {
-
     var onMainNavigate: EmptyCompletion?
 
     lazy var startController: UIViewController = {

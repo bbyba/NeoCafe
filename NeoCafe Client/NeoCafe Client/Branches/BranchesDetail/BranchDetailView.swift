@@ -2,12 +2,11 @@
 //  BranchDetailView.swift
 //  NeoCafe Client
 //
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 class BranchDetailView: UIView {
-
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.branchesDetail.name)
@@ -55,27 +54,28 @@ class BranchDetailView: UIView {
 
     lazy var phoneButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.Buttons.phoneIcon.image, for: .normal)
-        button.tintColor = .whiteCustom
+        let phoneImage = Asset.Buttons.phoneIcon.image.withRenderingMode(.alwaysTemplate)
+        button.setImage(phoneImage, for: .normal)
+        button.tintColor = .white
         button.backgroundColor = .orangeCustom
         button.layer.cornerRadius = 22
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return button
     }()
 
     lazy var locationButton: UIButton = {
         let button = UIButton()
-        button.setImage(Asset.Buttons.location.image, for: .normal)
-        button.tintColor = .whiteCustom
+        let locationImage = Asset.Buttons.location.image.withRenderingMode(.alwaysTemplate)
+        button.setImage(locationImage, for: .normal)
+        button.tintColor = .white
         button.backgroundColor = .orangeCustom
         button.layer.cornerRadius = 22
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return button
     }()
 
     lazy var dropDownButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "arrowtriangle.down.fill"), for: .normal)
+        let dropDownImage = Asset.dropDownIcon.image.withRenderingMode(.alwaysTemplate)
+        button.setImage(dropDownImage, for: .normal)
         button.tintColor = .darkBlueCustom
         return button
     }()
@@ -86,11 +86,12 @@ class BranchDetailView: UIView {
         return button
     }()
 
-    lazy var scheduleTableView:  UITableView = {
+    lazy var scheduleTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: "ScheduleTableViewCell")
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.isHidden = true
         return tableView
     }()
 
@@ -125,48 +126,65 @@ class BranchDetailView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    func toggleScheduleTableView(hidden: Bool) {
+        scheduleTableView.isHidden = hidden
+
+        let topConstraint = hidden ? scheduleLabelStack.snp.bottom : scheduleTableView.snp.bottom
+
+        collectionView.snp.remakeConstraints { make in
+            make.top.equalTo(topConstraint).offset(15)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(goToMenuButton.snp.top).offset(-16)
+        }
+    }
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BranchDetailView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.4),
-            heightDimension: .absolute(207))
+            heightDimension: .absolute(207)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 8)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 8,
+                                                      leading: 0,
+                                                      bottom: 8,
+                                                      trailing: 8)
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        header.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 8)
+
+        header.contentInsets = NSDirectionalEdgeInsets(top: 0,
+                                                       leading: 16,
+                                                       bottom: 0,
+                                                       trailing: 16)
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 }
 
@@ -232,6 +250,7 @@ extension BranchDetailView: BaseContentView {
         scheduleLabelStack.snp.makeConstraints { make in
             make.top.equalTo(buttonStack.snp.bottom).offset(24)
             make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(20)
         }
 
         scheduleLabel.snp.makeConstraints { make in
@@ -240,6 +259,7 @@ extension BranchDetailView: BaseContentView {
 
         dropDownButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
+            make.height.width.equalTo(24)
         }
 
         scheduleTableView.snp.makeConstraints { make in
@@ -249,15 +269,15 @@ extension BranchDetailView: BaseContentView {
         }
 
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(scheduleTableView.snp.bottom).offset(15)
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(scheduleLabelStack.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(goToMenuButton.snp.top).offset(-16)
         }
 
         goToMenuButton.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(16)
-            make.height.equalTo(48)
+            make.height.equalTo(54)
         }
     }
 }

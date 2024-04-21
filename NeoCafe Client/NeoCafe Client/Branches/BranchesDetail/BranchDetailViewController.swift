@@ -4,14 +4,8 @@
 //
 
 import UIKit
-struct PrItem {
-    let image: String
-    let name: String
-    let price: Int
-}
 
 class BranchDetailViewController: BaseViewController<BranchDetailViewModel, BranchDetailView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -29,6 +23,7 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.goToMenuButton.addTarget(self, action: #selector(goToMenuButtonTapped), for: .touchUpInside)
+        contentView.dropDownButton.addTarget(self, action: #selector(dropDownButtonTapped), for: .touchUpInside)
     }
 
     private func setupBindings() {
@@ -54,25 +49,32 @@ class BranchDetailViewController: BaseViewController<BranchDetailViewModel, Bran
     @objc func goToMenuButtonTapped() {
         viewModel.onMenuNavigate?()
     }
+
+    @objc func dropDownButtonTapped() {
+        contentView.toggleScheduleTableView(hidden: !contentView.scheduleTableView.isHidden)
+    }
 }
 
 extension BranchDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.suggestionItems.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        viewModel.suggestionItems.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: MenuProductCell = collectionView.dequeue(for: indexPath)
         let suggestionItem = viewModel.suggestionItems[indexPath.row]
         cell.configureData(item: suggestionItem)
-        return cell
+        cell.onAddToCart = { [weak self] item in
+            self?.viewModel.addToCart(menuItem: item)
         }
+        return cell
+    }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: S.pleasantAddition)
         return header
@@ -80,14 +82,14 @@ extension BranchDetailViewController: UICollectionViewDataSource, UICollectionVi
 }
 
 // MARK: - Schedule
-extension BranchDetailViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+extension BranchDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        7
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 22
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        22
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

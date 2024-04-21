@@ -6,7 +6,6 @@
 import UIKit
 
 class CartViewController: BaseViewController<CartViewModel, CartView> {
-
     private lazy var cartView = CartView()
 
     override func viewDidLoad() {
@@ -44,9 +43,15 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
         contentView.priceLabel.text = S.som(totalPrice)
     }
 
-    @objc func cartUpdated() {
-        updateTotalPriceLabel()
+    func reloadCollectionView() {
         contentView.collectionView.reloadData()
+        updateViewBasedOnCartState()
+        updateTotalPriceLabel()
+    }
+
+    @objc func cartUpdated() {
+        contentView.collectionView.reloadData()
+        updateTotalPriceLabel()
     }
 
     @objc func orderHistoryButtonTapped() {
@@ -67,12 +72,12 @@ class CartViewController: BaseViewController<CartViewModel, CartView> {
 }
 
 extension CartViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Cart.shared.orderList.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        Cart.shared.orderList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,32 +86,29 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         let selectedItem = item.item
         cell.configureData(item: selectedItem, quantity: item.quantity)
 
-        cell.onStepperValueChanged = { [weak self, weak cell] newValue in
-            guard let self = self, let cell = cell else { return }
+        cell.onStepperValueChanged = { [weak self] newValue in
+            Cart.shared.orderList[item.item] = newValue
             cell.updatePriceLabel(newValue: newValue, item: selectedItem)
-            updateTotalPriceLabel()
+            self?.updateTotalPriceLabel()
         }
 
-        cell.stepper.incrementTapped = { [weak self, weak cell] in
-            guard let self = self, let cell = cell else { return }
+        cell.stepper.incrementTapped = { [weak self] in
             Cart.shared.orderList[selectedItem, default: 0] += 1
             cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
-            updateTotalPriceLabel()
+            self?.updateTotalPriceLabel()
         }
 
-        cell.stepper.decrementTapped = { [weak self, weak cell] in
-            guard let self = self, let cell = cell else { return }
+        cell.stepper.decrementTapped = { [weak self] in
             if let currentQuantity = Cart.shared.orderList[selectedItem], currentQuantity > 0 {
                 Cart.shared.orderList[selectedItem] = currentQuantity - 1
                 cell.updatePriceLabel(newValue: cell.stepper.currentValue, item: selectedItem)
-                updateTotalPriceLabel()
+                self?.updateTotalPriceLabel()
             }
         }
-
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let customCell = cell as? BigProductCell {
             customCell.onSwipeToDelete = { [weak self] indexPath in
                 self?.showDeleteConfirmationModal(at: indexPath)
@@ -116,6 +118,7 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     private func showDeleteConfirmationModal(at indexPath: IndexPath) {
         let modalViewController = DeleteModalViewController()
+        modalViewController.modalPresentationStyle = .overFullScreen
         modalViewController.indexPathToDelete = indexPath
         let itemToRemove = Cart.shared.getItems()[indexPath.row].item
         modalViewController.itemName = itemToRemove.name
@@ -125,8 +128,10 @@ extension CartViewController: UICollectionViewDataSource, UICollectionViewDelega
         present(modalViewController, animated: true, completion: nil)
     }
 
-    private func deleteItem(itemToRemove: Item, at indexPath: IndexPath) {
+    private func deleteItem(itemToRemove: Item, at _: IndexPath) {
         Cart.shared.removeItem(itemToRemove)
+        updateTotalPriceLabel()
+        contentView.collectionView.reloadData()
         updateViewBasedOnCartState()
         NotificationCenter.default.post(name: .cartUpdated, object: nil)
     }

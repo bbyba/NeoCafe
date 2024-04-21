@@ -3,12 +3,12 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol BranchesViewModelProtocol {
     var onBranchDetailNavigate: ((Int) -> Void)? { get set }
-    var branchesList: [BranchModel]  { get }
+    var branchesList: [BranchModel] { get }
 }
 
 class BranchesViewModel: NSObject, BranchesViewModelProtocol {
@@ -19,7 +19,7 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
     var branchesList: [BranchModel]
 
     override init() {
-        self.branchesList = []
+        branchesList = []
     }
 
     func getBranches() {
@@ -28,17 +28,14 @@ class BranchesViewModel: NSObject, BranchesViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
                     self.branchesList = response.results
                     self.onBranchesFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }
     }
 }
-
-
-

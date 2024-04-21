@@ -3,11 +3,10 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 final class MainCoordinator: BaseCoordinator {
-
     private var onSearchNavigate: EmptyCompletion?
     var mainViewController: MainViewController!
     var tabBarCoordinator: TabBarCoordinator?
@@ -63,7 +62,7 @@ final class MainCoordinator: BaseCoordinator {
         }
         let viewController = MenuViewController(viewModel: viewModel)
         viewController.delegate = self
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: false,
                     hideNavBar: true,
@@ -80,12 +79,11 @@ final class MainCoordinator: BaseCoordinator {
         viewModel.onProductDetailUpdate = { productDetail in
             viewController.configureProductData(productData: productDetail)
         }
-        router.push(viewController, 
+        router.push(viewController,
                     animated: true,
                     hideBottomBar: true,
                     hideNavBar: true,
                     completion: nil)
-
     }
 
     private func openBranches() {
@@ -120,9 +118,9 @@ final class MainCoordinator: BaseCoordinator {
 }
 
 extension MainCoordinator: MenuViewControllerDelegate {
-  func didSelectBranch(branchName: String?) {
-    selectedBranchName = branchName
-    mainViewController?.selectedBranchName = branchName
-    mainViewController?.updateForSelectedBranch()
-  }
+    func didSelectBranch(branchName: String?) {
+        selectedBranchName = branchName
+        mainViewController?.selectedBranchName = branchName
+        mainViewController?.updateForSelectedBranch()
+    }
 }

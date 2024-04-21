@@ -10,7 +10,7 @@ class SplashViewController: UIViewController {
     private var splashViewModel: SplashViewModel
 
     init(viewModel: SplashViewModel) {
-        self.splashViewModel = viewModel
+        splashViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -23,7 +23,8 @@ class SplashViewController: UIViewController {
         splashViewModel.toLoginNavigate()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -4,11 +4,10 @@
 //
 
 import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class OrderDetailsView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var backButton: UIButton = {
@@ -61,10 +60,27 @@ class OrderDetailsView: UIView {
         return label
     }()
 
+    lazy var branchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "400 c"
+        label.textAlignment = .left
+        label.font = .poppins(ofSize: 16, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
+    lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "400 c"
+        label.textAlignment = .left
+        label.font = .poppins(ofSize: 16, weight: .semibold)
+        label.textColor = .darkBlueCustom
+        return label
+    }()
+
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.register(cell: BigProductCell.self)
-        collectionView.register(header: CollectionViewSingleHeader.self)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
@@ -85,6 +101,13 @@ class OrderDetailsView: UIView {
         return stack
     }()
 
+    lazy var branchAndDateStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [branchLabel, dateLabel])
+        stackView.axis = .horizontal
+        stackView.spacing = 4
+        return stackView
+    }()
+
     lazy var orderButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.order, backgroundColor: .darkBlueCustom)
@@ -93,7 +116,7 @@ class OrderDetailsView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setProperties()        
+        setProperties()
         addSubviews()
         setupConstraints()
     }
@@ -101,46 +124,32 @@ class OrderDetailsView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
         group.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0)
 
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
-
-        let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        header.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 8,
-            bottom: 0,
-            trailing: 8)
-
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
     func hideElementsByStatus() {
         orderButton.isHidden = true
-        availablePointsToUseLabel.isHidden = true
-        totalPriceLabel.isHidden = true
+//        availablePointsToUseLabel.isHidden = true
+//        totalPriceLabel.isHidden = true
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -154,6 +163,7 @@ extension OrderDetailsView: BaseContentView {
         addSubview(header)
         header.addSubview(backButton)
         header.addSubview(headerLabel)
+        addSubview(branchAndDateStackView)
         addSubview(collectionView)
         addSubview(availablePointsToUseLabel)
         availablePointsToUseLabel.addArrangedSubview(availablePointsLabel)
@@ -163,7 +173,6 @@ extension OrderDetailsView: BaseContentView {
         totalPriceLabel.addArrangedSubview(priceLabel)
         addSubview(orderButton)
     }
-
 
     func setupConstraints() {
         header.snp.makeConstraints { make in
@@ -182,8 +191,13 @@ extension OrderDetailsView: BaseContentView {
             make.top.equalToSuperview().offset(70)
         }
 
-        collectionView.snp.makeConstraints { make in
+        branchAndDateStackView.snp.makeConstraints { make in
             make.top.equalTo(header.snp.bottom).offset(28)
+            make.leading.equalToSuperview().inset(16)
+        }
+
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(branchAndDateStackView.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(availablePointsToUseLabel.snp.top).offset(-10)
         }

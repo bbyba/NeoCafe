@@ -41,15 +41,15 @@ class Cart {
     }
 
     func getItems() -> [(item: Item, quantity: Int)] {
-        return orderList.map { ($0.key, $0.value) }
+        orderList.map { ($0.key, $0.value) }
     }
 
     func getTotalPrice() -> Int {
-        return orderList.reduce(0) { $0 + Int($1.key.pricePerUnit * $1.value) }
+        orderList.reduce(0) { $0 + Int($1.key.pricePerUnit * $1.value) }
     }
 
     func createOrderListForSubmission() -> [Ito] {
-        return orderList.map { (item, quantity) in
+        orderList.map { item, quantity in
             let totalPrice = item.pricePerUnit * quantity
             return Ito(id: item.id, item: item.id, itemName: item.name, quantity: quantity, totalPrice: totalPrice)
         }

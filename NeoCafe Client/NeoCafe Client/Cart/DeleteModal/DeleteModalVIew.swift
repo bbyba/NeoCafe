@@ -1,9 +1,10 @@
 //
+import SnapKit
+
 //  DeleteModalView.swift
 //  NeoCafe Client
 //
 import UIKit
-import SnapKit
 
 class DeleteModalView: UIView {
     var itemName: String
@@ -38,7 +39,7 @@ class DeleteModalView: UIView {
         return button
     }()
 
-    lazy var yesButton : CustomButton = {
+    lazy var yesButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.yes, backgroundColor: .darkBlueCustom, titleColor: .white)
         return button
@@ -59,17 +60,17 @@ class DeleteModalView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension DeleteModalView: BaseContentView {
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
-        contentView.addSubview((headerLabel))
+        contentView.addSubview(headerLabel)
         contentView.addSubview(buttonStack)
     }
 

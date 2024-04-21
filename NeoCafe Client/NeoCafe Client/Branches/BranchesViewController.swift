@@ -11,8 +11,9 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupBindings()
+        Loader.shared.showLoader(view: view)
         viewModel.getBranches()
+        setupBindings()
     }
 
     private func setupCollectionView() {
@@ -24,18 +25,19 @@ class BranchesViewController: BaseViewController<BranchesViewModel, BranchesView
         viewModel.onBranchesFetched = { [weak self] in
             DispatchQueue.main.async {
                 self?.contentView.collectionView.reloadData()
+                Loader.shared.hideLoader(view: self?.view ?? UIView())
             }
         }
     }
 }
 
 extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.branchesList.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        viewModel.branchesList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -45,7 +47,7 @@ extension BranchesViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedBranch = viewModel.branchesList[indexPath.row]
         coordinator?.openBranchDetail(branch: selectedBranch)
 //        viewModel.onBranchDetailNavigate?(selectedBranch.id)

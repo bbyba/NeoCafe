@@ -22,11 +22,10 @@ class BranchesModalCell: BaseCollectionViewCell {
         label.textColor = .darkBlueCustom
         label.numberOfLines = 1
         label.backgroundColor = .white
-        label.layer.cornerRadius = 8    //14
+        label.layer.cornerRadius = 8 
         label.layer.masksToBounds = true
         return label
     }()
-
 
     lazy var branchNameLabel = {
         let label = UILabel()
@@ -124,7 +123,6 @@ class BranchesModalCell: BaseCollectionViewCell {
             make.centerY.equalTo(phoneIcon.snp.centerY)
             make.leading.equalTo(phoneIcon.snp.trailing).offset(8)
         }
-
     }
 
     private func setupShadow() {
@@ -158,7 +156,8 @@ class BranchesModalCell: BaseCollectionViewCell {
         branchNameLabel.text = branchName
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

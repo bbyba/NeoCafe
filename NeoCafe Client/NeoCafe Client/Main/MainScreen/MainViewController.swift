@@ -1,10 +1,10 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  NeoCafe Client
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 class MainViewController: BaseViewController<MainViewModel, MainView> {
     var loadingIndicator: UIActivityIndicatorView?
@@ -63,11 +63,11 @@ class MainViewController: BaseViewController<MainViewModel, MainView> {
 }
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Section.allCases.count
+    func numberOfSections(in _: UICollectionView) -> Int {
+        Section.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.allCases[section] {
         case .category:
             return viewModel.categories.count
@@ -87,6 +87,11 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             let cell: BigProductCell = collectionView.dequeue(for: indexPath)
             let popularItem = viewModel.popularItems[indexPath.row]
             cell.configureData(item: popularItem)
+            cell.plusButton.isHidden = false
+            cell.plusButton.isUserInteractionEnabled = true
+            cell.onAddToCart = { [weak self] popularItem in
+                self?.viewModel.addToCart(menuItem: popularItem)
+            }
             return cell
         }
     }

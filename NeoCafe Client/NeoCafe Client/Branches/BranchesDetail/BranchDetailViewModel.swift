@@ -39,4 +39,7 @@ class BranchDetailViewModel: NSObject, BranchesDetailViewModelProtocol {
         }
     }
 
+    func addToCart(menuItem: Item) {
+        Cart.shared.addItem(menuItem)
+    }
 }

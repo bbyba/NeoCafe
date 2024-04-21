@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class SplashView: UIView {
     lazy var coffeeBeansImage: UIImageView = {
@@ -40,10 +40,10 @@ class SplashView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 extension SplashView: BaseContentView {
@@ -76,7 +76,7 @@ extension SplashView: BaseContentView {
             make.centerX.equalToSuperview()
             make.top.equalTo(coffeeCupsImage.snp.bottom).offset(48)
         }
-        
+
         logoImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(welcomeLabel.snp.bottom).offset(32)

@@ -8,6 +8,8 @@ import UIKit
 class BigProductCell: BaseCollectionViewCell {
     var onStepperValueChanged: ((_ newValue: Int) -> Void)?
     var onSwipeToDelete: ((IndexPath) -> Void)?
+    var onAddToCart: ((Item) -> Void)?
+    private var currentItem: Item?
 
     lazy var image: UIImageView = {
         let image = UIImageView()
@@ -47,7 +49,16 @@ class BigProductCell: BaseCollectionViewCell {
         return label
     }()
 
-    lazy var switchingStepper = SwitchingStepper()
+    lazy var plusButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .whiteCustom
+        button.backgroundColor = .orangeCustom
+        button.layer.cornerRadius = 14
+        button.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMinYCorner]
+        return button
+    }()
+
     lazy var stepper = CustomStepper()
 
     override init(frame: CGRect) {
@@ -56,35 +67,45 @@ class BigProductCell: BaseCollectionViewCell {
         addSubviews()
         setupConstraints()
         setupShadow()
-        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+        addTargets()
         addSwipeToDeleteGesture()
     }
 
+    private func addTargets() {
+        plusButton.addTarget(self, action: #selector(addToCartButtonTapped), for: .touchUpInside)
+        stepper.addTarget(self, action: #selector(stepperValueChanged(_:)), for: .valueChanged)
+    }
+
     func configureData(item: Item, quantity: Int? = nil) {
+        currentItem = item
         image.image = UIImage(named: item.itemImage ?? Asset.coffeeCupFront.name)
         titleLabel.text = item.name
         descriptionLabel.text = item.description
-        priceLabel.text = S.som(item.pricePerUnit)
+        priceLabel.text = S.som(item.pricePerUnit * (quantity ?? 1))
 
         if let quantity = quantity {
-            switchingStepper.isHidden = true
+            plusButton.isHidden = true
             stepper.isHidden = false
             stepper.currentValue = quantity
         } else {
-            switchingStepper.isHidden = true
+            plusButton.isHidden = true
             stepper.isHidden = true
         }
     }
 
-    func configureForOrderHistory(item: OrderHistoryModel, isOrderHistoryCell: Bool) {
-        image.image = UIImage(named: Asset.coffeeCupFront.name)
+    func configureForOrderHistory(item: OrderHistoryModel, isOrderHistoryCell: Bool, inCurrent: Bool?) {
+        image.image = UIImage(named: Asset.coffeeCupTop.name)
         titleLabel.text = item.branchName
-        descriptionLabel.text = item.orderStatus
         statusLabel.text = item.orderStatus
         statusLabel.isHidden = !isOrderHistoryCell
         stepper.isHidden = isOrderHistoryCell
-        switchingStepper.isHidden = isOrderHistoryCell
+        plusButton.isHidden = isOrderHistoryCell
         priceLabel.isHidden = isOrderHistoryCell
+        if let inCurrent = inCurrent {
+            statusLabel.textColor = inCurrent ? .orangeCustom : .darkBlueCustom
+        } else {
+            statusLabel.textColor = .darkBlueCustom
+        }
     }
 
     func updatePriceLabel(newValue: Int, item: Item) {
@@ -98,23 +119,30 @@ class BigProductCell: BaseCollectionViewCell {
         addGestureRecognizer(swipeGesture)
     }
 
-    @objc private func handleSwipeToDelete(_ gesture: UISwipeGestureRecognizer) {
+    @objc private func handleSwipeToDelete(_: UISwipeGestureRecognizer) {
         guard let collectionView = superview as? UICollectionView,
-              let indexPath = collectionView.indexPath(for: self) else {
+              let indexPath = collectionView.indexPath(for: self)
+        else {
             return
         }
         onSwipeToDelete?(indexPath)
+    }
+
+    @objc private func addToCartButtonTapped() {
+        if let currentItem = currentItem {
+            onAddToCart?(currentItem)
+        }
     }
 
     @objc private func stepperValueChanged(_ sender: CustomStepper) {
         onStepperValueChanged?(sender.currentValue)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BigProductCell: BaseContentView {
     func setProperties() {
@@ -128,7 +156,7 @@ extension BigProductCell: BaseContentView {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(statusLabel)
-        contentView.addSubview(switchingStepper)
+        contentView.addSubview(plusButton)
         contentView.addSubview(stepper)
         stepper.isHidden = true
     }
@@ -147,7 +175,8 @@ extension BigProductCell: BaseContentView {
         descriptionLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(6)
             make.leading.equalTo(image.snp.trailing).offset(12)
-            make.trailing.equalToSuperview().offset(-40)
+            make.width.equalTo(150)
+            make.height.equalTo(12)
         }
 
         priceLabel.snp.makeConstraints { make in
@@ -160,10 +189,10 @@ extension BigProductCell: BaseContentView {
             make.leading.equalTo(image.snp.trailing).offset(12)
         }
 
-        switchingStepper.snp.makeConstraints { make in
+        plusButton.snp.makeConstraints { make in
             make.trailing.bottom.equalToSuperview()
             make.height.equalTo(40)
-            make.width.equalTo(130)
+            make.width.equalTo(56)
         }
 
         stepper.snp.makeConstraints { make in

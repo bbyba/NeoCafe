@@ -5,17 +5,11 @@
 import UIKit
 
 class ProductDetailViewController: BaseViewController<ProductDetailViewModel, ProductDetailsView> {
-    
-    var suggestions: [PrItem] = [
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP1", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP2", price: 230),
-        PrItem(image: Asset.coffeeCupTop.name, name: "POP3", price: 230)
-    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
+        Loader.shared.showLoader(view: view)
     }
 
     private func setupCollectionView() {
@@ -28,6 +22,7 @@ class ProductDetailViewController: BaseViewController<ProductDetailViewModel, Pr
         contentView.descriptionLabel.text = productData.description
         contentView.priceLabel.text = "\(productData.pricePerUnit) с"
         contentView.image.image = UIImage(named: productData.itemImage ?? Asset.coffeeCupFront.name)
+        Loader.shared.hideLoader(view: view)
     }
 
     private func addTargets() {
@@ -50,23 +45,22 @@ class ProductDetailViewController: BaseViewController<ProductDetailViewModel, Pr
 }
 
 extension ProductDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        3
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
-        let suggestion = suggestions[indexPath.row]
-//        let suggestion = viewModel.suggestions[indexPath.row]
-//        cell.configureData(item: suggestion)
+        let suggestion = viewModel.suggestions[indexPath.row]
+        cell.configureData(item: suggestion)
         return cell
-        }
+    }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
         header.configureTitle(title: S.pleasantAddition)
         return header

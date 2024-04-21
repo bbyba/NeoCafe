@@ -1,5 +1,5 @@
-import UIKit
 import Moya
+import UIKit
 
 protocol ProductDetailViewModelProtocol {
     var onBackNavigate: EmptyCompletion? { get set }
@@ -20,14 +20,15 @@ class ProductDetailViewModel: NSObject, ProductDetailViewModelProtocol {
 
     func getProductDetails(productId: Int) {
         networkService.sendRequest(successModelType: Item.self,
-                                   endpoint: MultiTarget(UserAPI.getProductDetails(productId: productId))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.getProductDetails(productId: productId)))
+        { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
-                case .success(let response):
+                case let .success(response):
                     self.productDetail = response
                     self.onProductDetailUpdate?(response)
-                case .failure(let error):
+                case let .failure(error):
                     print("handle error: \(error)")
                 }
             }

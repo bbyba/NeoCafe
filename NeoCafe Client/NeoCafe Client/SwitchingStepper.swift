@@ -9,7 +9,6 @@ protocol SwitchingStepperDelegate: AnyObject {
 }
 
 class SwitchingStepper: UIView {
-
     weak var delegate: SwitchingStepperDelegate?
 
     lazy var plusButton: UIButton = {
@@ -36,7 +35,8 @@ class SwitchingStepper: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

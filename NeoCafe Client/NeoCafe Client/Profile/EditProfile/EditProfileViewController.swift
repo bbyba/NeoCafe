@@ -6,7 +6,6 @@
 import UIKit
 
 class EditProfileViewController: BaseViewController<EditProfileViewModel, EditProfileView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         addTargets()
@@ -15,7 +14,6 @@ class EditProfileViewController: BaseViewController<EditProfileViewModel, EditPr
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-
     }
 
     func configureData(_ userData: CustomerProfile) {
@@ -29,9 +27,8 @@ class EditProfileViewController: BaseViewController<EditProfileViewModel, EditPr
             completion()
         }
         alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
-
 
     @objc func backButtonTapped() {
         viewModel.onBackNavigate?()
@@ -46,14 +43,13 @@ class EditProfileViewController: BaseViewController<EditProfileViewModel, EditPr
         viewModel.patchProfile(firstName: newName) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let updatedProfile):
+                case let .success(updatedProfile):
                     self?.viewModel.personalDataEdit = updatedProfile
                     self?.configureData(updatedProfile)
-//                    router.showAlert(withTitle: "Profile Update", message: "Successfully updated profile.")
-                    self?.showAlert(withTitle: "Profile Update", message: "Successfully updated profile.") {
+                    self?.showAlert(withTitle: "Редактирование", message: "Редактирование прошло успешно.") {
                         self?.viewModel.onEditCompleted?()
                     }
-                case .failure(let error):
+                case let .failure(error):
                     print("Error updating profile: \(error.localizedDescription)")
                     self?.showAlert(withTitle: "Profile Update", message: "Could not update the profile.") {
                         self?.viewModel.onEditCompleted?()
@@ -63,5 +59,3 @@ class EditProfileViewController: BaseViewController<EditProfileViewModel, EditPr
         }
     }
 }
-
-

@@ -68,6 +68,8 @@
 "total" = "Итого: ";
 "closeOrder" = "Закрыть счёт";
 "availablePoints" = "Бонусы к списанию:";
+"bonusPointsUsed" = "Использованные бонусы: ";
+
 "popularMenu" = "Популярные блюда";
 "deleteFromOrder" = "Удалить %@ из заказа?";
 
@@ -87,4 +89,5 @@
 "clearAll" = "Очистить всё";
 "enterYourName" = "Введите своё имя";
 "som" = "%@ с";
-
+"logout" = "Выход";
+"logoutConfirmation" = "Вы действительно хотите выйти?";

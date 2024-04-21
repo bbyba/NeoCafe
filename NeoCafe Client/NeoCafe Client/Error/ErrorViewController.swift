@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ErrorViewController: BaseViewController <ErrorViewModel, ErrorView> {
+class ErrorViewController: BaseViewController<ErrorViewModel, ErrorView> {
     weak var delegate: ErrorViewDelegate?
 
     override func viewDidLoad() {

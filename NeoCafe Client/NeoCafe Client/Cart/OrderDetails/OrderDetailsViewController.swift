@@ -6,19 +6,13 @@
 import UIKit
 
 class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, OrderDetailsView> {
-
-    var orderDetails: [Item] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
         setupCollectionView()
         addTargets()
-        viewModel.fetchProductDetails {
-            DispatchQueue.main.async {
-                self.contentView.collectionView.reloadData()
-            }
-        }
+        Loader.shared.showLoader(view: view)
+        configureUI()
+        setupBindings()
     }
 
     private func setupCollectionView() {
@@ -26,36 +20,48 @@ class OrderDetailsViewController: BaseViewController<OrderDetailsViewModel, Orde
         contentView.collectionView.delegate = self
     }
 
+    private func setupBindings() {
+        viewModel.fetchProductDetails {
+            DispatchQueue.main.async {
+                Loader.shared.hideLoader(view: self.view)
+                self.contentView.collectionView.reloadData()
+            }
+        }
+    }
+
     private func configureUI() {
         contentView.headerLabel.text = S.orderHash(viewModel.orderDetails.orderNumber)
+        contentView.branchLabel.text = "\(viewModel.orderDetails.branchName), "
+        contentView.dateLabel.text = viewModel.orderDetails.createdAt
+        contentView.totalAvailablePoints.text = String(viewModel.orderDetails.bonusPointsToSubtract)
+        contentView.priceLabel.text = String(viewModel.orderDetails.totalSum)
     }
 
     private func addTargets() {
         contentView.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         contentView.orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
-
     }
 
     @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc func orderButtonTapped() {
         Cart.shared.removeAllItems()
         for item in viewModel.itemDetails {
-                Cart.shared.addItem(item)
+            Cart.shared.addItem(item)
         }
         viewModel.onCartNavigate?()
     }
 }
 
 extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func numberOfSections(in _: UICollectionView) -> Int {
+        1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemDetails.count
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        viewModel.itemDetails.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,11 +73,5 @@ extension OrderDetailsViewController: UICollectionViewDataSource, UICollectionVi
             cell.configureData(item: order, quantity: ito.quantity)
         }
         return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
-        header.configureTitle(title: "Neocafe Dzerzhinka, August 1")
-        return header
     }
 }

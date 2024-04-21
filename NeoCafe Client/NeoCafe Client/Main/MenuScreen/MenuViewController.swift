@@ -4,6 +4,7 @@
 //
 
 import UIKit
+
 protocol MenuViewControllerDelegate: AnyObject {
     func didSelectBranch(branchName: String?)
 }
@@ -16,7 +17,7 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
-        Loader.shared.showLoader(view: self.view)
+        Loader.shared.showLoader(view: view)
         fetchCategoriesAndItems()
         setupBindings()
         contentView.branchNameLabel.text = UserDefaultsService.shared.branchName ?? "Select Branch"
@@ -39,7 +40,7 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
     private func setupBindings() {
         viewModel.onCategoriesFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty  == false  {
+                if self?.viewModel.allCategories.isEmpty == false && self?.viewModel.menuItems.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -49,7 +50,7 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
 
         viewModel.onMenuItemsFetched = { [weak self] in
             DispatchQueue.main.async {
-                if self?.viewModel.menuItems.isEmpty  == false  && self?.viewModel.allCategories.isEmpty  == false  {
+                if self?.viewModel.menuItems.isEmpty == false && self?.viewModel.allCategories.isEmpty == false {
                     self?.selectFirstCategory()
                 }
                 self?.contentView.collectionView.reloadData()
@@ -79,17 +80,17 @@ class MenuViewController: BaseViewController<MenuViewModel, MenuView> {
 
     private func checkIfDataLoadedThenHideLoader() {
         if !viewModel.allCategories.isEmpty && !viewModel.menuItems.isEmpty {
-            Loader.shared.hideLoader(view: self.view)
+            Loader.shared.hideLoader(view: view)
         }
     }
 }
 
 extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return MenuSection.allCases.count
+    func numberOfSections(in _: UICollectionView) -> Int {
+        MenuSection.allCases.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch MenuSection.allCases[section] {
         case .category:
             return viewModel.allCategories.count
@@ -118,7 +119,7 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind _: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = MenuSection(rawValue: MenuSection.allCases[indexPath.section].rawValue) {
@@ -142,7 +143,6 @@ extension MenuViewController: UICollectionViewDataSource, UICollectionViewDelega
         case .productItem:
             let menuItem = viewModel.filteredMenuItems[indexPath.row]
             viewModel.onProductDetailNavigate?(menuItem.id)
-
         }
     }
 }

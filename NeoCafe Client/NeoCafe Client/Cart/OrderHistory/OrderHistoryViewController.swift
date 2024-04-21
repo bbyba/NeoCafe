@@ -11,14 +11,16 @@ enum OrderHistorySection: String, CaseIterable {
 }
 
 class OrderHistoryViewController: BaseViewController<OrderHistoryViewModel, OrderHistoryView> {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
         addTargets()
-        viewModel.setupCompleteOrdersList()
-        viewModel.setupCurrentOrdersList()
-        contentView.collectionView.reloadData()
+        Loader.shared.showLoader(view: view)
+        viewModel.fetchOrderHistory()
+        viewModel.onOrdersFetched = {
+            self.contentView.collectionView.reloadData()
+            Loader.shared.hideLoader(view: self.view)
+        }
     }
 
     private func setupCollectionView() {
@@ -36,11 +38,11 @@ class OrderHistoryViewController: BaseViewController<OrderHistoryViewModel, Orde
 }
 
 extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+    func numberOfSections(in _: UICollectionView) -> Int {
+        2
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch OrderHistorySection.allCases[section] {
         case .current:
             return viewModel.currentOrdersList.count
@@ -49,23 +51,25 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
         }
     }
 
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: BigProductCell = collectionView.dequeue(for: indexPath)
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = viewModel.currentOrdersList[indexPath.row]
-            cell.configureForOrderHistory(item: currentOrder, isOrderHistoryCell: true)
+            cell.configureForOrderHistory(item: currentOrder, isOrderHistoryCell: true, inCurrent: true)
+            cell.descriptionLabel.text = viewModel.makeITONameList(orderIto: currentOrder.ito)
+
             return cell
         case .completed:
             let completedOrder = viewModel.completeOrdersList[indexPath.row]
-            cell.configureForOrderHistory(item: completedOrder, isOrderHistoryCell: true)
+            cell.configureForOrderHistory(item: completedOrder, isOrderHistoryCell: true, inCurrent: false)
+            cell.descriptionLabel.text = viewModel.makeITONameList(orderIto: completedOrder.ito)
             return cell
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionView.elementKindSectionHeader else {fatalError("Unexpected element kind") }
+        guard kind == UICollectionView.elementKindSectionHeader else { fatalError("Unexpected element kind") }
         let header: CollectionViewSingleHeader = collectionView.dequeue(forHeader: indexPath)
 
         if let sectionKind = OrderHistorySection(rawValue: OrderHistorySection.allCases[indexPath.section].rawValue) {
@@ -79,7 +83,7 @@ extension OrderHistoryViewController: UICollectionViewDataSource, UICollectionVi
         return header
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch OrderHistorySection.allCases[indexPath.section] {
         case .current:
             let currentOrder = viewModel.currentOrdersList[indexPath.row]

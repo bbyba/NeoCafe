@@ -5,8 +5,8 @@
 //  Created by Burte Bayaraa on 2024.02.07.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class SignInView: UIStackView {
     lazy var emailTextField = CustomTextField(iconName: Asset.TextField.at.image, customPlaceholder: S.enterEmail)
@@ -22,7 +22,8 @@ class SignInView: UIStackView {
         addArrangedSubview(emailTextField)
     }
 
-    required init(coder: NSCoder) {
+    @available(*, unavailable)
+    required init(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

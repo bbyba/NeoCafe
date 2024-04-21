@@ -3,12 +3,11 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
 import SwiftUI
+import UIKit
 
 class ProductDetailsView: UIView {
-    
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.coffeeCupFront.name)
@@ -26,7 +25,6 @@ class ProductDetailsView: UIView {
 
     lazy var productNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Латте"
         label.font = .poppins(ofSize: 24, weight: .semibold)
         label.textColor = .black
         label.textAlignment = .left
@@ -36,7 +34,6 @@ class ProductDetailsView: UIView {
 
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Латте — шоколадное пирожное коричневого цвета, прямоугольные куски нарезанного шоколадного пирога."
         label.font = .poppins(ofSize: 15, weight: .regular)
         label.textColor = .blueCustom
         label.textAlignment = .left
@@ -54,12 +51,10 @@ class ProductDetailsView: UIView {
         return collectionView
     }()
 
-
     lazy var priceLabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 20, weight: .semibold)
         label.textColor = .orangeCustom
-        label.text = "270 T"
         return label
     }()
 
@@ -85,23 +80,25 @@ class ProductDetailsView: UIView {
         setupConstraints()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension ProductDetailsView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -109,7 +106,8 @@ extension ProductDetailsView {
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -120,21 +118,20 @@ extension ProductDetailsView {
             top: 0,
             leading: 8,
             bottom: 0,
-            trailing: 8)
+            trailing: 8
+        )
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 }
-
 
 extension ProductDetailsView: BaseContentView {
     func setProperties() {
         backgroundColor = .white
     }
-    
+
     func addSubviews() {
         addSubview(image)
         addSubview(backButton)
@@ -191,6 +188,7 @@ extension ProductDetailsView: BaseContentView {
 
         stepper.snp.makeConstraints { make in
             make.width.equalTo(120)
+            make.height.equalTo(40)
         }
 
         addToCartButton.snp.makeConstraints { make in

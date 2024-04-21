@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import Moya
+import UIKit
 
 protocol MainViewModelProtocol {
     var onNotificationsNavigate: EmptyCompletion? { get set }
@@ -12,10 +12,9 @@ protocol MainViewModelProtocol {
     var onMenuNavigate: EmptyCompletion? { get set }
     var onAddToCartNavigate: EmptyCompletion? { get set }
     var onBranchesModalNavigate: EmptyCompletion? { get set }
-    var categories: [CategoryModel]  { get }
+    var categories: [CategoryModel] { get }
     var popularItems: [Item] { get }
 }
-
 
 class MainViewModel: NSObject, MainViewModelProtocol {
     @InjectionInjected(\.networkService) var networkService
@@ -36,15 +35,40 @@ class MainViewModel: NSObject, MainViewModelProtocol {
         CategoryModel(id: 2, name: "Чай", image: Asset.Menu.tea.name),
         CategoryModel(id: 3, name: "Десерты", image: Asset.Menu.dessert.name),
         CategoryModel(id: 4, name: "Кофе", image: Asset.Menu.coffee.name),
-        CategoryModel(id: 5, name: "Напитки", image: Asset.Menu.drink.name)]
-    var popularItems: [Item] = []
+        CategoryModel(id: 5, name: "Напитки", image: Asset.Menu.drink.name),
+    ]
+    var popularItems: [Item] = [
+        Item(id: 31,
+             name: "Пирожок с капустой",
+             description: "Традиционное блюдо",
+             itemImage: nil,
+             pricePerUnit: 120,
+             branch: nil,
+             category: Category(id: 1, name: "Выпечка"),
+             ingredients: nil),
+        Item(id: 27,
+             name: "Смузи с ягодами",
+             description: "Освежающий напиток",
+             itemImage: nil,
+             pricePerUnit: 160,
+             branch: nil,
+             category: Category(id: 5, name: "Напитки"),
+             ingredients: nil),
+        Item(id: 32,
+             name: "Суп грибной",
+             description: "Ароматный и сытный",
+             itemImage: nil,
+             pricePerUnit: 180,
+             branch: nil,
+             category: Category(id: 7, name: "Супы"),
+             ingredients: nil),
+    ]
 
     override init() {
         super.init()
 //        self.categories = []
-        self.popularItems = []
+//        self.popularItems = []
     }
-
 
 //    func getCategories() {
 //        networkService.sendRequest(successModelType: [CategoryModel].self,
@@ -70,15 +94,18 @@ class MainViewModel: NSObject, MainViewModelProtocol {
         { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
+            case let .success(response):
                 DispatchQueue.main.async {
-                    self.popularItems = response
-                    print("\(self.popularItems)")
                     self.onPopularItemsFetched?()
                 }
-            case .failure(let error):
+            case let .failure(error):
                 print("Error fetching menu items: \(error)")
             }
         }
+    }
+
+    func addToCart(menuItem: Item) {
+        Cart.shared.addItem(menuItem)
+//        onAddToCartNavigate?()
     }
 }

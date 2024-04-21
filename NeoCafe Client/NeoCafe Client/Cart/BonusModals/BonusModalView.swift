@@ -3,8 +3,8 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 enum BonusModalState {
     case initialState
@@ -13,7 +13,6 @@ enum BonusModalState {
 }
 
 class BonusModalView: UIView {
-
     var currentState: BonusModalState = .initialState
 
     lazy var blurredBackgroundView: UIView = {
@@ -61,7 +60,7 @@ class BonusModalView: UIView {
         return button
     }()
 
-    lazy var noButton : CustomButton = {
+    lazy var noButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.no, backgroundColor: .clear, titleColor: .darkBlueCustom, showBorder: true)
         return button
@@ -73,7 +72,7 @@ class BonusModalView: UIView {
         return button
     }()
 
-    lazy var cancelButton : CustomButton = {
+    lazy var cancelButton: CustomButton = {
         let button = CustomButton()
         button.setProperties(title: S.cancel, backgroundColor: .clear, titleColor: .darkBlueCustom, showBorder: true)
         return button
@@ -162,18 +161,17 @@ class BonusModalView: UIView {
         updateView()
     }
 
-
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 extension BonusModalView: BaseContentView {
     func addSubviews() {
         addSubview(blurredBackgroundView)
         addSubview(contentView)
-        contentView.addSubview((headerLabel))
+        contentView.addSubview(headerLabel)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(textfield)
         contentView.addSubview(yesNoButtonStack)

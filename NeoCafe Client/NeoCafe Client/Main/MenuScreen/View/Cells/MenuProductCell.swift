@@ -9,7 +9,6 @@ class MenuProductCell: BaseCollectionViewCell {
     var onAddToCart: ((Item) -> Void)?
     private var currentItem: Item?
 
-
     lazy var image: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: Asset.coffeeCupTop.name)
@@ -23,7 +22,7 @@ class MenuProductCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .poppins(ofSize: 14, weight: .semibold)
         label.textColor = .darkBlueCustom
-        label.numberOfLines = 0 
+        label.numberOfLines = 0
         label.text = "Cafe Latte"
         return label
     }()
@@ -113,7 +112,8 @@ class MenuProductCell: BaseCollectionViewCell {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

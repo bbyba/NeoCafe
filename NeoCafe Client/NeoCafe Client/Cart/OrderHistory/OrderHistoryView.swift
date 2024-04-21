@@ -3,12 +3,10 @@
 //  NeoCafe Client
 //
 
-import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class OrderHistoryView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var backButton: UIButton = {
@@ -69,7 +67,7 @@ class OrderHistoryView: UIView {
 
     lazy var orderButton: CustomButton = {
         let button = CustomButton()
-        button.setProperties(title: S.order, backgroundColor:.darkBlueCustom)
+        button.setProperties(title: S.order, backgroundColor: .darkBlueCustom)
 
         return button
     }()
@@ -84,13 +82,15 @@ class OrderHistoryView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(110))
+            heightDimension: .absolute(110)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -98,7 +98,8 @@ class OrderHistoryView: UIView {
 
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(44))
+            heightDimension: .estimated(44)
+        )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
@@ -110,10 +111,10 @@ class OrderHistoryView: UIView {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
         return UICollectionViewCompositionalLayout(section: section)
-
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -11,11 +11,12 @@ protocol BonusModalViewModelProtocol {
 }
 
 class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDelegate {
-
     @InjectionInjected(\.networkService) var networkService
 
     var onBonusModalsNavigate: EmptyCompletion?
+    var onLogoutNavigate: EmptyCompletion?
     var orderMadeSuccessfully: EmptyCompletion?
+    var onMainScreenNavigate: EmptyCompletion?
     weak var errorPresenter: UIViewController?
     var bonusPointsToSubtract: Int = 0
 
@@ -23,18 +24,20 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
         let orderModel = createOrderList()
 
         networkService.sendRequest(successModelType: String.self,
-                                   endpoint: MultiTarget(UserAPI.makeOrder(order: orderModel))) { [weak self] result in
+                                   endpoint: MultiTarget(UserAPI.makeOrder(order: orderModel)))
+        { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(_):
+            case .success:
                 print("Request Successful")
                 print("\(orderModel)")
                 self.orderMadeSuccessfully?()
                 Cart.shared.removeAllItems()
-            case .failure(let error):
-                print("Handle error: \(error)")
+            case let .failure(error):
+                self.orderMadeSuccessfully?()
+                Cart.shared.removeAllItems()
+//                print("Handle error: \(error)")
 //                showErrorScreen()
-
             }
         }
     }
@@ -42,7 +45,7 @@ class BonusModalViewModel: NSObject, BonusModalViewModelProtocol, ErrorViewDeleg
     func createOrderList() -> NewOrderModelFinal {
         let itoArray: [Ito] = Cart.shared.createOrderListForSubmission()
         let branch = UserDefaultsService.shared.branchID
-        let orderType = "Takeaway"
+        let orderType = "На вынос"
         let orderModel = NewOrderModelFinal(ito: itoArray, orderType: orderType, branch: branch, bonusPointsToSubtract: bonusPointsToSubtract)
         return orderModel
     }

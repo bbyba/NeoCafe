@@ -3,12 +3,10 @@
 //  NeoCafe Client
 //
 
-import Foundation
-import UIKit
 import SnapKit
+import UIKit
 
 class CartView: UIView {
-
     lazy var header = CustomHeaderView()
 
     lazy var headerLabel: UILabel = {
@@ -137,13 +135,15 @@ class CartView: UIView {
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .fractionalHeight(1.0)
+        )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.37))
+            heightDimension: .fractionalHeight(0.37)
+        )
 
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
@@ -153,7 +153,8 @@ class CartView: UIView {
         return UICollectionViewCompositionalLayout(section: section)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

@@ -3,11 +3,10 @@
 //  NeoCafe Client
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 class CollectionViewSingleHeader: BaseCollectionViewCell {
-
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .poppins(ofSize: 16, weight: .semibold)
@@ -31,13 +30,13 @@ class CollectionViewSingleHeader: BaseCollectionViewCell {
     }
 
     func configureTitle(title: String) {
-            titleLabel.text = title
-        }
+        titleLabel.text = title
+    }
 
     func configureButton(title: String, isVisible: Bool) {
-            button.setTitle(title, for: .normal)
-            button.isHidden = !isVisible
-        }
+        button.setTitle(title, for: .normal)
+        button.isHidden = !isVisible
+    }
 
     private func addSubviews() {
         addSubview(titleLabel)
@@ -58,7 +57,8 @@ class CollectionViewSingleHeader: BaseCollectionViewCell {
         button.isHidden = true
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
